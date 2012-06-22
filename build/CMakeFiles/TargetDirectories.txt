@@ -1,0 +1,2 @@
+/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir
+/home/mafiamole/projects/SM2ACM3k1/build/src/server/CMakeFiles/server.dir

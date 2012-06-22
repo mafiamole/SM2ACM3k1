@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 2.8)
+
+set (HEADERS ${MB_INCLUDE_DIR}/server/Game.hpp)
+
+set (SOURCES Game.cpp Main.cpp)
+
+add_executable(server ${HEADERS} ${SOURCES} )
+
+target_link_libraries( server ${MoleBox_LIBRARIES})
