@@ -1,6 +1,7 @@
 #include <client/UIComponent.hpp>
 
 
+
 static int Create(lua_State *L)
 {
  
@@ -13,6 +14,7 @@ static int SetPosition(lua_State *L)
   
   lua_pushnumber(L,0.0f);
   lua_pushnumber(L,0.0f);
+  
   return 2;
 }
 static int Activated(lua_State *L)
@@ -41,6 +43,7 @@ void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events,int argCo
 //   std::map< sf::Event::EventType, sf::Event >::iterator eventItr =  events->find(ev);
 //  
   
+  std::cout << "Updating" << std::endl;
   MB::Lua::LuaComponent::Update(elapsed,events,argCount);
 }
 

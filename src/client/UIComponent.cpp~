@@ -1,6 +1,7 @@
 #include <client/UIComponent.hpp>
 
 
+
 static int Create(lua_State *L)
 {
  
@@ -41,12 +42,13 @@ void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events,int argCo
 //   std::map< sf::Event::EventType, sf::Event >::iterator eventItr =  events->find(ev);
 //  
   
+  std::cout << "Updating" << std::endl;
   MB::Lua::LuaComponent::Update(elapsed,events,argCount);
 }
 
 void UIComponent::Draw()
 {
-  
+  MB::Lua::LuaComponent::Draw();
 }
 
 void UIComponent::UpdateScriptPreCall(lua_State* L)

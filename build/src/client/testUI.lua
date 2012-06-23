@@ -8,9 +8,7 @@ function init()
 end
 
 function update(a,b)
-win ={Window.Size()}
-print( "Window x:", win[1])
-	
+ --Sound.Play(Test)	
 end
 
 function draw()

@@ -98,19 +98,62 @@ src/client/CMakeFiles/client.dir/Game.cpp.o
 src/client/CMakeFiles/client.dir/Main.cpp.o
  ../include/client/Game.hpp
  ../include/client/UI/UI_Elements.hpp
+ ../include/client/UIComponent.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp
+ /usr/local/include/MoleBox/Action.hpp
+ /usr/local/include/MoleBox/Actions.hpp
+ /usr/local/include/MoleBox/ContainerDefinitions.hpp
+ /usr/local/include/MoleBox/Content/Content.hpp
+ /usr/local/include/MoleBox/Content/ContentID.hpp
+ /usr/local/include/MoleBox/Content/ContentTemplate.hpp
+ /usr/local/include/MoleBox/Content/Resources.hpp
+ /usr/local/include/MoleBox/Game.hpp
+ /usr/local/include/MoleBox/GameComponent.hpp
+ /usr/local/include/MoleBox/Lua/Component.hpp
+ /usr/local/include/MoleBox/Lua/ComponentFunctions.hpp
+ /usr/local/include/MoleBox/Lua/Content.hpp
+ /usr/local/include/MoleBox/Lua/Script.hpp
+ /usr/local/include/MoleBox/Lua/ScriptHelper.hpp
+ /usr/local/include/MoleBox/Lua/Scripts.hpp
+ /usr/local/include/SFML/Audio.hpp
+ /usr/local/include/SFML/Audio/Export.hpp
+ /usr/local/include/SFML/Audio/Listener.hpp
+ /usr/local/include/SFML/Audio/Music.hpp
+ /usr/local/include/SFML/Audio/Sound.hpp
+ /usr/local/include/SFML/Audio/SoundBuffer.hpp
+ /usr/local/include/SFML/Audio/SoundBufferRecorder.hpp
+ /usr/local/include/SFML/Audio/SoundRecorder.hpp
+ /usr/local/include/SFML/Audio/SoundSource.hpp
+ /usr/local/include/SFML/Audio/SoundStream.hpp
  /usr/local/include/SFML/Config.hpp
+ /usr/local/include/SFML/Graphics.hpp
  /usr/local/include/SFML/Graphics/BlendMode.hpp
+ /usr/local/include/SFML/Graphics/CircleShape.hpp
  /usr/local/include/SFML/Graphics/Color.hpp
+ /usr/local/include/SFML/Graphics/ConvexShape.hpp
  /usr/local/include/SFML/Graphics/Drawable.hpp
  /usr/local/include/SFML/Graphics/Export.hpp
+ /usr/local/include/SFML/Graphics/Font.hpp
+ /usr/local/include/SFML/Graphics/Glyph.hpp
+ /usr/local/include/SFML/Graphics/Image.hpp
+ /usr/local/include/SFML/Graphics/PrimitiveType.hpp
  /usr/local/include/SFML/Graphics/Rect.hpp
  /usr/local/include/SFML/Graphics/Rect.inl
+ /usr/local/include/SFML/Graphics/RectangleShape.hpp
  /usr/local/include/SFML/Graphics/RenderStates.hpp
+ /usr/local/include/SFML/Graphics/RenderTarget.hpp
+ /usr/local/include/SFML/Graphics/RenderTexture.hpp
+ /usr/local/include/SFML/Graphics/RenderWindow.hpp
+ /usr/local/include/SFML/Graphics/Shader.hpp
+ /usr/local/include/SFML/Graphics/Shape.hpp
  /usr/local/include/SFML/Graphics/Sprite.hpp
+ /usr/local/include/SFML/Graphics/Text.hpp
+ /usr/local/include/SFML/Graphics/Texture.hpp
  /usr/local/include/SFML/Graphics/Transform.hpp
  /usr/local/include/SFML/Graphics/Transformable.hpp
  /usr/local/include/SFML/Graphics/Vertex.hpp
+ /usr/local/include/SFML/Graphics/VertexArray.hpp
+ /usr/local/include/SFML/Graphics/View.hpp
  /usr/local/include/SFML/System.hpp
  /usr/local/include/SFML/System/Clock.hpp
  /usr/local/include/SFML/System/Err.hpp

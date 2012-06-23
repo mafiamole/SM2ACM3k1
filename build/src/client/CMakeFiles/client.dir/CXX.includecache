@@ -13,6 +13,8 @@ MoleBox/ContainerDefinitions.hpp
 -
 client/UI/UI_Elements.hpp
 -
+UIComponent.hpp
+../include/client/UIComponent.hpp
 
 ../include/client/UI/UI_Elements.hpp
 SFML/Window.hpp
