@@ -15,7 +15,7 @@ std::vector<sf::Sprite> MapLoader::ReadFile(std::string path)  {
 	sf::Texture spikeTexture;
 	
 
- std::ifstream mapfile(path);
+ std::ifstream mapfile(path.c_str());
  string mapRow;
  std::vector<sf::Sprite> tmpVect;
 

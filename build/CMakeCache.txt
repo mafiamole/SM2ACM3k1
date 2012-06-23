@@ -165,6 +165,18 @@ CMakeProjectTemplate_DIR:PATH=CMakeProjectTemplate_DIR-NOTFOUND
 CMakeProjectTemplate_SOURCE_DIR:STATIC=/home/mafiamole/projects/SM2ACM3k1
 
 //Path to a file.
+LUA_INCLUDE_DIR:PATH=/usr/include
+
+//Lua Libraries
+LUA_LIBRARIES:STRING=/usr/lib64/liblua-5.1.so;/usr/lib64/libm.so
+
+//Path to a library.
+LUA_LIBRARY:FILEPATH=/usr/lib64/liblua-5.1.so
+
+//Path to a library.
+LUA_MATH_LIBRARY:FILEPATH=/usr/lib64/libm.so
+
+//Path to a file.
 MoleBox_INCLUDE_DIR2:PATH=/usr/local/include
 
 //Path to a library.
@@ -557,10 +569,20 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding Lua51
+FIND_PACKAGE_MESSAGE_DETAILS_Lua51:INTERNAL=[/usr/lib64/liblua-5.1.so;/usr/lib64/libm.so][/usr/include][v5.1.4()]
 //Details about finding OpenGL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib64/libGL.so][v()]
 //Details about finding X11
 FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/lib64/libX11.so][/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include]
+//ADVANCED property for variable: LUA_INCLUDE_DIR
+LUA_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LUA_LIBRARIES
+LUA_LIBRARIES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LUA_LIBRARY
+LUA_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LUA_MATH_LIBRARY
+LUA_MATH_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_INCLUDE_DIR
 OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY

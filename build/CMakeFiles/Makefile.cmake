@@ -26,6 +26,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Compiler/GNU.cmake"
   "/usr/share/cmake/Modules/FindGLU.cmake"
+  "/usr/share/cmake/Modules/FindLua51.cmake"
   "/usr/share/cmake/Modules/FindMoleBox.cmake"
   "/usr/share/cmake/Modules/FindOpenGL.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
