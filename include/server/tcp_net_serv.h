@@ -1,5 +1,7 @@
+#ifndef TCP_NET_SERV_H
+#define TCP_NET_SERV_H
+
 #include <SFML/Network.hpp>
-#include <Windows.h>
 #include <iostream>
 
 using namespace std;
@@ -24,3 +26,5 @@ private:
 protected:
 	void SetTimeout(int iMilliseconds);	//Connection timeout in milleseconds
 };
+
+#endif

@@ -1,5 +1,5 @@
-#include "tcp_net_serv.h"
-#include "out_helper.h"
+#include "server/tcp_net_serv.h"
+//#include <shared/out_helper.h>
 
 using namespace std;
 
@@ -49,7 +49,7 @@ int ServerTCP::MessageTheClients(string msg)
 	}
 	else
 	{
-		if ((msg == NULL) || (msg == ""))	//Make sure that theres a message to send
+		if ((msg.size() < 2) || (msg == ""))	//Make sure that theres a message to send
 		{
 			cout << "Please enter a message.\n";
 			return 0;

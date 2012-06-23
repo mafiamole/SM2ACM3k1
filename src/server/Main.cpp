@@ -1,6 +1,5 @@
-#include <Windows.h>
 #include <server/Game.hpp>
-#include "tcp_net_serv.h"
+#include <server/tcp_net_serv.h>
 
 using namespace std;
 
