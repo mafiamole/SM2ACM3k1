@@ -1,0 +1,96 @@
+Determining if the Q_WS_X11 exist failed with the following output:
+Change Dir: C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp
+
+Run Build Command:c:\PROGRA~2\MICROS~2.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec2077949627
+
+Microsoft (R) Visual Studio Version 10.0.40219.1.
+Copyright (C) Microsoft Corp. All rights reserved.
+1>------ Build started: Project: cmTryCompileExec2077949627, Configuration: Debug Win32 ------
+1>  Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 16.00.40219.01 for 80x86
+1>  Copyright (C) Microsoft Corporation.  All rights reserved.
+1>  
+1>  cl /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec2077949627.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2077949627.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx  /Zm1000 
+1>  
+1>  CheckSymbolExists.cxx
+1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx(8): error C2065: 'Q_WS_X11' : undeclared identifier
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========
+
+File C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_X11
+  return ((int*)(&Q_WS_X11))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp
+
+Run Build Command:c:\PROGRA~2\MICROS~2.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec1728789673
+
+Microsoft (R) Visual Studio Version 10.0.40219.1.
+Copyright (C) Microsoft Corp. All rights reserved.
+1>------ Build started: Project: cmTryCompileExec1728789673, Configuration: Debug Win32 ------
+1>  Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 16.00.40219.01 for 80x86
+1>  Copyright (C) Microsoft Corporation.  All rights reserved.
+1>  
+1>  cl /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec1728789673.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1728789673.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx  /Zm1000 
+1>  
+1>  CheckSymbolExists.cxx
+1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx(8): error C2065: 'Q_WS_QWS' : undeclared identifier
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========
+
+File C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp
+
+Run Build Command:c:\PROGRA~2\MICROS~2.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec3357894668
+
+Microsoft (R) Visual Studio Version 10.0.40219.1.
+Copyright (C) Microsoft Corp. All rights reserved.
+1>------ Build started: Project: cmTryCompileExec3357894668, Configuration: Debug Win32 ------
+1>  Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 16.00.40219.01 for 80x86
+1>  Copyright (C) Microsoft Corporation.  All rights reserved.
+1>  
+1>  cl /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec3357894668.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec3357894668.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx  /Zm1000 
+1>  
+1>  CheckSymbolExists.cxx
+1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\CMakeFiles\CMakeTmp\CheckSymbolExists.cxx(8): error C2065: 'Q_WS_MAC' : undeclared identifier
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========
+
+File C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
