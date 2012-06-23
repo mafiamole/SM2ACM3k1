@@ -3,8 +3,9 @@
 
 int main(int argc, char **argv)
 {
-	Game game("Lol cam.");
+	Game game("The Game");
 	
 	game.Run(argc,argv);
+	
 return 0;
 }

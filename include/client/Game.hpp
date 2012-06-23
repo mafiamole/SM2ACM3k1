@@ -2,9 +2,15 @@
 #define GAME_H
 #include <MoleBox/Game.hpp>
 #include <MoleBox/ContainerDefinitions.hpp>
+#include <client/UI/UI_Elements.hpp>
+#include "UIComponent.hpp"
+
 class Game :
 	public MB::Game
 {
+protected:
+  UI_ELEMENTS elements;
+  UIComponent *UI;
 public:
 	Game(std::string windowName);
 	~Game(void);
