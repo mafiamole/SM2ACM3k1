@@ -2,23 +2,37 @@
 
 
 
+<<<<<<< HEAD
 static int UI_Button_Lua::Create(lua_State *L)
+=======
+static int Create(lua_State *L)
+>>>>>>> 65a701f... eaueaeuaoue
 {
  
   
   //lua_pushinteger(L,1);
   return 1;
 }
+<<<<<<< HEAD
 
 static int UI_Button_Lua::SetPosition(lua_State *L)
+=======
+static int SetPosition(lua_State *L)
+>>>>>>> 65a701f... eaueaeuaoue
 {
   
   lua_pushnumber(L,0.0f);
   lua_pushnumber(L,0.0f);
+<<<<<<< HEAD
   
   return 2;
 }
 static int UI_Button_Lua::Activated(lua_State *L)
+=======
+  return 2;
+}
+static int Activated(lua_State *L)
+>>>>>>> 65a701f... eaueaeuaoue
 {
   
   //lua_pushboolean(L,false);
@@ -36,7 +50,11 @@ UIComponent::~UIComponent()
   
 }
 
+<<<<<<< HEAD
 void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events)
+=======
+void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events,int argCount)
+>>>>>>> 65a701f... eaueaeuaoue
 {
   
   sf::Event ev;
@@ -44,9 +62,14 @@ void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events)
 //   std::map< sf::Event::EventType, sf::Event >::iterator eventItr =  events->find(ev);
 //  
   
+<<<<<<< HEAD
   this->script->AddLibrary("Button",UI_Button_reg);
   
   MB::Lua::LuaComponent::Update(elapsed,events);
+=======
+  std::cout << "Updating" << std::endl;
+  MB::Lua::LuaComponent::Update(elapsed,events,argCount);
+>>>>>>> 65a701f... eaueaeuaoue
 }
 
 void UIComponent::Draw()

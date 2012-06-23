@@ -153,6 +153,21 @@ clean: src/client/CMakeFiles/client.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory include/client/Players
+
+# Convenience name for "all" pass in the directory.
+include/client/Players/all:
+.PHONY : include/client/Players/all
+
+# Convenience name for "clean" pass in the directory.
+include/client/Players/clean:
+.PHONY : include/client/Players/clean
+
+# Convenience name for "preinstall" pass in the directory.
+include/client/Players/preinstall:
+.PHONY : include/client/Players/preinstall
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.

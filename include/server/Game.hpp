@@ -2,12 +2,9 @@
 #define GAME_H
 #include <MoleBox/Game.hpp>
 #include <MoleBox/ContainerDefinitions.hpp>
-class Game : public MB::Game
+class Game :
+	public MB::Game
 {
-protected:
-  
-  
-  
 public:
   Game(std::string windowName);
   ~Game(void);

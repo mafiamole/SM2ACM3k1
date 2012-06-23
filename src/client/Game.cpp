@@ -19,7 +19,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   
   UI = (UIComponent*)this->AddComponent(new UIComponent(this,"testUI.lua"));
   
-  this->elements.push_back( new UI_Button("TestButton.png","name","text") );
+  this->elements.push_back( new UI_Button(this->window,"TestButton.png","name","text") );
   
   map = Map(this->window,mapLoader.ReadFile("map.txt"));
 
@@ -35,7 +35,19 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 {
 
   UI->Update(elapsed,events);
+  
+    UI_ELEMENTS::iterator elementItr;
+
+  for (elementItr = elements.begin(); elementItr != elements.end(); elementItr++)
+  {
     
+    if ((*elementItr)->Activated(events))
+    {
+      std::cout << "Element activated." << std::endl;
+    }
+    
+  }  
+  
   MB::Game::Update(elapsed,events);
   
 }
@@ -43,7 +55,15 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 void Game::Draw()
 {
   map.Draw();
-	
+  UI_ELEMENTS::iterator elementItr;
+  
+  for (elementItr = elements.begin(); elementItr != elements.end(); elementItr++)
+  {
+    
+    (*elementItr)->Draw();
+    
+  }
+  
   MB::Game::Draw();  
   
 }
@@ -53,4 +73,5 @@ int Game::Run(int argc,char **argv)
   MB::Game::Run(argc,argv);
   return 0;
 }
+
 

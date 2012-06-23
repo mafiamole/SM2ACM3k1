@@ -22,11 +22,12 @@ class UI_Button : public UI_Element
 {
   sf::Sprite  buttonSprite;
   std::string text;
+  sf::RenderTarget* renderTarget;
 public:
-  UI_Button(std::string imagefile, std::string name, std::string text);
+  UI_Button(sf::RenderTarget* target,std::string imagefile, std::string name, std::string text);
   ~UI_Button();
     virtual bool Activated(MB::Types::EventList* events);
-    virtual void Draw(sf::RenderTarget* target);
+    virtual void Draw();
 };
 
 class UI_Radio : public UI_Element
