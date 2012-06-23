@@ -7,7 +7,7 @@
 
 class UI_Element
 {
-  std::string name;
+ std::string name;
  sf::Vector2f position;
 public:
     UI_Element(std::string name);
@@ -15,7 +15,7 @@ public:
     ~UI_Element();
     void Set_Position(sf::Vector2f position);
     virtual bool Activated(MB::Types::EventList* events);
-    //virtual void Draw();
+    virtual void Draw();
 };
 
 class UI_Button : public UI_Element
@@ -23,10 +23,10 @@ class UI_Button : public UI_Element
   sf::Sprite  buttonSprite;
   std::string text;
 public:
-  UI_Button(std::string name, std::string text);
+  UI_Button(std::string imagefile, std::string name, std::string text);
   ~UI_Button();
     virtual bool Activated(MB::Types::EventList* events);
-
+    virtual void Draw();
 };
 
 class UI_Radio : public UI_Element
@@ -36,7 +36,7 @@ public:
   UI_Radio(std::string name, std::string text);
   ~UI_Radio();
   virtual bool Activated(MB::Types::EventList* events);
-
+    virtual void Draw();
 };
 
 class UI_TextBox : public UI_Element
@@ -46,7 +46,7 @@ public:
   UI_TextBox(std::string name);
   ~UI_TextBox();
   virtual bool Activated(MB::Types::EventList* events);
-  
+    virtual void Draw();  
 };
 
 typedef std::list<UI_Element*> UI_ELEMENTS;

@@ -4,13 +4,14 @@
 
 Game::Game(std::string windowName) : MB::Game(windowName)
 {
+  
   window = new sf::RenderWindow( sf::VideoMode(1024,800), windowName);
+  
   UI = (UIComponent*)this->AddComponent(new UIComponent(this,"testUI.lua"));
   
   this->elements.push_back(new UI_Radio("name","text"));
   
-
-
+  
 }
 
 
