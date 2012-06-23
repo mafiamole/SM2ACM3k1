@@ -160,6 +160,102 @@ Main.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Main.cpp.s
 .PHONY : Main.cpp.s
 
+Map.o: Map.cpp.o
+.PHONY : Map.o
+
+# target to build an object file
+Map.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map.cpp.o
+.PHONY : Map.cpp.o
+
+Map.i: Map.cpp.i
+.PHONY : Map.i
+
+# target to preprocess a source file
+Map.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map.cpp.i
+.PHONY : Map.cpp.i
+
+Map.s: Map.cpp.s
+.PHONY : Map.s
+
+# target to generate assembly for a file
+Map.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map.cpp.s
+.PHONY : Map.cpp.s
+
+MapLoader.o: MapLoader.cpp.o
+.PHONY : MapLoader.o
+
+# target to build an object file
+MapLoader.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/MapLoader.cpp.o
+.PHONY : MapLoader.cpp.o
+
+MapLoader.i: MapLoader.cpp.i
+.PHONY : MapLoader.i
+
+# target to preprocess a source file
+MapLoader.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/MapLoader.cpp.i
+.PHONY : MapLoader.cpp.i
+
+MapLoader.s: MapLoader.cpp.s
+.PHONY : MapLoader.s
+
+# target to generate assembly for a file
+MapLoader.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/MapLoader.cpp.s
+.PHONY : MapLoader.cpp.s
+
+UI/UI_Elements.o: UI/UI_Elements.cpp.o
+.PHONY : UI/UI_Elements.o
+
+# target to build an object file
+UI/UI_Elements.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
+.PHONY : UI/UI_Elements.cpp.o
+
+UI/UI_Elements.i: UI/UI_Elements.cpp.i
+.PHONY : UI/UI_Elements.i
+
+# target to preprocess a source file
+UI/UI_Elements.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.i
+.PHONY : UI/UI_Elements.cpp.i
+
+UI/UI_Elements.s: UI/UI_Elements.cpp.s
+.PHONY : UI/UI_Elements.s
+
+# target to generate assembly for a file
+UI/UI_Elements.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
+.PHONY : UI/UI_Elements.cpp.s
+
+UIComponent.o: UIComponent.cpp.o
+.PHONY : UIComponent.o
+
+# target to build an object file
+UIComponent.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.o
+.PHONY : UIComponent.cpp.o
+
+UIComponent.i: UIComponent.cpp.i
+.PHONY : UIComponent.i
+
+# target to preprocess a source file
+UIComponent.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.i
+.PHONY : UIComponent.cpp.i
+
+UIComponent.s: UIComponent.cpp.s
+.PHONY : UIComponent.s
+
+# target to generate assembly for a file
+UIComponent.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.s
+.PHONY : UIComponent.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -175,6 +271,18 @@ help:
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
+	@echo "... Map.o"
+	@echo "... Map.i"
+	@echo "... Map.s"
+	@echo "... MapLoader.o"
+	@echo "... MapLoader.i"
+	@echo "... MapLoader.s"
+	@echo "... UI/UI_Elements.o"
+	@echo "... UI/UI_Elements.i"
+	@echo "... UI/UI_Elements.s"
+	@echo "... UIComponent.o"
+	@echo "... UIComponent.i"
+	@echo "... UIComponent.s"
 .PHONY : help
 
 

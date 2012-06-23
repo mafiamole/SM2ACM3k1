@@ -16,6 +16,15 @@ public:
   static int SetPosition(lua_State *L);
   static int Activated(lua_State *L);
 };
+static const luaL_reg UI_Button_reg[] =
+{
+  
+  { "Create", 		UI_Button_Lua::Create},
+  { "SetPosition",  	UI_Button_Lua::SetPosition},
+  { "Activated",	UI_Button_Lua::Activated},
+  { NULL, NULL }
+  
+};
 
 <<<<<<< HEAD
 =======
