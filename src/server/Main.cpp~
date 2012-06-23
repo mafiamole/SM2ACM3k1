@@ -1,5 +1,5 @@
 
-#include <include/server/Game.hpp>
+#include <server/Game.hpp>
 
 int main(int argc, char **argv)
 {

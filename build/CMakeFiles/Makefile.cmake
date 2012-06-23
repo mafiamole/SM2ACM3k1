@@ -12,6 +12,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
   "../src/client/CMakeLists.txt"
+  "../src/client/Content/CMakeLists.txt"
   "../src/server/CMakeLists.txt"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
@@ -26,6 +27,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Compiler/GNU.cmake"
   "/usr/share/cmake/Modules/FindGLU.cmake"
+  "/usr/share/cmake/Modules/FindLua51.cmake"
   "/usr/share/cmake/Modules/FindMoleBox.cmake"
   "/usr/share/cmake/Modules/FindOpenGL.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
@@ -50,6 +52,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/server/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/client/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/client/Content/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

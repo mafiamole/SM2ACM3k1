@@ -1,6 +1,8 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/client.dir/Game.cpp.o"
   "CMakeFiles/client.dir/Main.cpp.o"
+  "CMakeFiles/client.dir/UIComponent.cpp.o"
+  "CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
   "client.pdb"
   "client"
 )

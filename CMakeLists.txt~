@@ -5,9 +5,10 @@ find_package(MoleBox REQUIRED)
 
 set (MB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-include_directories( ${MB_INCLUDE_DIR} )
+include_directories ( ${MB_INCLUDE_DIR} )
 include_directories (${MoleBox_INCLUDE_DIRECTORIES} )
 
 
 add_subdirectory(src/server)
 add_subdirectory(src/client)
+add_subdirectory(include/client/UI)

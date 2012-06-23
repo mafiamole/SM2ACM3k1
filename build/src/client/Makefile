@@ -160,6 +160,54 @@ Main.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Main.cpp.s
 .PHONY : Main.cpp.s
 
+UI/UI_Elements.o: UI/UI_Elements.cpp.o
+.PHONY : UI/UI_Elements.o
+
+# target to build an object file
+UI/UI_Elements.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
+.PHONY : UI/UI_Elements.cpp.o
+
+UI/UI_Elements.i: UI/UI_Elements.cpp.i
+.PHONY : UI/UI_Elements.i
+
+# target to preprocess a source file
+UI/UI_Elements.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.i
+.PHONY : UI/UI_Elements.cpp.i
+
+UI/UI_Elements.s: UI/UI_Elements.cpp.s
+.PHONY : UI/UI_Elements.s
+
+# target to generate assembly for a file
+UI/UI_Elements.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
+.PHONY : UI/UI_Elements.cpp.s
+
+UIComponent.o: UIComponent.cpp.o
+.PHONY : UIComponent.o
+
+# target to build an object file
+UIComponent.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.o
+.PHONY : UIComponent.cpp.o
+
+UIComponent.i: UIComponent.cpp.i
+.PHONY : UIComponent.i
+
+# target to preprocess a source file
+UIComponent.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.i
+.PHONY : UIComponent.cpp.i
+
+UIComponent.s: UIComponent.cpp.s
+.PHONY : UIComponent.s
+
+# target to generate assembly for a file
+UIComponent.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.s
+.PHONY : UIComponent.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -175,6 +223,12 @@ help:
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
+	@echo "... UI/UI_Elements.o"
+	@echo "... UI/UI_Elements.i"
+	@echo "... UI/UI_Elements.s"
+	@echo "... UIComponent.o"
+	@echo "... UIComponent.i"
+	@echo "... UIComponent.s"
 .PHONY : help
 
 

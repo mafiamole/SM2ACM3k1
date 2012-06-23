@@ -6,6 +6,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Game.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Main.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UIComponent.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

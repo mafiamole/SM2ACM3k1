@@ -3,6 +3,8 @@
 
 src/client/CMakeFiles/client.dir/Game.cpp.o
  ../include/client/Game.hpp
+ ../include/client/UI/UI_Elements.hpp
+ ../include/client/UIComponent.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp
  /usr/local/include/MoleBox/Action.hpp
  /usr/local/include/MoleBox/Actions.hpp
@@ -12,7 +14,12 @@ src/client/CMakeFiles/client.dir/Game.cpp.o
  /usr/local/include/MoleBox/Content/ContentTemplate.hpp
  /usr/local/include/MoleBox/Content/Resources.hpp
  /usr/local/include/MoleBox/Game.hpp
+ /usr/local/include/MoleBox/GameComponent.hpp
+ /usr/local/include/MoleBox/Lua/Component.hpp
+ /usr/local/include/MoleBox/Lua/ComponentFunctions.hpp
+ /usr/local/include/MoleBox/Lua/Content.hpp
  /usr/local/include/MoleBox/Lua/Script.hpp
+ /usr/local/include/MoleBox/Lua/ScriptHelper.hpp
  /usr/local/include/MoleBox/Lua/Scripts.hpp
  /usr/local/include/SFML/Audio.hpp
  /usr/local/include/SFML/Audio/Export.hpp
@@ -90,7 +97,108 @@ src/client/CMakeFiles/client.dir/Game.cpp.o
  /usr/local/include/SFML/Window/WindowStyle.hpp
 src/client/CMakeFiles/client.dir/Main.cpp.o
  ../include/client/Game.hpp
+ ../include/client/UI/UI_Elements.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp
+ /usr/local/include/SFML/Config.hpp
+ /usr/local/include/SFML/Graphics/BlendMode.hpp
+ /usr/local/include/SFML/Graphics/Color.hpp
+ /usr/local/include/SFML/Graphics/Drawable.hpp
+ /usr/local/include/SFML/Graphics/Export.hpp
+ /usr/local/include/SFML/Graphics/Rect.hpp
+ /usr/local/include/SFML/Graphics/Rect.inl
+ /usr/local/include/SFML/Graphics/RenderStates.hpp
+ /usr/local/include/SFML/Graphics/Sprite.hpp
+ /usr/local/include/SFML/Graphics/Transform.hpp
+ /usr/local/include/SFML/Graphics/Transformable.hpp
+ /usr/local/include/SFML/Graphics/Vertex.hpp
+ /usr/local/include/SFML/System.hpp
+ /usr/local/include/SFML/System/Clock.hpp
+ /usr/local/include/SFML/System/Err.hpp
+ /usr/local/include/SFML/System/Export.hpp
+ /usr/local/include/SFML/System/InputStream.hpp
+ /usr/local/include/SFML/System/Lock.hpp
+ /usr/local/include/SFML/System/Mutex.hpp
+ /usr/local/include/SFML/System/NonCopyable.hpp
+ /usr/local/include/SFML/System/Sleep.hpp
+ /usr/local/include/SFML/System/String.hpp
+ /usr/local/include/SFML/System/Thread.hpp
+ /usr/local/include/SFML/System/Thread.inl
+ /usr/local/include/SFML/System/ThreadLocal.hpp
+ /usr/local/include/SFML/System/ThreadLocalPtr.hpp
+ /usr/local/include/SFML/System/ThreadLocalPtr.inl
+ /usr/local/include/SFML/System/Time.hpp
+ /usr/local/include/SFML/System/Utf.hpp
+ /usr/local/include/SFML/System/Utf.inl
+ /usr/local/include/SFML/System/Vector2.hpp
+ /usr/local/include/SFML/System/Vector2.inl
+ /usr/local/include/SFML/System/Vector3.hpp
+ /usr/local/include/SFML/System/Vector3.inl
+ /usr/local/include/SFML/Window.hpp
+ /usr/local/include/SFML/Window/Context.hpp
+ /usr/local/include/SFML/Window/ContextSettings.hpp
+ /usr/local/include/SFML/Window/Event.hpp
+ /usr/local/include/SFML/Window/Export.hpp
+ /usr/local/include/SFML/Window/GlResource.hpp
+ /usr/local/include/SFML/Window/Joystick.hpp
+ /usr/local/include/SFML/Window/Keyboard.hpp
+ /usr/local/include/SFML/Window/Mouse.hpp
+ /usr/local/include/SFML/Window/VideoMode.hpp
+ /usr/local/include/SFML/Window/Window.hpp
+ /usr/local/include/SFML/Window/WindowHandle.hpp
+ /usr/local/include/SFML/Window/WindowStyle.hpp
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
+ ../include/client/UI/UI_Elements.hpp
+ /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
+ /usr/local/include/SFML/Config.hpp
+ /usr/local/include/SFML/Graphics/BlendMode.hpp
+ /usr/local/include/SFML/Graphics/Color.hpp
+ /usr/local/include/SFML/Graphics/Drawable.hpp
+ /usr/local/include/SFML/Graphics/Export.hpp
+ /usr/local/include/SFML/Graphics/Rect.hpp
+ /usr/local/include/SFML/Graphics/Rect.inl
+ /usr/local/include/SFML/Graphics/RenderStates.hpp
+ /usr/local/include/SFML/Graphics/Sprite.hpp
+ /usr/local/include/SFML/Graphics/Transform.hpp
+ /usr/local/include/SFML/Graphics/Transformable.hpp
+ /usr/local/include/SFML/Graphics/Vertex.hpp
+ /usr/local/include/SFML/System.hpp
+ /usr/local/include/SFML/System/Clock.hpp
+ /usr/local/include/SFML/System/Err.hpp
+ /usr/local/include/SFML/System/Export.hpp
+ /usr/local/include/SFML/System/InputStream.hpp
+ /usr/local/include/SFML/System/Lock.hpp
+ /usr/local/include/SFML/System/Mutex.hpp
+ /usr/local/include/SFML/System/NonCopyable.hpp
+ /usr/local/include/SFML/System/Sleep.hpp
+ /usr/local/include/SFML/System/String.hpp
+ /usr/local/include/SFML/System/Thread.hpp
+ /usr/local/include/SFML/System/Thread.inl
+ /usr/local/include/SFML/System/ThreadLocal.hpp
+ /usr/local/include/SFML/System/ThreadLocalPtr.hpp
+ /usr/local/include/SFML/System/ThreadLocalPtr.inl
+ /usr/local/include/SFML/System/Time.hpp
+ /usr/local/include/SFML/System/Utf.hpp
+ /usr/local/include/SFML/System/Utf.inl
+ /usr/local/include/SFML/System/Vector2.hpp
+ /usr/local/include/SFML/System/Vector2.inl
+ /usr/local/include/SFML/System/Vector3.hpp
+ /usr/local/include/SFML/System/Vector3.inl
+ /usr/local/include/SFML/Window.hpp
+ /usr/local/include/SFML/Window/Context.hpp
+ /usr/local/include/SFML/Window/ContextSettings.hpp
+ /usr/local/include/SFML/Window/Event.hpp
+ /usr/local/include/SFML/Window/Export.hpp
+ /usr/local/include/SFML/Window/GlResource.hpp
+ /usr/local/include/SFML/Window/Joystick.hpp
+ /usr/local/include/SFML/Window/Keyboard.hpp
+ /usr/local/include/SFML/Window/Mouse.hpp
+ /usr/local/include/SFML/Window/VideoMode.hpp
+ /usr/local/include/SFML/Window/Window.hpp
+ /usr/local/include/SFML/Window/WindowHandle.hpp
+ /usr/local/include/SFML/Window/WindowStyle.hpp
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o
+ ../include/client/UIComponent.hpp
+ /home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp
  /usr/local/include/MoleBox/Action.hpp
  /usr/local/include/MoleBox/Actions.hpp
  /usr/local/include/MoleBox/ContainerDefinitions.hpp
@@ -99,7 +207,12 @@ src/client/CMakeFiles/client.dir/Main.cpp.o
  /usr/local/include/MoleBox/Content/ContentTemplate.hpp
  /usr/local/include/MoleBox/Content/Resources.hpp
  /usr/local/include/MoleBox/Game.hpp
+ /usr/local/include/MoleBox/GameComponent.hpp
+ /usr/local/include/MoleBox/Lua/Component.hpp
+ /usr/local/include/MoleBox/Lua/ComponentFunctions.hpp
+ /usr/local/include/MoleBox/Lua/Content.hpp
  /usr/local/include/MoleBox/Lua/Script.hpp
+ /usr/local/include/MoleBox/Lua/ScriptHelper.hpp
  /usr/local/include/MoleBox/Lua/Scripts.hpp
  /usr/local/include/SFML/Audio.hpp
  /usr/local/include/SFML/Audio/Export.hpp

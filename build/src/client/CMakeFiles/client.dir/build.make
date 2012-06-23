@@ -95,22 +95,73 @@ src/client/CMakeFiles/client.dir/Main.cpp.o.provides: src/client/CMakeFiles/clie
 
 src/client/CMakeFiles/client.dir/Main.cpp.o.provides.build: src/client/CMakeFiles/client.dir/Main.cpp.o
 
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o: ../src/client/UIComponent.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/UIComponent.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/UIComponent.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp
+
+src/client/CMakeFiles/client.dir/UIComponent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/UIComponent.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp > CMakeFiles/client.dir/UIComponent.cpp.i
+
+src/client/CMakeFiles/client.dir/UIComponent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/UIComponent.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp -o CMakeFiles/client.dir/UIComponent.cpp.s
+
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/UIComponent.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o.provides: src/client/CMakeFiles/client.dir/UIComponent.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/UIComponent.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/UIComponent.cpp.o.provides.build: src/client/CMakeFiles/client.dir/UIComponent.cpp.o
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: ../src/client/UI/UI_Elements.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/UI/UI_Elements.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/UI/UI_Elements.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp > CMakeFiles/client.dir/UI/UI_Elements.cpp.i
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/UI/UI_Elements.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp -o CMakeFiles/client.dir/UI/UI_Elements.cpp.s
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides.build: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
+
 # Object files for target client
 client_OBJECTS = \
 "CMakeFiles/client.dir/Game.cpp.o" \
-"CMakeFiles/client.dir/Main.cpp.o"
+"CMakeFiles/client.dir/Main.cpp.o" \
+"CMakeFiles/client.dir/UIComponent.cpp.o" \
+"CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
 
 src/client/client: src/client/CMakeFiles/client.dir/Game.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/Main.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/UIComponent.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/build.make
 src/client/client: /usr/local/lib/libMoleBox.so
 src/client/client: /usr/local/lib64/libsfml-system.so
 src/client/client: /usr/local/lib64/libsfml-window.so
 src/client/client: /usr/local/lib64/libsfml-graphics.so
 src/client/client: /usr/local/lib64/libsfml-audio.so
+src/client/client: /usr/lib64/liblua-5.1.so
 src/client/client: src/client/CMakeFiles/client.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable client"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
@@ -121,6 +172,8 @@ src/client/CMakeFiles/client.dir/build: src/client/client
 
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Game.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Main.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/UIComponent.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires
 .PHONY : src/client/CMakeFiles/client.dir/requires
 
 src/client/CMakeFiles/client.dir/clean:
