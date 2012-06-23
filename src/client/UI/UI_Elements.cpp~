@@ -1,5 +1,5 @@
 #include <client/UI/UI_Elements.hpp>
-
+#include <MoleBox/Content/Content.hpp>
 /**
  * 
  * 
@@ -69,8 +69,11 @@ bool UI_Button::Activated(MB::Types::EventList* events)
   return false;
 }
 
-void UI_Button::Draw()
+void UI_Button::Draw(sf::RenderTarget* target)
 {
+  
+  
+  
 }
 
 /**

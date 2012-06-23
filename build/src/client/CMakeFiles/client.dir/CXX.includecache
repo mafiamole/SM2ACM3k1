@@ -69,21 +69,7 @@ client/MapLoader.h
 -
 client/Game.hpp
 -
-client/UIComponent.hpp
--
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp
-client/Game.hpp
--
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
 client/UI/UI_Elements.hpp
--
-MoleBox/Content/Content.hpp
--
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp
-client/UIComponent.hpp
 -
 
 /usr/local/include/MoleBox/Action.hpp

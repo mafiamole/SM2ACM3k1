@@ -69,8 +69,11 @@ bool UI_Button::Activated(MB::Types::EventList* events)
   return false;
 }
 
-void UI_Button::Draw()
+void UI_Button::Draw(sf::RenderTarget* target)
 {
+  
+  target->draw(this->buttonSprite);
+  
 }
 
 /**

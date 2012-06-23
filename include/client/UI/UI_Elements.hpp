@@ -26,7 +26,7 @@ public:
   UI_Button(std::string imagefile, std::string name, std::string text);
   ~UI_Button();
     virtual bool Activated(MB::Types::EventList* events);
-    virtual void Draw();
+    virtual void Draw(sf::RenderTarget* target);
 };
 
 class UI_Radio : public UI_Element

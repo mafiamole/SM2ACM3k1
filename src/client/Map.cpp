@@ -9,13 +9,14 @@ Map::Map(){
 }
 
 void Map::Draw(){
+  
 	std::vector<sf::Sprite>::iterator it;
-	
-	for(it = tiles.begin(); it != tiles.end();it++){
+	int a = tiles.size();
+	for(it = tiles.begin(); it != tiles.end();it++) {
+	  
 		rendTarget->draw(*it);
-	}
 		
-	
+	}
 
 
 }
