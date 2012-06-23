@@ -9,6 +9,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/PlayerInformation.hpp
     
   )
+    ${MB_INCLUDE_DIR}/client/tcp_net.h)
 
 set (SOURCES 
     Game.cpp
@@ -17,6 +18,7 @@ set (SOURCES
     MapLoader.cpp
     UIComponent.cpp
     UI/UI_Elements.cpp
+    tcp_net.cpp
     )
 
 

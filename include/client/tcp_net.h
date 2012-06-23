@@ -1,5 +1,4 @@
 #include <SFML/Network.hpp>
-#include <Windows.h>
 #include <iostream>
 
 using namespace std;
@@ -14,7 +13,7 @@ public:
 	void		SetTimeout(int iMilliseconds);	//Connection timeout in milleseconds
 
 private:
-	void		OutputTest(LPCSTR arg);	//for testing purposes
+	//void		OutputTest(LPCSTR arg);	//for testing purposes
 
 	Time		timeout;
 	string		msg2Serv;

@@ -1,5 +1,5 @@
-#include "tcp_net.h"
-#include "out_helper.h"
+#include "client/tcp_net.h"
+//#include "out_helper.h"
 
 using namespace std;
 
@@ -80,10 +80,10 @@ int ClientTCP::MessageTheServer(string msg)
 
 //private funcs
 //helper func for displaying errors and other info, when paul fixes code :@
-void ClientTCP::OutputTest(LPCSTR arg)
-{
-	OutputDebugStringA(arg);
-}
+//void ClientTCP::OutputTest(LPCSTR arg)
+//{
+//	OutputDebugStringA(arg);
+//}
 
 
 //protected funcs
