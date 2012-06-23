@@ -22,4 +22,5 @@ void Game::Draw(void)
 int Game::Run(int argc,char **argv)
 {
   MB::Game::Run(argc,argv);
+  return 0;
 }
