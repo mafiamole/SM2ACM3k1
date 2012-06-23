@@ -2,7 +2,7 @@
 
 
 
-int UI_Button_Lua::Create(lua_State *L)
+static int UI_Button_Lua::Create(lua_State *L)
 {
  
   
@@ -10,7 +10,7 @@ int UI_Button_Lua::Create(lua_State *L)
   return 1;
 }
 
-int UI_Button_Lua::SetPosition(lua_State *L)
+static int UI_Button_Lua::SetPosition(lua_State *L)
 {
   
   lua_pushnumber(L,0.0f);
@@ -18,7 +18,7 @@ int UI_Button_Lua::SetPosition(lua_State *L)
   
   return 2;
 }
-int UI_Button_Lua::Activated(lua_State *L)
+static int UI_Button_Lua::Activated(lua_State *L)
 {
   
   //lua_pushboolean(L,false);
