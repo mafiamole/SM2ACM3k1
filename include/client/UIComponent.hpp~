@@ -5,7 +5,11 @@
 
 
 
+<<<<<<< HEAD
 class UI_Button_Lua
+=======
+class UI_Button
+>>>>>>> 65a701f... eaueaeuaoue
 {
 public:
   static int Create(lua_State *L);
@@ -13,6 +17,19 @@ public:
   static int Activated(lua_State *L);
 };
 
+<<<<<<< HEAD
+=======
+static const luaL_reg UI_Button_reg[] =
+{
+  
+  { "Create", UI_Button::Create},
+  { "SetPosition",  UI_Button::SetPosition},
+  { "Activated",UI_Button::Activated},
+  { NULL, NULL }
+  
+};
+
+>>>>>>> 65a701f... eaueaeuaoue
 class UIComponent : public MB::Lua::LuaComponent
 {
 protected:
@@ -22,7 +39,11 @@ public:
     UIComponent(MB::Game* game, std::string file);
     virtual ~UIComponent();
     
+<<<<<<< HEAD
     void Update(sf::Time elapsed, MB::Types::EventList* events);
+=======
+    void Update(sf::Time elapsed,MB::Types::EventList* events,int argCount = 2);
+>>>>>>> 65a701f... eaueaeuaoue
     void Draw();
   
 };

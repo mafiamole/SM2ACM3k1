@@ -1,0 +1,4 @@
+C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/CMakeFiles/client.dir
+C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/server/CMakeFiles/server.dir

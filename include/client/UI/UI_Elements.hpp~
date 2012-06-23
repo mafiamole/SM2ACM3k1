@@ -7,7 +7,11 @@
 
 class UI_Element
 {
+<<<<<<< HEAD
  std::string name;
+=======
+  std::string name;
+>>>>>>> 65a701f... eaueaeuaoue
  sf::Vector2f position;
 public:
     UI_Element(std::string name);
@@ -23,7 +27,11 @@ class UI_Button : public UI_Element
   sf::Sprite  buttonSprite;
   std::string text;
 public:
+<<<<<<< HEAD
   UI_Button(std::string imagefile, std::string name, std::string text);
+=======
+  UI_Button(std::string name, std::string text);
+>>>>>>> 65a701f... eaueaeuaoue
   ~UI_Button();
     virtual bool Activated(MB::Types::EventList* events);
 
