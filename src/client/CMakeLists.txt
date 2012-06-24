@@ -6,11 +6,11 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/UI/UI_Elements.hpp
     ${MB_INCLUDE_DIR}/client/Map.h 
     ${MB_INCLUDE_DIR}/client/MapLoader.h
-    ${MB_INCLUDE_DIR}/client/PlayerInformation.hpp
+    ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
     ${MB_INCLUDE_DIR}/client/Player.h
-    
+    ${MB_INCLUDE_DIR}/client/tcp_net.h
   )
-    ${MB_INCLUDE_DIR}/client/tcp_net.h)
+    
 
 set (SOURCES 
     Game.cpp
@@ -21,7 +21,7 @@ set (SOURCES
     UI/UI_Elements.cpp
     tcp_net.cpp
     Player.cpp
-    PlayerInformation.cpp
+    Players/PlayerInformation.cpp
     )
 
 
@@ -32,4 +32,4 @@ include_directories (${MoleBox_INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIR} )
 target_link_libraries( client ${MoleBox_LIBRARIES} ${LUA_LIBRARIES} )
 
 
-add_subdirectory(Player)
+add_subdirectory(Players)
