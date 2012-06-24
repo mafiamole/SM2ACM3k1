@@ -34,6 +34,7 @@ set (SOURCES
     Map/Tile.cpp
     SpriteSheet.cpp
     SpriteSheetAnimator.cpp
+    tcp_net.cpp
     )
 
 

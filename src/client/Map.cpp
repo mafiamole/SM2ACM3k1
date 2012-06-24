@@ -33,6 +33,7 @@ bool Map::collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Ve
     Tile* tile = (*it);
     
     value = tile->DetectCollision(collisionBox, velocety,direction);
+    
     if (value != velocety)
     {
       return true;

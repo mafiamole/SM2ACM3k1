@@ -74,11 +74,7 @@ src/server/preinstall:
 src/server/CMakeFiles/server.dir/all:
 	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/depend
 	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  15 16 17 18
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  12 13 14
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 	@echo "Built target server"
 .PHONY : src/server/CMakeFiles/server.dir/all
 
@@ -133,11 +129,7 @@ src/client/preinstall: src/client/Map/preinstall
 src/client/CMakeFiles/client.dir/all:
 	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/depend
 	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 	@echo "Built target client"
 .PHONY : src/client/CMakeFiles/client.dir/all
 
@@ -147,11 +139,7 @@ all: src/client/CMakeFiles/client.dir/all
 
 # Build rule for subdir invocation for target.
 src/client/CMakeFiles/client.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 14
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 11
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 	$(MAKE) -f CMakeFiles/Makefile2 src/client/CMakeFiles/client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 0
 .PHONY : src/client/CMakeFiles/client.dir/rule
@@ -171,7 +159,6 @@ clean: src/client/CMakeFiles/client.dir/clean
 
 #=============================================================================
 # Directory level rules for directory src/client/Players
-<<<<<<< HEAD
 
 # Convenience name for "all" pass in the directory.
 src/client/Players/all:
@@ -187,8 +174,6 @@ src/client/Players/preinstall:
 
 #=============================================================================
 # Directory level rules for directory src/client/Map
-=======
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 # Convenience name for "all" pass in the directory.
 src/client/Map/all:

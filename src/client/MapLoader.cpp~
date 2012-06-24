@@ -10,11 +10,7 @@ MapLoader::MapLoader()
 
 std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
 
-	sf::Texture wallTexture ;
-	sf::Texture floorTexture;
-	sf::Texture spikeTexture;
-	
-
+ 
  std::ifstream mapfile(path.c_str());
  string mapRow;
  std::vector<Tile *> tmpVect;
@@ -26,7 +22,7 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
  if(mapfile.is_open()) {
   while (!mapfile.eof()) {
 	  std::getline(mapfile,mapRow);
-
+    std::cout << mapRow;
    int i = mapRow.size();
    x = 0;
    for(int j = 0 ; j < i ; j++) {
@@ -35,42 +31,37 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
     sf::Sprite tempSprite;
 
     tempSprite.setPosition(x*32, y*32);
+    std::cout << (x * 32) << " " << ( y * 32 ) << std::endl;
     switch (tile) 
     {
     case 'F':
 	
      //FLOOR
-<<<<<<< HEAD
-     tempSprite.setTexture( MB::Content::Load<sf::Texture>("Floor.png") );
-      tmpVect.push_back(new Floor( tempSprite ));
-=======
-		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png"));		
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Floor.png") );
+	tmpVect.push_back(new Floor( tempSprite ));
      break;
     case 'W':
      //WALL
-     tempSprite.setTexture( MB::Content::Load<sf::Texture>("Wall.png") );
-     tempSprite.setPosition(x*32, y*32);
-	tmpVect.push_back(new Wall( tempSprite ));
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Wall.png") );
 
+	tmpVect.push_back(new Wall( tempSprite ));
      break;
     case 'S':
      //SPIKE
-     tempSprite.setTexture( MB::Content::Load<sf::Texture>("Spike.png") );
-     tempSprite.setPosition(x*32, y*32);
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Spike.png") );
 	tmpVect.push_back(new Spikes( tempSprite ));
 
     default:
 
       break;
+
+	}
     }
-	tmpVect.push_back(tempTile);
 	x++;
    }
    y++;
   }
- }
-
+ 
  //return new vector;
  return tmpVect;
 }

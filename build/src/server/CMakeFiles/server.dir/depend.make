@@ -7,7 +7,6 @@ src/server/CMakeFiles/server.dir/Game.cpp.o: ../src/server/Game.cpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: ../include/server/Game.hpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: ../include/server/tcp_net_serv.h
 src/server/CMakeFiles/server.dir/Main.cpp.o: ../src/server/Main.cpp
-<<<<<<< HEAD
 src/server/CMakeFiles/server.dir/Main.cpp.o: ../src/server/tcp_net_serv.cpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/MoleBox/Action.hpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/MoleBox/Actions.hpp
@@ -95,8 +94,6 @@ src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/SFML/Window/Vide
 src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/SFML/Window/Window.hpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/server/CMakeFiles/server.dir/Main.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
-=======
->>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o: ../include/shared/Packets.h
 src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o: ../src/shared/Packets.cpp
