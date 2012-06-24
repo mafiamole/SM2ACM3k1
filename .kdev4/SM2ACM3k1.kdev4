@@ -32,5 +32,32 @@ Use External Terminal=false
 Working Directory=
 isExecutable=false
 
+<<<<<<< HEAD
+=======
+[Launch][Launch Configuration 1]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=Server
+Type=Native Application
+
+[Launch][Launch Configuration 1][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Nothing
+EnvironmentGroup=default
+Executable=
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=SM2ACM3k1,src,server,server
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+<<<<<<< HEAD
+=======
+[MakeBuilder]
+Number Of Jobs=1
+
+>>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 [Project]
 VersionControlSupport=kdevgit

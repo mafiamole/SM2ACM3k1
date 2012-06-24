@@ -1,0 +1,23 @@
+#include <client/Players/PlayerInformation.hpp>
+
+
+bool RightHealth(PlayerData player)
+{
+  return ( player.health && 4 );
+}
+
+bool LeftHealth(PlayerData player)
+{
+  return ( player.health && 3 );
+}
+
+bool BackHealth(PlayerData player)
+{
+  return ( player.health && 2 );
+}
+
+bool FrontHealth(PlayerData player)
+{
+  return ( player.health && 1 );
+}
+
