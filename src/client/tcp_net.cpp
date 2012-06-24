@@ -20,16 +20,18 @@ void ThreadClass::Run() {
 		sleep(sf::milliseconds(100));
 		// Wait for connection and then put any recieved messages on a queue, while reading another queue of msgs to be sent
 		if(clientTCP->client.connect(clientTCP->serverIP, clientTCP->portNumber, clientTCP->timeout) != clientTCP->client.Disconnected){
-			if(clientTCP->client.receive(tmpPacket)== clientTCP->client.Done){
+			if(clientTCP->client.receive(tmpPacket) == clientTCP->client.Done){
 				// some data recieved, store on queue for update procedures to deal with
-				clientTCP->packetsToProcess.push(tmpPacket);
+				WorkQueues::packetsToProcess().push(tmpPacket);
 			}
-			if(clientTCP->packetsToSend.size() > 0){
+			if(WorkQueues::packetsToSend().size() > 0){
 				// Queue has messages to send, get and process
-				for(int i = 0; i < clientTCP->packetsToSend.size(); i++){
-					;
-					clientTCP->client.send(clientTCP->packetsToSend.front());
-					clientTCP->packetsToSend.pop();				
+				printf("%i \n", WorkQueues::packetsToSend().size());
+				for(int i = 0; i < WorkQueues::packetsToSend().size(); i++){
+					
+					
+					//clientTCP->client.send(WorkQueues.packetsToSend.front());
+					//WorkQueues::packetsToSend.pop();				
 				}				
 			}
 		}
@@ -99,9 +101,10 @@ void ClientTCP::ConnectToServer(unsigned short port, string address)
 	connected = true;
 
 
-	
+	/*
 	game->GetPlayer()->SetPosition(3.0f,4.0f);
 	client.send(packets.CreateSendThisPlayerPos(game->GetPlayer()->GetPosition(), game->GetPlayer()->GetDirection()));
+*/
 
 
 	//if ((msg2Serv == NULL) || (msg2Serv == ""))	//Make sure that theres a message to send

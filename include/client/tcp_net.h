@@ -6,10 +6,10 @@
 #include <iostream>
 #include <shared/Packets.h>
 #include <client/Player.h>
-#include <shared/Packets.h>
 #include <queue>
 #include <SFML/System/Thread.hpp>
 #include <SFML/Config.hpp>
+#include <client/WorkQueues.h>
 
 
 
@@ -30,8 +30,6 @@ public:
 	TcpSocket	client;
 	Time		timeout;
 	ClientTCP* clientTCP;
-	std::queue<sf::Packet>	packetsToSend;
-	std::queue<sf::Packet>	packetsToProcess;
 protected:
 	
 private:

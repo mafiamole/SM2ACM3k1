@@ -2,9 +2,8 @@
 #include <client/Player.h>
 #include <MoleBox/Content/Content.hpp>
 #include <MoleBox/Game.hpp>
-
-
 #include <iostream>
+
 
 Player::Player(MB::Game* game) : MB::GameComponent(game)
 {
@@ -24,26 +23,27 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 
 	int dirX = 0;
 	int dirY = 0;
+	bool moved = false;
 	if ( (this->actions->Exists("Player Move Up") && this->actions->Get("Player Move Up")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Up Alt") && this->actions->Get("Player Move Up Alt")->IsActive())){
-		dirY = -1;
+		dirY = -1; moved = true;
 	}
 
 	if ( (this->actions->Exists("Player Move Down") && this->actions->Get("Player Move Down")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Down Alt") && this->actions->Get("Player Move Down Alt")->IsActive())){
-		dirY = 1;
+		dirY = 1; moved = true;
 	}
 
 	if ( (this->actions->Exists("Player Move Left") && this->actions->Get("Player Move Left")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Left Alt") && this->actions->Get("Player Move Left Alt")->IsActive())){
-		dirX = -1;
+		dirX = -1; moved = true;
 	}
 
 	if ( (this->actions->Exists("Player Move Right") && this->actions->Get("Player Move Right")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Right Alt") && this->actions->Get("Player Move Right Alt")->IsActive())){
-		dirX =1;
+		dirX =1; moved = true;
 	}
-	
+
 
 	// Change position (based on elapsed time)
 	float vectorX = dirX * 0.5f * (float)elapsed.asMilliseconds();  
@@ -114,6 +114,10 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 
 	this->playerSprite.setRotation(rotation);
 
+	if(moved){
+		Packets packets;
+		WorkQueues::packetsToSend().push(packets.CreateSendThisPlayerPos(playerSprite.getPosition(),playerSprite.getRotation()));
+	}
 
 }
 

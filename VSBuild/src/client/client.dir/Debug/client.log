@@ -1,20 +1,28 @@
-﻿Build started 24/06/2012 16:03:31.
+﻿Build started 24/06/2012 21:03:31.
      1>Project "C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\src\client\client.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "client.dir\Debug\client.unsuccessfulbuild" because "AlwaysCreate" was specified.
        CustomBuild:
          All outputs are up-to-date.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtGui /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtCore /IC:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/include /IC:/Users/Demorian/Desktop/MoleBox_Windows_Dynamic0.0.2/MoleBox_Windows_Dynamic/include /I"C:/Users/Demorian/Desktop/SFML-2.0-rc-windows-32-vc2010/SFML-2.0-rc/include" /I"C:/Program Files (x86)/Lua/5.1/include" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_DLL /D QT_DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"client.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp  /Zm1000 
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtGui /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtCore /IC:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/include /IC:/Users/Demorian/Desktop/MoleBox_Windows_Dynamic0.0.2/MoleBox_Windows_Dynamic/include /I"C:/Users/Demorian/Desktop/SFML-2.0-rc-windows-32-vc2010/SFML-2.0-rc/include" /I"C:/Program Files (x86)/Lua/5.1/include" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_DLL /D QT_DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"client.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp  /Zm1000 
+         Player.cpp
+     1>C:\Users\Demorian\Desktop\MoleBox_Windows_Dynamic0.0.2\MoleBox_Windows_Dynamic\include\MoleBox/Content/Content.hpp(306): warning C4373: 'MB::SpriteBatch::draw': virtual function overrides 'sf::Drawable::draw', previous versions of the compiler did not override when parameters only differed by const/volatile qualifiers
+                 C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\include\SFML/Graphics/Drawable.hpp(69) : see declaration of 'sf::Drawable::draw'
+     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp(63): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp(64): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
          tcp_net.cpp
      1>C:\Users\Demorian\Desktop\MoleBox_Windows_Dynamic0.0.2\MoleBox_Windows_Dynamic\include\MoleBox/Content/Content.hpp(306): warning C4373: 'MB::SpriteBatch::draw': virtual function overrides 'sf::Drawable::draw', previous versions of the compiler did not override when parameters only differed by const/volatile qualifiers
                  C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\include\SFML/Graphics/Drawable.hpp(69) : see declaration of 'sf::Drawable::draw'
-     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp(29): warning C4018: '<' : signed/unsigned mismatch
+     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp(30): warning C4018: '<' : signed/unsigned mismatch
      1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp(16): warning C4101: 'status' : unreferenced local variable
+         Generating Code...
+     1>c:\users\demorian\desktop\sm2acm3k1\sm2acm3k1\src\client\player.cpp(135): warning C4717: 'Player::GetPosition' : recursive on all control paths, function will cause runtime stack overflow
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\src\client\Debug\client.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib C:\Users\Demorian\Desktop\MoleBox_Windows_Dynamic0.0.2\MoleBox_Windows_Dynamic\lib\MoleBox.lib "C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\lib\sfml-system-d.lib" "C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\lib\sfml-window-d.lib" "C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\lib\sfml-graphics-d.lib" "C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\lib\sfml-audio-d.lib" "C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\lib\sfml-network-d.lib" C:\QtSDK\Desktop\Qt\4.8.1\msvc2010\lib\QtGuid4.lib C:\QtSDK\Desktop\Qt\4.8.1\msvc2010\lib\QtCored4.lib opengl32.lib glu32.lib opengl32.lib glu32.lib opengl32.lib "C:\Program Files (x86)\Lua\5.1\lib\lua51.lib" "C:\Program Files (x86)\Lua\5.1\lib\lua51.lib" glu32.lib opengl32.lib glu32.lib "C:\Program Files (x86)\Lua\5.1\lib\lua51.lib" /MANIFEST /ManifestFile:"client.dir\Debug\client.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.pdb" /SUBSYSTEM:CONSOLE /STACK:"10000000" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.lib" /MACHINE:X86 client.dir\Debug\client.exe.embed.manifest.res
+         client.dir\Debug\WorkQueues.obj
          client.dir\Debug\Game.obj
          client.dir\Debug\Main.obj
          client.dir\Debug\Map.obj
@@ -40,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:15.89
+Time Elapsed 00:00:27.96

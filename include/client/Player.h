@@ -3,6 +3,10 @@
 
 #include <MoleBox/GameComponent.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+#include <client/WorkQueues.h>
+
+#include <shared/Packets.h>
 
 
 class Game;
