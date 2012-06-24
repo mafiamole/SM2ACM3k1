@@ -33,6 +33,7 @@ Thumbs.db
 /src/client/Game.cpp~.LOCAL.20200.cpp~
 /src/client/Game.cpp~.REMOTE.20200.cpp~
 /src/client/Map.cpp~
+/VSBuild/
 /VSBuild/src/client/Players/CMakeFiles/generate.stamp.depend
 /VSBuild/ALL_BUILD.vcxproj.filters
 /VSBuild/ZERO_CHECK.vcxproj.filters
