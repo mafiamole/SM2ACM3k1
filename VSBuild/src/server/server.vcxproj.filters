@@ -7,9 +7,15 @@
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\server\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\server\tcp_net_serv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\server\Game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\server\tcp_net_serv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

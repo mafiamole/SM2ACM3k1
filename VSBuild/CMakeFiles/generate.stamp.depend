@@ -48,3 +48,7 @@ C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeParseArguments.cma
 C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Qt4ConfigDependentSettings.cmake
 C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Qt4Macros.cmake
 C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/UseQt4.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/FindLua51.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/FindPackageMessage.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeParseArguments.cmake

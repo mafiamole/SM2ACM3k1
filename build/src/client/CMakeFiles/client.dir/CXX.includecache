@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 ../include/client/HUD.h
 MoleBox/Lua/Component.hpp
 =======
@@ -42,6 +44,7 @@ vector
 string
 -
 
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 ../include/client/UI/UI_Elements.hpp
 SFML/Window.hpp
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
@@ -57,6 +60,8 @@ SFML/Window/Event.hpp
 MoleBox/ContainerDefinitions.hpp
 -
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 /usr/local/include/MoleBox/Actions.hpp
 map
@@ -91,41 +96,12 @@ client/UIComponent.hpp
 client/Game.hpp
 -
 
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
 client/UI/UI_Elements.hpp
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
 -
 string
--
-MoleBox/Action.hpp
--
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp
-client/UIComponent.hpp
--
-
-/usr/local/include/MoleBox/Action.hpp
-SFML/Window/Event.hpp
--
-MoleBox/ContainerDefinitions.hpp
--
-
-/usr/local/include/MoleBox/Actions.hpp
-map
--
-string
--
-MoleBox/Action.hpp
--
-
-/usr/local/include/MoleBox/Actions/Keyboard.hpp
-MoleBox/Action.hpp
--
-
-/usr/local/include/MoleBox/Actions/Mouse.hpp
-SFML/Window.hpp
--
-SFML/Config.hpp
 -
 MoleBox/Action.hpp
 -
@@ -176,6 +152,8 @@ stdlib.h
 SFML/System/Mutex.hpp
 -
 
+<<<<<<< HEAD
+=======
 /usr/local/include/MoleBox/Content/Resources.hpp
 MoleBox/Content/Content.hpp
 -
@@ -243,6 +221,7 @@ MoleBox/Lua/ScriptHelper.hpp
 -
 
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 /usr/local/include/MoleBox/Lua/Script.hpp
 MoleBox/Lua/Scripts.hpp
 -
@@ -251,22 +230,6 @@ lua.hpp
 sstream
 -
 map
--
-
-/usr/local/include/MoleBox/Lua/ScriptHelper.hpp
-lua.hpp
-/usr/local/include/MoleBox/Lua/lua.hpp
-lualib.h
-/usr/local/include/MoleBox/Lua/lualib.h
-lauxlib.h
-/usr/local/include/MoleBox/Lua/lauxlib.h
-iostream
--
-string
--
-map
--
-MoleBox/Content/Content.hpp
 -
 
 /usr/local/include/MoleBox/Lua/Scripts.hpp

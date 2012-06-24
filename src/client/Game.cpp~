@@ -63,7 +63,7 @@ int Game::Run(int argc,char **argv)
 #include <client/Map.h>
 #include <client/MapLoader.h>
 #include <client/Game.hpp>
-#include <client/UIComponent.hpp>
+#include <client/UI/UI_Elements.hpp>
 
 
 //sf::Sound sound;
@@ -73,14 +73,13 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 {
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
-  UI = (UIComponent*)this->AddComponent(new UIComponent(this,"testUI.lua"));
-  this->elements.push_back(new UI_Radio("name","text"));
-
-  map = Map(this->window,	mapLoader.ReadFile("C:\\Content\\map.txt"));
-
-  	
-
   
+  UI = (UIComponent*)this->AddComponent(new UIComponent(this,"testUI.lua"));
+  
+  this->elements.push_back( new UI_Button(this->window,"TestButton.png","name","text") );
+  
+  map = Map(this->window,mapLoader.ReadFile("map.txt"));
+
 }
 
 
@@ -94,14 +93,40 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 
   UI->Update(elapsed,events);
   
+    UI_ELEMENTS::iterator elementItr;
+
+  for (elementItr = elements.begin(); elementItr != elements.end(); elementItr++)
+  {
+    
+    if ((*elementItr)->Activated(events))
+    {
+      std::cout << "Element activated." << std::endl;
+    }
+    else
+    {
+      std::cout << "Element not activated." << std::endl;
+
+    }
+    
+    
+  }  
+  
   MB::Game::Update(elapsed,events);
   
 }
 
 void Game::Draw()
 {
-	map.Draw();
-	
+  map.Draw();
+  UI_ELEMENTS::iterator elementItr;
+  
+  for (elementItr = elements.begin(); elementItr != elements.end(); elementItr++)
+  {
+    
+    (*elementItr)->Draw();
+    
+  }
+  
   MB::Game::Draw();  
   
 }
@@ -111,4 +136,9 @@ int Game::Run(int argc,char **argv)
   MB::Game::Run(argc,argv);
   return 0;
 }
+<<<<<<< HEAD
+
+
+=======
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d

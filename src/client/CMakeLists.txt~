@@ -6,11 +6,25 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/UI/UI_Elements.hpp
     ${MB_INCLUDE_DIR}/client/Map.h 
     ${MB_INCLUDE_DIR}/client/MapLoader.h
+    ${MB_INCLUDE_DIR}/client/PlayerInformation.hpp
+    
+  )
+=======
+<<<<<<< HEAD
+    ${MB_INCLUDE_DIR}/client/MapLoader.h
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
+<<<<<<< HEAD
     ${MB_INCLUDE_DIR}/client/Player.h
     ${MB_INCLUDE_DIR}/client/tcp_net.h
   )
 
+=======
+    ${MB_INCLUDE_DIR}/client/tcp_net.h)
+=======
+    ${MB_INCLUDE_DIR}/client/MapLoader.h)
+>>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
+>>>>>>> 8af4970d2516d4f3bd13d1fb7e7d2979f453453b
 
 set (SOURCES 
     Game.cpp

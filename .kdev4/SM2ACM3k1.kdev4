@@ -12,12 +12,12 @@ Extra Arguments=
 ProjectRootRelative=./
 
 [Launch]
-Launch Configurations=Launch Configuration 0,Launch Configuration 1
+Launch Configurations=Launch Configuration 0
 
 [Launch][Launch Configuration 0]
 Configured Launch Modes=execute
 Configured Launchers=nativeAppLauncher
-Name=Client
+Name=Add Client
 Type=Native Application
 
 [Launch][Launch Configuration 0][Data]
@@ -32,6 +32,8 @@ Use External Terminal=false
 Working Directory=
 isExecutable=false
 
+<<<<<<< HEAD
+=======
 [Launch][Launch Configuration 1]
 Configured Launch Modes=execute
 Configured Launchers=nativeAppLauncher
@@ -56,5 +58,6 @@ isExecutable=false
 Number Of Jobs=1
 
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 [Project]
 VersionControlSupport=kdevgit

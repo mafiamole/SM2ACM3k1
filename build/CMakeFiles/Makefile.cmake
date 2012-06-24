@@ -11,6 +11,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCCompiler.cmake"
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
+  "../include/client/Players/CMakeLists.txt"
   "../src/client/CMakeLists.txt"
   "../src/client/Players/CMakeLists.txt"
   "../src/server/CMakeLists.txt"
@@ -52,6 +53,10 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/server/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/client/CMakeFiles/CMakeDirectoryInformation.cmake"
+<<<<<<< HEAD
+=======
+  "include/client/Players/CMakeFiles/CMakeDirectoryInformation.cmake"
+>>>>>>> 8af4970d2516d4f3bd13d1fb7e7d2979f453453b
   "src/client/Players/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

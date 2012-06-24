@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="drawing-1.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="401.76302"
-     inkscape:cy="956.01624"
+     inkscape:cy="1036.0162"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,13 +52,13 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:none;stroke:#ff8080;stroke-width:1.98935974;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffffff;stroke:#ff8080;stroke-width:1.77816558000000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2987"
-       width="198.01064"
-       height="98.010643"
-       x="117.17239"
-       y="47.239876"
-       rx="13.717708"
-       ry="15.254737" />
+       width="198.22183"
+       height="78.221832"
+       x="117.0668"
+       y="67.134285"
+       rx="20"
+       ry="20" />
   </g>
 </svg>

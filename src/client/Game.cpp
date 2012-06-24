@@ -7,7 +7,7 @@
 #include <client/MapLoader.h>
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
-
+#include <client/randomc.h>
 
 //sf::Sound sound;
 Map map = Map();
@@ -16,14 +16,8 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 {
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
-  
-  UI = (UIComponent*)this->AddComponent(new UIComponent(this,"testUI.lua"));
-  
-  this->elements.push_back( new UI_Button(this->window,"TestButton.png","name","text") );
-  
-  map = Map(this->window,mapLoader.ReadFile("map.txt"));
 
-  map = Map(this->window,	mapLoader.ReadFile("C:\\Content\\map.txt"));
+  map = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
 
 
   this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
@@ -40,6 +34,8 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->player = (Player*)this->AddComponent( new Player(this) );
 
   
+  CRandomMersenne rand(23232);
+  printf("%i",rand.IRandom(0,100));
 
 
 
@@ -54,13 +50,7 @@ Game::~Game(void)
 
 void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 {
-
-  UI->Update(elapsed,events);
- // UI->Update(elapsed,events);
-  
-	// Handle Keyboard input
-
-	
+    // Handle Keyboard input	
 	if (this->actionList.Exists("Exit") && this->actionList.Get("Exit")->IsActive()){
 		this->window->close(); 
 		exit(0);
@@ -74,6 +64,9 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 
 void Game::Draw()
 {
+  
+	
+  map.Draw();
   MB::Game::Draw();  
   
 }

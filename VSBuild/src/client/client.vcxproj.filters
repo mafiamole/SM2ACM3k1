@@ -7,10 +7,28 @@
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\client\Map.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\client\MapLoader.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\MapLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UIComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UI\UI_Elements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Players\PlayerInformation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\mersenne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -18,10 +36,28 @@
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\client\Map.h">
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UIComponent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\client\MapLoader.h">
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UI\UI_Elements.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\MapLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Players\PlayerInformation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\tcp_net.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\randomc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

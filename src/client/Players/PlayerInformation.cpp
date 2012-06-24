@@ -1,23 +1,12 @@
-#include <client/Players/PlayerInformation.hpp>
+#ifndef PLAYERINFORMATION_H
+#define PLAYERINFORMATION_H
 
 
-bool PlayerData::RightHealth(PlayerData player)
+
+struct PlayerData
 {
-  return ( player.health && 4 );
-}
+  short int health;
+};
 
-bool PlayerData::LeftHealth(PlayerData player)
-{
-  return ( player.health && 3 );
-}
 
-bool PlayerData::BackHealth(PlayerData player)
-{
-  return ( player.health && 2 );
-}
-
-bool PlayerData::FrontHealth(PlayerData player)
-{
-  return ( player.health && 1 );
-}
-
+#endif

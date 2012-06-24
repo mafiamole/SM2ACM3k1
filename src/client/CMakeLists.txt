@@ -9,8 +9,10 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
     ${MB_INCLUDE_DIR}/client/Player.h
     ${MB_INCLUDE_DIR}/client/tcp_net.h
-  )
+    ${MB_INCLUDE_DIR}/client/randomc.h
 
+  )
+    
 
 set (SOURCES 
     Game.cpp
@@ -22,6 +24,8 @@ set (SOURCES
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
+    Players/PlayerInformation.cpp
+    mersenne.cpp
     )
 
 
