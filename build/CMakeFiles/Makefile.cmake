@@ -12,8 +12,10 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
   "../src/client/CMakeLists.txt"
+  "../src/client/Map/CMakeLists.txt"
   "../src/client/Players/CMakeLists.txt"
   "../src/server/CMakeLists.txt"
+  "../src/shared/CMakeLists.txt"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
@@ -53,6 +55,8 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "src/server/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/client/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/client/Players/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/client/Map/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/shared/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

@@ -208,6 +208,30 @@ Map.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map.cpp.s
 .PHONY : Map.cpp.s
 
+Map/Tile.o: Map/Tile.cpp.o
+.PHONY : Map/Tile.o
+
+# target to build an object file
+Map/Tile.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map/Tile.cpp.o
+.PHONY : Map/Tile.cpp.o
+
+Map/Tile.i: Map/Tile.cpp.i
+.PHONY : Map/Tile.i
+
+# target to preprocess a source file
+Map/Tile.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map/Tile.cpp.i
+.PHONY : Map/Tile.cpp.i
+
+Map/Tile.s: Map/Tile.cpp.s
+.PHONY : Map/Tile.s
+
+# target to generate assembly for a file
+Map/Tile.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map/Tile.cpp.s
+.PHONY : Map/Tile.cpp.s
+
 MapLoader.o: MapLoader.cpp.o
 .PHONY : MapLoader.o
 
@@ -280,6 +304,54 @@ Players/PlayerInformation.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.s
 .PHONY : Players/PlayerInformation.cpp.s
 
+SpriteSheet.o: SpriteSheet.cpp.o
+.PHONY : SpriteSheet.o
+
+# target to build an object file
+SpriteSheet.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o
+.PHONY : SpriteSheet.cpp.o
+
+SpriteSheet.i: SpriteSheet.cpp.i
+.PHONY : SpriteSheet.i
+
+# target to preprocess a source file
+SpriteSheet.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheet.cpp.i
+.PHONY : SpriteSheet.cpp.i
+
+SpriteSheet.s: SpriteSheet.cpp.s
+.PHONY : SpriteSheet.s
+
+# target to generate assembly for a file
+SpriteSheet.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheet.cpp.s
+.PHONY : SpriteSheet.cpp.s
+
+SpriteSheetAnimator.o: SpriteSheetAnimator.cpp.o
+.PHONY : SpriteSheetAnimator.o
+
+# target to build an object file
+SpriteSheetAnimator.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o
+.PHONY : SpriteSheetAnimator.cpp.o
+
+SpriteSheetAnimator.i: SpriteSheetAnimator.cpp.i
+.PHONY : SpriteSheetAnimator.i
+
+# target to preprocess a source file
+SpriteSheetAnimator.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.i
+.PHONY : SpriteSheetAnimator.cpp.i
+
+SpriteSheetAnimator.s: SpriteSheetAnimator.cpp.s
+.PHONY : SpriteSheetAnimator.s
+
+# target to generate assembly for a file
+SpriteSheetAnimator.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.s
+.PHONY : SpriteSheetAnimator.cpp.s
+
 UI/UI_Elements.o: UI/UI_Elements.cpp.o
 .PHONY : UI/UI_Elements.o
 
@@ -304,29 +376,29 @@ UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
 
-UI/UI_LuaFunctions.o: UI/UI_LuaFunctions.cpp.o
-.PHONY : UI/UI_LuaFunctions.o
+__/shared/Packets.o: __/shared/Packets.cpp.o
+.PHONY : __/shared/Packets.o
 
 # target to build an object file
-UI/UI_LuaFunctions.cpp.o:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
-.PHONY : UI/UI_LuaFunctions.cpp.o
+__/shared/Packets.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o
+.PHONY : __/shared/Packets.cpp.o
 
-UI/UI_LuaFunctions.i: UI/UI_LuaFunctions.cpp.i
-.PHONY : UI/UI_LuaFunctions.i
+__/shared/Packets.i: __/shared/Packets.cpp.i
+.PHONY : __/shared/Packets.i
 
 # target to preprocess a source file
-UI/UI_LuaFunctions.cpp.i:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i
-.PHONY : UI/UI_LuaFunctions.cpp.i
+__/shared/Packets.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.i
+.PHONY : __/shared/Packets.cpp.i
 
-UI/UI_LuaFunctions.s: UI/UI_LuaFunctions.cpp.s
-.PHONY : UI/UI_LuaFunctions.s
+__/shared/Packets.s: __/shared/Packets.cpp.s
+.PHONY : __/shared/Packets.s
 
 # target to generate assembly for a file
-UI/UI_LuaFunctions.cpp.s:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s
-.PHONY : UI/UI_LuaFunctions.cpp.s
+__/shared/Packets.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.s
+.PHONY : __/shared/Packets.cpp.s
 
 mersenne.o: mersenne.cpp.o
 .PHONY : mersenne.o
@@ -397,6 +469,9 @@ help:
 	@echo "... Map.o"
 	@echo "... Map.i"
 	@echo "... Map.s"
+	@echo "... Map/Tile.o"
+	@echo "... Map/Tile.i"
+	@echo "... Map/Tile.s"
 	@echo "... MapLoader.o"
 	@echo "... MapLoader.i"
 	@echo "... MapLoader.s"
@@ -406,12 +481,18 @@ help:
 	@echo "... Players/PlayerInformation.o"
 	@echo "... Players/PlayerInformation.i"
 	@echo "... Players/PlayerInformation.s"
+	@echo "... SpriteSheet.o"
+	@echo "... SpriteSheet.i"
+	@echo "... SpriteSheet.s"
+	@echo "... SpriteSheetAnimator.o"
+	@echo "... SpriteSheetAnimator.i"
+	@echo "... SpriteSheetAnimator.s"
 	@echo "... UI/UI_Elements.o"
 	@echo "... UI/UI_Elements.i"
 	@echo "... UI/UI_Elements.s"
-	@echo "... UI/UI_LuaFunctions.o"
-	@echo "... UI/UI_LuaFunctions.i"
-	@echo "... UI/UI_LuaFunctions.s"
+	@echo "... __/shared/Packets.o"
+	@echo "... __/shared/Packets.i"
+	@echo "... __/shared/Packets.s"
 	@echo "... mersenne.o"
 	@echo "... mersenne.i"
 	@echo "... mersenne.s"

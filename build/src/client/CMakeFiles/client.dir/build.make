@@ -187,32 +187,9 @@ src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides: src/client/CMake
 
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.provides.build: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
 
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: src/client/CMakeFiles/client.dir/flags.make
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: ../src/client/UI/UI_LuaFunctions.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_7)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o"
-	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_LuaFunctions.cpp
-
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i"
-	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_LuaFunctions.cpp > CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i
-
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s"
-	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_LuaFunctions.cpp -o CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s
-
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.requires:
-.PHONY : src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.requires
-
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.provides: src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.requires
-	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.provides.build
-.PHONY : src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.provides
-
-src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.provides.build: src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
-
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: src/client/CMakeFiles/client.dir/flags.make
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../src/client/tcp_net.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/tcp_net.cpp.o"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/tcp_net.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/tcp_net.cpp
 
@@ -235,7 +212,7 @@ src/client/CMakeFiles/client.dir/tcp_net.cpp.o.provides.build: src/client/CMakeF
 
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: src/client/CMakeFiles/client.dir/flags.make
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../src/client/Players/PlayerInformation.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/Players/PlayerInformation.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp
 
@@ -258,7 +235,7 @@ src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.provides.build:
 
 src/client/CMakeFiles/client.dir/Player.cpp.o: src/client/CMakeFiles/client.dir/flags.make
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../src/client/Player.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/Player.cpp.o"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/Player.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
 
@@ -281,7 +258,7 @@ src/client/CMakeFiles/client.dir/Player.cpp.o.provides.build: src/client/CMakeFi
 
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: src/client/CMakeFiles/client.dir/flags.make
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: ../src/client/mersenne.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/mersenne.cpp.o"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/mersenne.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/mersenne.cpp
 
@@ -302,6 +279,98 @@ src/client/CMakeFiles/client.dir/mersenne.cpp.o.provides: src/client/CMakeFiles/
 
 src/client/CMakeFiles/client.dir/mersenne.cpp.o.provides.build: src/client/CMakeFiles/client.dir/mersenne.cpp.o
 
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: ../src/shared/Packets.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/__/shared/Packets.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp
+
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/__/shared/Packets.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp > CMakeFiles/client.dir/__/shared/Packets.cpp.i
+
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/__/shared/Packets.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp -o CMakeFiles/client.dir/__/shared/Packets.cpp.s
+
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.provides: src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.provides.build: src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.o: ../src/client/Map/Tile.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/Map/Tile.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/Map/Tile.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/Map/Tile.cpp
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/Map/Tile.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/Map/Tile.cpp > CMakeFiles/client.dir/Map/Tile.cpp.i
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/Map/Tile.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/Map/Tile.cpp -o CMakeFiles/client.dir/Map/Tile.cpp.s
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.provides: src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.provides.build: src/client/CMakeFiles/client.dir/Map/Tile.cpp.o
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o: ../src/client/SpriteSheet.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/SpriteSheet.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheet.cpp
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/SpriteSheet.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheet.cpp > CMakeFiles/client.dir/SpriteSheet.cpp.i
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/SpriteSheet.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheet.cpp -o CMakeFiles/client.dir/SpriteSheet.cpp.s
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.provides: src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.provides.build: src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o: ../src/client/SpriteSheetAnimator.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheetAnimator.cpp
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/SpriteSheetAnimator.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheetAnimator.cpp > CMakeFiles/client.dir/SpriteSheetAnimator.cpp.i
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/SpriteSheetAnimator.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheetAnimator.cpp -o CMakeFiles/client.dir/SpriteSheetAnimator.cpp.s
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.provides: src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.provides.build: src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o
+
 # Object files for target client
 client_OBJECTS = \
 "CMakeFiles/client.dir/Game.cpp.o" \
@@ -310,11 +379,14 @@ client_OBJECTS = \
 "CMakeFiles/client.dir/HUD.cpp.o" \
 "CMakeFiles/client.dir/MapLoader.cpp.o" \
 "CMakeFiles/client.dir/UI/UI_Elements.cpp.o" \
-"CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o" \
 "CMakeFiles/client.dir/tcp_net.cpp.o" \
 "CMakeFiles/client.dir/Players/PlayerInformation.cpp.o" \
 "CMakeFiles/client.dir/Player.cpp.o" \
-"CMakeFiles/client.dir/mersenne.cpp.o"
+"CMakeFiles/client.dir/mersenne.cpp.o" \
+"CMakeFiles/client.dir/__/shared/Packets.cpp.o" \
+"CMakeFiles/client.dir/Map/Tile.cpp.o" \
+"CMakeFiles/client.dir/SpriteSheet.cpp.o" \
+"CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
@@ -325,11 +397,14 @@ src/client/client: src/client/CMakeFiles/client.dir/Map.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/HUD.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/MapLoader.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
-src/client/client: src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/tcp_net.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/Player.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/mersenne.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/Map/Tile.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/build.make
 src/client/client: /usr/local/lib/libMoleBox.so
 src/client/client: /usr/local/lib64/libsfml-system.so
@@ -353,11 +428,14 @@ src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Map.
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/HUD.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/MapLoader.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires
-src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/tcp_net.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Player.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/mersenne.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Map/Tile.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o.requires
 .PHONY : src/client/CMakeFiles/client.dir/requires
 
 src/client/CMakeFiles/client.dir/clean:

@@ -7,11 +7,12 @@
 #include <MoleBox/Content/Content.hpp>
 #include <vector>
 #include <string>
+#include <client/Map/Tile.hpp>
 
 class MapLoader {
 public:
 	MapLoader();
-	std::vector<sf::Sprite> ReadFile(std::string path);
+	   std::vector< Tile* > ReadFile(std::string path);
 
 };
 

@@ -36,6 +36,7 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/mafiamole/projects/SM2ACM3k1/build/src/server/cmake_install.cmake")
   INCLUDE("/home/mafiamole/projects/SM2ACM3k1/build/src/client/cmake_install.cmake")
+  INCLUDE("/home/mafiamole/projects/SM2ACM3k1/build/src/shared/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

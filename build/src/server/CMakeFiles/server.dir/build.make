@@ -95,9 +95,32 @@ src/server/CMakeFiles/server.dir/Main.cpp.o.provides: src/server/CMakeFiles/serv
 
 src/server/CMakeFiles/server.dir/Main.cpp.o.provides.build: src/server/CMakeFiles/server.dir/Main.cpp.o
 
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o: src/server/CMakeFiles/server.dir/flags.make
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o: ../src/shared/Packets.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/server.dir/__/shared/Packets.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp
+
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/__/shared/Packets.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp > CMakeFiles/server.dir/__/shared/Packets.cpp.i
+
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/__/shared/Packets.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp -o CMakeFiles/server.dir/__/shared/Packets.cpp.s
+
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.requires:
+.PHONY : src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.requires
+
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.provides: src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.requires
+	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.provides.build
+.PHONY : src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.provides
+
+src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.provides.build: src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o
+
 src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o: src/server/CMakeFiles/server.dir/flags.make
 src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o: ../src/server/tcp_net_serv.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/server.dir/tcp_net_serv.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/server/tcp_net_serv.cpp
 
@@ -122,6 +145,7 @@ src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.provides.build: src/server/C
 server_OBJECTS = \
 "CMakeFiles/server.dir/Game.cpp.o" \
 "CMakeFiles/server.dir/Main.cpp.o" \
+"CMakeFiles/server.dir/__/shared/Packets.cpp.o" \
 "CMakeFiles/server.dir/tcp_net_serv.cpp.o"
 
 # External object files for target server
@@ -129,6 +153,7 @@ server_EXTERNAL_OBJECTS =
 
 src/server/server: src/server/CMakeFiles/server.dir/Game.cpp.o
 src/server/server: src/server/CMakeFiles/server.dir/Main.cpp.o
+src/server/server: src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o
 src/server/server: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o
 src/server/server: src/server/CMakeFiles/server.dir/build.make
 src/server/server: /usr/local/lib/libMoleBox.so
@@ -147,6 +172,7 @@ src/server/CMakeFiles/server.dir/build: src/server/server
 
 src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/Game.cpp.o.requires
 src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/Main.cpp.o.requires
+src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o.requires
 src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.requires
 .PHONY : src/server/CMakeFiles/server.dir/requires
 
