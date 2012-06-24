@@ -10,8 +10,8 @@
 
   static const luaL_reg ui_button_reg[] =
   {
-    { "Create", UI_BUTTON_REG::Create},
-    { "Activated", UI_BUTTON_REG::Activated},
-    { "SetPosition", UI_BUTTON_REG::SetPosition},
+    { "Create", UI_Button_Reg::Create},
+    { "Activated", UI_Button_Reg::Activated},
+    { "SetPosition", UI_Button_Reg::SetPosition},
     { NULL, NULL }
   };

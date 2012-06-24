@@ -1,7 +1,7 @@
 #include "lua.hpp"
 
 
-  class UI_Button_Reg 
+  struct UI_Button_Reg 
   {
     static int Create(lua_State*);
     static int Activated(lua_State*);

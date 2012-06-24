@@ -520,8 +520,33 @@ src/client/CMakeFiles/client.dir/Player.cpp.o: /usr/local/include/SFML/Window/Wi
 src/client/CMakeFiles/client.dir/Player.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/Player.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
 
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../include/client/HUD.h
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../include/client/Players/PlayerInformation.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../include/client/UI/UI_Elements.hpp
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../src/client/Players/PlayerInformation.cpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Action.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Actions.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/ContainerDefinitions.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Content/Content.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Content/ContentID.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Content/ContentTemplate.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Content/Resources.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Game.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/GameComponent.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Lua/Component.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Lua/Script.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Lua/ScriptHelper.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/MoleBox/Lua/Scripts.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/Export.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/Listener.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/Music.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/Sound.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/SoundBuffer.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/SoundBufferRecorder.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/SoundRecorder.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/SoundSource.hpp
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Audio/SoundStream.hpp
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Config.hpp
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Graphics.hpp
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Graphics/BlendMode.hpp
@@ -669,6 +694,9 @@ src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/W
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/Window/Window.hpp
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
+
+src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: ../include/client/UI/UI_LuaFunctions.hpp
+src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: ../src/client/UI/UI_LuaFunctions.cpp
 
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: ../include/client/randomc.h
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: ../src/client/mersenne.cpp

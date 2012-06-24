@@ -304,6 +304,30 @@ UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
 
+UI/UI_LuaFunctions.o: UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.o
+
+# target to build an object file
+UI/UI_LuaFunctions.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.cpp.o
+
+UI/UI_LuaFunctions.i: UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.i
+
+# target to preprocess a source file
+UI/UI_LuaFunctions.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.cpp.i
+
+UI/UI_LuaFunctions.s: UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.s
+
+# target to generate assembly for a file
+UI/UI_LuaFunctions.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.cpp.s
+
 mersenne.o: mersenne.cpp.o
 .PHONY : mersenne.o
 
@@ -385,6 +409,9 @@ help:
 	@echo "... UI/UI_Elements.o"
 	@echo "... UI/UI_Elements.i"
 	@echo "... UI/UI_Elements.s"
+	@echo "... UI/UI_LuaFunctions.o"
+	@echo "... UI/UI_LuaFunctions.i"
+	@echo "... UI/UI_LuaFunctions.s"
 	@echo "... mersenne.o"
 	@echo "... mersenne.i"
 	@echo "... mersenne.s"

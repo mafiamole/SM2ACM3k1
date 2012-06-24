@@ -15,8 +15,6 @@ client/UI/UI_Elements.hpp
 -
 client/HUD.h
 -
-UIComponent.hpp
-../include/client/UIComponent.hpp
 Player.h
 ../include/client/Player.h
 
@@ -57,7 +55,9 @@ MoleBox/GameComponent.hpp
 ../include/client/Players/PlayerInformation.hpp
 SFML/Graphics.hpp
 -
-list
+vector
+-
+lua.hpp
 -
 
 ../include/client/UI/UI_Elements.hpp
@@ -74,8 +74,6 @@ inttypes.h
 
 /home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp
 client/Game.hpp
--
-client/UIComponent.hpp
 -
 MoleBox/Actions/Keyboard.hpp
 -
@@ -102,29 +100,15 @@ client/HUD.h
 client/Game.hpp
 -
 
-/home/mafiamole/projects/SM2ACM3k1/src/client/MapLoader.cpp
-client/MapLoader.h
--
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
-client/Player.h
--
-MoleBox/Content/Content.hpp
--
-MoleBox/Game.hpp
--
-iostream
--
-
 /home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp
 client/Players/PlayerInformation.hpp
 -
+client/HUD.h
+-
+MoleBox/Lua/ScriptHelper.hpp
+-
 lua.h
 -
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/mersenne.cpp
-client/randomc.h
-/home/mafiamole/projects/SM2ACM3k1/src/client/client/randomc.h
 
 /usr/local/include/MoleBox/Action.hpp
 SFML/Window/Event.hpp
@@ -262,6 +246,22 @@ lua.hpp
 sstream
 -
 map
+-
+
+/usr/local/include/MoleBox/Lua/ScriptHelper.hpp
+lua.hpp
+/usr/local/include/MoleBox/Lua/lua.hpp
+lualib.h
+/usr/local/include/MoleBox/Lua/lualib.h
+lauxlib.h
+/usr/local/include/MoleBox/Lua/lauxlib.h
+iostream
+-
+string
+-
+map
+-
+MoleBox/Content/Content.hpp
 -
 
 /usr/local/include/MoleBox/Lua/Scripts.hpp

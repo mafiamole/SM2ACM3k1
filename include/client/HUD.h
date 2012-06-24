@@ -18,6 +18,10 @@ public:
   
   void SetPlayersData(PlayerDataList list);
   
+  PlayerData PlayerInformation( int player );
+  
+  
+  
   void Update(sf::Time elapsed, MB::Types::EventList* events);
   
   void Draw();
