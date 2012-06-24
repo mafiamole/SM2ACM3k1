@@ -11,4 +11,3 @@ include_directories (${MoleBox_INCLUDE_DIRECTORIES} )
 
 add_subdirectory(src/server)
 add_subdirectory(src/client)
-add_subdirectory(include/client/Players)

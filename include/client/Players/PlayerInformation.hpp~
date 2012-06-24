@@ -10,13 +10,13 @@ struct PlayerData {
   int 		item;
   sf::Vector2f	position;
   float		direction;
-  bool RightHealth(PlayerData player);
+  static bool RightHealth(PlayerData player);
 
-  bool LeftHealth(PlayerData player);
+  static bool LeftHealth(PlayerData player);
 
-  bool BackHealth(PlayerData player);
+  static bool BackHealth(PlayerData player);
 
-  bool FrontHealth(PlayerData player);
+  static bool FrontHealth(PlayerData player);
     
 };
 

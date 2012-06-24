@@ -136,6 +136,30 @@ Game.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Game.cpp.s
 .PHONY : Game.cpp.s
 
+HUD.o: HUD.cpp.o
+.PHONY : HUD.o
+
+# target to build an object file
+HUD.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/HUD.cpp.o
+.PHONY : HUD.cpp.o
+
+HUD.i: HUD.cpp.i
+.PHONY : HUD.i
+
+# target to preprocess a source file
+HUD.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/HUD.cpp.i
+.PHONY : HUD.cpp.i
+
+HUD.s: HUD.cpp.s
+.PHONY : HUD.s
+
+# target to generate assembly for a file
+HUD.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/HUD.cpp.s
+.PHONY : HUD.cpp.s
+
 Main.o: Main.cpp.o
 .PHONY : Main.o
 
@@ -232,29 +256,29 @@ UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
 
-UIComponent.o: UIComponent.cpp.o
-.PHONY : UIComponent.o
+tcp_net.o: tcp_net.cpp.o
+.PHONY : tcp_net.o
 
 # target to build an object file
-UIComponent.cpp.o:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.o
-.PHONY : UIComponent.cpp.o
+tcp_net.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/tcp_net.cpp.o
+.PHONY : tcp_net.cpp.o
 
-UIComponent.i: UIComponent.cpp.i
-.PHONY : UIComponent.i
+tcp_net.i: tcp_net.cpp.i
+.PHONY : tcp_net.i
 
 # target to preprocess a source file
-UIComponent.cpp.i:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.i
-.PHONY : UIComponent.cpp.i
+tcp_net.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/tcp_net.cpp.i
+.PHONY : tcp_net.cpp.i
 
-UIComponent.s: UIComponent.cpp.s
-.PHONY : UIComponent.s
+tcp_net.s: tcp_net.cpp.s
+.PHONY : tcp_net.s
 
 # target to generate assembly for a file
-UIComponent.cpp.s:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UIComponent.cpp.s
-.PHONY : UIComponent.cpp.s
+tcp_net.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/tcp_net.cpp.s
+.PHONY : tcp_net.cpp.s
 
 # Help Target
 help:
@@ -268,6 +292,9 @@ help:
 	@echo "... Game.o"
 	@echo "... Game.i"
 	@echo "... Game.s"
+	@echo "... HUD.o"
+	@echo "... HUD.i"
+	@echo "... HUD.s"
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
@@ -280,9 +307,9 @@ help:
 	@echo "... UI/UI_Elements.o"
 	@echo "... UI/UI_Elements.i"
 	@echo "... UI/UI_Elements.s"
-	@echo "... UIComponent.o"
-	@echo "... UIComponent.i"
-	@echo "... UIComponent.s"
+	@echo "... tcp_net.o"
+	@echo "... tcp_net.i"
+	@echo "... tcp_net.s"
 .PHONY : help
 
 

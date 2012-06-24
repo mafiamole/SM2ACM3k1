@@ -2,9 +2,10 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/client.dir/Game.cpp.o"
   "CMakeFiles/client.dir/Main.cpp.o"
   "CMakeFiles/client.dir/Map.cpp.o"
+  "CMakeFiles/client.dir/HUD.cpp.o"
   "CMakeFiles/client.dir/MapLoader.cpp.o"
-  "CMakeFiles/client.dir/UIComponent.cpp.o"
   "CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
+  "CMakeFiles/client.dir/tcp_net.cpp.o"
   "client.pdb"
   "client"
 )

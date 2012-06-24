@@ -95,22 +95,48 @@ src/server/CMakeFiles/server.dir/Main.cpp.o.provides: src/server/CMakeFiles/serv
 
 src/server/CMakeFiles/server.dir/Main.cpp.o.provides.build: src/server/CMakeFiles/server.dir/Main.cpp.o
 
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o: src/server/CMakeFiles/server.dir/flags.make
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o: ../src/server/tcp_net_serv.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/server.dir/tcp_net_serv.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/server/tcp_net_serv.cpp
+
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/tcp_net_serv.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/server/tcp_net_serv.cpp > CMakeFiles/server.dir/tcp_net_serv.cpp.i
+
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/tcp_net_serv.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/server/tcp_net_serv.cpp -o CMakeFiles/server.dir/tcp_net_serv.cpp.s
+
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.requires:
+.PHONY : src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.requires
+
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.provides: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.requires
+	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.provides.build
+.PHONY : src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.provides
+
+src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.provides.build: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o
+
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/Game.cpp.o" \
-"CMakeFiles/server.dir/Main.cpp.o"
+"CMakeFiles/server.dir/Main.cpp.o" \
+"CMakeFiles/server.dir/tcp_net_serv.cpp.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
 src/server/server: src/server/CMakeFiles/server.dir/Game.cpp.o
 src/server/server: src/server/CMakeFiles/server.dir/Main.cpp.o
+src/server/server: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o
 src/server/server: src/server/CMakeFiles/server.dir/build.make
 src/server/server: /usr/local/lib/libMoleBox.so
 src/server/server: /usr/local/lib64/libsfml-system.so
 src/server/server: /usr/local/lib64/libsfml-window.so
 src/server/server: /usr/local/lib64/libsfml-graphics.so
 src/server/server: /usr/local/lib64/libsfml-audio.so
+src/server/server: /usr/local/lib64/libsfml-network.so
 src/server/server: src/server/CMakeFiles/server.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable server"
 	cd /home/mafiamole/projects/SM2ACM3k1/build/src/server && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
@@ -121,6 +147,7 @@ src/server/CMakeFiles/server.dir/build: src/server/server
 
 src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/Game.cpp.o.requires
 src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/Main.cpp.o.requires
+src/server/CMakeFiles/server.dir/requires: src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o.requires
 .PHONY : src/server/CMakeFiles/server.dir/requires
 
 src/server/CMakeFiles/server.dir/clean:

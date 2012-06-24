@@ -5,11 +5,12 @@ SET(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Game.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/HUD.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/HUD.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Main.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Map.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Map.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/MapLoader.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/MapLoader.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
-  "/home/mafiamole/projects/SM2ACM3k1/src/client/UIComponent.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UIComponent.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/tcp_net.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/tcp_net.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
