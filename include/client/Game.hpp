@@ -5,7 +5,6 @@
 #include <client/UI/UI_Elements.hpp>
 
 #include <client/HUD.h>
-#include "UIComponent.hpp"
 #include "Player.h"
 
 class Game :
@@ -16,7 +15,6 @@ protected:
 	HUD* Hud;
 
   UI_ELEMENTS elements;
-  UIComponent *UI;
   Player* player;
 public:
 	Game(std::string windowName);

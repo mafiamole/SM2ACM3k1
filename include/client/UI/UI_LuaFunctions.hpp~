@@ -1,0 +1,17 @@
+#include "lua.hpp"
+
+
+  class UI_Button_Reg 
+  {
+    static int Create(lua_State*);
+    static int Activated(lua_State*);
+    static int SetPosition(lua_State*);
+  };
+
+  static const luaL_reg ui_button_reg[] =
+  {
+    { "Create", UI_BUTTON_REG::Create},
+    { "Activated", UI_BUTTON_REG::Activated},
+    { "SetPosition", UI_BUTTON_REG::SetPosition},
+    { NULL, NULL }
+  };

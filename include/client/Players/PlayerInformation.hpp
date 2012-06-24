@@ -33,4 +33,27 @@ typedef std::list <PlayerData> PlayerDataList;
 
 
 
+  struct Player_Interface_Reg 
+  {
+    static int GetPlayer	(lua_State* L);
+    static int GetHP		(lua_State* L);
+    static int GetWeapon	(lua_State* L);
+    static int GetItem		(lua_State* L);
+    static int GetPosition	(lua_State* L);
+    static int GetDirection	(lua_State* L);
+
+  };
+
+  static const luaL_reg play_interface_reg[] =
+  {
+    { "GetPlayer", Player_Interface_Reg::GetPlayer},
+    { "GetHP", Player_Interface_Reg::GetHP},
+    { "GetWeapon", Player_Interface_Reg::GetWeapon},
+    { "GetItem", Player_Interface_Reg::GetPlayer},
+    { "GetPosition", Player_Interface_Reg::GetHP},
+    { "GetDirection", Player_Interface_Reg::GetWeapon},
+    { NULL, NULL }
+  };
+
+
 #endif

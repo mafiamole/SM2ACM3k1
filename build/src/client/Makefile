@@ -304,6 +304,30 @@ UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
 
+mersenne.o: mersenne.cpp.o
+.PHONY : mersenne.o
+
+# target to build an object file
+mersenne.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.o
+.PHONY : mersenne.cpp.o
+
+mersenne.i: mersenne.cpp.i
+.PHONY : mersenne.i
+
+# target to preprocess a source file
+mersenne.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.i
+.PHONY : mersenne.cpp.i
+
+mersenne.s: mersenne.cpp.s
+.PHONY : mersenne.s
+
+# target to generate assembly for a file
+mersenne.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.s
+.PHONY : mersenne.cpp.s
+
 tcp_net.o: tcp_net.cpp.o
 .PHONY : tcp_net.o
 
@@ -361,6 +385,9 @@ help:
 	@echo "... UI/UI_Elements.o"
 	@echo "... UI/UI_Elements.i"
 	@echo "... UI/UI_Elements.s"
+	@echo "... mersenne.o"
+	@echo "... mersenne.i"
+	@echo "... mersenne.s"
 	@echo "... tcp_net.o"
 	@echo "... tcp_net.i"
 	@echo "... tcp_net.s"

@@ -10,13 +10,13 @@ struct PlayerData {
   int 		item;
   sf::Vector2f	position;
   float		direction;
-  static bool RightHealth(PlayerData player);
+  bool RightHealth(PlayerData player);
 
-  static bool LeftHealth(PlayerData player);
+  bool LeftHealth(PlayerData player);
 
-  static bool BackHealth(PlayerData player);
+  bool BackHealth(PlayerData player);
 
-  static bool FrontHealth(PlayerData player);
+  bool FrontHealth(PlayerData player);
     
 };
 
@@ -31,6 +31,26 @@ typedef std::list <PlayerData> PlayerDataList;
  * 
  */ 
 
+
+
+  struct Player_Interface_Reg 
+  {
+    static int GetPlayer	(lua_State* L);
+    static int GetHP		(lua_State* L);
+    static int GetWeapon	(lua_State* L);
+    static int GetItem		(lua_State* L);
+    static int GetPosition	(lua_State* L);
+    static int GetDirection	(lua_State* L);
+
+  };
+
+  static const luaL_reg play_interface_reg[] =
+  {
+    { "GetPlayer", Player_Interface_Reg::GetPlayer},
+    { "Weapon", Player_Interface_Reg::GetHP},
+    { "SetPosition", Player_Interface_Reg::GetWeapon},
+    { NULL, NULL }
+  };
 
 
 #endif

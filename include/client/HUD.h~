@@ -1,7 +1,7 @@
 #ifndef HUD_H
 #define HUD_H
 
-// #include <client/Players/PlayerInformation.hpp>
+#include <client/Players/PlayerInformation.hpp>
 #include <MoleBox/Lua/Component.hpp>
 
 class HUD : public MB::Lua::LuaComponent

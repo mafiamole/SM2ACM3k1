@@ -1,23 +1,50 @@
+#ifndef PLAYERINFORMATION_H
+#define PLAYERINFORMATION_H
+
 #include <client/Players/PlayerInformation.hpp>
+#include <lua.h>
 
 
-bool RightHealth(PlayerData player)
+int Player_Interface_Reg::GetPlayer(lua_State* L)
 {
-  return ( player.health && 4 );
+  
+  
+  return 0;
 }
 
-bool LeftHealth(PlayerData player)
+int Player_Interface_Reg::GetHP(lua_State* L)
 {
-  return ( player.health && 3 );
+  
+  
+  return 0;
 }
 
-bool BackHealth(PlayerData player)
+int Player_Interface_Reg::GetWeapon(lua_State* L)
 {
-  return ( player.health && 2 );
+  
+  
+  return 0;
 }
 
-bool FrontHealth(PlayerData player)
+int Player_Interface_Reg::GetPlayer(lua_State* L)
 {
-  return ( player.health && 1 );
+  
+  
+  return 0;
 }
 
+int Player_Interface_Reg::GetPlayer(lua_State* L)
+{
+  
+  
+  return 0;
+}
+
+int Player_Interface_Reg::GetPlayer(lua_State* L)
+{
+  
+  
+  return 0;
+}
+
+#endif

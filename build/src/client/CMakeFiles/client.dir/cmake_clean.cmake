@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/client.dir/tcp_net.cpp.o"
   "CMakeFiles/client.dir/Players/PlayerInformation.cpp.o"
   "CMakeFiles/client.dir/Player.cpp.o"
+  "CMakeFiles/client.dir/mersenne.cpp.o"
   "client.pdb"
   "client"
 )

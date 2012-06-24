@@ -1,5 +1,4 @@
 #include <client/Game.hpp>
-#include <client/UIComponent.hpp>
 #include <MoleBox/Actions/Keyboard.hpp>
 #include <MoleBox/Actions/Mouse.hpp>
 #include <MoleBox/Lua/Component.hpp>

@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-../include/client/HUD.h
-MoleBox/Lua/Component.hpp
-=======
 ../include/client/Game.hpp
 MoleBox/Game.hpp
 -
@@ -19,8 +13,20 @@ MoleBox/ContainerDefinitions.hpp
 -
 client/UI/UI_Elements.hpp
 -
+client/HUD.h
+-
 UIComponent.hpp
 ../include/client/UIComponent.hpp
+Player.h
+../include/client/Player.h
+
+../include/client/HUD.h
+MoleBox/Lua/Component.hpp
+-
+client/Players/PlayerInformation.hpp
+-
+UI/UI_Elements.hpp
+../include/client/UI/UI_Elements.hpp
 
 ../include/client/Map.h
 SFML/Graphics.hpp
@@ -44,32 +50,26 @@ vector
 string
 -
 
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
+../include/client/Player.h
+MoleBox/GameComponent.hpp
+-
+
+../include/client/Players/PlayerInformation.hpp
+SFML/Graphics.hpp
+-
+list
+-
+
 ../include/client/UI/UI_Elements.hpp
 SFML/Window.hpp
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
 -
-
-/home/mafiamole/projects/SM2ACM3k1/src/client/HUD.cpp
-client/HUD.h
--
-
-/usr/local/include/MoleBox/Action.hpp
-SFML/Window/Event.hpp
+SFML/Graphics/Sprite.hpp
 -
 MoleBox/ContainerDefinitions.hpp
 -
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-/usr/local/include/MoleBox/Actions.hpp
-map
-=======
-../include/client/UIComponent.hpp
-MoleBox/Lua/ComponentFunctions.hpp
--
-MoleBox/Lua/Component.hpp
+../include/client/randomc.h
+inttypes.h
 -
 
 /home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp
@@ -89,19 +89,65 @@ client/MapLoader.h
 -
 client/Game.hpp
 -
-client/UIComponent.hpp
+client/UI/UI_Elements.hpp
+-
+client/randomc.h
+-
+
+/home/mafiamole/projects/SM2ACM3k1/src/client/HUD.cpp
+client/HUD.h
 -
 
 /home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp
 client/Game.hpp
 -
 
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
-/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
-client/UI/UI_Elements.hpp
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+/home/mafiamole/projects/SM2ACM3k1/src/client/MapLoader.cpp
+client/MapLoader.h
+-
+
+/home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
+client/Player.h
+-
+MoleBox/Content/Content.hpp
+-
+MoleBox/Game.hpp
+-
+iostream
+-
+
+/home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp
+client/Players/PlayerInformation.hpp
+-
+lua.h
+-
+
+/home/mafiamole/projects/SM2ACM3k1/src/client/mersenne.cpp
+client/randomc.h
+/home/mafiamole/projects/SM2ACM3k1/src/client/client/randomc.h
+
+/usr/local/include/MoleBox/Action.hpp
+SFML/Window/Event.hpp
+-
+MoleBox/ContainerDefinitions.hpp
+-
+
+/usr/local/include/MoleBox/Actions.hpp
+map
 -
 string
+-
+MoleBox/Action.hpp
+-
+
+/usr/local/include/MoleBox/Actions/Keyboard.hpp
+MoleBox/Action.hpp
+-
+
+/usr/local/include/MoleBox/Actions/Mouse.hpp
+SFML/Window.hpp
+-
+SFML/Config.hpp
 -
 MoleBox/Action.hpp
 -
@@ -152,8 +198,6 @@ stdlib.h
 SFML/System/Mutex.hpp
 -
 
-<<<<<<< HEAD
-=======
 /usr/local/include/MoleBox/Content/Resources.hpp
 MoleBox/Content/Content.hpp
 -
@@ -210,18 +254,6 @@ MoleBox/Lua/Scripts.hpp
 map
 -
 
-<<<<<<< HEAD
-=======
-/usr/local/include/MoleBox/Lua/ComponentFunctions.hpp
-MoleBox/Lua/Content.hpp
--
-
-/usr/local/include/MoleBox/Lua/Content.hpp
-MoleBox/Lua/ScriptHelper.hpp
--
-
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 /usr/local/include/MoleBox/Lua/Script.hpp
 MoleBox/Lua/Scripts.hpp
 -

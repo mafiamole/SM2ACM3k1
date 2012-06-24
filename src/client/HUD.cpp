@@ -2,7 +2,7 @@
 
 HUD::HUD(MB::Game* game, std::string file) : MB::Lua::LuaComponent(game,file)
 {
-  
+  //this->script->AddLibrary("Test",);
 }
 
 HUD::~HUD()
