@@ -2,23 +2,21 @@
 set (HEADERS 
 
     ${MB_INCLUDE_DIR}/client/Game.hpp 
-    ${MB_INCLUDE_DIR}/client/HUD.hpp 
+    ${MB_INCLUDE_DIR}/client/HUD.h
     ${MB_INCLUDE_DIR}/client/UI/UI_Elements.hpp
     ${MB_INCLUDE_DIR}/client/Map.h 
-<<<<<<< HEAD
-    ${MB_INCLUDE_DIR}/client/MapLoader.h
-    ${MB_INCLUDE_DIR}/client/PlayerInformation.hpp
-    
-  )
-=======
-<<<<<<< HEAD
     ${MB_INCLUDE_DIR}/client/MapLoader.h
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
-    ${MB_INCLUDE_DIR}/client/tcp_net.h)
-=======
-    ${MB_INCLUDE_DIR}/client/MapLoader.h)
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
+    ${MB_INCLUDE_DIR}/client/Player.h
+    ${MB_INCLUDE_DIR}/client/tcp_net.h
+    ${MB_INCLUDE_DIR}/client/randomc.h
+    ${MB_INCLUDE_DIR}/shared/Packets.h
+    ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
+    #${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
+
+
+  )
+    
 
 set (SOURCES 
     Game.cpp
@@ -27,8 +25,15 @@ set (SOURCES
     HUD.cpp
     MapLoader.cpp
     UI/UI_Elements.cpp
+    #UI/UI_LuaFunctions.cpp
     tcp_net.cpp
-    Players/PlayerInformation.hpp
+    Players/PlayerInformation.cpp
+    Player.cpp
+    mersenne.cpp
+    ../shared/Packets.cpp
+    Map/Tile.cpp
+    SpriteSheet.cpp
+    SpriteSheetAnimator.cpp
     )
 
 
@@ -40,3 +45,5 @@ target_link_libraries( client ${MoleBox_LIBRARIES} ${LUA_LIBRARIES} )
 
 
 add_subdirectory(Players)
+
+add_subdirectory(Map)

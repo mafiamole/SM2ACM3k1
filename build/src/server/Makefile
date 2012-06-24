@@ -160,6 +160,30 @@ Main.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/Main.cpp.s
 .PHONY : Main.cpp.s
 
+__/shared/Packets.o: __/shared/Packets.cpp.o
+.PHONY : __/shared/Packets.o
+
+# target to build an object file
+__/shared/Packets.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o
+.PHONY : __/shared/Packets.cpp.o
+
+__/shared/Packets.i: __/shared/Packets.cpp.i
+.PHONY : __/shared/Packets.i
+
+# target to preprocess a source file
+__/shared/Packets.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.i
+.PHONY : __/shared/Packets.cpp.i
+
+__/shared/Packets.s: __/shared/Packets.cpp.s
+.PHONY : __/shared/Packets.s
+
+# target to generate assembly for a file
+__/shared/Packets.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.s
+.PHONY : __/shared/Packets.cpp.s
+
 tcp_net_serv.o: tcp_net_serv.cpp.o
 .PHONY : tcp_net_serv.o
 
@@ -199,6 +223,9 @@ help:
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
+	@echo "... __/shared/Packets.o"
+	@echo "... __/shared/Packets.i"
+	@echo "... __/shared/Packets.s"
 	@echo "... tcp_net_serv.o"
 	@echo "... tcp_net_serv.i"
 	@echo "... tcp_net_serv.s"

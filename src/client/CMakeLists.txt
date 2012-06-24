@@ -11,7 +11,8 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/client/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
-    ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
+    ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
+    #${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
 
 
   )
@@ -24,12 +25,15 @@ set (SOURCES
     HUD.cpp
     MapLoader.cpp
     UI/UI_Elements.cpp
-    UI/UI_LuaFunctions.cpp
+    #UI/UI_LuaFunctions.cpp
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
     mersenne.cpp
     ../shared/Packets.cpp
+    Map/Tile.cpp
+    SpriteSheet.cpp
+    SpriteSheetAnimator.cpp
     )
 
 
@@ -41,3 +45,5 @@ target_link_libraries( client ${MoleBox_LIBRARIES} ${LUA_LIBRARIES} )
 
 
 add_subdirectory(Players)
+
+add_subdirectory(Map)

@@ -4,11 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <vector>
+#include "Map/Tile.hpp"
 
 class Map{
+
 public:
-	Map(sf::RenderTarget* renderTarget, std::vector<sf::Sprite> tileList);
+  
+	Map(sf::RenderTarget* renderTarget, std::vector< Tile* > tileList);
+	
 	void Draw();
+	
 	enum TileType {
 		WALL,
 		FLOOR,
@@ -16,10 +21,14 @@ public:
 	};
 	Map();
 	
+	   bool collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
 
 private:
-	std::vector<sf::Sprite> tiles;
+  
+	std::vector<Tile*> tiles;
+
 	sf::RenderTarget* rendTarget;
+	
 };
 
 

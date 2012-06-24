@@ -6,6 +6,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/mafiamole/projects/SM2ACM3k1/src/server/Game.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/server/CMakeFiles/server.dir/Game.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/server/Main.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/server/CMakeFiles/server.dir/Main.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/server/CMakeFiles/server.dir/__/shared/Packets.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/server/tcp_net_serv.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

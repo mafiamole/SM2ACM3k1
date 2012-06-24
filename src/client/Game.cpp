@@ -18,8 +18,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
-  mapObj = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
-
+  mapObj = Map(this->window, mapLoader.ReadFile("map.txt"));
 
   this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
   this->actionList.Register("Player Move Up",new MB::Keyboard(sf::Keyboard::W));
@@ -32,7 +31,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->actionList.Register("Player Move Right Alt",new MB::Keyboard(sf::Keyboard::E));
 
 
-  this->player = (Player*)this->AddComponent( new Player(this) );
+  this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
   this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   
   ClientTCP clientTCP(this);

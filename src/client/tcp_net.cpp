@@ -25,7 +25,8 @@ void ClientTCP::ConnectToServer(unsigned short port, string address)
 
 	
 	game->GetPlayer()->SetPosition(3.0f,4.0f);
-	client.send(packets.CreateSendThisPlayerPos(game->GetPlayer()->GetPosition(), game->GetPlayer()->GetDirection()));
+	sf::Packet packet = packets.CreateSendThisPlayerPos(game->GetPlayer()->GetPosition(), game->GetPlayer()->GetDirection());
+	client.send( packet );
 
 
 	//if ((msg2Serv == NULL) || (msg2Serv == ""))	//Make sure that theres a message to send
