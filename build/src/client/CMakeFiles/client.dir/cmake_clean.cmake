@@ -6,6 +6,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/client.dir/MapLoader.cpp.o"
   "CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
   "CMakeFiles/client.dir/tcp_net.cpp.o"
+  "CMakeFiles/client.dir/Players/PlayerInformation.cpp.o"
+  "CMakeFiles/client.dir/Player.cpp.o"
   "client.pdb"
   "client"
 )

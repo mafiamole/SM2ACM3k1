@@ -210,6 +210,52 @@ src/client/CMakeFiles/client.dir/tcp_net.cpp.o.provides: src/client/CMakeFiles/c
 
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o.provides.build: src/client/CMakeFiles/client.dir/tcp_net.cpp.o
 
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: ../src/client/Players/PlayerInformation.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/Players/PlayerInformation.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp
+
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/Players/PlayerInformation.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp > CMakeFiles/client.dir/Players/PlayerInformation.cpp.i
+
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/Players/PlayerInformation.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp -o CMakeFiles/client.dir/Players/PlayerInformation.cpp.s
+
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.provides: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.provides.build: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o
+
+src/client/CMakeFiles/client.dir/Player.cpp.o: src/client/CMakeFiles/client.dir/flags.make
+src/client/CMakeFiles/client.dir/Player.cpp.o: ../src/client/Player.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/client/CMakeFiles/client.dir/Player.cpp.o"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/client.dir/Player.cpp.o -c /home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
+
+src/client/CMakeFiles/client.dir/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/client.dir/Player.cpp.i"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp > CMakeFiles/client.dir/Player.cpp.i
+
+src/client/CMakeFiles/client.dir/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/client.dir/Player.cpp.s"
+	cd /home/mafiamole/projects/SM2ACM3k1/build/src/client && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp -o CMakeFiles/client.dir/Player.cpp.s
+
+src/client/CMakeFiles/client.dir/Player.cpp.o.requires:
+.PHONY : src/client/CMakeFiles/client.dir/Player.cpp.o.requires
+
+src/client/CMakeFiles/client.dir/Player.cpp.o.provides: src/client/CMakeFiles/client.dir/Player.cpp.o.requires
+	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Player.cpp.o.provides.build
+.PHONY : src/client/CMakeFiles/client.dir/Player.cpp.o.provides
+
+src/client/CMakeFiles/client.dir/Player.cpp.o.provides.build: src/client/CMakeFiles/client.dir/Player.cpp.o
+
 # Object files for target client
 client_OBJECTS = \
 "CMakeFiles/client.dir/Game.cpp.o" \
@@ -218,7 +264,9 @@ client_OBJECTS = \
 "CMakeFiles/client.dir/HUD.cpp.o" \
 "CMakeFiles/client.dir/MapLoader.cpp.o" \
 "CMakeFiles/client.dir/UI/UI_Elements.cpp.o" \
-"CMakeFiles/client.dir/tcp_net.cpp.o"
+"CMakeFiles/client.dir/tcp_net.cpp.o" \
+"CMakeFiles/client.dir/Players/PlayerInformation.cpp.o" \
+"CMakeFiles/client.dir/Player.cpp.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
@@ -230,6 +278,8 @@ src/client/client: src/client/CMakeFiles/client.dir/HUD.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/MapLoader.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/tcp_net.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o
+src/client/client: src/client/CMakeFiles/client.dir/Player.cpp.o
 src/client/client: src/client/CMakeFiles/client.dir/build.make
 src/client/client: /usr/local/lib/libMoleBox.so
 src/client/client: /usr/local/lib64/libsfml-system.so
@@ -254,6 +304,8 @@ src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/HUD.
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/MapLoader.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o.requires
 src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/tcp_net.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o.requires
+src/client/CMakeFiles/client.dir/requires: src/client/CMakeFiles/client.dir/Player.cpp.o.requires
 .PHONY : src/client/CMakeFiles/client.dir/requires
 
 src/client/CMakeFiles/client.dir/clean:

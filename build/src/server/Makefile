@@ -160,30 +160,6 @@ Main.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/Main.cpp.s
 .PHONY : Main.cpp.s
 
-tcp_net_serv.o: tcp_net_serv.cpp.o
-.PHONY : tcp_net_serv.o
-
-# target to build an object file
-tcp_net_serv.cpp.o:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.o
-.PHONY : tcp_net_serv.cpp.o
-
-tcp_net_serv.i: tcp_net_serv.cpp.i
-.PHONY : tcp_net_serv.i
-
-# target to preprocess a source file
-tcp_net_serv.cpp.i:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.i
-.PHONY : tcp_net_serv.cpp.i
-
-tcp_net_serv.s: tcp_net_serv.cpp.s
-.PHONY : tcp_net_serv.s
-
-# target to generate assembly for a file
-tcp_net_serv.cpp.s:
-	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/tcp_net_serv.cpp.s
-.PHONY : tcp_net_serv.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -199,9 +175,6 @@ help:
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
-	@echo "... tcp_net_serv.o"
-	@echo "... tcp_net_serv.i"
-	@echo "... tcp_net_serv.s"
 .PHONY : help
 
 
