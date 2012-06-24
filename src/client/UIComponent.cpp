@@ -47,6 +47,7 @@ void UIComponent::Update(sf::Time elapsed,MB::Types::EventList* events)
   this->script->AddLibrary("Button",UI_Button_reg);
   
   MB::Lua::LuaComponent::Update(elapsed,events);
+  
 }
 
 void UIComponent::Draw()

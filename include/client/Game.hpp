@@ -4,6 +4,7 @@
 #include <MoleBox/ContainerDefinitions.hpp>
 #include <client/UI/UI_Elements.hpp>
 #include "UIComponent.hpp"
+#include "Player.h"
 
 class Game :
 	public MB::Game
@@ -11,6 +12,7 @@ class Game :
 protected:
   UI_ELEMENTS elements;
   UIComponent *UI;
+  Player* player;
 public:
 	Game(std::string windowName);
 	~Game(void);
