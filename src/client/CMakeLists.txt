@@ -11,6 +11,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/client/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
+    ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
 
 
   )
@@ -23,6 +24,7 @@ set (SOURCES
     HUD.cpp
     MapLoader.cpp
     UI/UI_Elements.cpp
+    UI/UI_LuaFunctions.cpp
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp

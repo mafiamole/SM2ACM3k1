@@ -9,6 +9,7 @@
 #include <client/randomc.h>
 #include <client/tcp_net.h>
 
+
 //sf::Sound sound;
 Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
@@ -32,7 +33,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 
 
   this->player = (Player*)this->AddComponent( new Player(this) );
-
+  this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   
   ClientTCP clientTCP(this);
   clientTCP.ConnectToServer(4000,"127.0.0.1");
@@ -40,7 +41,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   CRandomMersenne rand(23232);
   printf("%i",rand.IRandom(0,100));
 
-
+ 
 
 
 }

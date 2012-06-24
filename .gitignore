@@ -1,3 +1,25 @@
+.DS_Store
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+# General OS files #
+####################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+*~
+
+
 
 /build/CMakeFiles/Progress/8
 /build/include/client/Players/Makefile
