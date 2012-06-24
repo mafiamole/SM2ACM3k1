@@ -8,7 +8,7 @@ Map::Map(sf::RenderTarget* renderTarget, std::vector<sf::Sprite> tileList){
 Map::Map(){
 }
 
-void Map::Draw(){
+void Map::Draw() {
   
 	std::vector<sf::Sprite>::iterator it;
 	int a = tiles.size();
