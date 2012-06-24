@@ -1,5 +1,4 @@
 #include <client/Game.hpp>
-#include <client/UIComponent.hpp>
 #include <MoleBox/Actions/Keyboard.hpp>
 #include <MoleBox/Actions/Mouse.hpp>
 #include <MoleBox/Lua/Component.hpp>
@@ -8,16 +7,17 @@
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
 #include <client/randomc.h>
+#include <client/tcp_net.h>
 
 //sf::Sound sound;
-Map map = Map();
+Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
 Game::Game(std::string windowName) : MB::Game(windowName)
 {
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
-  map = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
+  mapObj = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
 
 
   this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
@@ -34,6 +34,9 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->player = (Player*)this->AddComponent( new Player(this) );
 
   
+  ClientTCP clientTCP(this);
+  clientTCP.ConnectToServer(4000,"127.0.0.1");
+
   CRandomMersenne rand(23232);
   printf("%i",rand.IRandom(0,100));
 
@@ -66,7 +69,7 @@ void Game::Draw()
 {
   
 	
-  map.Draw();
+  mapObj.Draw();
   MB::Game::Draw();  
   
 }
@@ -77,3 +80,7 @@ int Game::Run(int argc,char **argv)
   return 0;
 }
 
+
+Player* Game::GetPlayer(){
+	return this->player;
+}

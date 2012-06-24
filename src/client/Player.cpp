@@ -94,6 +94,17 @@ void Player::Draw()
   
 }
 
+sf::Vector2f Player::GetPosition(){
+	return this->GetPosition();
+}
+void Player::SetPosition(float X, float Y){
+	this->playerSprite.setPosition(sf::Vector2f(X,Y));
+}
+
+float Player::GetDirection(){
+	return this->playerSprite.getRotation();
+}
+
 Player::~Player()
 {
 

@@ -5,7 +5,9 @@ using namespace std;
 
 //public funcs
 
-
+ClientTCP::ClientTCP(Game* mainGame){
+	game = mainGame;
+}
 
 void ClientTCP::ConnectToServer(unsigned short port, string address)
 {
@@ -20,6 +22,12 @@ void ClientTCP::ConnectToServer(unsigned short port, string address)
 	cout << "Connected to server " << address << "\n";
 	connected = true;
 
+
+	
+	game->GetPlayer()->SetPosition(3.0f,4.0f);
+	client.send(packets.CreateSendThisPlayerPos(game->GetPlayer()->GetPosition(), game->GetPlayer()->GetDirection()));
+
+
 	//if ((msg2Serv == NULL) || (msg2Serv == ""))	//Make sure that theres a message to send
 	//{
 	//	odprintf("No Message");
@@ -32,20 +40,20 @@ void ClientTCP::ConnectToServer(unsigned short port, string address)
 	//	return;
 	//}
 	//odprintf("Message successfully sent :)");
-	string msg = "test 2000000000\n";
-	MessageTheServer(msg);
+	//string msg = "test 2000000000\n";
+	//MessageTheServer(msg);
 
-	//Retrieve any messages from the server
-	char	buf[1024] = "";
-	size_t	recieved = 0;
-	if (client.receive(buf, sizeof(buf), recieved) != Socket::Done)
-	{
-		//odprintf("Message not recieved...");
-		cout << "Message not recieved...\n";
-		return;
-	}
-	//odprintf("Message received from server: \"%s\"", buf);
-	cout << "Message recieved from server: " << buf << "\n";
+	////Retrieve any messages from the server
+	//char	buf[1024] = "";
+	//size_t	recieved = 0;
+	//if (client.receive(buf, sizeof(buf), recieved) != Socket::Done)
+	//{
+	//	//odprintf("Message not recieved...");
+	//	cout << "Message not recieved...\n";
+	//	return;
+	//}
+	////odprintf("Message received from server: \"%s\"", buf);
+	//cout << "Message recieved from server: " << buf << "\n";
 
 	client.disconnect();
 }

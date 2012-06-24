@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	//game.Run(argc,argv);
 
 	ServerTCP	serv;
-	unsigned	port = 55001;
+	unsigned	port = 4000;
 	string msg = "";
 	//do 
 	//{
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	//
 	//} while ((port <= 1024) || (port >= 65535));
 	serv.Launch(port);
-
+/*
 	char input = '\0';
 	while (input != 'e')
 	{
@@ -54,6 +54,6 @@ int main(int argc, char **argv)
 		default:
 			cout << "Invalid command\n";
 			break;
-		}
-	}
+		}*/
+	//}
 }
