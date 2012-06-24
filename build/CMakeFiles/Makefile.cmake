@@ -52,7 +52,10 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/server/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/client/CMakeFiles/CMakeDirectoryInformation.cmake"
+<<<<<<< HEAD
   "src/client/Players/CMakeFiles/CMakeDirectoryInformation.cmake"
+=======
+>>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
   )
 
 # Dependency information for all targets:

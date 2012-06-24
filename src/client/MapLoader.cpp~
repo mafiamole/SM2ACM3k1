@@ -15,7 +15,7 @@ std::vector<sf::Sprite> MapLoader::ReadFile(std::string path)  {
 	sf::Texture spikeTexture;
 	
 
- std::ifstream mapfile(path.c_str());
+ std::ifstream mapfile(path);
  string mapRow;
  std::vector<sf::Sprite> tmpVect;
 
@@ -36,7 +36,7 @@ std::vector<sf::Sprite> MapLoader::ReadFile(std::string path)  {
     case 'F':
 	{
      //FLOOR
-		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("Floor.png"));		
+		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png"));		
      break;
 	}
     case 'W':

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(SM2ACM3k1)
 find_package(MoleBox REQUIRED)
-find_package(Lua51)
+
 
 set (MB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
