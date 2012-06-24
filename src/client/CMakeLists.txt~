@@ -2,23 +2,17 @@
 set (HEADERS 
 
     ${MB_INCLUDE_DIR}/client/Game.hpp 
-    ${MB_INCLUDE_DIR}/client/HUD.hpp 
+    ${MB_INCLUDE_DIR}/client/HUD.h
     ${MB_INCLUDE_DIR}/client/UI/UI_Elements.hpp
     ${MB_INCLUDE_DIR}/client/Map.h 
-<<<<<<< HEAD
-    ${MB_INCLUDE_DIR}/client/MapLoader.h
-    ${MB_INCLUDE_DIR}/client/PlayerInformation.hpp
-    
-  )
-=======
-<<<<<<< HEAD
     ${MB_INCLUDE_DIR}/client/MapLoader.h
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
-    ${MB_INCLUDE_DIR}/client/tcp_net.h)
-=======
-    ${MB_INCLUDE_DIR}/client/MapLoader.h)
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
+    ${MB_INCLUDE_DIR}/client/Player.h
+    ${MB_INCLUDE_DIR}/client/tcp_net.h
+    ${MB_INCLUDE_DIR}/client/randomc.h
+
+  )
+    
 
 set (SOURCES 
     Game.cpp
@@ -28,7 +22,10 @@ set (SOURCES
     MapLoader.cpp
     UI/UI_Elements.cpp
     tcp_net.cpp
-    Players/PlayerInformation.hpp
+    Players/PlayerInformation.cpp
+    Player.cpp
+    Players/PlayerInformation.cpp
+    mersenne.cpp
     )
 
 

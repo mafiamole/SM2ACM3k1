@@ -74,7 +74,7 @@ src/server/preinstall:
 src/server/CMakeFiles/server.dir/all:
 	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/depend
 	$(MAKE) -f src/server/CMakeFiles/server.dir/build.make src/server/CMakeFiles/server.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  8 9 10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  12 13 14
 	@echo "Built target server"
 .PHONY : src/server/CMakeFiles/server.dir/all
 
@@ -126,7 +126,7 @@ src/client/preinstall: src/client/Players/preinstall
 src/client/CMakeFiles/client.dir/all:
 	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/depend
 	$(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  1 2 3 4 5 6 7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11
 	@echo "Built target client"
 .PHONY : src/client/CMakeFiles/client.dir/all
 
@@ -136,7 +136,7 @@ all: src/client/CMakeFiles/client.dir/all
 
 # Build rule for subdir invocation for target.
 src/client/CMakeFiles/client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 src/client/CMakeFiles/client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mafiamole/projects/SM2ACM3k1/build/CMakeFiles 0
 .PHONY : src/client/CMakeFiles/client.dir/rule
@@ -155,24 +155,6 @@ clean: src/client/CMakeFiles/client.dir/clean
 .PHONY : clean
 
 #=============================================================================
-<<<<<<< HEAD
-# Directory level rules for directory include/client/Players
-
-# Convenience name for "all" pass in the directory.
-include/client/Players/all:
-.PHONY : include/client/Players/all
-
-# Convenience name for "clean" pass in the directory.
-include/client/Players/clean:
-.PHONY : include/client/Players/clean
-
-# Convenience name for "preinstall" pass in the directory.
-include/client/Players/preinstall:
-.PHONY : include/client/Players/preinstall
-
-#=============================================================================
-=======
-<<<<<<< HEAD
 # Directory level rules for directory src/client/Players
 
 # Convenience name for "all" pass in the directory.
@@ -188,9 +170,6 @@ src/client/Players/preinstall:
 .PHONY : src/client/Players/preinstall
 
 #=============================================================================
-=======
->>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
->>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.

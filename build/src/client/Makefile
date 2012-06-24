@@ -232,6 +232,54 @@ MapLoader.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/MapLoader.cpp.s
 .PHONY : MapLoader.cpp.s
 
+Player.o: Player.cpp.o
+.PHONY : Player.o
+
+# target to build an object file
+Player.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Player.cpp.o
+.PHONY : Player.cpp.o
+
+Player.i: Player.cpp.i
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Player.cpp.i
+.PHONY : Player.cpp.i
+
+Player.s: Player.cpp.s
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Player.cpp.s
+.PHONY : Player.cpp.s
+
+Players/PlayerInformation.o: Players/PlayerInformation.cpp.o
+.PHONY : Players/PlayerInformation.o
+
+# target to build an object file
+Players/PlayerInformation.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o
+.PHONY : Players/PlayerInformation.cpp.o
+
+Players/PlayerInformation.i: Players/PlayerInformation.cpp.i
+.PHONY : Players/PlayerInformation.i
+
+# target to preprocess a source file
+Players/PlayerInformation.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.i
+.PHONY : Players/PlayerInformation.cpp.i
+
+Players/PlayerInformation.s: Players/PlayerInformation.cpp.s
+.PHONY : Players/PlayerInformation.s
+
+# target to generate assembly for a file
+Players/PlayerInformation.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.s
+.PHONY : Players/PlayerInformation.cpp.s
+
 UI/UI_Elements.o: UI/UI_Elements.cpp.o
 .PHONY : UI/UI_Elements.o
 
@@ -255,6 +303,54 @@ UI/UI_Elements.s: UI/UI_Elements.cpp.s
 UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
+
+UI/UI_LuaFunctions.o: UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.o
+
+# target to build an object file
+UI/UI_LuaFunctions.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.cpp.o
+
+UI/UI_LuaFunctions.i: UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.i
+
+# target to preprocess a source file
+UI/UI_LuaFunctions.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.cpp.i
+
+UI/UI_LuaFunctions.s: UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.s
+
+# target to generate assembly for a file
+UI/UI_LuaFunctions.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.cpp.s
+
+mersenne.o: mersenne.cpp.o
+.PHONY : mersenne.o
+
+# target to build an object file
+mersenne.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.o
+.PHONY : mersenne.cpp.o
+
+mersenne.i: mersenne.cpp.i
+.PHONY : mersenne.i
+
+# target to preprocess a source file
+mersenne.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.i
+.PHONY : mersenne.cpp.i
+
+mersenne.s: mersenne.cpp.s
+.PHONY : mersenne.s
+
+# target to generate assembly for a file
+mersenne.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/mersenne.cpp.s
+.PHONY : mersenne.cpp.s
 
 tcp_net.o: tcp_net.cpp.o
 .PHONY : tcp_net.o
@@ -304,9 +400,21 @@ help:
 	@echo "... MapLoader.o"
 	@echo "... MapLoader.i"
 	@echo "... MapLoader.s"
+	@echo "... Player.o"
+	@echo "... Player.i"
+	@echo "... Player.s"
+	@echo "... Players/PlayerInformation.o"
+	@echo "... Players/PlayerInformation.i"
+	@echo "... Players/PlayerInformation.s"
 	@echo "... UI/UI_Elements.o"
 	@echo "... UI/UI_Elements.i"
 	@echo "... UI/UI_Elements.s"
+	@echo "... UI/UI_LuaFunctions.o"
+	@echo "... UI/UI_LuaFunctions.i"
+	@echo "... UI/UI_LuaFunctions.s"
+	@echo "... mersenne.o"
+	@echo "... mersenne.i"
+	@echo "... mersenne.s"
 	@echo "... tcp_net.o"
 	@echo "... tcp_net.i"
 	@echo "... tcp_net.s"
