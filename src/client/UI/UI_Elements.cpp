@@ -38,9 +38,10 @@ void UI_Element::Draw()
  * 
  **/
 
-UI_Button::UI_Button(std::string imagefile, std::string name, std::string text) : UI_Element(name), text(text)
+UI_Button::UI_Button(sf::RenderTarget* target,std::string imagefile, std::string name, std::string text) : UI_Element(name), text(text), renderTarget(target)
 {
-  this->buttonSprite.setTexture(MB::Content::Load<sf::Texture>(imagefile) ); 
+  this->buttonSprite.setTexture(MB::Content::Load<sf::Texture>(imagefile) );
+  
 }
 
 UI_Button::~UI_Button()
@@ -50,12 +51,25 @@ UI_Button::~UI_Button()
 
 bool UI_Button::Activated(MB::Types::EventList* events)
 {
+
+  MB::Types::EventList::iterator eventItr;
   
-  if (events->find(sf::Event::MouseButtonReleased) != events->end())
+  std::cout << events->size() << std::endl;
+  
+  for (eventItr = events->begin(); eventItr != events->end(); eventItr++ )
   {
+    sf::Event event = (*eventItr).second;
+    std::cout << event.mouseButton.button << std::endl;
+  }
+  
+  if (events->find(sf::Event::MouseButtonPressed) != events->end())
+  {
+    std::cout << "Mouse Button pressed!" << std::endl;
+    
     sf::Event ev = events->at(sf::Event::MouseButtonReleased);
     if ( ev.mouseButton.button == sf::Mouse::Left )
     {
+       
       sf::Rect<int> mousePosRect;
       mousePosRect.left 	= ev.mouseButton.x;
       mousePosRect.top 		= ev.mouseButton.y;
@@ -71,6 +85,9 @@ bool UI_Button::Activated(MB::Types::EventList* events)
 
 void UI_Button::Draw()
 {
+  
+  this->renderTarget->draw(this->buttonSprite);
+  
 }
 
 /**
