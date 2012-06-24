@@ -13,7 +13,7 @@ Player::Player(MB::Game* game) : MB::GameComponent(game)
     playerSprite = MB::Content::NewSprite("C:\\Content\\Player2.png");
  
 	// Player sprite is 63x38
-	this->playerSprite.setOrigin(31,19);
+    this->playerSprite.setOrigin(31,19);
     this->playerSprite.setPosition(600,350);
   
 }
@@ -43,6 +43,7 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 		 ( this->actions->Exists("Player Move Right Alt") && this->actions->Get("Player Move Right Alt")->IsActive())){
 		dirX =1;
 	}
+	
 
 	// Change position (based on elapsed time)
 	float vectorX = dirX * 0.5f * (float)elapsed.asMilliseconds();  
@@ -52,6 +53,35 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
     playerPos.y = playerPos.y + vectorY;
     playerPos.x = playerPos.x + vectorX;
 
+    
+	sf::Vector2u windowSize = this->game->Window()->getSize();
+	
+	sf::IntRect windowRect(0,0,windowSize.x,windowSize.y);
+	
+	sf::IntRect collisionRect = this->playerSprite.getTextureRect();
+	
+	collisionRect.left = this->playerSprite.getPosition().x;
+	collisionRect.top = this->playerSprite.getPosition().y;
+	
+	bool topLeft = false,topRight = false ,bottomLeft = false ,bottomRight = false;
+	
+	topLeft = windowRect.contains(collisionRect.left,collisionRect.top);
+	
+	topRight = windowRect.contains(collisionRect.left + collisionRect.width,collisionRect.top);
+	
+	bottomLeft = windowRect.contains(collisionRect.left,collisionRect.top + collisionRect.height);
+	
+	bottomRight = windowRect.contains(collisionRect.left + collisionRect.width,collisionRect.top + collisionRect.height);
+	
+	
+	if ( !(topLeft && topRight && bottomLeft && bottomRight) )
+	{
+	 
+	  playerPos.y = playerPos.y - (vectorY * 2);
+	  playerPos.x = playerPos.x - (vectorX * 2);
+	}
+	
+	
 	this->playerSprite.setPosition(playerPos);
 
 	// Set sprite orientation based on dir

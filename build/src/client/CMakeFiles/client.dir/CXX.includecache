@@ -7,6 +7,20 @@
 #IncludeRegexTransform: 
 
 <<<<<<< HEAD
+../include/client/Player.h
+MoleBox/GameComponent.hpp
+-
+
+/home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
+client/Player.h
+-
+MoleBox/Content/Content.hpp
+-
+MoleBox/Game.hpp
+-
+iostream
+=======
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 ../include/client/HUD.h
@@ -52,6 +66,7 @@ SFML/Window.hpp
 
 /home/mafiamole/projects/SM2ACM3k1/src/client/HUD.cpp
 client/HUD.h
+>>>>>>> 570567d1a3c36b3b22735a8fa2c280d258457d67
 -
 
 /usr/local/include/MoleBox/Action.hpp
@@ -60,6 +75,10 @@ SFML/Window/Event.hpp
 MoleBox/ContainerDefinitions.hpp
 -
 
+<<<<<<< HEAD
+/usr/local/include/MoleBox/Actions.hpp
+map
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -100,6 +119,7 @@ client/Game.hpp
 /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
 client/UI/UI_Elements.hpp
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
+>>>>>>> 570567d1a3c36b3b22735a8fa2c280d258457d67
 -
 string
 -
@@ -190,6 +210,8 @@ MoleBox/ContainerDefinitions.hpp
 MoleBox/Actions.hpp
 -
 
+<<<<<<< HEAD
+=======
 /usr/local/include/MoleBox/Lua/Component.hpp
 lua.hpp
 /usr/local/include/MoleBox/Lua/lua.hpp
@@ -222,6 +244,7 @@ MoleBox/Lua/ScriptHelper.hpp
 
 >>>>>>> 32403bd3ded5eb19f0b45ed2595290a1b26837f5
 >>>>>>> a7f7f31f5b0a9feda3461e0ff1e80280e4a0771d
+>>>>>>> 570567d1a3c36b3b22735a8fa2c280d258457d67
 /usr/local/include/MoleBox/Lua/Script.hpp
 MoleBox/Lua/Scripts.hpp
 -
