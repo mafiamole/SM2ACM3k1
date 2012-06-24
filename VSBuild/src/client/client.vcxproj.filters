@@ -10,25 +10,31 @@
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\MapLoader.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\HUD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UIComponent.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\MapLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UI\UI_Elements.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UI\UI_LuaFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp">
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Players\PlayerInformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\mersenne.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\shared\Packets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,7 +42,7 @@
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UIComponent.hpp">
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\HUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UI\UI_Elements.hpp">
@@ -58,6 +64,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\randomc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\shared\Packets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UI\UI_LuaFunctions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

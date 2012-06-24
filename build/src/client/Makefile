@@ -304,6 +304,7 @@ Players/PlayerInformation.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.s
 .PHONY : Players/PlayerInformation.cpp.s
 
+<<<<<<< HEAD
 SpriteSheet.o: SpriteSheet.cpp.o
 .PHONY : SpriteSheet.o
 
@@ -352,6 +353,8 @@ SpriteSheetAnimator.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.s
 .PHONY : SpriteSheetAnimator.cpp.s
 
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 UI/UI_Elements.o: UI/UI_Elements.cpp.o
 .PHONY : UI/UI_Elements.o
 
@@ -376,6 +379,7 @@ UI/UI_Elements.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.s
 .PHONY : UI/UI_Elements.cpp.s
 
+<<<<<<< HEAD
 __/shared/Packets.o: __/shared/Packets.cpp.o
 .PHONY : __/shared/Packets.o
 
@@ -399,6 +403,31 @@ __/shared/Packets.s: __/shared/Packets.cpp.s
 __/shared/Packets.cpp.s:
 	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.s
 .PHONY : __/shared/Packets.cpp.s
+=======
+UI/UI_LuaFunctions.o: UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.o
+
+# target to build an object file
+UI/UI_LuaFunctions.cpp.o:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
+.PHONY : UI/UI_LuaFunctions.cpp.o
+
+UI/UI_LuaFunctions.i: UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.i
+
+# target to preprocess a source file
+UI/UI_LuaFunctions.cpp.i:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.i
+.PHONY : UI/UI_LuaFunctions.cpp.i
+
+UI/UI_LuaFunctions.s: UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.s
+
+# target to generate assembly for a file
+UI/UI_LuaFunctions.cpp.s:
+	cd /home/mafiamole/projects/SM2ACM3k1/build && $(MAKE) -f src/client/CMakeFiles/client.dir/build.make src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.s
+.PHONY : UI/UI_LuaFunctions.cpp.s
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 mersenne.o: mersenne.cpp.o
 .PHONY : mersenne.o
@@ -481,6 +510,7 @@ help:
 	@echo "... Players/PlayerInformation.o"
 	@echo "... Players/PlayerInformation.i"
 	@echo "... Players/PlayerInformation.s"
+<<<<<<< HEAD
 	@echo "... SpriteSheet.o"
 	@echo "... SpriteSheet.i"
 	@echo "... SpriteSheet.s"
@@ -493,6 +523,14 @@ help:
 	@echo "... __/shared/Packets.o"
 	@echo "... __/shared/Packets.i"
 	@echo "... __/shared/Packets.s"
+=======
+	@echo "... UI/UI_Elements.o"
+	@echo "... UI/UI_Elements.i"
+	@echo "... UI/UI_Elements.s"
+	@echo "... UI/UI_LuaFunctions.o"
+	@echo "... UI/UI_LuaFunctions.i"
+	@echo "... UI/UI_LuaFunctions.s"
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 	@echo "... mersenne.o"
 	@echo "... mersenne.i"
 	@echo "... mersenne.s"

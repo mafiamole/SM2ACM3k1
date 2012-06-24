@@ -9,11 +9,16 @@ src/client/CMakeFiles/client.dir/Game.cpp.o
  ../include/client/MapLoader.h
  ../include/client/Player.h
  ../include/client/Players/PlayerInformation.hpp
+<<<<<<< HEAD
  ../include/client/SpriteSheet.h
  ../include/client/UI/UI_Elements.hpp
  ../include/client/randomc.h
  ../include/client/tcp_net.h
  ../include/shared/Packets.h
+=======
+ ../include/client/UI/UI_Elements.hpp
+ ../include/client/randomc.h
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
  /home/mafiamole/projects/SM2ACM3k1/src/client/Game.cpp
  /usr/local/include/MoleBox/Action.hpp
  /usr/local/include/MoleBox/Actions.hpp
@@ -117,6 +122,8 @@ src/client/CMakeFiles/client.dir/Game.cpp.o
  /usr/local/include/SFML/Window/WindowStyle.hpp
 src/client/CMakeFiles/client.dir/HUD.cpp.o
  ../include/client/HUD.h
+ ../include/client/Players/PlayerInformation.hpp
+ ../include/client/UI/UI_Elements.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/HUD.cpp
  /usr/local/include/MoleBox/Action.hpp
  /usr/local/include/MoleBox/Actions.hpp
@@ -207,11 +214,16 @@ src/client/CMakeFiles/client.dir/HUD.cpp.o
 src/client/CMakeFiles/client.dir/Main.cpp.o
  ../include/client/Game.hpp
  ../include/client/HUD.h
+<<<<<<< HEAD
  ../include/client/Map.h
  ../include/client/Map/Tile.hpp
  ../include/client/Player.h
  ../include/client/Players/PlayerInformation.hpp
  ../include/client/SpriteSheet.h
+=======
+ ../include/client/Player.h
+ ../include/client/Players/PlayerInformation.hpp
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
  ../include/client/UI/UI_Elements.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/Main.cpp
  /usr/local/include/MoleBox/Action.hpp
@@ -522,10 +534,14 @@ src/client/CMakeFiles/client.dir/MapLoader.cpp.o
  /usr/local/include/SFML/Window/WindowHandle.hpp
  /usr/local/include/SFML/Window/WindowStyle.hpp
 src/client/CMakeFiles/client.dir/Player.cpp.o
+<<<<<<< HEAD
  ../include/client/Map.h
  ../include/client/Map/Tile.hpp
  ../include/client/Player.h
  ../include/client/SpriteSheet.h
+=======
+ ../include/client/Player.h
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
  /home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp
  /usr/local/include/MoleBox/Action.hpp
  /usr/local/include/MoleBox/Actions.hpp
@@ -704,10 +720,13 @@ src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o
  /usr/local/include/SFML/Window/Window.hpp
  /usr/local/include/SFML/Window/WindowHandle.hpp
  /usr/local/include/SFML/Window/WindowStyle.hpp
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o
  /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheet.cpp
 src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o
  /home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheetAnimator.cpp
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
  ../include/client/UI/UI_Elements.hpp
  /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp
@@ -791,6 +810,7 @@ src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o
  /usr/local/include/SFML/Window/Window.hpp
  /usr/local/include/SFML/Window/WindowHandle.hpp
  /usr/local/include/SFML/Window/WindowStyle.hpp
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o
  ../include/shared/Packets.h
  /home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp
@@ -870,6 +890,11 @@ src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o
  /usr/local/include/SFML/Window/Window.hpp
  /usr/local/include/SFML/Window/WindowHandle.hpp
  /usr/local/include/SFML/Window/WindowStyle.hpp
+=======
+src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o
+ ../include/client/UI/UI_LuaFunctions.hpp
+ /home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_LuaFunctions.cpp
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/mersenne.cpp.o
  ../include/client/randomc.h
  /home/mafiamole/projects/SM2ACM3k1/src/client/mersenne.cpp

@@ -10,10 +10,13 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/Player.h
     ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/client/randomc.h
+<<<<<<< HEAD
     ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
     #${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
 
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
   )
     
@@ -29,11 +32,16 @@ set (SOURCES
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
+<<<<<<< HEAD
     mersenne.cpp
     ../shared/Packets.cpp
     Map/Tile.cpp
     SpriteSheet.cpp
     SpriteSheetAnimator.cpp
+=======
+    Players/PlayerInformation.cpp
+    mersenne.cpp
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
     )
 
 

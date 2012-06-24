@@ -5,22 +5,38 @@
 #include <lua.h>
 
 
+<<<<<<< HEAD
 bool PlayerData::FrontHealth(PlayerData player)
 {
   return player.health && 1;
 }
 bool PlayerData::BackHealth(PlayerData player)
+=======
+PlayerData::FrontHealth(PlayerData player)
+{
+  return player.health && 1;
+}
+PlayerData::BackHealth(PlayerData player)
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 {
   return player.health && 2;
 }
 
 
+<<<<<<< HEAD
 bool PlayerData::LeftHealth(PlayerData player)
+=======
+PlayerData::LeftHealth(PlayerData player)
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 {
   return player.health && 3;
   
 }
+<<<<<<< HEAD
 bool PlayerData::RightHealth(PlayerData player)
+=======
+PlayerData::RightHealth(PlayerData player)
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 {
   return player.health && 4;
   

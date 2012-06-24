@@ -7,7 +7,10 @@
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
 #include <client/randomc.h>
+<<<<<<< HEAD
 #include <client/tcp_net.h>
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 
 //sf::Sound sound;
@@ -18,6 +21,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
+<<<<<<< HEAD
   mapObj = Map(this->window, mapLoader.ReadFile("map.txt"));
 
   this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
@@ -41,6 +45,29 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   printf("%i",rand.IRandom(0,100));
 
  
+=======
+  map = Map(this->window, mapLoader.ReadFile("map.txt"));
+
+
+  this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
+  this->actionList.Register("Player Move Up",new MB::Keyboard(sf::Keyboard::W));
+  this->actionList.Register("Player Move Down",new MB::Keyboard(sf::Keyboard::S));
+  this->actionList.Register("Player Move Left",new MB::Keyboard(sf::Keyboard::A));
+  this->actionList.Register("Player Move Right",new MB::Keyboard(sf::Keyboard::D));
+  	
+  this->actionList.Register("Player Move Up Alt",new MB::Keyboard(sf::Keyboard::Comma));
+  this->actionList.Register("Player Move Down Alt",new MB::Keyboard(sf::Keyboard::O));
+  this->actionList.Register("Player Move Right Alt",new MB::Keyboard(sf::Keyboard::E));
+
+
+  this->player = (Player*)this->AddComponent( new Player(this) );
+  this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
+  
+  CRandomMersenne rand(23232);
+  printf("%i",rand.IRandom(0,100));
+
+
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 
 }
@@ -69,7 +96,11 @@ void Game::Draw()
 {
   
 	
+<<<<<<< HEAD
   mapObj.Draw();
+=======
+  map.Draw();
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
   MB::Game::Draw();  
   
 }
@@ -79,8 +110,12 @@ int Game::Run(int argc,char **argv)
   MB::Game::Run(argc,argv);
   return 0;
 }
+<<<<<<< HEAD
 
 
 Player* Game::GetPlayer(){
 	return this->player;
 }
+=======
+
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d

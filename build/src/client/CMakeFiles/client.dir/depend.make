@@ -8,11 +8,16 @@ src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/Map/Tile.hpp
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/MapLoader.h
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/Player.h
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/Players/PlayerInformation.hpp
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/SpriteSheet.h
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/UI/UI_Elements.hpp
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/randomc.h
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/tcp_net.h
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/shared/Packets.h
+=======
+src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/UI/UI_Elements.hpp
+src/client/CMakeFiles/client.dir/Game.cpp.o: ../include/client/randomc.h
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/Game.cpp.o: ../src/client/Game.cpp
 src/client/CMakeFiles/client.dir/Game.cpp.o: /usr/local/include/MoleBox/Action.hpp
 src/client/CMakeFiles/client.dir/Game.cpp.o: /usr/local/include/MoleBox/Actions.hpp
@@ -116,6 +121,8 @@ src/client/CMakeFiles/client.dir/Game.cpp.o: /usr/local/include/SFML/Window/Wind
 src/client/CMakeFiles/client.dir/Game.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
 
 src/client/CMakeFiles/client.dir/HUD.cpp.o: ../include/client/HUD.h
+src/client/CMakeFiles/client.dir/HUD.cpp.o: ../include/client/Players/PlayerInformation.hpp
+src/client/CMakeFiles/client.dir/HUD.cpp.o: ../include/client/UI/UI_Elements.hpp
 src/client/CMakeFiles/client.dir/HUD.cpp.o: ../src/client/HUD.cpp
 src/client/CMakeFiles/client.dir/HUD.cpp.o: /usr/local/include/MoleBox/Action.hpp
 src/client/CMakeFiles/client.dir/HUD.cpp.o: /usr/local/include/MoleBox/Actions.hpp
@@ -206,11 +213,16 @@ src/client/CMakeFiles/client.dir/HUD.cpp.o: /usr/local/include/SFML/Window/Windo
 
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Game.hpp
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/HUD.h
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Map.h
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Map/Tile.hpp
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Player.h
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Players/PlayerInformation.hpp
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/SpriteSheet.h
+=======
+src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Player.h
+src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/Players/PlayerInformation.hpp
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../include/client/UI/UI_Elements.hpp
 src/client/CMakeFiles/client.dir/Main.cpp.o: ../src/client/Main.cpp
 src/client/CMakeFiles/client.dir/Main.cpp.o: /usr/local/include/MoleBox/Action.hpp
@@ -521,10 +533,14 @@ src/client/CMakeFiles/client.dir/MapLoader.cpp.o: /usr/local/include/SFML/Window
 src/client/CMakeFiles/client.dir/MapLoader.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/MapLoader.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
 
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../include/client/Map.h
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../include/client/Map/Tile.hpp
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../include/client/Player.h
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../include/client/SpriteSheet.h
+=======
+src/client/CMakeFiles/client.dir/Player.cpp.o: ../include/client/Player.h
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/Player.cpp.o: ../src/client/Player.cpp
 src/client/CMakeFiles/client.dir/Player.cpp.o: /usr/local/include/MoleBox/Action.hpp
 src/client/CMakeFiles/client.dir/Player.cpp.o: /usr/local/include/MoleBox/Actions.hpp
@@ -704,10 +720,13 @@ src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/inc
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
 
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o: ../src/client/SpriteSheet.cpp
 
 src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o: ../src/client/SpriteSheetAnimator.cpp
 
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: ../include/client/UI/UI_Elements.hpp
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: ../src/client/UI/UI_Elements.cpp
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/MoleBox/ContainerDefinitions.hpp
@@ -791,6 +810,7 @@ src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/W
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
 
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: ../include/shared/Packets.h
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: ../src/shared/Packets.cpp
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: /usr/local/include/SFML/Config.hpp
@@ -869,10 +889,15 @@ src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: /usr/local/include/SFM
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: /usr/local/include/SFML/Window/Window.hpp
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: /usr/local/include/SFML/Window/WindowHandle.hpp
 src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o: /usr/local/include/SFML/Window/WindowStyle.hpp
+=======
+src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: ../include/client/UI/UI_LuaFunctions.hpp
+src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o: ../src/client/UI/UI_LuaFunctions.cpp
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: ../include/client/randomc.h
 src/client/CMakeFiles/client.dir/mersenne.cpp.o: ../src/client/mersenne.cpp
 
+<<<<<<< HEAD
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/Game.hpp
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/HUD.h
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/Map.h
@@ -881,6 +906,8 @@ src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/Player.h
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/Players/PlayerInformation.hpp
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/SpriteSheet.h
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/UI/UI_Elements.hpp
+=======
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/client/tcp_net.h
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../include/shared/Packets.h
 src/client/CMakeFiles/client.dir/tcp_net.cpp.o: ../src/client/tcp_net.cpp

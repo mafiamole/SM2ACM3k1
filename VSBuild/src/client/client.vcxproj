@@ -311,7 +311,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Game.hpp" />
-    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UIComponent.hpp" />
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\HUD.h" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UI\UI_Elements.hpp" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Map.h" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\MapLoader.h" />
@@ -319,16 +319,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\Player.h" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\tcp_net.h" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\randomc.h" />
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\shared\Packets.h" />
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\client\UI\UI_LuaFunctions.hpp" />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Game.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Main.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Map.cpp"  />
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\HUD.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\MapLoader.cpp"  />
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UIComponent.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UI\UI_Elements.cpp"  />
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\UI\UI_LuaFunctions.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp"  />
-    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Players\PlayerInformation.cpp"  />
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Player.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\mersenne.cpp"  />
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\shared\Packets.cpp"  />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/ZERO_CHECK.vcxproj">

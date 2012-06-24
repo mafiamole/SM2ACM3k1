@@ -1,14 +1,16 @@
-﻿Build started 24/06/2012 03:33:41.
+﻿Build started 24/06/2012 16:03:31.
      1>Project "C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\VSBuild\src\client\client.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "client.dir\Debug\client.unsuccessfulbuild".
+         Creating "client.dir\Debug\client.unsuccessfulbuild" because "AlwaysCreate" was specified.
        CustomBuild:
          All outputs are up-to-date.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtGui /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtCore /IC:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/include /IC:/Users/Demorian/Desktop/MoleBox_Windows_Dynamic0.0.2/MoleBox_Windows_Dynamic/include /I"C:/Users/Demorian/Desktop/SFML-2.0-rc-windows-32-vc2010/SFML-2.0-rc/include" /I"C:/Program Files (x86)/Lua/5.1/include" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_DLL /D QT_DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"client.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\Game.cpp  /Zm1000 
-         Game.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtGui /IC:/QtSDK/Desktop/Qt/4.8.1/msvc2010/include/QtCore /IC:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/include /IC:/Users/Demorian/Desktop/MoleBox_Windows_Dynamic0.0.2/MoleBox_Windows_Dynamic/include /I"C:/Users/Demorian/Desktop/SFML-2.0-rc-windows-32-vc2010/SFML-2.0-rc/include" /I"C:/Program Files (x86)/Lua/5.1/include" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_DLL /D QT_DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"client.dir\Debug\\" /Fd"C:/Users/Demorian/Desktop/SM2ACM3K1/SM2ACM3k1/VSBuild/src/client/Debug/client.pdb" /Gd /TP /analyze- /errorReport:prompt C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp  /Zm1000 
+         tcp_net.cpp
      1>C:\Users\Demorian\Desktop\MoleBox_Windows_Dynamic0.0.2\MoleBox_Windows_Dynamic\include\MoleBox/Content/Content.hpp(306): warning C4373: 'MB::SpriteBatch::draw': virtual function overrides 'sf::Drawable::draw', previous versions of the compiler did not override when parameters only differed by const/volatile qualifiers
                  C:\Users\Demorian\Desktop\SFML-2.0-rc-windows-32-vc2010\SFML-2.0-rc\include\SFML/Graphics/Drawable.hpp(69) : see declaration of 'sf::Drawable::draw'
+     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp(29): warning C4018: '<' : signed/unsigned mismatch
+     1>C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\client\tcp_net.cpp(16): warning C4101: 'status' : unreferenced local variable
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -16,13 +18,15 @@
          client.dir\Debug\Game.obj
          client.dir\Debug\Main.obj
          client.dir\Debug\Map.obj
+         client.dir\Debug\HUD.obj
          client.dir\Debug\MapLoader.obj
-         client.dir\Debug\UIComponent.obj
          client.dir\Debug\UI_Elements.obj
+         client.dir\Debug\UI_LuaFunctions.obj
          client.dir\Debug\tcp_net.obj
-         client.dir\Debug\Player.obj
          client.dir\Debug\PlayerInformation.obj
-         client.dir\Debug\mersenne.obj  /machine:X86 /debug 
+         client.dir\Debug\Player.obj
+         client.dir\Debug\mersenne.obj
+         client.dir\Debug\Packets.obj  /machine:X86 /debug 
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"client.dir\Debug\client.exe.embed.manifest" /manifest client.dir\Debug\client.exe.intermediate.manifest
          All outputs are up-to-date.
@@ -36,4 +40,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:21.76
+Time Elapsed 00:00:15.89

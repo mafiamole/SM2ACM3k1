@@ -311,9 +311,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\server\Game.hpp" />
+    <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\shared\Packets.h" />
     <ClInclude Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\include\server\tcp_net_serv.h" />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\server\Game.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\server\Main.cpp"  />
+    <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\shared\Packets.cpp"  />
     <ClCompile Include="C:\Users\Demorian\Desktop\SM2ACM3K1\SM2ACM3k1\src\server\tcp_net_serv.cpp"  />
   </ItemGroup>
   <ItemGroup>

@@ -40,8 +40,12 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
     case 'F':
 	
      //FLOOR
+<<<<<<< HEAD
      tempSprite.setTexture( MB::Content::Load<sf::Texture>("Floor.png") );
       tmpVect.push_back(new Floor( tempSprite ));
+=======
+		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png"));		
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
      break;
     case 'W':
      //WALL

@@ -16,6 +16,7 @@ MoleBox/ContainerDefinitions.hpp
 SFML/Network.hpp
 -
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 MoleBox/ContainerDefinitions.hpp
 -
@@ -626,6 +627,9 @@ SFML/Graphics/Transformable.hpp
 SFML/Graphics/VertexArray.hpp
 -
 SFML/System/Vector2.hpp
+=======
+iostream
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
 -
 
 /usr/local/include/SFML/Graphics/Sprite.hpp

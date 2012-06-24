@@ -38,8 +38,12 @@ void HUD::SetPlayersData(PlayerDataList list)
 }
 
 
+<<<<<<< HEAD
 
 PlayerData HUD::PlayerInformation( int player )
+=======
+ PlayerData HUD::PlayerInformation( int player )
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
  {
    if ( player < this->playersData.size() && player > 0)
    {
@@ -49,5 +53,9 @@ PlayerData HUD::PlayerInformation( int player )
    {
       PlayerData data;
    }
+<<<<<<< HEAD
  }
  
+=======
+ }
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d

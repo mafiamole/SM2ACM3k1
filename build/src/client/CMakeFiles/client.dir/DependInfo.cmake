@@ -12,10 +12,15 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/mafiamole/projects/SM2ACM3k1/src/client/MapLoader.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/MapLoader.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Player.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Player.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/Players/PlayerInformation.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/Players/PlayerInformation.cpp.o"
+<<<<<<< HEAD
   "/home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheet.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/SpriteSheet.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/SpriteSheetAnimator.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/SpriteSheetAnimator.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/shared/Packets.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/__/shared/Packets.cpp.o"
+=======
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_Elements.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UI/UI_Elements.cpp.o"
+  "/home/mafiamole/projects/SM2ACM3k1/src/client/UI/UI_LuaFunctions.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/UI/UI_LuaFunctions.cpp.o"
+>>>>>>> 5bcdc7783b2b5efb78d2c07c1e6434c09da15a4d
   "/home/mafiamole/projects/SM2ACM3k1/src/client/mersenne.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/mersenne.cpp.o"
   "/home/mafiamole/projects/SM2ACM3k1/src/client/tcp_net.cpp" "/home/mafiamole/projects/SM2ACM3k1/build/src/client/CMakeFiles/client.dir/tcp_net.cpp.o"
   )
