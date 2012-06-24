@@ -1,14 +1,13 @@
 #ifndef HUD_H
 #define HUD_H
+
+// #include <client/Players/PlayerInformation.hpp>
 #include <MoleBox/Lua/Component.hpp>
-#include <client/Players/PlayerInformation.hpp>
-#include "UI/UI_Elements.hpp"
 
 class HUD : public MB::Lua::LuaComponent
 {
 protected:
-  PlayerDataList 	playersData;
-  UI_ELEMENTS 		elements;
+  PlayerDataList playersData;
   virtual void UpdateScriptPreCall(lua_State* L);
 public:
   
@@ -17,10 +16,6 @@ public:
   ~HUD();
   
   void SetPlayersData(PlayerDataList list);
-  
-  PlayerData PlayerInformation( int player );
-  
-  t
   
   void Update(sf::Time elapsed, MB::Types::EventList* events);
   

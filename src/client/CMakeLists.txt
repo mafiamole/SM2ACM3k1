@@ -10,7 +10,9 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/Player.h
     ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/client/randomc.h
+    ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
+
 
   )
     
@@ -26,8 +28,8 @@ set (SOURCES
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
-    Players/PlayerInformation.cpp
     mersenne.cpp
+    ../shared/Packets.cpp
     )
 
 

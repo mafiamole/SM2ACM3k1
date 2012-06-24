@@ -15,14 +15,14 @@ protected:
 	HUD* Hud;
 
   UI_ELEMENTS elements;
-  Player* player;
+   Player* player;
 public:
 	Game(std::string windowName);
 	~Game(void);
 	virtual void Draw(void);
 	virtual void Update(sf::Time elapsed, MB::Types::EventList *events);
 	virtual int Run(int argc,char **argv);
-
+	Player* GetPlayer();
 
 };
 

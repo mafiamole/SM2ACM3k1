@@ -36,7 +36,7 @@ std::vector<sf::Sprite> MapLoader::ReadFile(std::string path)  {
     case 'F':
 	{
      //FLOOR
-		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png"));		
+		tmpSprite = sf::Sprite(MB::Content::Load<sf::Texture>("Floor.png"));		
      break;
 	}
     case 'W':
