@@ -8,7 +8,9 @@
 
 Player::Player(MB::Game* game) : MB::GameComponent(game)
 {
-    playerSprite = MB::Content::NewSprite("Player2.png");
+	std::string pathPrefix = "";
+
+    playerSprite = MB::Content::NewSprite("C:\\Content\\Player2.png");
  
 	// Player sprite is 63x38
 	this->playerSprite.setOrigin(31,19);

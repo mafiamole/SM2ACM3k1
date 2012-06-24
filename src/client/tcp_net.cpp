@@ -1,13 +1,89 @@
 #include "client/tcp_net.h"
+
+
 //#include "out_helper.h"
 
 using namespace std;
 
 //public funcs
 
+ThreadClass::ThreadClass(ClientTCP* passedClientTCP){
+	this->clientTCP = passedClientTCP;
+}
+void ThreadClass::Run() {
+         
+	clientTCP->client.setBlocking(false);
+	int status;
+	sf::Packet tmpPacket;
+
+	while(true){		
+		sleep(sf::milliseconds(100));
+		// Wait for connection and then put any recieved messages on a queue, while reading another queue of msgs to be sent
+		if(clientTCP->client.connect(clientTCP->serverIP, clientTCP->portNumber, clientTCP->timeout) != clientTCP->client.Disconnected){
+			if(clientTCP->client.receive(tmpPacket)== clientTCP->client.Done){
+				// some data recieved, store on queue for update procedures to deal with
+				clientTCP->packetsToProcess.push(tmpPacket);
+			}
+			if(clientTCP->packetsToSend.size() > 0){
+				// Queue has messages to send, get and process
+				for(int i = 0; i < clientTCP->packetsToSend.size(); i++){
+					;
+					clientTCP->client.send(clientTCP->packetsToSend.front());
+					clientTCP->packetsToSend.pop();				
+				}				
+			}
+		}
+	}
+	//printf("testing ");		 
+}
+
+
+
+
 ClientTCP::ClientTCP(Game* mainGame){
 	game = mainGame;
+	/*packetsToSend.;
+	packetsToProcess;*/
+	this->clientTCP = this;
+
+	// Setup Server
+	this->portNumber = 4000;
+	this->serverIP = "127.0.0.1";
+   
+	
+  
 }
+
+//void ClientTCP::ThreadRun(int inte){//ClientTCP* clientTCP){
+	//clientTCP->client.setBlocking(false);
+	//int status;
+	//sf::Packet tmpPacket;
+
+	//while(true){
+
+	//	// Wait for connection and then put any recieved messages on a queue, while reading another queue of msgs to be sent
+	//	if(clientTCP->client.connect(clientTCP->serverIP, clientTCP->portNumber, clientTCP->timeout) != clientTCP->client.Disconnected){
+	//		if(clientTCP->client.receive(tmpPacket)== clientTCP->client.Done){
+	//			// some data recieved, store on queue for update procedures to deal with
+	//			clientTCP->packetsToProcess.push(tmpPacket);
+	//		}
+	//		if(clientTCP->packetsToSend.size() > 0){
+	//			// Queue has messages to send, get and process
+	//			for(int i = 0; i < clientTCP->packetsToSend.size(); i++){
+	//				;
+	//				clientTCP->client.send(clientTCP->packetsToSend.front());
+	//				clientTCP->packetsToSend.pop();				
+	//			}				
+	//		}
+	//	}
+	//}
+	//	// loop 
+
+	
+//}
+
+
+
 
 void ClientTCP::ConnectToServer(unsigned short port, string address)
 {

@@ -1,11 +1,21 @@
+#ifndef TCP_NET_H
+#define TCP_NET_H
+
 #include <SFML/Network.hpp>
 #include <client/Game.hpp>
 #include <iostream>
 #include <shared/Packets.h>
 #include <client/Player.h>
+#include <shared/Packets.h>
+#include <queue>
+#include <SFML/System/Thread.hpp>
+#include <SFML/Config.hpp>
+
+
 
 using namespace std;
 using namespace sf;
+
 
 class ClientTCP
 {
@@ -15,13 +25,29 @@ public:
 	void		ConnectToServer(unsigned short port, string address);
 	int 		MessageTheServer(string msg);
 	void		SetTimeout(int iMilliseconds);	//Connection timeout in milleseconds
-
+	unsigned short portNumber;
+	std::string serverIP;
+	TcpSocket	client;
+	Time		timeout;
+	ClientTCP* clientTCP;
+	std::queue<sf::Packet>	packetsToSend;
+	std::queue<sf::Packet>	packetsToProcess;
+protected:
+	
 private:
 	//void		OutputTest(LPCSTR arg);	//for testing purposes
-	Game*	game;
-	Time		timeout;
-	string		msg2Serv;
-	TcpSocket	client;
+	Game*	    game;	
+	string		msg2Serv;	
 	bool		connected;
-	Packets packets;
+	Packets     packets;
 };
+
+ 
+class ThreadClass
+{
+public:
+	ThreadClass(ClientTCP* passedClientTCP);
+	ClientTCP* clientTCP;
+	void Run();    
+};
+#endif

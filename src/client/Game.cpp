@@ -11,15 +11,17 @@
 
 
 //sf::Sound sound;
+
 Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
 Game::Game(std::string windowName) : MB::Game(windowName)
 {
+
+
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
   mapObj = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
-
 
   this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
   this->actionList.Register("Player Move Up",new MB::Keyboard(sf::Keyboard::W));
@@ -33,16 +35,14 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 
 
   this->player = (Player*)this->AddComponent( new Player(this) );
-  this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
+ // this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   
-  ClientTCP clientTCP(this);
-  clientTCP.ConnectToServer(4000,"127.0.0.1");
+  this->AddComponent(new MB::Lua::LuaComponent(this, "C:\\Content\\Music.lua") );
 
-  CRandomMersenne rand(23232);
-  printf("%i",rand.IRandom(0,100));
+
 
  
-
+   // Start the thread (internally calls task.run())
 
 }
 
@@ -77,7 +77,17 @@ void Game::Draw()
 
 int Game::Run(int argc,char **argv)
 {
-  MB::Game::Run(argc,argv);
+  ClientTCP clientTCP(this);
+
+  ThreadClass threadClass(clientTCP.clientTCP);
+  sf::Thread thread(&ThreadClass::Run, &threadClass);
+
+  CRandomMersenne rand(23232);
+  printf("%i",rand.IRandom(0,100));
+
+	thread.launch();
+	MB::Game::Run(argc,argv);
+	thread.wait();
   return 0;
 }
 
