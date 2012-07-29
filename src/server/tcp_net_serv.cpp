@@ -184,7 +184,7 @@ cout << "Server is listening to port " << port << ", waiting for connection...\n
                                          Packet packet;       //the client sent some data
                                          if (client.receive(packet) == Socket::Done)
                                          {
-                                                cout << "Data received... " << client.getRemotePort() << " :-: ";
+                                               // cout << "Data received... " << client.getRemotePort() << " :-: ";
 												int packetID;
 												packet >> packetID;
 
@@ -193,7 +193,7 @@ cout << "Server is listening to port " << port << ", waiting for connection...\n
 													sf::Vector2f playerPosition; 
 													float currDirectionFacing;
 													packet >> playerPosition.x >> playerPosition.y >> currDirectionFacing;
-													printf("%d - %f - %f - %f\n", packetID, playerPosition.x, playerPosition.y, currDirectionFacing);
+													//printf("%d - %f - %f - %f\n", packetID, playerPosition.x, playerPosition.y, currDirectionFacing);
 
 													// Loop through all attached clients (excluding one recieved from) and send player location
 

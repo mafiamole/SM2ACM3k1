@@ -144,9 +144,10 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	//if(dirX == -1){ this->playerSprite.rotate(20.0f);  }
 	//if(dirX == 1){ this->playerSprite.rotate(-20.0f); }
 
-	this->playerSprite.setRotation(rotation);
+	
 
 	if(moved){
+		this->playerSprite.setRotation(rotation);
 		Packets packets;
 		WorkQueues::packetsToSend().push(packets.CreateSendThisPlayerPos(playerSprite.getPosition(),playerSprite.getRotation()));
 

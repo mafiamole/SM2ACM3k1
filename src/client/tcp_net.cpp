@@ -23,7 +23,7 @@ void ThreadClass::Run() {
 			if(clientTCP->client.receive(tmpPacket) == clientTCP->client.Done){
 				// some data recieved, store on queue for update procedures to deal with
 				WorkQueues::packetsToProcess().push(tmpPacket);
-				cout << "data received \n";
+				//cout << "data received \n";
 			}
 			if(WorkQueues::packetsToSend().size() > 0){
 				// Queue has messages to send, get and process
