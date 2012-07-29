@@ -10,7 +10,7 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
 {
 	std::string pathPrefix = "";
 	
-    playerSprite = MB::Content::NewSprite("C:\\Content\\Player2.png");
+    playerSprite = MB::Content::NewSprite("Player2.png");
  
 	// Player sprite is 63x38
     

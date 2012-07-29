@@ -37,18 +37,18 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
     case 'F':
 	
      //FLOOR
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Floor.png") );
 	tmpVect.push_back(new Floor( tempSprite ));
      break;
     case 'W':
      //WALL
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Wall.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Wall.png") );
 
 	tmpVect.push_back(new Wall( tempSprite ));
      break;
     case 'S':
      //SPIKE
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Spike.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Spike.png") );
 	tmpVect.push_back(new Spikes( tempSprite ));
 
     default:

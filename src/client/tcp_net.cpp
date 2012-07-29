@@ -15,11 +15,13 @@ void ThreadClass::Run() {
 	clientTCP->client.setBlocking(false);
 	int status;
 	sf::Packet tmpPacket;
+	std::cout << "Waiting to connect to " << clientTCP->serverIP <<  std::endl;
 
 	while(true){		
-		sleep(sf::milliseconds(100));
+		sleep(sf::milliseconds(10));
 		// Wait for connection and then put any recieved messages on a queue, while reading another queue of msgs to be sent
 		if(clientTCP->client.connect(clientTCP->serverIP, clientTCP->portNumber, clientTCP->timeout) != clientTCP->client.Disconnected){
+			std::cout << "Connected" <<std::endl;
 			if(clientTCP->client.receive(tmpPacket) == clientTCP->client.Done){
 				// some data recieved, store on queue for update procedures to deal with
 				WorkQueues::packetsToProcess().push(tmpPacket);
@@ -48,13 +50,10 @@ ClientTCP::ClientTCP(Game* mainGame){
 	/*packetsToSend.;
 	packetsToProcess;*/
 	this->clientTCP = this;
-
+	std::cout << this->timeout.asMilliseconds() << std::endl;
 	// Setup Server
 	this->portNumber = 4000;
-	this->serverIP = "127.0.0.1";
-   
-	
-  
+	this->serverIP = "86.185.77.64";//"127.0.0.1";
 }
 
 //void ClientTCP::ThreadRun(int inte){//ClientTCP* clientTCP){
@@ -90,6 +89,8 @@ ClientTCP::ClientTCP(Game* mainGame){
 
 void ClientTCP::ConnectToServer(unsigned short port, string address)
 {
+
+
 	if (client.connect(address, port, timeout))	//try to connect to the specified server
 	{
 		//odprintf("Cannot connect to server. Socket connection error %s \n", address);
@@ -98,6 +99,7 @@ void ClientTCP::ConnectToServer(unsigned short port, string address)
 		return;
 	}
 	//odprintf("Connected to server %s \n", address);	//Successfully connected to the server
+	
 	cout << "Connected to server " << address << "\n";
 	connected = true;
 

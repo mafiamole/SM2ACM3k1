@@ -8,6 +8,7 @@
 #include <client/UI/UI_Elements.hpp>
 #include <client/randomc.h>
 #include <client/tcp_net.h>
+#include <client/TCP_Net2.hpp>
 
 
 //sf::Sound sound;
@@ -23,7 +24,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   
 
 
-  mapObj = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
+  mapObj = Map(this->window, mapLoader.ReadFile("map.txt"));
 
   //mapObj = Map(this->window, mapLoader.ReadFile("C:\\Content\\map.txt"));
 
@@ -41,7 +42,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
   //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   //this->player = (Player*)this->AddComponent( new Player(this) ); 
-  this->AddComponent(new MB::Lua::LuaComponent(this, "C:\\Content\\Music.lua") );
+  this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
 
 
 
@@ -131,7 +132,7 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 					remotePlayers.push_back(tmpPlayer); 
 					indexFoundAt = remotePlayers.size() -1;  
 					remotePlayers.at(indexFoundAt).playerID = playerID;
-					remotePlayers.at(indexFoundAt).playerSprite = MB::Content::NewSprite("C:\\Content\\Player2.png");
+					remotePlayers.at(indexFoundAt).playerSprite = MB::Content::NewSprite("Player2.png");
 					remotePlayers.at(indexFoundAt).playerSprite.setOrigin(31,19);
 				}
 					
@@ -140,7 +141,7 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 				remotePlayers.at(indexFoundAt).direction = dirFacing;
 
 				remotePlayers.at(indexFoundAt).playerSprite.setPosition(sf::Vector2f(positionX,positionY));
-	         	remotePlayers.at(indexFoundAt).playerSprite.setRotation(dirFacing);
+				remotePlayers.at(indexFoundAt).playerSprite.setRotation(dirFacing);
 
 				//if(!((remotePlayers.size() -1) >= playerID)){
 				//	// Player doesn't exist in list yet
@@ -167,28 +168,37 @@ void Game::Draw()
   // loop through other players and draw them
   for (vector<PlayerData>::iterator pIT = remotePlayers.begin(); pIT != remotePlayers.end(); ++pIT)
   {
-					PlayerData pData = *pIT;
-					this->DrawSprite(pData.playerSprite);
+    PlayerData pData = *pIT;
+    this->DrawSprite(pData.playerSprite);
   }
-	
-  
+
   MB::Game::Draw();  
   
 }
 
 int Game::Run(int argc,char **argv)
 {
-  ClientTCP clientTCP(this);
+//   ClientTCP clientTCP(this);
+// 
+//   ThreadClass threadClass(clientTCP.clientTCP);
+//   sf::Thread thread(&ThreadClass::Run, &threadClass);
 
-  ThreadClass threadClass(clientTCP.clientTCP);
-  sf::Thread thread(&ThreadClass::Run, &threadClass);
-
+  ConnectionInfo info;
+  //info.address = "86.185.77.64";
+  info.address = "127.0.0.1";
+  info.port = 4000;
+  info.attempts = 3;
+  info.timeout = 300;
+  sf::Thread tcpThread(&TCP_Net_Thead2,info);
+  
   CRandomMersenne rand(23232);
   //printf("%i",rand.IRandom(0,100));
 
-	thread.launch();
+// 	thread.launch();
+	tcpThread.launch();
 	MB::Game::Run(argc,argv);
-	thread.wait();
+	tcpThread.wait();
+// 	thread.wait();
   return 0;
 }
 
