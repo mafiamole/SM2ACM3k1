@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	//game.Run(argc,argv);
 
 	ServerTCP	serv;
-	unsigned	port = 4000;
+	unsigned short	port = 4000;
 	string msg = "";
 	//do 
 	//{

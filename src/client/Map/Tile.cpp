@@ -136,7 +136,7 @@ sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f veloce
   
   bool intercepts = collisionBox.intersects( hitbox );
   if (intercepts){
-      std::cout << "wall" << std::endl;
+      //std::cout << "wall" << std::endl;
   return sf::Vector2f(0,0);  
     }
   else

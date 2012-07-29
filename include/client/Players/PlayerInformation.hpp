@@ -23,6 +23,10 @@ struct PlayerData {
   bool BackHealth(PlayerData player);
 
   bool FrontHealth(PlayerData player);
+
+  int playerID;
+
+  sf::Sprite playerSprite;
     
 };
 

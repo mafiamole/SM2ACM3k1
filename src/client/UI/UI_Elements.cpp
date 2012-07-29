@@ -54,12 +54,12 @@ bool UI_Button::Activated(MB::Types::EventList* events)
 
   MB::Types::EventList::iterator eventItr;
   
-  std::cout << events->size() << std::endl;
+ // std::cout << events->size() << std::endl;
   
   for (eventItr = events->begin(); eventItr != events->end(); eventItr++ )
   {
     sf::Event event = (*eventItr).second;
-    std::cout << event.mouseButton.button << std::endl;
+    //std::cout << event.mouseButton.button << std::endl;
   }
   
   if (events->find(sf::Event::MouseButtonPressed) != events->end())

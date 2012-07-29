@@ -6,9 +6,11 @@
 #include <client/tcp_net.h>
 #include <client/HUD.h>
 #include "Player.h"
+#include <client/Players/PlayerInformation.hpp>
+#include <vector>
 
 class Game :
-	public MB::Game
+	public MB::Game	
 {
 protected:
 
@@ -16,6 +18,8 @@ protected:
 
   UI_ELEMENTS elements;
    Player* player;
+   
+   bool hasFocus;
 public:
 	Game(std::string windowName);
 	~Game(void);
@@ -24,7 +28,8 @@ public:
 	virtual void Update(sf::Time elapsed, MB::Types::EventList *events);
 	virtual int Run(int argc,char **argv);
 	Player* GetPlayer();
-
+	bool HasFocus();
+	std::vector<PlayerData> remotePlayers;
 };
 
 

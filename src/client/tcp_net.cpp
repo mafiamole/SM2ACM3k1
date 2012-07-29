@@ -23,15 +23,16 @@ void ThreadClass::Run() {
 			if(clientTCP->client.receive(tmpPacket) == clientTCP->client.Done){
 				// some data recieved, store on queue for update procedures to deal with
 				WorkQueues::packetsToProcess().push(tmpPacket);
+				cout << "data received \n";
 			}
 			if(WorkQueues::packetsToSend().size() > 0){
 				// Queue has messages to send, get and process
-				printf("%i \n", WorkQueues::packetsToSend().size());
+				//printf("%i \n", WorkQueues::packetsToSend().size());
 				for(int i = 0; i < WorkQueues::packetsToSend().size(); i++){
 					
 					
-					//clientTCP->client.send(WorkQueues.packetsToSend.front());
-					//WorkQueues::packetsToSend.pop();				
+					clientTCP->client.send(WorkQueues::packetsToSend().front());
+					WorkQueues::packetsToSend().pop();				
 				}				
 			}
 		}

@@ -3,12 +3,13 @@
 #include <client/Map.h>
 #include <MoleBox/Content/Content.hpp>
 #include <MoleBox/Game.hpp>
+#include <client/Game.hpp>
 #include <iostream>
 
 Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
 {
 	std::string pathPrefix = "";
-
+	
     playerSprite = MB::Content::NewSprite("C:\\Content\\Player2.png");
  
 	// Player sprite is 63x38
@@ -28,6 +29,12 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	int dirX = 0;
 	int dirY = 0;
 	bool moved = false;
+
+	 
+	Game* g = (Game*)this->game;
+
+
+	/*if(g->HasFocus()){*/
 	if ( (this->actions->Exists("Player Move Up") && this->actions->Get("Player Move Up")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Up Alt") && this->actions->Get("Player Move Up Alt")->IsActive())){
 		dirY = -1; moved = true;
@@ -47,6 +54,10 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 		 ( this->actions->Exists("Player Move Right Alt") && this->actions->Get("Player Move Right Alt")->IsActive())){
 		dirX =1; moved = true;
 	}
+	
+	//}
+
+
 	sf::Vector2f direction(dirX,dirY);
 	
 
@@ -138,6 +149,7 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	if(moved){
 		Packets packets;
 		WorkQueues::packetsToSend().push(packets.CreateSendThisPlayerPos(playerSprite.getPosition(),playerSprite.getRotation()));
+
 	}
 
 }

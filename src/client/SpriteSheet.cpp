@@ -42,7 +42,7 @@ SpriteSheet::SpriteSheet(const sf::Texture& texture, unsigned int spriteWidth, u
 {
   columnCount 	= texture.getSize().x / spriteWidth;
   rowCount 	= texture.getSize().y / spriteHeight;
-  std::cout << columnCount << "-" << rowCount << std::endl;
+  //std::cout << columnCount << "-" << rowCount << std::endl;
   frameCount	= rowCount * columnCount;
   this->SetFrame(0);
 }
