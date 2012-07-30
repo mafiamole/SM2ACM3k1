@@ -86,6 +86,7 @@ void TCP_Net2::Run()
       {
 	case sf::Socket::Disconnected:
 	  std::cout << "You have been disconnected" << std::endl;
+	  this->connected = false;
 	  break;
 	case sf::Socket::Done:
 	  WorkQueues::packetsToProcess().push(tmpPacket);
