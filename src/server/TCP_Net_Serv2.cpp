@@ -30,19 +30,19 @@
 
 void TCP_Net_Thread(ServerSettings settings)
 {
-  TCP_Net_Serv2 server(settings.port,settings.maxClients);
-  
-  server.Launch();
-  
+    TCP_Net_Serv2 server(settings.port,settings.maxClients);
+
+    server.Launch();
+
 }
 
 
 TCP_Net_Serv2::TCP_Net_Serv2(short unsigned int port, int MaxClients)
 {
-  this->port = port;
-  this->maxClients = MaxClients;
-  this->clientCount = 0;
-  this->serverUp = true;
+    this->port = port;
+    this->maxClients = MaxClients;
+    this->clientCount = 0;
+    this->serverUp = true;
 }
 
 TCP_Net_Serv2::~TCP_Net_Serv2()
@@ -54,97 +54,100 @@ TCP_Net_Serv2::~TCP_Net_Serv2()
 void TCP_Net_Serv2::Launch()
 {
 
-  std::cout << "Lanching SM2ACM3k1 Server" << std::endl;  
-  
-  
-  this->WaitForClients();
-  
-  while (this->serverUp)
-  {
+    std::cout << "Lanching SM2ACM3k1 Server" << std::endl;
 
-   
-    int index = 0;
-    
-    for (TcpSocketList::iterator itr = this->clientSockets.begin(); itr != this->clientSockets.end(); itr++)
+
+    this->WaitForClients();
+
+    while (this->serverUp)
     {
-      sf::TcpSocket* client = (*itr);
 
-      if (this->selector.isReady(*client))
-      {
-	this->ReceiveData(index,client);
-      }
-    index++; 
+        int index = 0;
+
+        for (TcpSocketList::iterator itr = this->clientSockets.begin(); itr != this->clientSockets.end(); ++itr)
+        {
+            sf::TcpSocket* client = (*itr);
+
+            if (selector.wait())
+            {
+                if (this->selector.isReady(*client))
+                {
+                    this->ReceiveData(index,client);
+                }
+
+            }
+            index++;
+        }
     }
-  }
 }
 
 void TCP_Net_Serv2::SendPlayerPositionToAll(int index,sf::TcpSocket* client, sf::Vector2f playerPosition,float currDirectionFacing)
 {
-  for (TcpSocketList::iterator it2 = this->clientSockets.begin(); it2 != this->clientSockets.end(); ++it2)
-  {
-      sf::TcpSocket* client2 = *it2;
+    for (TcpSocketList::iterator it2 = this->clientSockets.begin(); it2 != this->clientSockets.end(); ++it2)
+    {
+        sf::TcpSocket* client2 = *it2;
 
-      sf::IpAddress ip1 = client->getRemoteAddress();
-      sf::IpAddress ip2 = client2->getRemoteAddress();
-      unsigned short p1 = client->getRemotePort();
-      unsigned short p2 = client2->getRemotePort();
-
-
-      if(( ip1 != ip2 ) || ((ip1 == ip2) && (p1 != p2))) {
-	  int newPacketID = 3;
-	  sf::Packet newPacket;
-
-	  newPacket << newPacketID << playerPosition.x << playerPosition.y << currDirectionFacing << index;
-	  std::cout << index << std::endl;
-	  sf::Socket::Status status = client2->send(newPacket);
-      }
+        sf::IpAddress ip1 = client->getRemoteAddress();
+        sf::IpAddress ip2 = client2->getRemoteAddress();
+        unsigned short p1 = client->getRemotePort();
+        unsigned short p2 = client2->getRemotePort();
 
 
-  }  
+        if(( ip1 != ip2 ) || ((ip1 == ip2) && (p1 != p2))) {
+            int newPacketID = 3;
+            sf::Packet newPacket;
+
+            newPacket << newPacketID << playerPosition.x << playerPosition.y << currDirectionFacing << index;
+
+            sf::Socket::Status status = client2->send(newPacket);
+        }
+
+
+    }
 }
 
 void TCP_Net_Serv2::ReceiveData(int index, sf::TcpSocket* client)
 {
 
-  sf::Packet packet;
-  
-  sf::Socket::Status status = client->receive(packet);
-  
-  if ( status == sf::Socket::Done)
-  {
-    int packetID;
-    packet >> packetID;
-    
-    switch( packetID )
-    {
-      case 1:
-	sf::Vector2f playerPosition;
-	float curDirectionFacing;
-	packet >> playerPosition.x >> playerPosition.y >> curDirectionFacing;
-	SendPlayerPositionToAll(index,client,playerPosition,curDirectionFacing);
-	break;
-    }
-    
-  }
-  else if ( status == sf::Socket::Disconnected )
-  {
-    //std::cout << "Player at " <<  client->getRemoteAddress() << " Disconnected." << std::endl;
-  }
+    sf::Packet packet;
 
-  
+    sf::Socket::Status status = client->receive(packet);
+
+    if ( status == sf::Socket::Done)
+    {
+        int packetID;
+        packet >> packetID;
+
+        switch( packetID )
+        {
+        case 1:
+            sf::Vector2f playerPosition;
+            float playerDirection;
+            packet >> playerPosition.x >> playerPosition.y >> playerDirection;
+            SendPlayerPositionToAll(index,client,playerPosition,playerDirection);
+            break;
+        }
+
+    }
+    else if ( status == sf::Socket::Disconnected )
+    {
+        //std::cout << "Player at " <<  client->getRemoteAddress() << " Disconnected." << std::endl;
+    }
+
+
 }
 
 void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
 {
-  sf::TcpSocket* client = new sf::TcpSocket;
-  if ( servListener.accept(*client) == sf::Socket::Done)
-  {
-    this->clientSockets.push_back(client);
-    this->clientCount++;
-    selector->add(*client);
-    std::cout << "New client connected at " << client->getRemoteAddress() << std::endl;
+    sf::TcpSocket* client = new sf::TcpSocket;
+    if ( servListener.accept(*client) == sf::Socket::Done)
+    {
+        this->clientSockets.push_back(client);
+        this->clientCount++;
+        selector->add(*client);
+        std::cout << "New client connected at " << client->getRemoteAddress() << std::endl;
 
-  }
+    }
 }
 
 
@@ -157,7 +160,7 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     while (this->clientCount < this->maxClients)
     {
- 	  
+
         this->selector.add(servListener);
         if ( this->selector.wait() )
         {
@@ -170,16 +173,16 @@ void TCP_Net_Serv2::WaitForClients(void)
             }
             else
             {
-	      //add code that manages either talk between waiting players or all players wanting to start and select specialisation.
+                //add code that manages either talk between waiting players or all players wanting to start and select specialisation.
             }
         }
 
     }
-    
+
     std::cout << "Everyone is ready. Sending go signal." << std::endl;
-    
+
 //     std::list<TcpSocket*>::iterator itr;
-//     sf::Packet goPacket;   
+//     sf::Packet goPacket;
 //     goPacket << "GO";
 //     for (itr = this->clientSockets.begin(); itr != this->clientSockets.end(); itr++)
 //     {

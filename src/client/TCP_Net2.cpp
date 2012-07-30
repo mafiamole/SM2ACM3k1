@@ -76,25 +76,29 @@ void TCP_Net2::Run()
  
  if ( this->connected )
  {
-    while ( !this->connected )
+    while ( this->connected )
     {
       sf::sleep( sf::milliseconds(10) );
       
       sf::Socket::Status status = clientSocket.receive(tmpPacket);
       
-      // Check to see if we have disconnected.
-      if (status = sf::Socket::Disconnected)
+      switch (status)
       {
-	std::cout << "You have been disconnected" << std::endl;
-	this->connected = false;
+	case sf::Socket::Disconnected:
+	  std::cout << "You have been disconnected" << std::endl;
+	  break;
+	case sf::Socket::Done:
+	  WorkQueues::packetsToProcess().push(tmpPacket);
+	  break;
+	case sf::Socket::NotReady:
+	  break;
+	case sf::Socket::Error:
+	  std::cerr << "Some error occured!" << std::endl;
+	  break;
+	default:
+	  std::cerr << "IMPOSSIBRO!" << std::endl;
+	break;
       }
-      // process any incoming messages.
-      if (status  = sf::Socket::Done)
-      {
-	// store on the queue
-	WorkQueues::packetsToProcess().push(tmpPacket);
-      }
-      
       // send any pending data.
       if ( WorkQueues::packetsToSend().size() > 0 )
       {
@@ -106,6 +110,8 @@ void TCP_Net2::Run()
       }
       
     }
+    
+    std::cout << "Thankyou for playing" << std::endl;
  }
   
 }
