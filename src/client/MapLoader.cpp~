@@ -22,7 +22,7 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
  if(mapfile.is_open()) {
   while (!mapfile.eof()) {
 	  std::getline(mapfile,mapRow);
-    std::cout << mapRow;
+    //std::cout << mapRow;
    int i = mapRow.size();
    x = 0;
    for(int j = 0 ; j < i ; j++) {
@@ -31,24 +31,24 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
     sf::Sprite tempSprite;
 
     tempSprite.setPosition(x*32, y*32);
-    std::cout << (x * 32) << " " << ( y * 32 ) << std::endl;
+   // std::cout << (x * 32) << " " << ( y * 32 ) << std::endl;
     switch (tile) 
     {
     case 'F':
 	
      //FLOOR
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Floor.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Floor.png") );
 	tmpVect.push_back(new Floor( tempSprite ));
      break;
     case 'W':
      //WALL
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Wall.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Wall.png") );
 
 	tmpVect.push_back(new Wall( tempSprite ));
      break;
     case 'S':
      //SPIKE
-	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Spike.png") );
+	tempSprite.setTexture( MB::Content::Load<sf::Texture>("C:\\Content\\Spike.png") );
 	tmpVect.push_back(new Spikes( tempSprite ));
 
     default:
@@ -56,10 +56,11 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
       break;
 
 	}
-    }
 	x++;
+    }
+	 y++;
    }
-   y++;
+  
   }
  
  //return new vector;

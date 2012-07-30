@@ -6,7 +6,7 @@ set (HEADERS
 	${MB_INCLUDE_DIR}/shared/Packets.h
 	${MB_INCLUDE_DIR}/server/tcp_net_serv.h)
 
-set (SOURCES 
+set (SOURCES TCP_Net_Serv2.cpp 
 	Game.cpp 
 	Main.cpp
 	../shared/Packets.cpp

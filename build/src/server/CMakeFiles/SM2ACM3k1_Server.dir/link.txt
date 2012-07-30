@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/SM2ACM3k1_Server.dir/Game.cpp.o CMakeFiles/SM2ACM3k1_Server.dir/Main.cpp.o  -o SM2ACM3k1_Server -rdynamic /usr/local/lib/libMoleBox.so /usr/local/lib64/libsfml-system.so /usr/local/lib64/libsfml-window.so /usr/local/lib64/libsfml-graphics.so /usr/local/lib64/libsfml-audio.so -Wl,-rpath,/usr/local/lib64:/usr/local/lib 

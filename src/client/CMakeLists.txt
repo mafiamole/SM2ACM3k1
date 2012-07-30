@@ -14,7 +14,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
     ${MB_INCLUDE_DIR}/client/WorkQueues.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
-
+    ${MB_INCLUDE_DIR}/client/TCP_Net2.hpp
 
   )
     
@@ -37,6 +37,7 @@ set (SOURCES
     WorkQueues.cpp
     SpriteSheetAnimator.cpp
     tcp_net.cpp
+    TCP_Net2.cpp
     )
 
 
