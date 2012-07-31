@@ -4,11 +4,12 @@
  
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 #include <list>
 #include <shared/Packets.h>
-
+#include <bitset>
 
 //#include "server\threadClass2.h"
 
@@ -47,6 +48,19 @@ protected:
 
 };
  
+
+ struct ClientInformation 
+  {
+    bitset<4> health;
+    int killCount;
+    int currWeapon;
+    int currPowerUp;
+    int specBonus;
+    sf::Vector2f position;
+    float dirFacing;
+    TcpSocket* clientSocket;
+  };
+
 
 #endif
 

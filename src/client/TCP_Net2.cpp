@@ -56,7 +56,7 @@ void TCP_Net2::Run()
 
   sf::Packet tmpPacket;
   
-  std::cout << "Attempting to Connection" << std::endl;
+  std::cout << "Attempting to Connect" << std::endl;
   
   for ( int i = 0; i < this->connectionAttemptLimit; i++)
   {
@@ -67,7 +67,7 @@ void TCP_Net2::Run()
     
     if ( connectStatus != sf::Socket::NotReady  )
     {
-      std::cout << "Connection established. Welcome to the matrix." << std::endl;
+      std::cout << "Connection established. Welcome to the Matrix." << std::endl;
       this->connected = true;
       break;
     }
@@ -112,7 +112,7 @@ void TCP_Net2::Run()
       
     }
     
-    std::cout << "Thankyou for playing" << std::endl;
+    std::cout << "Thank you for playing" << std::endl;
  }
   
 }

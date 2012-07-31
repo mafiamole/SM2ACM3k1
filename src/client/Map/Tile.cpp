@@ -62,7 +62,7 @@ Spikes::Spikes(sf::Sprite sprite) : Tile(sprite)
   bool intercepts = collisionBox.intersects( hitbox );
   
   if (intercepts){
-      std::cout << "spikes" << std::endl;
+      //std::cout << "spikes" << std::endl;
     return newvel;
   }
   else

@@ -4,13 +4,12 @@ set (HEADERS
 
 	${MB_INCLUDE_DIR}/server/Game.hpp
 	${MB_INCLUDE_DIR}/shared/Packets.h
-	${MB_INCLUDE_DIR}/server/tcp_net_serv.h)
+	${MB_INCLUDE_DIR}/server/TCP_Net_Serv2.hpp)
 
 set (SOURCES TCP_Net_Serv2.cpp 
 	Game.cpp 
 	Main.cpp
-	../shared/Packets.cpp
-	tcp_net_serv.cpp)
+	../shared/Packets.cpp)
 
 add_executable(server ${HEADERS} ${SOURCES} )
 

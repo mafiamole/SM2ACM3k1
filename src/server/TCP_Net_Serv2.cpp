@@ -25,7 +25,6 @@
 
 
 #include <server/TCP_Net_Serv2.hpp>
-#include <queue>
 
 
 void TCP_Net_Thread(ServerSettings settings)
@@ -35,7 +34,6 @@ void TCP_Net_Thread(ServerSettings settings)
     server.Launch();
 
 }
-
 
 TCP_Net_Serv2::TCP_Net_Serv2(short unsigned int port, int MaxClients)
 {
@@ -64,15 +62,14 @@ void TCP_Net_Serv2::Launch()
 
         int index = 0;
 
-        for (TcpSocketList::iterator itr = this->clientSockets.begin(); itr != this->clientSockets.end(); ++itr)
+        for (std::list<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
         {
-            sf::TcpSocket* client = (*itr);
 
             if (selector.wait())
             {
-                if (this->selector.isReady(*client))
+                if (this->selector.isReady(*itr->clientSocket))
                 {
-                    this->ReceiveData(index,client);
+                    this->ReceiveData(index,&(*itr));
                 }
 
             }
@@ -81,16 +78,19 @@ void TCP_Net_Serv2::Launch()
     }
 }
 
-void TCP_Net_Serv2::SendPlayerPositionToAll(int index,sf::TcpSocket* client, sf::Vector2f playerPosition,float currDirectionFacing)
-{
-    for (TcpSocketList::iterator it2 = this->clientSockets.begin(); it2 != this->clientSockets.end(); ++it2)
-    {
-        sf::TcpSocket* client2 = *it2;
 
-        sf::IpAddress ip1 = client->getRemoteAddress();
-        sf::IpAddress ip2 = client2->getRemoteAddress();
-        unsigned short p1 = client->getRemotePort();
-        unsigned short p2 = client2->getRemotePort();
+
+
+void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition,float currDirectionFacing)
+{
+    for (std::list<ClientInformation>::iterator it2 = this->allClients.begin(); it2 != this->allClients.end(); ++it2)
+    {
+        ClientInformation& client2 = *it2;
+
+        sf::IpAddress ip1 = client->clientSocket->getRemoteAddress();
+        sf::IpAddress ip2 = client2.clientSocket->getRemoteAddress();
+        unsigned short p1 = client->clientSocket->getRemotePort();
+        unsigned short p2 = client2.clientSocket->getRemotePort();
 
 
         if(( ip1 != ip2 ) || ((ip1 == ip2) && (p1 != p2))) {
@@ -99,19 +99,23 @@ void TCP_Net_Serv2::SendPlayerPositionToAll(int index,sf::TcpSocket* client, sf:
 
             newPacket << newPacketID << playerPosition.x << playerPosition.y << currDirectionFacing << index;
 
-            sf::Socket::Status status = client2->send(newPacket);
+            sf::Socket::Status status = (client2.clientSocket)->send(newPacket);
+        }else{
+                // Update the player position/dir for this client
+                client2.dirFacing = currDirectionFacing;
+                client2.position = playerPosition;
         }
 
 
     }
 }
 
-void TCP_Net_Serv2::ReceiveData(int index, sf::TcpSocket* client)
+void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
 {
 
     sf::Packet packet;
 
-    sf::Socket::Status status = client->receive(packet);
+    sf::Socket::Status status = client->clientSocket->receive(packet);
 
     if ( status == sf::Socket::Done)
     {
@@ -124,7 +128,7 @@ void TCP_Net_Serv2::ReceiveData(int index, sf::TcpSocket* client)
             sf::Vector2f playerPosition;
             float playerDirection;
             packet >> playerPosition.x >> playerPosition.y >> playerDirection;
-            SendPlayerPositionToAll(index,client,playerPosition,playerDirection);
+            SendPositionToAllExcludingSender(index,client,playerPosition,playerDirection);
             break;
         }
 
@@ -132,6 +136,9 @@ void TCP_Net_Serv2::ReceiveData(int index, sf::TcpSocket* client)
     else if ( status == sf::Socket::Disconnected )
     {
         //std::cout << "Player at " <<  client->getRemoteAddress() << " Disconnected." << std::endl;
+        sf::Packet p;
+        int t[] = {1,2,3};
+        p << t;
     }
 
 
@@ -142,7 +149,9 @@ void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
     sf::TcpSocket* client = new sf::TcpSocket;
     if ( servListener.accept(*client) == sf::Socket::Done)
     {
-        this->clientSockets.push_back(client);
+        ClientInformation NCI;
+        NCI.clientSocket = client;
+        allClients.push_back(NCI); 
         this->clientCount++;
         selector->add(*client);
         std::cout << "New client connected at " << client->getRemoteAddress() << std::endl;

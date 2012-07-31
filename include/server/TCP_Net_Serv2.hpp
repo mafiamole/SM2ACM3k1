@@ -29,11 +29,26 @@
 #include <shared/Packets.h>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 #include <list>
 #include <queue>
-typedef std::list<sf::TcpSocket*> TcpSocketList;
+#include <bitset>
+
+using namespace std;
+
+struct ClientInformation 
+  {
+    bitset<4> health;
+    int killCount;
+    int currWeapon;
+    int currPowerUp;
+    int specBonus;
+    sf::Vector2f position;
+    float dirFacing;
+    sf::TcpSocket* clientSocket;
+  };
 
 class TCP_Net_Serv2
 {
@@ -43,7 +58,8 @@ protected:
   sf::SocketSelector       	selector;
   unsigned short	       	port;   
   sf::Time                 	timeout;
-  TcpSocketList 		clientSockets;
+  //TcpSocketList 		clientSockets;
+  list<ClientInformation> allClients;
   
   std::string              	msgClient;
   bool        	         	shuttingDown;
@@ -58,10 +74,10 @@ protected:
   void SendOutStart(void);
   void SendData(void);
   void DisconnectClient(sf::TcpSocket *client);
-  void ReceiveData(int index,sf::TcpSocket* client);
-  void SendPlayerPositionToAll(int index, sf::TcpSocket* client, sf::Vector2f playerPosition, float currDirectionFacing);
+  void ReceiveData(int index, ClientInformation* client);
+  void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
   
-public:
+public: 
   TCP_Net_Serv2(unsigned short port,int MaxClients);
   virtual ~TCP_Net_Serv2();
   
@@ -75,5 +91,8 @@ struct ServerSettings
   int 		 maxClients;
 
 };
+
+
+
 void TCP_Net_Thread(ServerSettings settings);
 #endif // TCP_NET_SERV2_HPP

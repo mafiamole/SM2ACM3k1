@@ -1,30 +1,102 @@
 #include <shared/Packets.h>
 #include <SFML/Network.hpp>
 
-//  int packetID    ==        1	 - curr player position
+//  server to client
+//  int packetID        ==        0  - All clients have connected and selected their bonus, update clients with start game and the starting position / weapon of each player
+//                                   - this needs to make sure the client knows the correct player id of all players, including self
+//                                   - clients can init all other info such as full health, zero'd kill count etc.
+//  int playerCount
+//  int IDsForWeapons[]
+//  float positionX[]
+//  float positionY[]
+//  int yourID                       - the index for the arrays where this player is stored
+
+//  -------------------------------------------
+//  client to server
+//  int packetID        ==        1	 - curr player position
 //  float positionX
 //  float PositionY
-//  float dirFacing   ==		float representing rotation from 0 (facing up) (360 rotation, i.e. 180 is facing down).
+//  float dirFacing     ==		     - float representing rotation from 0 (facing up) (360 rotation, i.e. 180 is facing down).
 //
 //  -------------------------------------------
-//
-//  int packetID	==		2	-	first connection, set player bonus
+//  client to server
+//  int packetID	    ==		  2	 - On connection, set player bonus, and player position (needs to have been randomly selected by client and ensuring not colliding with scenery)
+//  float positionX
+//  float positionY
 //  int bonusID
 
 //  -------------------------------------------
-//  From server to client, position/direction of another player
-//
-//  int packetID    ==        3	 - curr player position
+//  From server to client, position/direction of another player//
+//  int packetID        ==        3	 - curr player position
 //  float positionX
 //  float PositionY
-//  float dirFacing   ==		float representing rotation from 0 (facing up) (360 rotation, i.e. 180 is facing down).
+//  float dirFacing     ==		     - float representing rotation from 0 (facing up) (360 rotation, i.e. 180 is facing down).
 //  int playerID
 
-Packets::Packets(){}
+//  ---------------------------------------------
+//  server to client
+//  int packetID        ==        4  - Player updated health  (can be sent when health is lost, or to re-init a player on death   
+//                                     Have option to send to all but orig sender (when hitting spikes player client already knows lost health)
+//  int playerID
+//  int newHealth
 
+//  ---------------------------------------------
+//  Server to client
+//  int packetID        ==        5  - Update player kill count
+//  int playerID
+//  int newKillCount
+
+//  --------------------------------------------
+//  client to server (serv checks if a coll is made with another player) && server to client (send back out to all but orig sender)
+//  int packetID        ==        6  - player has made an attack
+//  playerID
+
+//  --------------------------------------------
+//  server to client
+//  int packetID        ==        7 - a player just got a powerup / weapon (could be self)
+//  int playerID
+//  bool isWeapon                   - maintaining two lists of items, powerups and weapons. this sets which list to check.
+//  int itemCode      
+//  int itemID                      - the index for internal list of items currently on floor. Clinet can use this to remove item from list so it doesn't display any more.
+
+//  ---------------------------------------------
+//  server to client
+//  int packetID        ==        8 - new item appeared on floor (could have been dropped by another player, or randomly spawned)
+//  bool isWeapon
+//  int itemCode
+//  float positionX
+//  float positionY
+
+//  --------------------------------------------
+//  client to server
+//  int packetID        ==        9 - player hit some spikes
+//  int newHealth
+//  float dirFacing
+//  float positionX
+//  float PositionY
+
+
+
+
+
+
+////////////////////
+///////////////////
+//  Still need packets for: knockback / animation info / game timer / game events (lion)/ ranged weapons
+
+
+
+Packets::Packets(){}
+// Client Side packets
 sf::Packet Packets::CreateSendThisPlayerPos(sf::Vector2f playerPosition, float currDirectionFacing){
 	sf::Packet packet;
 	int packetID = 1;
 	packet << packetID << playerPosition.x << playerPosition.y << currDirectionFacing;
 	return packet;
 }
+
+
+
+
+// Server side packets
+

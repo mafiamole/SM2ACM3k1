@@ -130,7 +130,7 @@ void ServerTCP::WaitForClients()
     int                  clientCount = 0;
     //TcpSocket            tmpSocket;
     SocketSelector       selector;
-    list<TcpSocket*>     clients;
+    list<ClientInformation>     allClients;
 
 
 //Create a listener to wait for incoming connections
@@ -152,7 +152,9 @@ void ServerTCP::WaitForClients()
                 if (servListener.accept(*client) == Socket::Done)
                 {
                     clientCount++;
-                    clients.push_back(client); //add the new client to the clients list
+                    ClientInformation NCI;
+                    NCI.clientSocket = client;
+                    allClients.push_back(NCI); //add the new client to the clients list
                     //Add the new client to the selector so that we will
                     //be notified when he sends something
                     selector.add(*client);
@@ -174,9 +176,10 @@ void ServerTCP::WaitForClients()
             {
                 //The listener socket is not ready, test all other sockets (the clients) and process incoming messages
                 int index = 0;
-                for (list<TcpSocket*>::iterator it = clients.begin(); it != clients.end(); ++it)
+                for (list<ClientInformation>::iterator it = allClients.begin(); it != allClients.end(); ++it)
                 {
-                    TcpSocket& client = **it;
+                    
+                    TcpSocket& client = *it->clientSocket;
                     if (selector.isReady(client))
                     {
                         Packet packet;       //the client sent some data
@@ -193,11 +196,13 @@ void ServerTCP::WaitForClients()
                                 packet >> playerPosition.x >> playerPosition.y >> currDirectionFacing;
                                 //printf("%d - %f - %f - %f\n", packetID, playerPosition.x, playerPosition.y, currDirectionFacing);
 
+                                
+
                                 // Loop through all attached clients (excluding one recieved from) and send player location
 
-                                for (list<TcpSocket*>::iterator it2 = clients.begin(); it2 != clients.end(); ++it2)
+                                for (list<ClientInformation>::iterator it2 = allClients.begin(); it2 != allClients.end(); ++it2)
                                 {
-                                    TcpSocket& client2 = **it2;
+                                    TcpSocket& client2 = *it2->clientSocket;
 
                                     sf::IpAddress ip1 = client.getRemoteAddress();
                                     sf::IpAddress ip2 = client2.getRemoteAddress();
@@ -212,15 +217,19 @@ void ServerTCP::WaitForClients()
                                         newPacket << newPacketID << playerPosition.x << playerPosition.y << currDirectionFacing << index;
                                         client2.send(newPacket);
 
+                                    }else{
+                                        // Update the player position/dir for this client
+                                        it2->dirFacing = currDirectionFacing;
+                                        it2->position = playerPosition;
                                     }
 
 
                                 }
 
 
-                                for(int i = 0; i < clients.size(); i++) {
+                                /*for(int i = 0; i < clients.size(); i++) {
 
-                                }
+                                }*/
 
 
                                 break;
@@ -248,8 +257,8 @@ void ServerTCP::SendData()
     while(true)
     {
         Packet packet;
+       // allClients.at(0).clientSocket->receive(packet);
         allSockets.at(0)->receive(packet);
-
 
         int packetID;
         packet >> packetID;

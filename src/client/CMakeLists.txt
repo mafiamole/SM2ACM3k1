@@ -15,6 +15,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/WorkQueues.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
     ${MB_INCLUDE_DIR}/client/TCP_Net2.hpp
+    ${MB_INCLUDE_DIR}/client/RemotePlayer.h
 
   )
     
@@ -30,6 +31,7 @@ set (SOURCES
     tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
+    RemotePlayer.cpp
     mersenne.cpp
     ../shared/Packets.cpp
     Map/Tile.cpp
