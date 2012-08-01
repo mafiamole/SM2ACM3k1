@@ -212,7 +212,7 @@ void TCP_Net_Serv2::WaitForClients(void)
                                     allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
                                     allClients.at(index).killCount = 0;
                                     allClients.at(index).dirFacing = 0.0f;
-                                    allClients.at(index).health = 0;
+                                    SetFullHealth(&allClients.at(index));
                             }
 
                         }
@@ -226,6 +226,30 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     std::cout << "Everyone is ready. Sending go signal." << std::endl;
 
+   
+    packetID = 0;
+    int *IDsForWeapons = new int[this->maxClients];
+    float *positionX = new float[this->maxClients];
+    float *positionY = new float[this->maxClients];
+    
+
+    index = 0;
+    for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
+    {     
+        // Loop through all clients and fill arrays to send in the packets
+        IDsForWeapons[index] = (*itr).currWeapon;
+        positionX[index] = (*itr).position.x;
+        positionY[index] = (*itr).position.y;
+        index++;
+    }
+
+    for(int i = 0; i < this->maxClients;i++){
+        // Loop through all clients, create its packet and send
+        sf::Packet packet;
+        packet << packetID << this->maxClients << IDsForWeapons << positionX << positionY << i;
+        allClients.at(i).clientSocket->send(packet);
+    }
+   
 }
 
 
@@ -246,3 +270,12 @@ void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPositi
         player->health = player->health & (~(1<<healthPosition-1));
     }
 }
+
+void TCP_Net_Serv2::SetFullHealth(ClientInformation* player)
+{
+    // Could probably just set the value to 15 to init first 4 bits
+    for(int i=1;i<5;i++){
+        SetHealth(player,(HealthBits)i,true);
+    }
+}
+

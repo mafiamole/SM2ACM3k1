@@ -14,7 +14,8 @@ struct PlayerData {
   float		direction;  
   bool ReadHealth(PlayerData* player, HealthBits healthPosition);
   void SetHealth(PlayerData* player, HealthBits healthPosition, bool value);
-  int playerID;
+  void SetFullHealth(PlayerData* player);
+  //int playerID;
   sf::Sprite playerSprite;  
     
 };

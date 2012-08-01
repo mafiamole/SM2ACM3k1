@@ -159,44 +159,41 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 			packet >> packetID;
 			
 			switch(packetID){
+            case 0: // The game start packet that initialises the local copy of player data for each player.
+                  int playerCount;
+                  int *IDsForWeapons;
+                  float *positionX;
+                  float *positionY;
+                  packet >> playerCount >> *IDsForWeapons >> *positionX >> *positionY >> this->player->ownID;
+                  
+                  for(int i=0; i < playerCount; i++){
+                      // Add a new player to allPlayers, and flesh out the info, doesn't matter about your own, but can fill it out anyway.
+                      PlayerData tmpPlayer;				 
+					  allPlayers.push_back(tmpPlayer); 
+					  allPlayers.at(i).playerSprite = MB::Content::NewSprite("Player2.png");
+					  allPlayers.at(i).playerSprite.setOrigin(31,19);
+				
+					  allPlayers.at(i).position.x = positionX[i];
+                      allPlayers.at(i).position.y = positionY[i];
+                      allPlayers.at(i).weapon = IDsForWeapons[i];
+
+                      allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
+                      allPlayers.at(i).item = PowerUp::NO_POWERUP;
+                  }
+               
+                break;
 			case 3: // Another player has moved. Update their info
-				float positionX;
-				float positionY;
+                sf::Vector2f position;
 				float dirFacing; 
 				int playerID;
 
-				packet >> positionX >> positionY >> dirFacing >> playerID;
-
-				bool alreadyExists = false;
-				int indexFoundAt = 0;
-				int currInd = 0;
-				for (vector<PlayerData>::iterator pIT = remotePlayers.begin(); pIT != remotePlayers.end(); ++pIT)
-				{
-					PlayerData pData = *pIT;
-					if(pData.playerID == playerID){ alreadyExists = true; indexFoundAt = currInd; }
-					currInd++;
-				}
-				PlayerData tmpPlayer;
-				if(!alreadyExists){ 
-					remotePlayers.push_back(tmpPlayer); 
-					indexFoundAt = remotePlayers.size() -1;  
-					remotePlayers.at(indexFoundAt).playerID = playerID;
-					remotePlayers.at(indexFoundAt).playerSprite = MB::Content::NewSprite("Player2.png");
-					remotePlayers.at(indexFoundAt).playerSprite.setOrigin(31,19);
-				}
-					
-				remotePlayers.at(indexFoundAt).position.x = positionX;
-				remotePlayers.at(indexFoundAt).position.y = positionY;
-				remotePlayers.at(indexFoundAt).direction = dirFacing;
-
-				remotePlayers.at(indexFoundAt).playerSprite.setPosition(sf::Vector2f(positionX,positionY));
-				remotePlayers.at(indexFoundAt).playerSprite.setRotation(dirFacing);
-
-				//if(!((remotePlayers.size() -1) >= playerID)){
-				//	// Player doesn't exist in list yet
-
-				//}
-				 
+                packet >> position.x >> position.y >> dirFacing >> playerID;
+			    
+                allPlayers.at(playerID).position.x = position.x;
+                allPlayers.at(playerID).position.y = position.y;
+				allPlayers.at(playerID).direction = dirFacing;
+                allPlayers.at(playerID).playerSprite.setPosition(sf::Vector2f(position.x,position.x));
+				allPlayers.at(playerID).playerSprite.setRotation(dirFacing);
 
 				break;
 			
@@ -215,11 +212,11 @@ void Game::Draw()
 
 
   // loop through other players and draw them
-  for (std::vector<PlayerData>::iterator pIT = remotePlayers.begin(); pIT != remotePlayers.end(); ++pIT)
-  {
-    PlayerData pData = *pIT;
-    this->DrawSprite(pData.playerSprite);
-  }
+    for(int i=0; i < allPlayers.size();i++){
+        if(i != this->player->ownID){
+            this->DrawSprite(allPlayers.at(i).playerSprite);
+        }
+    }
 
   MB::Game::Draw();  
   

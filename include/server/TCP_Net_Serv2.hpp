@@ -48,6 +48,8 @@ struct ClientInformation
     sf::Vector2f position;
     float dirFacing;
     sf::TcpSocket* clientSocket;
+
+    
   };
 
 class TCP_Net_Serv2
@@ -70,7 +72,7 @@ protected:
   
   void WaitForClients(void);
   
-  void CLIHandle(); // was not sure what to name this. It iterates over the last set of inputed commands.
+  //void CLIHandle(); // was not sure what to name this. It iterates over the last set of inputed commands.
   void AddClient(sf::SocketSelector* selector);
   void SendOutStart(void);
   void SendData(void);
@@ -78,8 +80,9 @@ protected:
   void ReceiveData(int index, ClientInformation* client);
   void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
   
-  bool TCP_Net_Serv2::ReadHealth(ClientInformation* player, HealthBits healthPosition);
-  void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPosition, bool value);
+  bool ReadHealth(ClientInformation* player, HealthBits healthPosition);
+  void SetHealth(ClientInformation* player, HealthBits healthPosition, bool value);
+  void SetFullHealth(ClientInformation* player);
 
 public: 
   TCP_Net_Serv2(unsigned short port,int MaxClients);

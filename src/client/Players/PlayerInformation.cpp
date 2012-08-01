@@ -21,6 +21,13 @@ void PlayerData::SetHealth(PlayerData* player, HealthBits healthPosition, bool v
     }
 }
 
+void PlayerData::SetFullHealth(PlayerData* player)
+{
+    for(int i=1; i<5;i++){
+        SetHealth(player, (HealthBits)i, true);
+    }
+}
+
 int Player_Interface_Reg::GetHP(lua_State* L)
 {
   int argc = lua_gettop(L);

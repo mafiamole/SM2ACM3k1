@@ -30,7 +30,7 @@ public:
 	virtual int Run(int argc,char **argv);
 	Player* GetPlayer();
 	bool HasFocus();
-	std::vector<PlayerData> remotePlayers;
+	std::vector<PlayerData> allPlayers;
 };
 
 
