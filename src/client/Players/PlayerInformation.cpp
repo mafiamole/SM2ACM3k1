@@ -4,26 +4,21 @@
 #include <MoleBox/Lua/ScriptHelper.hpp>
 #include <lua.h>
 
-
-bool PlayerData::FrontHealth(PlayerData player)
+bool PlayerData::ReadHealth(PlayerData* player, HealthBits healthPosition)
 {
-  return player.health && 1;
-}
-bool PlayerData::BackHealth(PlayerData player)
-{
-  return player.health && 2;
+    int result;
+    result = player->health & (1<<healthPosition-1);
+    if(result > 0){return true;}else{ return false;}
+    //return result;
 }
 
-
-bool PlayerData::LeftHealth(PlayerData player)
+void PlayerData::SetHealth(PlayerData* player, HealthBits healthPosition, bool value)
 {
-  return player.health && 3;
-  
-}
-bool PlayerData::RightHealth(PlayerData player)
-{
-  return player.health && 4;
-  
+  if(value){
+      player->health = player->health | (1<<healthPosition-1);
+    }else{
+        player->health = player->health & (~(1<<healthPosition-1));
+    }
 }
 
 int Player_Interface_Reg::GetHP(lua_State* L)
@@ -39,10 +34,10 @@ int Player_Interface_Reg::GetHP(lua_State* L)
   
   PlayerData playerData = hud->PlayerInformation(Player);
 
-  lua_pushboolean(L,playerData.FrontHealth(playerData));
-  lua_pushboolean(L,playerData.BackHealth(playerData));
-  lua_pushboolean(L,playerData.LeftHealth(playerData));  
-  lua_pushboolean(L,playerData.RightHealth(playerData));  
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::FRONT));//1));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::BACK));//2));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::LEFT));//  3));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::RIGHT));//4));//  
 
   return 4;
 

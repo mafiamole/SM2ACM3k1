@@ -27,6 +27,7 @@
 #ifndef TCP_NET_SERV2_HPP
 #define TCP_NET_SERV2_HPP
 #include <shared/Packets.h>
+#include <shared/Enums.h>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -34,13 +35,12 @@
 #include <vector>
 #include <list>
 #include <queue>
-#include <bitset>
 
 using namespace std;
 
 struct ClientInformation 
   {
-    bitset<4> health;
+    int health;
     int killCount;
     int currWeapon;
     int currPowerUp;
@@ -59,11 +59,12 @@ protected:
   unsigned short	       	port;   
   sf::Time                 	timeout;
   //TcpSocketList 		clientSockets;
-  list<ClientInformation> allClients;
+  std::vector<ClientInformation> allClients;
   
   std::string              	msgClient;
   bool        	         	shuttingDown;
   int 				maxClients;
+  int               readyClients;
   unsigned int			clientCount;
   bool				serverUp;
   
@@ -77,6 +78,9 @@ protected:
   void ReceiveData(int index, ClientInformation* client);
   void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
   
+  bool TCP_Net_Serv2::ReadHealth(ClientInformation* player, HealthBits healthPosition);
+  void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPosition, bool value);
+
 public: 
   TCP_Net_Serv2(unsigned short port,int MaxClients);
   virtual ~TCP_Net_Serv2();

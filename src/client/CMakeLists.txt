@@ -11,6 +11,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/client/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
+    ${MB_INCLUDE_DIR}/shared/Enums.h
     ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
     ${MB_INCLUDE_DIR}/client/WorkQueues.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp

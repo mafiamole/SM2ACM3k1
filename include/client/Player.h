@@ -22,6 +22,7 @@ private:
     sf::IntRect rect;
 public:
 	sf::Vector2f GetPosition();
+    sf::IntRect GetTextureRect();
 	void SetPosition(float X, float Y);
 	float GetDirection();
     Player(MB::Game* game, Map* map);

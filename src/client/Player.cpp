@@ -52,7 +52,7 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 
 	if ( (this->actions->Exists("Player Move Right") && this->actions->Get("Player Move Right")->IsActive() ) ||
 		 ( this->actions->Exists("Player Move Right Alt") && this->actions->Get("Player Move Right Alt")->IsActive())){
-		dirX =1; moved = true;
+		dirX = 1; moved = true;
 	}
 	
 	//}
@@ -170,7 +170,7 @@ void Player::Draw()
 }
 
 sf::Vector2f Player::GetPosition(){
-	return this->GetPosition();
+	return this->playerSprite.getPosition();
 }
 void Player::SetPosition(float X, float Y){
 	this->playerSprite.setPosition(sf::Vector2f(X,Y));
@@ -178,6 +178,10 @@ void Player::SetPosition(float X, float Y){
 
 float Player::GetDirection(){
 	return this->playerSprite.getRotation();
+}
+
+sf::IntRect Player::GetTextureRect(){
+	return this->playerSprite.getTextureRect();
 }
 
 Player::~Player()

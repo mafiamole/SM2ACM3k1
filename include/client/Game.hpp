@@ -1,5 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include <MoleBox/Game.hpp>
 #include <MoleBox/ContainerDefinitions.hpp>
 #include <client/UI/UI_Elements.hpp>
@@ -16,7 +17,7 @@ protected:
 
 	HUD* Hud;
 
-  UI_ELEMENTS elements;
+   UI_ELEMENTS elements;
    Player* player;
    
    bool hasFocus;

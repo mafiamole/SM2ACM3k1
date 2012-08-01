@@ -63,6 +63,8 @@ Spikes::Spikes(sf::Sprite sprite) : Tile(sprite)
   
   if (intercepts){
       //std::cout << "spikes" << std::endl;
+    
+
     return newvel;
   }
   else

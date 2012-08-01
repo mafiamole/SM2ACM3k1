@@ -3,34 +3,23 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <lua.hpp>
+#include <shared/Enums.h>
 
 struct PlayerData {
   
-  int 		health;
-  
-  int 		weapon;
-  
-  int 		item;
-  
-  sf::Vector2f	position;
-  
-  float		direction;
-  
-  bool RightHealth(PlayerData player);
-
-  bool LeftHealth(PlayerData player);
-
-  bool BackHealth(PlayerData player);
-
-  bool FrontHealth(PlayerData player);
-
+  int 		health;  
+  int 		weapon;  
+  int 		item;  
+  sf::Vector2f	position;  
+  float		direction;  
+  bool ReadHealth(PlayerData* player, HealthBits healthPosition);
+  void SetHealth(PlayerData* player, HealthBits healthPosition, bool value);
   int playerID;
-
-  sf::Sprite playerSprite;
+  sf::Sprite playerSprite;  
     
 };
 
-typedef std::vector <PlayerData> PlayerDataList;
+typedef std::vector<PlayerData> PlayerDataList;
 /**
  *  
  *  Health is a single integer where,

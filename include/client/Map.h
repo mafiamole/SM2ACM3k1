@@ -22,6 +22,7 @@ public:
 	Map();
 	
 	   bool collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
+       bool PlayerOnFloor(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
 
 private:
   

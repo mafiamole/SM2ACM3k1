@@ -39,6 +39,7 @@ TCP_Net_Serv2::TCP_Net_Serv2(short unsigned int port, int MaxClients)
 {
     this->port = port;
     this->maxClients = MaxClients;
+    this->readyClients = 0;
     this->clientCount = 0;
     this->serverUp = true;
 }
@@ -62,7 +63,7 @@ void TCP_Net_Serv2::Launch()
 
         int index = 0;
 
-        for (std::list<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
+        for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
         {
 
             if (selector.wait())
@@ -83,7 +84,7 @@ void TCP_Net_Serv2::Launch()
 
 void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition,float currDirectionFacing)
 {
-    for (std::list<ClientInformation>::iterator it2 = this->allClients.begin(); it2 != this->allClients.end(); ++it2)
+    for (std::vector<ClientInformation>::iterator it2 = this->allClients.begin(); it2 != this->allClients.end(); ++it2)
     {
         ClientInformation& client2 = *it2;
 
@@ -163,11 +164,17 @@ void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
 
 void TCP_Net_Serv2::WaitForClients(void)
 {
+    // Need to wait for initialisation packet, might as well create temp vars now to save re-creating each time the packet is received.
+    int packetID;	
+    sf::Vector2f playerPosition;
+    int bonusID;
+
+    int index;
 
     std::cout << "Listening for connections on port " << this->port << std::endl;
     servListener.listen( this->port );
 
-    while (this->clientCount < this->maxClients)
+    while ((this->clientCount < this->maxClients) && (this->readyClients != this->maxClients))
     {
 
         this->selector.add(servListener);
@@ -182,7 +189,36 @@ void TCP_Net_Serv2::WaitForClients(void)
             }
             else
             {
-                //add code that manages either talk between waiting players or all players wanting to start and select specialisation.
+                // Process any data here while waiting for all clients to be ready.
+                // Loop through all currently connected clients, if one is sending data check for an init packet, mark readyClients++ and set their info in the client list
+                index = 0;
+                for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
+                {                  
+                    if (this->selector.isReady(*itr->clientSocket))
+                    {
+                        sf::Packet packet;
+                        sf::Socket::Status status = (*itr).clientSocket->receive(packet);
+
+                        if ( status == sf::Socket::Done)
+                        {
+                            packet >> packetID;
+
+                            if(packetID == 2){
+                                this->readyClients++;
+                                    packet >> playerPosition.x >> playerPosition.y >> bonusID;
+                                    allClients.at(index).position = playerPosition;
+                                    allClients.at(index).specBonus = bonusID;
+                                    allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
+                                    allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
+                                    allClients.at(index).killCount = 0;
+                                    allClients.at(index).dirFacing = 0.0f;
+                                    allClients.at(index).health = 0;
+                            }
+
+                        }
+                    }
+                    index++;
+                }
             }
         }
 
@@ -190,12 +226,23 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     std::cout << "Everyone is ready. Sending go signal." << std::endl;
 
-//     std::list<TcpSocket*>::iterator itr;
-//     sf::Packet goPacket;
-//     goPacket << "GO";
-//     for (itr = this->clientSockets.begin(); itr != this->clientSockets.end(); itr++)
-//     {
-//       TcpSocket* client = (*itr);
-//       client->send(goPacket);
-//     }
+}
+
+
+
+
+bool TCP_Net_Serv2::ReadHealth(ClientInformation* player, HealthBits healthPosition)
+{
+    int result;
+    result = player->health & (1<<healthPosition-1);
+    return result;
+}
+
+void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPosition, bool value)
+{
+  if(value){
+      player->health = player->health | (1<<healthPosition-1);
+    }else{
+        player->health = player->health & (~(1<<healthPosition-1));
+    }
 }

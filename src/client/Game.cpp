@@ -9,6 +9,7 @@
 #include <client/randomc.h>
 #include <client/tcp_net.h>
 #include <client/TCP_Net2.hpp>
+#include <ctime>
 
 
 //sf::Sound sound;
@@ -38,16 +39,45 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->actionList.Register("Player Move Down Alt",new MB::Keyboard(sf::Keyboard::O));
   this->actionList.Register("Player Move Right Alt",new MB::Keyboard(sf::Keyboard::E));
 
+  this->actionList.Register("Random", new MB::Keyboard(sf::Keyboard::Num0));
 
   this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
   //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   //this->player = (Player*)this->AddComponent( new Player(this) ); 
-  this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
+  //this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
+
+
+  // Generate random starting position
+  CRandomMersenne rand(time(0));
+  //1024 x 768
+  sf::Vector2f v = sf::Vector2f(1,1);
+  //do{ // If colliding, try again.
+    float x = (float)rand.IRandom(0,1024);
+    float y = (float)rand.IRandom(0,768);
+    //printf("%i",rand.IRandom(0,100));
+    this->player->SetPosition(x,y);
+
+    // Bonus is currently selected randomly, need to change this later
+    Packets packets;
+	WorkQueues::packetsToSend().push(packets.CreateInitThisClient(this->player->GetPosition(),(Bonus)rand.IRandom(1,3)));
 
 
 
- 
-   // Start the thread (internally calls task.run())
+  //}while(mapObj.collisionDetect(player->GetTextureRect(),v,v));
+
+    //for(int i=0; i<10;i++){
+    //    float x = (float)rand.IRandom(0,1024);
+    //float y = (float)rand.IRandom(0,768);
+    ////printf("%i",rand.IRandom(0,100));
+    //this->player->SetPosition(x,y);
+    //float x3 = this->player->GetPosition().x;
+    //float y3 = this->player->GetPosition().y;
+    //cout << x3 << " " << y3 << " ";
+    //  cout <<  mapObj.collisionDetect(player->GetTextureRect(),v,v) << "\n";
+
+    //}
+  
+
 
 }
 
@@ -92,13 +122,32 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 	//		break;
 	//    }
  //}*/
-    // Handle Keyboard input	(only if has focus)
+    // Handle Keyboard input	(only if has focus - ideally)
 
 	//if(this->HasFocus()){
 		if (this->actionList.Exists("Exit") && this->actionList.Get("Exit")->IsActive()){
 			this->window->close(); 
 			exit(0);
 		}
+
+        if (this->actionList.Exists("Random") && this->actionList.Get("Random")->IsActive()){
+			CRandomMersenne rand(time(0));
+
+              sf::Vector2f v = sf::Vector2f(0.1,0.1);
+              sf::Vector2f dir = sf::Vector2f(1,1);
+  //do{ // If colliding, try again.
+              
+              float x = (float)rand.IRandom(0,1024);
+    float y = (float)rand.IRandom(0,768);
+    //printf("%i",rand.IRandom(0,100));
+    this->player->SetPosition(x,y);
+    
+    cout << x << " " << y << " ";
+      //cout <<  mapObj.PlayerOnFloor(player->GetTextureRect(),v,v) << "\n";
+    //cout << player->GetTextureRect().top << player->GetTextureRect().left << player->GetTextureRect().height << player->GetTextureRect().width << "\n";
+        //cout << mapObj.collisionDetect(player->GetTextureRect(), v,dir ) << "\n";
+		}
+          
 	//}
      
 		// Here have a section which processes the work (received) packets queue
@@ -166,7 +215,7 @@ void Game::Draw()
 
 
   // loop through other players and draw them
-  for (vector<PlayerData>::iterator pIT = remotePlayers.begin(); pIT != remotePlayers.end(); ++pIT)
+  for (std::vector<PlayerData>::iterator pIT = remotePlayers.begin(); pIT != remotePlayers.end(); ++pIT)
   {
     PlayerData pData = *pIT;
     this->DrawSprite(pData.playerSprite);
@@ -191,7 +240,7 @@ int Game::Run(int argc,char **argv)
   info.timeout = 300;
   sf::Thread tcpThread(&TCP_Net_Thead2,info);
   
-  CRandomMersenne rand(23232);
+  //CRandomMersenne rand(23232);
   //printf("%i",rand.IRandom(0,100));
 
 // 	thread.launch();
