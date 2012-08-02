@@ -6,13 +6,17 @@ set (HEADERS
 	${MB_INCLUDE_DIR}/server/PacketRoutines.h
 	${MB_INCLUDE_DIR}/shared/Packets.h
 	${MB_INCLUDE_DIR}/shared/Enums.h
-	${MB_INCLUDE_DIR}/server/TCP_Net_Serv2.hpp)
+	${MB_INCLUDE_DIR}/shared/randomc.h
+	${MB_INCLUDE_DIR}/server/TCP_Net_Serv2.hpp
+	${MB_INCLUDE_DIR}/server/ServMapLoader.h)
 
 set (SOURCES TCP_Net_Serv2.cpp
 	PacketRoutines.cpp 
 	Game.cpp 
 	Main.cpp
-	../shared/Packets.cpp)
+	../shared/Packets.cpp
+	../shared/mersenne.cpp
+	ServMapLoader.cpp)
 
 add_executable(server ${HEADERS} ${SOURCES} )
 

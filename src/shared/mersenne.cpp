@@ -22,7 +22,7 @@
 * GNU General Public License http://www.gnu.org/licenses/gpl.html
 *******************************************************************************/
 
-#include "client/randomc.h"
+#include "shared/randomc.h"
 
 void CRandomMersenne::Init0(int seed) {
    // Seed generator

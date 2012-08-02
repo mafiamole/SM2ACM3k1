@@ -1,5 +1,4 @@
 #include <client/MapLoader.h>
-#include <client/Map/Tile.hpp>
 
 using namespace std;
 
@@ -48,6 +47,7 @@ std::vector<Tile *> MapLoader::ReadFile(std::string path)  {
      break;
     case 'S':
      //SPIKE
+    
 	tempSprite.setTexture( MB::Content::Load<sf::Texture>("Spike.png") );
 	tmpVect.push_back(new Spikes( tempSprite ));
 

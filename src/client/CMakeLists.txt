@@ -9,7 +9,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
     ${MB_INCLUDE_DIR}/client/Player.h
     ${MB_INCLUDE_DIR}/client/tcp_net.h
-    ${MB_INCLUDE_DIR}/client/randomc.h
+    ${MB_INCLUDE_DIR}/shared/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/shared/Enums.h
     ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
@@ -33,7 +33,7 @@ set (SOURCES
     Players/PlayerInformation.cpp
     Player.cpp
     RemotePlayer.cpp
-    mersenne.cpp
+    ../shared/mersenne.cpp
     ../shared/Packets.cpp
     Map/Tile.cpp
     SpriteSheet.cpp

@@ -58,6 +58,8 @@ void TCP_Net_Serv2::Launch()
 
     this->WaitForClients();
 
+    bool createdItems = false;
+
     while (this->serverUp)
     {
 
@@ -76,6 +78,73 @@ void TCP_Net_Serv2::Launch()
             }
             index++;
         }
+
+       // std::vector<int> indexesToRemove;
+
+        // Check for collisions between players with items on board
+        int i = 0;
+
+        //for(int i=0; i<this->itemsOnMap.size();i++){ // All items
+
+        // This is untested......
+        while(i < allClients.size()){
+            bool removedSomething = false;
+            for(int j=0; j<this->allClients.size();j++){
+                if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).position)){
+                    // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
+                    switch(itemsOnMap.at(i).tileType){
+                    case TileTypes::WEAPON:
+                        allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
+                        break;
+                    case TileTypes::ITEM:
+                        allClients.at(j).currPowerUp = itemsOnMap.at(i).ItemID;
+                        break;
+                    }
+                    removedSomething = true;
+                    itemsOnMap.erase(itemsOnMap.begin() + i);
+                    //indexesToRemove.push_back(i);
+                }
+            }
+            if(!removedSomething){ i++; }
+        }
+
+
+
+
+
+        //I could just put a while instead of for int i (above) while until my index reaches items.size
+        // Loop through vector of indexesToRemove and remove them from the item vector.
+       /* for (std::vector<int>::iterator itr = indexesToRemove.begin(); itr != indexesToRemove.end(); ++itr)
+        {
+            itemsOnMap.erase((indexesToRemove.begin() + *itr));
+        }*/
+
+
+        // Randomly spawn items if it's time to. Needs to spawn in locations that are 'floor'.
+        if(!createdItems){
+            // spawn a few items to get going (testing)
+            for(int j=0;j<4;j++){
+
+            Item i;
+            i.ItemID = PowerUp::REPEL_NPC;
+            i.tileType = TileTypes::ITEM;
+
+            CRandomMersenne rand(time(0));
+            do{
+                float x = (float)rand.IRandom(0,1024);
+                float y = (float)rand.IRandom(0,768);
+                i.position = sf::Vector2f(x,y);
+            }while(!mapLoader.TileOnFloor(&i, this->currMapObj));
+            
+            // Randomly choose a position for item. Then check it's valid
+
+            this->itemsOnMap.push_back(i);
+
+            }
+            createdItems = true;
+        }
+
+
     }
 }
 
@@ -224,8 +293,10 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     }
 
-    std::cout << "Everyone is ready. Sending go signal." << std::endl;
+    std::cout << "Everyone is ready. Init and Sending go signal." << std::endl;
 
+    // Set which map we will be using.
+    SetMap(Maps::COLOSSEUM);
    
     packetID = 0;
     int *IDsForWeapons = new int[this->maxClients];
@@ -279,3 +350,15 @@ void TCP_Net_Serv2::SetFullHealth(ClientInformation* player)
     }
 }
 
+void TCP_Net_Serv2::SetMap(Maps map)
+{
+    this->currMap = map;
+    // also load the mapObj here
+        switch(map){
+
+        case 1: // Colosseum
+            this->currMapObj = mapLoader.ReadFile("C:\\Content\\map.txt");
+            break;
+
+        }
+}

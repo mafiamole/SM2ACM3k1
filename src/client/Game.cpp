@@ -6,7 +6,7 @@
 #include <client/MapLoader.h>
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
-#include <client/randomc.h>
+#include <shared/randomc.h>
 #include <client/tcp_net.h>
 #include <client/TCP_Net2.hpp>
 #include <ctime>
@@ -55,13 +55,15 @@ Game::Game(std::string windowName) : MB::Game(windowName)
     float x = (float)rand.IRandom(0,1024);
     float y = (float)rand.IRandom(0,768);
     //printf("%i",rand.IRandom(0,100));
+
+
     this->player->SetPosition(x,y);
 
     // Bonus is currently selected randomly, need to change this later
     Packets packets;
 	WorkQueues::packetsToSend().push(packets.CreateInitThisClient(this->player->GetPosition(),(Bonus)rand.IRandom(1,3)));
 
-
+    
 
   //}while(mapObj.collisionDetect(player->GetTextureRect(),v,v));
 
@@ -160,11 +162,14 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 			
 			switch(packetID){
             case 0: // The game start packet that initialises the local copy of player data for each player.
+                {
                   int playerCount;
-                  int *IDsForWeapons;
-                  float *positionX;
-                  float *positionY;
-                  packet >> playerCount >> *IDsForWeapons >> *positionX >> *positionY >> this->player->ownID;
+                  packet >> playerCount;
+                  int *IDsForWeapons = new int[playerCount];
+                  float *positionX = new float[playerCount];
+                  float *positionY = new float[playerCount];
+                  
+                  packet >> *IDsForWeapons >> *positionX >> *positionY >> this->player->ownID;
                   
                   for(int i=0; i < playerCount; i++){
                       // Add a new player to allPlayers, and flesh out the info, doesn't matter about your own, but can fill it out anyway.
@@ -176,11 +181,11 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 					  allPlayers.at(i).position.x = positionX[i];
                       allPlayers.at(i).position.y = positionY[i];
                       allPlayers.at(i).weapon = IDsForWeapons[i];
-
+                      
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
                       allPlayers.at(i).item = PowerUp::NO_POWERUP;
                   }
-               
+                }
                 break;
 			case 3: // Another player has moved. Update their info
                 sf::Vector2f position;

@@ -35,10 +35,13 @@
 #include <vector>
 #include <list>
 #include <queue>
+#include <server/ServMapLoader.h>
+#include <shared/randomc.h>
+#include <ctime>
 
 using namespace std;
 
-struct ClientInformation 
+ struct ClientInformation 
   {
     int health;
     int killCount;
@@ -51,6 +54,11 @@ struct ClientInformation
 
     
   };
+
+struct Item : Tile 
+{
+    int ItemID;
+};
 
 class TCP_Net_Serv2
 {
@@ -69,7 +77,11 @@ protected:
   int               readyClients;
   unsigned int			clientCount;
   bool				serverUp;
-  
+  Maps              currMap;
+  std::vector<Tile>      currMapObj;
+  std::vector<Item> itemsOnMap;
+  ServMapLoader mapLoader;
+
   void WaitForClients(void);
   
   //void CLIHandle(); // was not sure what to name this. It iterates over the last set of inputed commands.
@@ -79,7 +91,7 @@ protected:
   void DisconnectClient(sf::TcpSocket *client);
   void ReceiveData(int index, ClientInformation* client);
   void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
-  
+  void SetMap(Maps map);
   bool ReadHealth(ClientInformation* player, HealthBits healthPosition);
   void SetHealth(ClientInformation* player, HealthBits healthPosition, bool value);
   void SetFullHealth(ClientInformation* player);
@@ -98,6 +110,7 @@ struct ServerSettings
   int 		 maxClients;
 
 };
+
 
 
 

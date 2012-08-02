@@ -45,6 +45,22 @@ enum PowerUp{
     AOE_ARROWS
 };
 
+enum Maps{
+    NO_MAP,
+    COLOSSEUM
+};
+
+enum TileTypes{
+    NO_TILE_TYPE,
+    FLOOR,
+    CONTACT_DAMAGE,
+    ITEM,
+    WEAPON,
+    WALL
+};
+
+
+
 /**
  *  
  *  Health is a single integer where,
@@ -56,7 +72,7 @@ enum PowerUp{
  */ 
 
 enum HealthBits{
-    NONE,
+    NO_HEALTH,
     FRONT,
     BACK,
     LEFT,
