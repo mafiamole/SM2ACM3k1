@@ -59,7 +59,7 @@ void TCP_Net_Serv2::Launch()
     this->WaitForClients();
 
     bool createdItems = false;
-
+     
     while (this->serverUp)
     {
 
@@ -68,7 +68,7 @@ void TCP_Net_Serv2::Launch()
         for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
         {
 
-            if (selector.wait())
+            if (selector.wait(sf::milliseconds(5)))
             {
                 if (this->selector.isReady(*itr->clientSocket))
                 {
@@ -86,26 +86,41 @@ void TCP_Net_Serv2::Launch()
 
         //for(int i=0; i<this->itemsOnMap.size();i++){ // All items
 
-        // This is untested......
-        while(i < allClients.size()){
+        while(i < itemsOnMap.size()){
             bool removedSomething = false;
             for(int j=0; j<this->allClients.size();j++){
+                if(i < itemsOnMap.size()){
                 if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).position)){
                     // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
+                    int packetID = 7;
+                    bool isWeapon = false;
+
                     switch(itemsOnMap.at(i).tileType){
                     case TileTypes::WEAPON:
                         allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
+                        isWeapon = true;
                         break;
                     case TileTypes::ITEM:
                         allClients.at(j).currPowerUp = itemsOnMap.at(i).ItemID;
                         break;
                     }
                     removedSomething = true;
+
+                    sf::Packet packet;
+                    packet << packetID << j << isWeapon << itemsOnMap.at(i).ItemID << i;
+
+                    for(int k=0;k<this->allClients.size();k++){
+                        this->allClients.at(k).clientSocket->send(packet);
+                    }                     
+
                     itemsOnMap.erase(itemsOnMap.begin() + i);
+
+
                     //indexesToRemove.push_back(i);
                 }
+                }
             }
-            if(!removedSomething){ i++; }
+            if(!removedSomething || (itemsOnMap.size()==0)){ i++; }
         }
 
 
@@ -123,22 +138,34 @@ void TCP_Net_Serv2::Launch()
         // Randomly spawn items if it's time to. Needs to spawn in locations that are 'floor'.
         if(!createdItems){
             // spawn a few items to get going (testing)
+            CRandomMersenne rand((int)time(0));
+
             for(int j=0;j<4;j++){
 
             Item i;
             i.ItemID = PowerUp::REPEL_NPC;
             i.tileType = TileTypes::ITEM;
-
-            CRandomMersenne rand(time(0));
+            
+            float x, y; 
             do{
-                float x = (float)rand.IRandom(0,1024);
-                float y = (float)rand.IRandom(0,768);
-                i.position = sf::Vector2f(x,y);
+               x = (float)rand.IRandom(0,1024);
+               y = (float)rand.IRandom(0,768);
+               i.position = sf::Vector2f(x,y);
             }while(!mapLoader.TileOnFloor(&i, this->currMapObj));
             
             // Randomly choose a position for item. Then check it's valid
 
             this->itemsOnMap.push_back(i);
+            // Send packet saying new item has been put on floor
+            int packetID = 8 ;
+            bool isWeapon = false;
+
+            sf::Packet packet;
+            packet << packetID << isWeapon << i.ItemID << i.position.x << i.position.y;
+
+            for(int k=0;k<this->allClients.size();k++){
+               this->allClients.at(k).clientSocket->send(packet);
+            } 
 
             }
             createdItems = true;
@@ -147,8 +174,6 @@ void TCP_Net_Serv2::Launch()
 
     }
 }
-
-
 
 
 void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition,float currDirectionFacing)
@@ -235,7 +260,6 @@ void TCP_Net_Serv2::WaitForClients(void)
 {
     // Need to wait for initialisation packet, might as well create temp vars now to save re-creating each time the packet is received.
     int packetID;	
-    sf::Vector2f playerPosition;
     int bonusID;
 
     int index;
@@ -243,7 +267,7 @@ void TCP_Net_Serv2::WaitForClients(void)
     std::cout << "Listening for connections on port " << this->port << std::endl;
     servListener.listen( this->port );
 
-    while ((this->clientCount < this->maxClients) && (this->readyClients != this->maxClients))
+    while ((this->clientCount < this->maxClients) || (this->readyClients != this->maxClients))
     {
 
         this->selector.add(servListener);
@@ -272,16 +296,36 @@ void TCP_Net_Serv2::WaitForClients(void)
                         {
                             packet >> packetID;
 
-                            if(packetID == 2){
-                                this->readyClients++;
-                                    packet >> playerPosition.x >> playerPosition.y >> bonusID;
-                                    allClients.at(index).position = playerPosition;
+                            if(packetID == 2){                               
+                                    packet >> bonusID;
+
+                                    CRandomMersenne rand((int)time(0));
+                                    // Need to set a random location which is on the floor. (And ideally not where another player is.)
+                                    float x, y; 
+                                    Item tmpItem;
+                                    bool playerColliding;
+                                    do{
+                                        playerColliding = false;
+                                        tmpItem.position.x = x = (float)rand.IRandom(0,1024);
+                                        tmpItem.position.y = y = (float)rand.IRandom(0,768);
+                                        // Loop through other players, if colliding with one, set boolean, true.
+                                        // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
+                                        for(int i=0;i<allClients.size();i++){
+                                            if(i!=index){
+                                                if(mapLoader.PlayersColliding(allClients.at(i).position,tmpItem.position)){ playerColliding = true;}
+                                            }                                            
+                                        }
+                                    }while(playerColliding || !mapLoader.TileOnFloor(&tmpItem, this->currMapObj));
+
+                                    allClients.at(index).position = sf::Vector2f(x,y);
                                     allClients.at(index).specBonus = bonusID;
                                     allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
                                     allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
                                     allClients.at(index).killCount = 0;
                                     allClients.at(index).dirFacing = 0.0f;
                                     SetFullHealth(&allClients.at(index));
+                                    
+                                    this->readyClients++;
                             }
 
                         }
@@ -317,7 +361,13 @@ void TCP_Net_Serv2::WaitForClients(void)
     for(int i = 0; i < this->maxClients;i++){
         // Loop through all clients, create its packet and send
         sf::Packet packet;
-        packet << packetID << this->maxClients << IDsForWeapons << positionX << positionY << i;
+        packet << packetID << this->maxClients;
+        
+        // Need to loop through all data arrays and push each item individually into packet.
+        for(int j=0; j<this->maxClients;j++){
+            packet << IDsForWeapons[j] << positionX[j] << positionY[j]; 
+        }
+        packet << i;
         allClients.at(i).clientSocket->send(packet);
     }
    
@@ -357,8 +407,11 @@ void TCP_Net_Serv2::SetMap(Maps map)
         switch(map){
 
         case 1: // Colosseum
-            this->currMapObj = mapLoader.ReadFile("C:\\Content\\map.txt");
+            this->currMapObj = mapLoader.ReadFile("map.txt");
             break;
 
         }
 }
+
+//find map.txt for server, and work on integrating the mapid/enum/file loader ( i.e. for colosseum (enum 1) load map1.txt file.
+//TODO: do item update packets send out, and work on client drawing to floor. think about surrounding actions with sending/receiving item updates

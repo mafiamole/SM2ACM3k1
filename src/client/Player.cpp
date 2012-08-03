@@ -176,6 +176,10 @@ void Player::SetPosition(float X, float Y){
 	this->playerSprite.setPosition(sf::Vector2f(X,Y));
 }
 
+void Player::SetPosition(sf::Vector2f vect){
+	this->playerSprite.setPosition(vect);
+}
+
 float Player::GetDirection(){
 	return this->playerSprite.getRotation();
 }

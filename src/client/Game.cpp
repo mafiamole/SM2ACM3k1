@@ -47,39 +47,12 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   //this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
 
 
-  // Generate random starting position
-  CRandomMersenne rand(time(0));
-  //1024 x 768
-  sf::Vector2f v = sf::Vector2f(1,1);
-  //do{ // If colliding, try again.
-    float x = (float)rand.IRandom(0,1024);
-    float y = (float)rand.IRandom(0,768);
-    //printf("%i",rand.IRandom(0,100));
+  // Generate random bonus id
+  CRandomMersenne rand(time(0));  
 
-
-    this->player->SetPosition(x,y);
-
-    // Bonus is currently selected randomly, need to change this later
-    Packets packets;
-	WorkQueues::packetsToSend().push(packets.CreateInitThisClient(this->player->GetPosition(),(Bonus)rand.IRandom(1,3)));
-
-    
-
-  //}while(mapObj.collisionDetect(player->GetTextureRect(),v,v));
-
-    //for(int i=0; i<10;i++){
-    //    float x = (float)rand.IRandom(0,1024);
-    //float y = (float)rand.IRandom(0,768);
-    ////printf("%i",rand.IRandom(0,100));
-    //this->player->SetPosition(x,y);
-    //float x3 = this->player->GetPosition().x;
-    //float y3 = this->player->GetPosition().y;
-    //cout << x3 << " " << y3 << " ";
-    //  cout <<  mapObj.collisionDetect(player->GetTextureRect(),v,v) << "\n";
-
-    //}
-  
-
+  // Bonus is currently selected randomly, need to change this later
+  Packets packets;
+  WorkQueues::packetsToSend().push(packets.CreateInitThisClient((Bonus)rand.IRandom(1,3)));
 
 }
 
@@ -169,10 +142,16 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                   float *positionX = new float[playerCount];
                   float *positionY = new float[playerCount];
                   
-                  packet >> *IDsForWeapons >> *positionX >> *positionY >> this->player->ownID;
+                  // Need to loop through all data arrays and unpack each data element individually.
+                    
+                  for(int j=0; j<playerCount;j++){
+                        packet >> IDsForWeapons[j] >> positionX[j] >> positionY[j]; 
+                  }
+
+                  packet >> this->player->ownID;
                   
                   for(int i=0; i < playerCount; i++){
-                      // Add a new player to allPlayers, and flesh out the info, doesn't matter about your own, but can fill it out anyway.
+                      // Add a new player to allPlayers, and flesh out the info, own data will be used also(at least partially)
                       PlayerData tmpPlayer;				 
 					  allPlayers.push_back(tmpPlayer); 
 					  allPlayers.at(i).playerSprite = MB::Content::NewSprite("Player2.png");
@@ -180,28 +159,85 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 				
 					  allPlayers.at(i).position.x = positionX[i];
                       allPlayers.at(i).position.y = positionY[i];
+                      allPlayers.at(i).playerSprite.setPosition(allPlayers.at(i).position);
                       allPlayers.at(i).weapon = IDsForWeapons[i];
                       
+                      allPlayers.at(i).direction = 0.0f;
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
                       allPlayers.at(i).item = PowerUp::NO_POWERUP;
                   }
+                
+
+                 // Set pointer to own data in player class
+                  //this->player->playerInformation = (&*(allPlayers.begin()) + (sizeof(PlayerData)*this->player->ownID)  );
+                  // Set this player position from the received go packet.
+                  //this->player->SetPosition(this->player->playerInformation->position);
+                  this->player->SetPosition(allPlayers.at(this->player->ownID).position);
                 }
                 break;
 			case 3: // Another player has moved. Update their info
-                sf::Vector2f position;
+            {
+                float positionX;
+                float positionY;
 				float dirFacing; 
 				int playerID;
 
-                packet >> position.x >> position.y >> dirFacing >> playerID;
+                packet >> positionX >> positionY >> dirFacing >> playerID;
 			    
-                allPlayers.at(playerID).position.x = position.x;
-                allPlayers.at(playerID).position.y = position.y;
+                allPlayers.at(playerID).position.x = positionX;
+                allPlayers.at(playerID).position.y = positionY;
 				allPlayers.at(playerID).direction = dirFacing;
-                allPlayers.at(playerID).playerSprite.setPosition(sf::Vector2f(position.x,position.x));
+                allPlayers.at(playerID).playerSprite.setPosition(sf::Vector2f(positionX,positionY));
 				allPlayers.at(playerID).playerSprite.setRotation(dirFacing);
 
 				break;
-			
+            }
+            case 7: // Remove item 
+            {
+			 int playerID;
+             bool isWeapon;  
+             int itemCode;      
+             int itemIndex;
+
+             packet >> playerID >> isWeapon >> itemCode >> itemIndex;
+
+                if(isWeapon){
+                    allPlayers.at(playerID).weapon = itemCode;
+                 }else{
+                    allPlayers.at(playerID).item = itemCode;
+                 }
+             
+
+             // TODO: it's possible that the packet is erasing an item that wasn't on the floor .. need to handle in future
+             allItems.erase(allItems.begin() + itemIndex);
+
+
+                break;
+            }
+            case 8: // Put new items on the floor,
+            {
+                bool isWeapon;
+                ClientItem tempItem;
+              
+                packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;                
+
+                if(isWeapon){ tempItem.tileType = TileTypes::WEAPON; }else{ tempItem.tileType = TileTypes::ITEM; }
+
+                // Need a better item/tile/sprite handling...
+                tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
+                tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
+                
+                //13*32 // row;
+                //1*32 // col;
+                sf::IntRect rect = sf::IntRect(32,13*32,32,32);
+                tempItem.itemSprite.setTextureRect(rect);
+
+                allItems.push_back(tempItem);
+                // new item appeared on floor (could have been dropped by another player, or randomly spawned)
+
+
+                break;
+            }
 			}
 
 		}
@@ -213,27 +249,28 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
 
 void Game::Draw()
 {
+    // Draw map tiles first
 	mapObj.Draw();
 
+    // Loop and draw all items
+    for(int i=0; i < allItems.size();i++){
+        this->DrawSprite(allItems.at(i).itemSprite);
+    }
 
-  // loop through other players and draw them
+   // Loop through other players and draw them
     for(int i=0; i < allPlayers.size();i++){
         if(i != this->player->ownID){
             this->DrawSprite(allPlayers.at(i).playerSprite);
         }
     }
 
+   
   MB::Game::Draw();  
   
 }
 
 int Game::Run(int argc,char **argv)
 {
-//   ClientTCP clientTCP(this);
-// 
-//   ThreadClass threadClass(clientTCP.clientTCP);
-//   sf::Thread thread(&ThreadClass::Run, &threadClass);
-
   ConnectionInfo info;
   //info.address = "86.185.77.64";
   info.address = "127.0.0.1";
@@ -242,14 +279,10 @@ int Game::Run(int argc,char **argv)
   info.timeout = 300;
   sf::Thread tcpThread(&TCP_Net_Thead2,info);
   
-  //CRandomMersenne rand(23232);
-  //printf("%i",rand.IRandom(0,100));
+  tcpThread.launch();
+  MB::Game::Run(argc,argv);
+  tcpThread.wait();
 
-// 	thread.launch();
-	tcpThread.launch();
-	MB::Game::Run(argc,argv);
-	tcpThread.wait();
-// 	thread.wait();
   return 0;
 }
 
@@ -264,4 +297,4 @@ bool Game::HasFocus(){
 
 
 
-// Maybe use a stack instead of a queue, and process only the latest of each message - to avoid updating multiple positions etc needlessly.
+// Maybe use a stack instead of a queue, and process only the latest of each message - to avoid updating multiple positions etc needlessly, tricky with them arriving out of order, maybe?

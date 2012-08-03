@@ -6,7 +6,7 @@
 #include <SFML/Network.hpp>
 #include <client/Map.h>
 #include <client/WorkQueues.h>
-
+#include <client/Players/PlayerInformation.hpp>
 #include <shared/Packets.h>
 
 
@@ -24,7 +24,9 @@ public:
 	sf::Vector2f GetPosition();
     sf::IntRect GetTextureRect();
     int ownID;
+    //PlayerData* playerInformation;
 	void SetPosition(float X, float Y);
+    void SetPosition(sf::Vector2f vect);
 	float GetDirection();
     Player(MB::Game* game, Map* map);
 	//const sf::Vector2f& getPosition();

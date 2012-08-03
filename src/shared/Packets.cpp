@@ -11,7 +11,7 @@
 //  float positionY[]
 //  int yourID                       - the index for the arrays where this player is stored
 
-//  [Dev-Status]                     - Done
+//  [Dev-Status]                     - Done - In the future, the client should wipe list of remote players and prepare for a new round.
 
 
 //  -------------------------------------------
@@ -25,9 +25,7 @@
 
 //  -------------------------------------------
 //  client to server
-//  int packetID	    ==		  2	 - On connection, set player bonus, and player position (needs to have been randomly selected by client and ensuring not colliding with scenery)
-//  float positionX
-//  float positionY
+//  int packetID	    ==		  2	 - On connection, set player bonus,  (player pos needs to have been randomly selected by server and ensuring not colliding with scenery)
 //  int bonusID
 
 //  [Dev-Status]                     - Working Temporary implementation. Player can 'spawn' inside walls/floors still, and is unable to select bonus (randomly chosen atm)
@@ -73,9 +71,9 @@
 //  int playerID
 //  bool isWeapon                    - maintaining two lists of items, powerups and weapons. this sets which list to check.
 //  int itemCode      
-//  int itemID                       - the index for internal list of items currently on floor. Clinet can use this to remove item from list so it doesn't display any more.
+//  int itemIndex                       - the index for internal list of items currently on floor. Clinet can use this to remove item from list so it doesn't display any more.
 
-//  [Dev-Status]                     - Not Started
+//  [Dev-Status]                     - Done, slightly untested
 
 //  ---------------------------------------------
 //  server to client
@@ -85,7 +83,7 @@
 //  float positionX
 //  float positionY
 
-//  [Dev-Status]                     - Not Started
+//  [Dev-Status]                     - Done
 
 //  --------------------------------------------
 //  client to server
@@ -115,10 +113,10 @@ sf::Packet Packets::CreateSendThisPlayerPos(sf::Vector2f playerPosition, float c
 	packet << packetID << playerPosition.x << playerPosition.y << currDirectionFacing;
 	return packet;
 }
-sf::Packet Packets::CreateInitThisClient(sf::Vector2f playerPosition, Bonus specBonus){
+sf::Packet Packets::CreateInitThisClient(Bonus specBonus){
 	sf::Packet packet;
 	int packetID = 2;
-	packet << packetID << playerPosition.x << playerPosition.y << specBonus;
+	packet << packetID << specBonus;
 	return packet;
 }
 

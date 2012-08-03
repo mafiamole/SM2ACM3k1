@@ -11,10 +11,7 @@ class Packets{
 public:
 	Packets();
 	sf::Packet CreateSendThisPlayerPos(sf::Vector2f playerPosition, float currDirectionFacing);
-    sf::Packet CreateInitThisClient(sf::Vector2f playerPosition, Bonus specBonus);
-
-
-
+    sf::Packet CreateInitThisClient(Bonus specBonus);
 
 };
 

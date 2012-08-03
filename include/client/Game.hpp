@@ -31,6 +31,7 @@ public:
 	Player* GetPlayer();
 	bool HasFocus();
 	std::vector<PlayerData> allPlayers;
+    std::vector<ClientItem> allItems;
 };
 
 

@@ -7,18 +7,15 @@
 #include <SFML/Graphics.hpp>
 #include <shared/Enums.h>
 
-struct Tile{
-    sf::Vector2f position;
-    TileTypes tileType;
-};  
 
 class ServMapLoader {
 public:
 	ServMapLoader();
-	std::vector<Tile> ReadFile(std::string path);
+	std::vector<ServTile> ReadFile(std::string path);
     
-    bool TileOnFloor(Tile* tile, std::vector<Tile> mapTiles);
-    bool TilesColliding(Tile* tile1, sf::Vector2f tile2Pos);
+    bool TileOnFloor(ServTile* tile, std::vector<ServTile> mapTiles);
+    bool TilesColliding(ServTile* tile1, sf::Vector2f tile2Pos);
+    bool PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f player2Pos);
 };
 
 

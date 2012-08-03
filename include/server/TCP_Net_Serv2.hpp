@@ -31,6 +31,7 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Time.hpp>
 #include <iostream>
 #include <vector>
 #include <list>
@@ -55,10 +56,6 @@ using namespace std;
     
   };
 
-struct Item : Tile 
-{
-    int ItemID;
-};
 
 class TCP_Net_Serv2
 {
@@ -78,7 +75,7 @@ protected:
   unsigned int			clientCount;
   bool				serverUp;
   Maps              currMap;
-  std::vector<Tile>      currMapObj;
+  std::vector<ServTile>      currMapObj;
   std::vector<Item> itemsOnMap;
   ServMapLoader mapLoader;
 

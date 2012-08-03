@@ -1,6 +1,7 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
+#include <SFML/Graphics.hpp>
 
 enum Weapons
 {        
@@ -79,4 +80,18 @@ enum HealthBits{
     RIGHT
 };
 
+struct ServTile{
+    sf::Vector2f position;
+    TileTypes tileType;
+};  
+
+struct Item : ServTile 
+{
+    int ItemID;
+};
+
+struct ClientItem : Item
+{
+    sf::Sprite itemSprite;
+};
 #endif

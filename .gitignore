@@ -7,8 +7,11 @@
 *.exe
 *.o
 *.so
+*.*~
+*.orig
 # General OS files #
 ####################
+/VSBuild/*
 .DS_Store
 .DS_Store?
 ._*
@@ -205,4 +208,5 @@ Thumbs.db
 /VSBuild/src/client/client.vcxproj.filters
 /VSBuild/src/client/client.vcxproj.user
 /VSBuild/src/client/cmake_install.cmake
+/VSBuild
 /VSBuild
