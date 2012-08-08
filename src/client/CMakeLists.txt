@@ -8,7 +8,6 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/MapLoader.h
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
     ${MB_INCLUDE_DIR}/client/Player.h
-    ${MB_INCLUDE_DIR}/client/tcp_net.h
     ${MB_INCLUDE_DIR}/shared/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/shared/Enums.h
@@ -39,7 +38,6 @@ set (SOURCES
     SpriteSheet.cpp
     WorkQueues.cpp
     SpriteSheetAnimator.cpp
-    tcp_net.cpp
     TCP_Net2.cpp
     )
 

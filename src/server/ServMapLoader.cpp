@@ -63,23 +63,29 @@ std::vector<ServTile> ServMapLoader::ReadFile(std::string path)  {
 
 
 
-bool ServMapLoader::TileOnFloor(ServTile* tile, std::vector<ServTile> mapTiles){
+bool ServMapLoader::TileOnFloor(ServTile* tile, std::vector<ServTile> mapTiles, bool isPlayer){
+  // Rect1 == player/Item
+  // Rect2 == mapTile
   sf::Vector2f value(0,0);
   
   std::vector<ServTile>::iterator it;
   int a = mapTiles.size();
 
-  for(it = mapTiles.begin(); it != mapTiles.end();it++) {
-    sf::IntRect rect;
-    
-    rect.left = tile->position.x;
-    rect.top = tile->position.y;
-    rect.width = 32;
-    rect.height = 32;
+  sf::IntRect rect, rect2;
+  
+  rect2.width = rect2.height = 32;
+  
+  if(isPlayer){
+    rect.width = 63;
+    rect.height = 38;
+  }else{
+    rect = rect2;
+  }
 
-    sf::IntRect rect2 = rect;
-     
-    
+  rect.left = tile->position.x;
+  rect.top = tile->position.y;
+
+  for(it = mapTiles.begin(); it != mapTiles.end();it++) {     
     // If the map tile is collidable, and they intersect, hasHitSomething = true
     if(((*it).tileType == TileTypes::CONTACT_DAMAGE) || ((*it).tileType == TileTypes::WALL)){
         rect2.left = (*it).position.x;

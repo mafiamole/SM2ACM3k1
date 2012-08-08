@@ -84,8 +84,6 @@ void TCP_Net_Serv2::Launch()
         // Check for collisions between players with items on board
         int i = 0;
 
-        //for(int i=0; i<this->itemsOnMap.size();i++){ // All items
-
         while(i < itemsOnMap.size()){
             bool removedSomething = false;
             for(int j=0; j<this->allClients.size();j++){
@@ -123,18 +121,6 @@ void TCP_Net_Serv2::Launch()
             if(!removedSomething || (itemsOnMap.size()==0)){ i++; }
         }
 
-
-
-
-
-        //I could just put a while instead of for int i (above) while until my index reaches items.size
-        // Loop through vector of indexesToRemove and remove them from the item vector.
-       /* for (std::vector<int>::iterator itr = indexesToRemove.begin(); itr != indexesToRemove.end(); ++itr)
-        {
-            itemsOnMap.erase((indexesToRemove.begin() + *itr));
-        }*/
-
-
         // Randomly spawn items if it's time to. Needs to spawn in locations that are 'floor'.
         if(!createdItems){
             // spawn a few items to get going (testing)
@@ -147,12 +133,27 @@ void TCP_Net_Serv2::Launch()
             i.tileType = TileTypes::ITEM;
             
             float x, y; 
+            bool playerColliding;
             do{
+               playerColliding = false;
                x = (float)rand.IRandom(0,1024);
                y = (float)rand.IRandom(0,768);
                i.position = sf::Vector2f(x,y);
-            }while(!mapLoader.TileOnFloor(&i, this->currMapObj));
-            
+
+               for(int j=0;j<allClients.size();j++){
+                 if(j!=index){
+                   if(mapLoader.PlayersColliding(allClients.at(j).position,i.position)){ playerColliding = true;}
+                 }                                            
+               }
+
+               for(int j=0;j<itemsOnMap.size();j++){
+                 if(j!=index){
+                   if(mapLoader.TilesColliding(&(ServTile)itemsOnMap.at(j),i.position)){ playerColliding = true;}
+                 }                                            
+               }
+
+            }while(playerColliding || !mapLoader.TileOnFloor(&i, this->currMapObj)); 
+            //should also check not colliding with players, or other items.
             // Randomly choose a position for item. Then check it's valid
 
             this->itemsOnMap.push_back(i);
@@ -264,8 +265,14 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     int index;
 
+    CRandomMersenne rand((int)time(0));
+
     std::cout << "Listening for connections on port " << this->port << std::endl;
     servListener.listen( this->port );
+    
+    // Set which map we will be using.
+    std::cout << "Setting map <Colosseum> for round" << std::endl;
+    SetMap(Maps::COLOSSEUM);
 
     while ((this->clientCount < this->maxClients) || (this->readyClients != this->maxClients))
     {
@@ -299,25 +306,23 @@ void TCP_Net_Serv2::WaitForClients(void)
                             if(packetID == 2){                               
                                     packet >> bonusID;
 
-                                    CRandomMersenne rand((int)time(0));
-                                    // Need to set a random location which is on the floor. (And ideally not where another player is.)
-                                    float x, y; 
-                                    Item tmpItem;
+                                    // Need to set a random location which is on the floor. (And ideally not where another player is.) 
+                                    ServTile tmpTile;
                                     bool playerColliding;
                                     do{
                                         playerColliding = false;
-                                        tmpItem.position.x = x = (float)rand.IRandom(0,1024);
-                                        tmpItem.position.y = y = (float)rand.IRandom(0,768);
+                                        tmpTile.position.x = (float)rand.IRandom(0,1024);
+                                        tmpTile.position.y = (float)rand.IRandom(0,768);
                                         // Loop through other players, if colliding with one, set boolean, true.
                                         // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
                                         for(int i=0;i<allClients.size();i++){
                                             if(i!=index){
-                                                if(mapLoader.PlayersColliding(allClients.at(i).position,tmpItem.position)){ playerColliding = true;}
+                                                if(mapLoader.PlayersColliding(allClients.at(i).position,tmpTile.position)){ playerColliding = true;}
                                             }                                            
                                         }
-                                    }while(playerColliding || !mapLoader.TileOnFloor(&tmpItem, this->currMapObj));
+                                    }while(playerColliding || !mapLoader.TileOnFloor(&tmpTile, this->currMapObj, true));
 
-                                    allClients.at(index).position = sf::Vector2f(x,y);
+                                    allClients.at(index).position = sf::Vector2f(tmpTile.position.x,tmpTile.position.y);
                                     allClients.at(index).specBonus = bonusID;
                                     allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
                                     allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
@@ -339,8 +344,6 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     std::cout << "Everyone is ready. Init and Sending go signal." << std::endl;
 
-    // Set which map we will be using.
-    SetMap(Maps::COLOSSEUM);
    
     packetID = 0;
     int *IDsForWeapons = new int[this->maxClients];
