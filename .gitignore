@@ -13,6 +13,14 @@
 *.so
 *.*~
 *.orig
+*.stamp
+*.depend
+*.sln
+*.suo
+*.user
+*.kdev4
+*.vcxproj
+*.filters
 # General OS files #
 ####################
 /VSBuild/*
