@@ -5,6 +5,10 @@
 *.class
 *.dll
 *.exe
+*.pdb
+*.tlog
+*.ilk
+*.obj
 *.o
 *.so
 *.*~
