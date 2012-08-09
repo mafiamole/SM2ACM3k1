@@ -15,10 +15,12 @@
 *.orig
 *.stamp
 *.depend
+*.directory
 *.sln
 *.suo
 *.user
 *.kdev4
+*.kate-swp
 *.vcxproj
 *.filters
 # General OS files #
