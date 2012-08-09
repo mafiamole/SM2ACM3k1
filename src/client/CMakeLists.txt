@@ -5,9 +5,10 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/HUD.h
     ${MB_INCLUDE_DIR}/client/UI/UI_Elements.hpp
     ${MB_INCLUDE_DIR}/client/Map.h 
-    ${MB_INCLUDE_DIR}/client/MapLoader.h
+    ${MB_INCLUDE_DIR}/client/ClientMapLoader.h
     ${MB_INCLUDE_DIR}/client/Players/PlayerInformation.hpp
     ${MB_INCLUDE_DIR}/client/Player.h
+    ${MB_INCLUDE_DIR}/shared/MapLoader.h
     ${MB_INCLUDE_DIR}/shared/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/shared/Enums.h
@@ -15,8 +16,6 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/client/WorkQueues.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
     ${MB_INCLUDE_DIR}/client/TCP_Net2.hpp
-    ${MB_INCLUDE_DIR}/client/RemotePlayer.h
-
   )
     
 
@@ -25,13 +24,12 @@ set (SOURCES
     Main.cpp
     Map.cpp
     HUD.cpp
-    MapLoader.cpp
+    ClientMapLoader.cpp
     UI/UI_Elements.cpp
     #UI/UI_LuaFunctions.cpp
-    tcp_net.cpp
     Players/PlayerInformation.cpp
     Player.cpp
-    RemotePlayer.cpp
+    ../shared/MapLoader.cpp
     ../shared/mersenne.cpp
     ../shared/Packets.cpp
     Map/Tile.cpp

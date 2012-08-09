@@ -79,8 +79,6 @@ void TCP_Net_Serv2::Launch()
             index++;
         }
 
-       // std::vector<int> indexesToRemove;
-
         // Check for collisions between players with items on board
         int i = 0;
 
@@ -88,34 +86,31 @@ void TCP_Net_Serv2::Launch()
             bool removedSomething = false;
             for(int j=0; j<this->allClients.size();j++){
                 if(i < itemsOnMap.size()){
-                if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).position)){
-                    // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
-                    int packetID = 7;
-                    bool isWeapon = false;
+                    if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).position)){
+                        // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
+                        int packetID = 7;
+                        bool isWeapon = false;
 
-                    switch(itemsOnMap.at(i).tileType){
-                    case TileTypes::WEAPON:
-                        allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
-                        isWeapon = true;
-                        break;
-                    case TileTypes::ITEM:
-                        allClients.at(j).currPowerUp = itemsOnMap.at(i).ItemID;
-                        break;
+                        switch(itemsOnMap.at(i).tileType){
+                        case TileTypes::WEAPON:
+                            allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
+                            isWeapon = true;
+                            break;
+                        case TileTypes::ITEM:
+                            allClients.at(j).currPowerUp = itemsOnMap.at(i).ItemID;
+                            break;
+                        }
+                        removedSomething = true;
+
+                        sf::Packet packet;
+                        packet << packetID << j << isWeapon << itemsOnMap.at(i).ItemID << i;
+
+                        for(int k=0;k<this->allClients.size();k++){
+                            this->allClients.at(k).clientSocket->send(packet);
+                        }                     
+
+                        itemsOnMap.erase(itemsOnMap.begin() + i);
                     }
-                    removedSomething = true;
-
-                    sf::Packet packet;
-                    packet << packetID << j << isWeapon << itemsOnMap.at(i).ItemID << i;
-
-                    for(int k=0;k<this->allClients.size();k++){
-                        this->allClients.at(k).clientSocket->send(packet);
-                    }                     
-
-                    itemsOnMap.erase(itemsOnMap.begin() + i);
-
-
-                    //indexesToRemove.push_back(i);
-                }
                 }
             }
             if(!removedSomething || (itemsOnMap.size()==0)){ i++; }
@@ -148,7 +143,7 @@ void TCP_Net_Serv2::Launch()
 
                for(int j=0;j<itemsOnMap.size();j++){
                  if(j!=index){
-                   if(mapLoader.TilesColliding(&(ServTile)itemsOnMap.at(j),i.position)){ playerColliding = true;}
+                   if(mapLoader.TilesColliding(&(Tile)itemsOnMap.at(j),i.position)){ playerColliding = true;}
                  }                                            
                }
 
@@ -221,17 +216,35 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
         switch( packetID )
         {
         case 1:
+        {
             sf::Vector2f playerPosition;
             float playerDirection;
             packet >> playerPosition.x >> playerPosition.y >> playerDirection;
             SendPositionToAllExcludingSender(index,client,playerPosition,playerDirection);
             break;
         }
+        case 10: // Player has used item, update internal info, and process if needed, then send out same packet to all other clients.
+            {
+               int playerID;
+               packet >> playerID;
+               sf::Packet newPacket;
+               newPacket << packetID << playerID;
+               allClients.at(playerID).currPowerUp = PowerUp::NO_POWERUP;
+
+               for(int i=0; i<allClients.size();i++){
+                    if(i != playerID){
+                        allClients.at(i).clientSocket->send(newPacket);
+                    }
+               }
+               
+
+            }
+        }
 
     }
     else if ( status == sf::Socket::Disconnected )
     {
-        //std::cout << "Player at " <<  client->getRemoteAddress() << " Disconnected." << std::endl;
+        std::cout << "Player at " <<  client->clientSocket->getRemoteAddress() << " Disconnected." << std::endl;
         sf::Packet p;
         int t[] = {1,2,3};
         p << t;
@@ -251,7 +264,6 @@ void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
         this->clientCount++;
         selector->add(*client);
         std::cout << "New client connected at " << client->getRemoteAddress() << std::endl;
-
     }
 }
 
@@ -283,9 +295,7 @@ void TCP_Net_Serv2::WaitForClients(void)
 
             if ( this->selector.isReady(servListener) )
             {
-
                 this->AddClient(&selector);
-
             }
             else
             {
@@ -307,7 +317,7 @@ void TCP_Net_Serv2::WaitForClients(void)
                                     packet >> bonusID;
 
                                     // Need to set a random location which is on the floor. (And ideally not where another player is.) 
-                                    ServTile tmpTile;
+                                    Tile tmpTile;
                                     bool playerColliding;
                                     do{
                                         playerColliding = false;
@@ -397,7 +407,7 @@ void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPositi
 
 void TCP_Net_Serv2::SetFullHealth(ClientInformation* player)
 {
-    // Could probably just set the value to 15 to init first 4 bits
+    // Could probably just set the value to 15 to init first 4 bits - At least this system is ignores platform endien-ness & int size.
     for(int i=1;i<5;i++){
         SetHealth(player,(HealthBits)i,true);
     }
@@ -417,4 +427,3 @@ void TCP_Net_Serv2::SetMap(Maps map)
 }
 
 //find map.txt for server, and work on integrating the mapid/enum/file loader ( i.e. for colosseum (enum 1) load map1.txt file.
-//TODO: do item update packets send out, and work on client drawing to floor. think about surrounding actions with sending/receiving item updates

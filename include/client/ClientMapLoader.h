@@ -1,5 +1,5 @@
-#ifndef MAPLOADER_H
-#define MAPLOADER_H
+#ifndef CLIENT_MAPLOADER_H
+#define CLIENT_MAPLOADER_H
 
 #include <fstream>
 #include <SFML/Graphics/Sprite.hpp>
@@ -7,13 +7,13 @@
 #include <MoleBox/Content/Content.hpp>
 #include <vector>
 #include <string>
+#include <shared/Enums.h>
 #include <client/Map/Tile.hpp>
 
-class MapLoader {
+static class ClientMapLoader {
 public:
-	MapLoader();
-	   std::vector< Tile* > ReadFile(std::string path);
-
+	ClientMapLoader();
+    static std::vector<ClientTile*> PopulateClientTileSprites(std::vector<Tile>* tiles);
 };
 
 

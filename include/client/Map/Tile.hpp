@@ -1,8 +1,9 @@
 #ifndef TILES_H
 #define TILES_H
 #include <client/SpriteSheet.h>
+#include <shared/Enums.h>
 
-class Tile
+class ClientTile : public Tile
 {
   
 protected:
@@ -10,52 +11,50 @@ protected:
   sf::Sprite 	sprite;
 public:
   
-  Tile(sf::Sprite sprite);
-  
+  ClientTile(sf::Sprite sprite);
+  ClientTile();
+  TileTypes tileType;
+
   void Draw(sf::RenderTarget* target );
   
   void SetPosition(float x, float y);
-  
-  virtual ~Tile();
+  void SetSprite(sf::Sprite sprite);
+  virtual ~ClientTile();
 
   virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
   
 };
 
 
-class Spikes : public Tile
+class Spikes : public ClientTile
 {
 public:  
   Spikes(sf::Sprite sprite);
-  
-  
+    
   virtual ~Spikes();
-
   virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
    
 };
 
-class Floor : public Tile
+class Floor : public ClientTile
 {
   
 public:
   Floor(sf::Sprite sprite);
 
   virtual ~Floor();
-  //   Tile(const sf::Texture& texture, unsigned int spriteWidth,unsigned int spriteHeight);
   virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
     
 };
 
 
-class Wall : public Tile
+class Wall : public ClientTile
 {
   
 public:
   Wall(sf::Sprite sprite);
   
   virtual ~Wall();
-  //   Tile(const sf::Texture& texture, unsigned int spriteWidth,unsigned int spriteHeight);
   virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
     
 };

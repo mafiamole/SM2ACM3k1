@@ -7,30 +7,36 @@
  * 
  */
 
-Tile::Tile(sf::Sprite sprite) : sprite(sprite)
+ClientTile::ClientTile(){}
+ClientTile::ClientTile(sf::Sprite sprite) : sprite(sprite)
+{
+
+  
+}
+
+ClientTile::~ClientTile()
 {
 
 
   
 }
-
-Tile::~Tile()
-{
-
-
-  
-}
-void Tile::Draw(sf::RenderTarget* target )
+void ClientTile::Draw(sf::RenderTarget* target )
 {
   target->draw(this->sprite);
 }
 
-void Tile::SetPosition(float x, float y)
+void ClientTile::SetPosition(float x, float y)
 {
   this->sprite.setPosition(x,y);
+  this->position = this->sprite.getPosition();
 }
 
-sf::Vector2f Tile::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction)
+void ClientTile::SetSprite(sf::Sprite sprite)
+{
+    this->sprite = sprite;
+}
+
+sf::Vector2f ClientTile::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction)
 {
   
   return velocety;
@@ -44,7 +50,7 @@ sf::Vector2f Tile::DetectCollision(sf::IntRect collisionBox, sf::Vector2f veloce
  * 
  */
 
-Spikes::Spikes(sf::Sprite sprite) : Tile(sprite)
+Spikes::Spikes(sf::Sprite sprite) : ClientTile(sprite)
 {
 }
 
@@ -62,8 +68,6 @@ Spikes::Spikes(sf::Sprite sprite) : Tile(sprite)
   bool intercepts = collisionBox.intersects( hitbox );
   
   if (intercepts){
-      //std::cout << "spikes" << std::endl;
-    
 
     return newvel;
   }
@@ -85,7 +89,7 @@ Spikes::~Spikes()
  * 
  */
 
-Floor::Floor(sf::Sprite sprite) : Tile(sprite)
+Floor::Floor(sf::Sprite sprite) : ClientTile(sprite)
 {
  
 }
@@ -108,7 +112,7 @@ Floor::~Floor()
  */
 
 
-Wall::Wall(sf::Sprite sprite)  : Tile(sprite)
+Wall::Wall(sf::Sprite sprite)  : ClientTile(sprite)
 {
   
 }

@@ -10,23 +10,16 @@ class Map{
 
 public:
   
-	Map(sf::RenderTarget* renderTarget, std::vector< Tile* > tileList);
+	Map(sf::RenderTarget* renderTarget, std::vector<ClientTile*> tileList);
 	
 	void Draw();
 	
-	enum TileType {
-		WALL,
-		FLOOR,
-		SPIKE
-	};
-	Map();
-	
-	   bool collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
-       bool PlayerOnFloor(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
 
+	Map();
+	   bool collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction);
 private:
   
-	std::vector<Tile*> tiles;
+	std::vector<ClientTile*> tiles;
 
 	sf::RenderTarget* rendTarget;
 	

@@ -1,18 +1,18 @@
-#include <server/ServMapLoader.h>
+#include <shared/MapLoader.h>
 
 using namespace std;
 
-ServMapLoader::ServMapLoader()
+MapLoader::MapLoader()
 {
 
 }
 
-std::vector<ServTile> ServMapLoader::ReadFile(std::string path)  {
+std::vector<Tile> MapLoader::ReadFile(std::string path)  {
 
  
  std::ifstream mapfile(path.c_str());
  string mapRow;
- std::vector<ServTile> tmpVect;
+ std::vector<Tile> tmpVect;
 
  int x = 0;
  int y = 0;
@@ -25,7 +25,7 @@ std::vector<ServTile> ServMapLoader::ReadFile(std::string path)  {
    for(int j = 0 ; j < i ; j++) {
      
     char tile = mapRow.at(j);
-    ServTile tempTile;
+    Tile tempTile;
     tempTile.position = sf::Vector2f(x*32,y*32);
 
     switch (tile) 
@@ -63,12 +63,12 @@ std::vector<ServTile> ServMapLoader::ReadFile(std::string path)  {
 
 
 
-bool ServMapLoader::TileOnFloor(ServTile* tile, std::vector<ServTile> mapTiles, bool isPlayer){
+bool MapLoader::TileOnFloor(Tile* tile, std::vector<Tile> mapTiles, bool isPlayer){
   // Rect1 == player/Item
   // Rect2 == mapTile
   sf::Vector2f value(0,0);
   
-  std::vector<ServTile>::iterator it;
+  std::vector<Tile>::iterator it;
   int a = mapTiles.size();
 
   sf::IntRect rect, rect2;
@@ -98,7 +98,7 @@ bool ServMapLoader::TileOnFloor(ServTile* tile, std::vector<ServTile> mapTiles, 
 
 }
 
-bool ServMapLoader::PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f player2Pos)
+bool MapLoader::PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f player2Pos)
 {
     sf::IntRect rect1;
     rect1.width = 63;
@@ -113,7 +113,7 @@ bool ServMapLoader::PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f playe
 }
 
 
-bool ServMapLoader::TilesColliding(ServTile* tile1, sf::Vector2f tile2Pos)
+bool MapLoader::TilesColliding(Tile* tile1, sf::Vector2f tile2Pos)
 {
     // TODO: Not much use with colliding against players as they should have a diff hitbox
     sf::IntRect rect1;

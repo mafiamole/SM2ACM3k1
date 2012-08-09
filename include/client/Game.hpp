@@ -4,7 +4,6 @@
 #include <MoleBox/Game.hpp>
 #include <MoleBox/ContainerDefinitions.hpp>
 #include <client/UI/UI_Elements.hpp>
-#include <client/tcp_net.h>
 #include <client/HUD.h>
 #include "Player.h"
 #include <client/Players/PlayerInformation.hpp>

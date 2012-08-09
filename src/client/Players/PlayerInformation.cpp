@@ -9,7 +9,6 @@ bool PlayerData::ReadHealth(PlayerData* player, HealthBits healthPosition)
     int result;
     result = player->health & (1<<healthPosition-1);
     if(result > 0){return true;}else{ return false;}
-    //return result;
 }
 
 void PlayerData::SetHealth(PlayerData* player, HealthBits healthPosition, bool value)
@@ -41,10 +40,10 @@ int Player_Interface_Reg::GetHP(lua_State* L)
   
   PlayerData playerData = hud->PlayerInformation(Player);
 
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::FRONT));//1));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::BACK));//2));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::LEFT));//  3));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::RIGHT));//4));//  
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::FRONT)); // 1));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::BACK));  // 2));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::LEFT));  // 3));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::RIGHT)); // 4));//  
 
   return 4;
 

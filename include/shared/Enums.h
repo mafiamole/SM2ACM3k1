@@ -80,12 +80,12 @@ enum HealthBits{
     RIGHT
 };
 
-struct ServTile{
+struct Tile{
     sf::Vector2f position;
     TileTypes tileType;
 };  
 
-struct Item : ServTile 
+struct Item : Tile 
 {
     int ItemID;
 };

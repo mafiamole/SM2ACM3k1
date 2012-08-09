@@ -36,7 +36,7 @@
 #include <vector>
 #include <list>
 #include <queue>
-#include <server/ServMapLoader.h>
+#include <shared/MapLoader.h>
 #include <shared/randomc.h>
 #include <ctime>
 
@@ -65,7 +65,6 @@ protected:
   sf::SocketSelector       	selector;
   unsigned short	       	port;   
   sf::Time                 	timeout;
-  //TcpSocketList 		clientSockets;
   std::vector<ClientInformation> allClients;
   
   std::string              	msgClient;
@@ -75,13 +74,12 @@ protected:
   unsigned int			clientCount;
   bool				serverUp;
   Maps              currMap;
-  std::vector<ServTile>      currMapObj;
+  std::vector<Tile>      currMapObj;
   std::vector<Item> itemsOnMap;
-  ServMapLoader mapLoader;
+  MapLoader mapLoader;
 
   void WaitForClients(void);
   
-  //void CLIHandle(); // was not sure what to name this. It iterates over the last set of inputed commands.
   void AddClient(sf::SocketSelector* selector);
   void SendOutStart(void);
   void SendData(void);

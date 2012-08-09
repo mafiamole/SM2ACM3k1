@@ -28,7 +28,7 @@
 //  int packetID	    ==		  2	 - On connection, set player bonus,  (player pos needs to have been randomly selected by server and ensuring not colliding with scenery)
 //  int bonusID
 
-//  [Dev-Status]                     - Working Temporary implementation. Player can 'spawn' inside walls/floors still, and is unable to select bonus (randomly chosen atm)
+//  [Dev-Status]                     - Working Temporary implementation. Player may be able to 'spawn' inside walls/floors still, and is unable to select bonus (randomly chosen atm)
 
 //  -------------------------------------------
 //  From server to client, position/direction of another player//
@@ -71,7 +71,8 @@
 //  int playerID
 //  bool isWeapon                    - maintaining two lists of items, powerups and weapons. this sets which list to check.
 //  int itemCode      
-//  int itemIndex                       - the index for internal list of items currently on floor. Clinet can use this to remove item from list so it doesn't display any more.
+//  int itemIndex                    - the index for internal list of items currently on floor. Client can use this to remove item from list so it doesn't display any more.
+//                                    
 
 //  [Dev-Status]                     - Done, slightly untested
 
@@ -95,7 +96,12 @@
 
 //  [Dev-Status]                     - Not Started (should implement knock-back system fully first)  -- may not strictly be necessary, as can be done with other packets.
 
+//  ---------------------------------------------
+//  client to server
+//  int packetID        ==        10  - a player just used their equipped item/power-up
+//  int playerID
 
+//  [Dev-Status]                     - Done, slightly untested
 
 
 
