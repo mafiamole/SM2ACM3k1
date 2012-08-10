@@ -42,12 +42,11 @@
 
 //  ---------------------------------------------
 //  server to client
-//  int packetID        ==        4  - Player updated health  (can be sent when health is lost, or to re-init a player on death   
-//                                     Have option to send to all but orig sender (when hitting spikes player client already knows lost health)
+//  int packetID        ==        4  - Player updated health  (can be sent when health is lost, or to re-init a player on death  
 //  int playerID
 //  int newHealth
 
-//  [Dev-Status]                     - Not Started
+//  [Dev-Status]                     - Done
 
 //  ---------------------------------------------
 //  Server to client
@@ -56,7 +55,7 @@
 //  int newKillCount
 
 
-//  [Dev-Status]                     - Not Started
+//  [Dev-Status]                     - Done
 
 //  --------------------------------------------
 //  client to server (serv checks if a coll is made with another player) && server to client (send back out to all but orig sender)
@@ -72,6 +71,7 @@
 //  bool isWeapon                    - maintaining two lists of items, powerups and weapons. this sets which list to check.
 //  int itemCode      
 //  int itemIndex                    - the index for internal list of items currently on floor. Client can use this to remove item from list so it doesn't display any more.
+//                                      if index == -1, then item wasn't taken from floor, so don't remove from list.
 //                                    
 
 //  [Dev-Status]                     - Done, slightly untested
@@ -87,6 +87,7 @@
 //  [Dev-Status]                     - Done
 
 //  --------------------------------------------
+// I think this is going to be scrapped
 //  client to server
 //  int packetID        ==        9  - player hit some spikes
 //  int newHealth

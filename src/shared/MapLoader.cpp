@@ -126,3 +126,38 @@ bool MapLoader::TilesColliding(Tile* tile1, sf::Vector2f tile2Pos)
 
     return rect1.intersects(rect2);
 }
+
+bool MapLoader::TileCollidingWithTileOfType(sf::Vector2f tilePosition, std::vector<Tile> mapTiles, TileTypes tileType, bool isPlayer){
+  // Rect1 == player/Item
+  // Rect2 == mapTile
+  sf::Vector2f value(0,0);
+  
+  std::vector<Tile>::iterator it;
+  int a = mapTiles.size();
+
+  sf::IntRect rect, rect2;
+  
+  rect2.width = rect2.height = 32;
+  
+  if(isPlayer){
+    rect.width = 63;
+    rect.height = 38;
+  }else{
+    rect = rect2;
+  }
+
+  rect.left = tilePosition.x;
+  rect.top = tilePosition.y;
+
+  for(it = mapTiles.begin(); it != mapTiles.end();it++) {     
+    // If the map tile is collidable, and they intersect, hasHitSomething = true
+    if((*it).tileType == tileType){ 
+        rect2.left = (*it).position.x;
+        rect2.top = (*it).position.y;
+        if(rect.intersects(rect2)){ return true; }
+    }
+  }
+
+  return false;
+
+}

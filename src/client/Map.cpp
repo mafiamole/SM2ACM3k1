@@ -23,7 +23,7 @@ void Map::Draw() {
 }
 
 
-bool Map::collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction) {
+bool Map::collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction) {
 
   sf::Vector2f value(0,0);
   
@@ -33,9 +33,9 @@ bool Map::collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Ve
       
     ClientTile* tile = (*it);
     
-    value = tile->DetectCollision(collisionBox, velocety,direction);
+    value = tile->DetectCollision(collisionBox, velocity,direction);
     
-    if (value != velocety)
+    if (value != velocity)
     {
       return true;
       

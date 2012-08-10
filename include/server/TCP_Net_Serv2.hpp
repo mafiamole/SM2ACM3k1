@@ -49,10 +49,10 @@ using namespace std;
     int currWeapon;
     int currPowerUp;
     int specBonus;
+    sf::Clock timeOfLastContactDamage; // This is the time since last contact damage (e.g. spikes) and is the minimum time ( before adding grace period) before can be contact_damaged again
     sf::Vector2f position;
     float dirFacing;
     sf::TcpSocket* clientSocket;
-
     
   };
 
@@ -60,22 +60,22 @@ using namespace std;
 class TCP_Net_Serv2
 {
 protected:
-  sf::TcpListener          	servListener;
-  sf::TcpSocket           	clientSocket; 
-  sf::SocketSelector       	selector;
-  unsigned short	       	port;   
-  sf::Time                 	timeout;
+  sf::TcpListener          	     servListener;
+  sf::TcpSocket           	     clientSocket; 
+  sf::SocketSelector       	     selector;
+  unsigned short	             port;   
+  sf::Time                 	     timeout;
   std::vector<ClientInformation> allClients;
   
-  std::string              	msgClient;
-  bool        	         	shuttingDown;
-  int 				maxClients;
-  int               readyClients;
-  unsigned int			clientCount;
-  bool				serverUp;
-  Maps              currMap;
-  std::vector<Tile>      currMapObj;
-  std::vector<Item> itemsOnMap;
+  std::string              	     msgClient;
+  bool        	         	     shuttingDown;
+  int 				             maxClients;
+  int                            readyClients;
+  unsigned int			         clientCount;
+  bool				             serverUp;
+  Maps                           currMap;
+  std::vector<Tile>              currMapObj;
+  std::vector<Item>              itemsOnMap;
   MapLoader mapLoader;
 
   void WaitForClients(void);
@@ -83,13 +83,16 @@ protected:
   void AddClient(sf::SocketSelector* selector);
   void SendOutStart(void);
   void SendData(void);
+  void SetPlayerRandomPosition(std::vector<ClientInformation>* allClients, int playerIndex, MapLoader* mapLoader, std::vector<Tile> mapTiles, CRandomMersenne rand);
   void DisconnectClient(sf::TcpSocket *client);
   void ReceiveData(int index, ClientInformation* client);
   void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
+  void PlayerDiedUpdateAll(int index, CRandomMersenne rand);
   void SetMap(Maps map);
   bool ReadHealth(ClientInformation* player, HealthBits healthPosition);
   void SetHealth(ClientInformation* player, HealthBits healthPosition, bool value);
   void SetFullHealth(ClientInformation* player);
+  bool IsPlayerDead(ClientInformation* player);
 
 public: 
   TCP_Net_Serv2(unsigned short port,int MaxClients);

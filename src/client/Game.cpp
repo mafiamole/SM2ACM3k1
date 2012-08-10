@@ -36,6 +36,9 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   this->actionList.Register("UseItem", new MB::Keyboard(sf::Keyboard::U));
   this->actionList.Register("UseItem Alt", new MB::Keyboard(sf::Keyboard::F));
 
+  this->actionList.Register("CheckHealth", new MB::Keyboard(sf::Keyboard::Num0));
+  this->actionList.Register("CheckScore", new MB::Keyboard(sf::Keyboard::Num9));
+
   this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
   //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
   //this->player = (Player*)this->AddComponent( new Player(this) ); 
@@ -97,7 +100,19 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
     // Handle Keyboard input	(only if has focus - ideally)
 
 	//if(this->HasFocus()){
-    
+        if (this->actionList.Exists("CheckHealth") && this->actionList.Get("CheckHealth")->IsActive() && allPlayers.size()>0){
+            std::cout << "Health: ";
+            for(int i=1; i<5;i++){
+                std::cout << allPlayers.at(player->ownID).ReadHealth(&allPlayers.at(player->ownID),(HealthBits)i);
+            }			
+            std::cout << "\n";
+		}
+
+        if (this->actionList.Exists("CheckScore") && this->actionList.Get("CheckScore")->IsActive() && allPlayers.size()>0){
+            std::cout << "Score: " << allPlayers.at(player->ownID).killCount << "\n";
+		}
+
+
 		if (this->actionList.Exists("Exit") && this->actionList.Get("Exit")->IsActive()){
 			this->window->close(); 
 			exit(0);
@@ -166,6 +181,7 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                       allPlayers.at(i).direction = 0.0f;
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
                       allPlayers.at(i).item = PowerUp::NO_POWERUP;
+                      allPlayers.at(i).killCount = 0;
                   }
                 
 
@@ -176,7 +192,7 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                   this->player->SetPosition(allPlayers.at(this->player->ownID).position);
                 }
                 break;
-			case 3: // Another player has moved. Update their info
+			case 3: // A player has moved. Update their info
             {
                 float positionX;
                 float positionY;
@@ -191,9 +207,30 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                 allPlayers.at(playerID).playerSprite.setPosition(sf::Vector2f(positionX,positionY));
 				allPlayers.at(playerID).playerSprite.setRotation(dirFacing);
 
+                // If player is self (in case of has been killed and new position generated) - This packet should only be sent to self under that circumstance. So can re-init items as well
+                if(playerID == player->ownID){
+                    player->SetPosition(allPlayers.at(playerID).position);
+                    allPlayers.at(playerID).item = PowerUp::NO_POWERUP;
+                }
 				break;
             }
-            case 7: // Remove item 
+            case 4: // Someone lost health (could be self). Do whatever (trigger hurt animation, combat text etc)
+            {
+                int playerID;
+                int newHealth;
+                packet >> playerID >> newHealth;
+                allPlayers.at(playerID).health = newHealth;
+                break;
+            }
+            case 5: // Receive updated kill count from server and do whatever
+            {
+                int playerID;
+                int newKillCount;
+                packet >> playerID >> newKillCount;
+                allPlayers.at(playerID).killCount = newKillCount; 
+                break;
+            }
+            case 7: // Remove item   -- if index is -1, then don't remove from floor
             {
 			 int playerID;
              bool isWeapon;  
@@ -208,8 +245,9 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                 allPlayers.at(playerID).item = itemCode;
              }
              
-             allItems.erase(allItems.begin() + itemIndex);
-             
+             if(!(itemIndex == -1)){
+                allItems.erase(allItems.begin() + itemIndex);
+             }   
              
              break;
             }

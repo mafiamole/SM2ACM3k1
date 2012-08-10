@@ -36,10 +36,10 @@ void ClientTile::SetSprite(sf::Sprite sprite)
     this->sprite = sprite;
 }
 
-sf::Vector2f ClientTile::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety, sf::Vector2f direction)
+sf::Vector2f ClientTile::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity, sf::Vector2f direction)
 {
   
-  return velocety;
+  return velocity;
  
 }
 
@@ -54,7 +54,7 @@ Spikes::Spikes(sf::Sprite sprite) : ClientTile(sprite)
 {
 }
 
- sf::Vector2f Spikes::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction)
+ sf::Vector2f Spikes::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction)
 {
 
   sf::IntRect hitbox = this->sprite.getTextureRect();
@@ -62,18 +62,18 @@ Spikes::Spikes(sf::Sprite sprite) : ClientTile(sprite)
   hitbox.top = this->sprite.getPosition().y;
   hitbox.left = this->sprite.getPosition().x;
     sf::Vector2f newvel;
-    newvel.x = velocety.x / 10;
-    newvel.y = velocety.y / 10;
+    newvel.x = velocity.x / 10;
+    newvel.y = velocity.y / 10;
      
   bool intercepts = collisionBox.intersects( hitbox );
   
   if (intercepts){
 
-    return newvel;
+    return velocity;//newvel;
   }
   else
   {
-    return velocety;
+    return velocity;
   }
   
 }
@@ -94,10 +94,10 @@ Floor::Floor(sf::Sprite sprite) : ClientTile(sprite)
  
 }
 
-sf::Vector2f Floor::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction)
+sf::Vector2f Floor::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction)
 {
 
-  return velocety;
+  return velocity;
 }
 Floor::~Floor()
 {
@@ -122,7 +122,7 @@ Wall::~Wall()
 {
 }
 
-sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction)
+sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction)
 {
   
   //std::cout << "checking wall!" << std::endl;
@@ -133,7 +133,7 @@ sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f veloce
   float yTileDistance = yDistance / this->sprite.getTextureRect().height;
   
   if ( xTileDistance > 2 || yTileDistance > 2)
-    return velocety;
+    return velocity;
   
   sf::IntRect hitbox = this->sprite.getTextureRect();
   
@@ -147,6 +147,6 @@ sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f veloce
     }
   else
     {
-    return velocety;
+    return velocity;
     }
 }

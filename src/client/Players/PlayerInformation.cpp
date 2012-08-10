@@ -27,6 +27,14 @@ void PlayerData::SetFullHealth(PlayerData* player)
     }
 }
 
+bool PlayerData::IsPlayerDead(PlayerData* player)
+{
+    for(int i=1;i<5;i++){
+        if(ReadHealth(player,(HealthBits)i)) { return false; }
+    }
+    return true;
+}
+
 int Player_Interface_Reg::GetHP(lua_State* L)
 {
   int argc = lua_gettop(L);

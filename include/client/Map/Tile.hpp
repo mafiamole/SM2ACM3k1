@@ -21,7 +21,7 @@ public:
   void SetSprite(sf::Sprite sprite);
   virtual ~ClientTile();
 
-  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
+  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
   
 };
 
@@ -32,7 +32,7 @@ public:
   Spikes(sf::Sprite sprite);
     
   virtual ~Spikes();
-  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
+  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
    
 };
 
@@ -43,7 +43,7 @@ public:
   Floor(sf::Sprite sprite);
 
   virtual ~Floor();
-  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
+  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
     
 };
 
@@ -55,7 +55,7 @@ public:
   Wall(sf::Sprite sprite);
   
   virtual ~Wall();
-  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocety,sf::Vector2f direction);
+  virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
     
 };
 

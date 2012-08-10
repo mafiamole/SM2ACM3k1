@@ -7,17 +7,18 @@
 
 struct PlayerData {
   
-  int 		health;  
-  int 		weapon;  
-  int 		item;  
+  int 		    health;  
+  int 		    weapon;  
+  int 		    item; 
+  int           killCount;
   sf::Vector2f	position;  
-  float		direction;  
+  float		    direction;
+  sf::Sprite    playerSprite; 
+
   bool ReadHealth(PlayerData* player, HealthBits healthPosition);
   void SetHealth(PlayerData* player, HealthBits healthPosition, bool value);
   void SetFullHealth(PlayerData* player);
-  //int playerID;
-  sf::Sprite playerSprite;  
-    
+  bool IsPlayerDead(PlayerData* player);
 };
 
 typedef std::vector<PlayerData> PlayerDataList;

@@ -116,6 +116,50 @@ void TCP_Net_Serv2::Launch()
             if(!removedSomething || (itemsOnMap.size()==0)){ i++; }
         }
 
+        CRandomMersenne rand((int)time(0));
+
+        // Check if a player is colliding with a contact_damage tile (e.g. spikes), check if the time since last contact_damage is after the grace period, then update health / send packet
+        for(int j=0;j<allClients.size();j++){           
+            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).position,currMapObj,TileTypes::CONTACT_DAMAGE)){
+                if(allClients.at(j).timeOfLastContactDamage.getElapsedTime() > sf::milliseconds(1000)){ //Time before more hurting on spikies can occur (in milliseconds)
+                   //std::cout << "Player " << j << " took damage.\n";
+                   // Player needs to lose a random health block. This assumes that there IS some health to loose, otherwise infinite loop.
+                   
+                   bool foundHealthyBlock = false;
+                   HealthBits positionUsed;
+                   do{
+                       positionUsed = (HealthBits)rand.IRandom(1,4);
+                       if(this->ReadHealth(&allClients.at(j), positionUsed)){
+                           foundHealthyBlock = true;
+                       }
+                   }
+                   while(!foundHealthyBlock);
+
+                   SetHealth(&allClients.at(j), positionUsed,0);
+
+                   // Check if player is dead, and deal with appropriately.
+                   if(IsPlayerDead(&allClients.at(j))){ // Alert other players that a player died, update kill count, re-init character etc
+                        PlayerDiedUpdateAll(j, rand);            
+                        
+                   }else{ // Not dead, alert other players about losing health
+                        int packetID = 4;
+                        sf::Packet packet;
+                        packet << packetID << j << allClients.at(j).health;
+
+                        for(int i=0; i<allClients.size();i++){                    
+                            allClients.at(i).clientSocket->send(packet);
+                        }               
+
+                   }
+                   
+                   // Update collision time for this player
+                   allClients.at(j).timeOfLastContactDamage.restart();
+                }
+            }
+        }
+
+
+
         // Randomly spawn items if it's time to. Needs to spawn in locations that are 'floor'.
         if(!createdItems){
             // spawn a few items to get going (testing)
@@ -135,16 +179,16 @@ void TCP_Net_Serv2::Launch()
                y = (float)rand.IRandom(0,768);
                i.position = sf::Vector2f(x,y);
 
+               // Check not spawing on a player
                for(int j=0;j<allClients.size();j++){
-                 if(j!=index){
                    if(mapLoader.PlayersColliding(allClients.at(j).position,i.position)){ playerColliding = true;}
-                 }                                            
                }
 
-               for(int j=0;j<itemsOnMap.size();j++){
-                 if(j!=index){
-                   if(mapLoader.TilesColliding(&(Tile)itemsOnMap.at(j),i.position)){ playerColliding = true;}
-                 }                                            
+               // Check not spawing on another item
+               for(int k=0;playerColliding == false && k<itemsOnMap.size();k++){
+                // if(j!=index){
+                   if(mapLoader.TilesColliding(&(Tile)itemsOnMap.at(k),i.position)){ playerColliding = true;}
+               //  }                                            
                }
 
             }while(playerColliding || !mapLoader.TileOnFloor(&i, this->currMapObj)); 
@@ -199,6 +243,48 @@ void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformatio
 
 
     }
+}
+
+void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand){
+    //std::vector<ClientInformation>& allClients = *clients;
+    SetFullHealth(&allClients.at(index));
+                      
+    SetPlayerRandomPosition(&allClients, index, &mapLoader, currMapObj, rand);
+    // Drop/Destroy currently held weapon/items. Create packets (player powerup removed by position update packet)
+    int packetID = 7;                        
+    bool isWeapon = true;
+    int itemIndex = -1;
+    sf::Packet itemPacket;
+    itemPacket << packetID << index << isWeapon << allClients.at(index).specBonus << itemIndex;
+
+    allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;                           
+    allClients.at(index).currWeapon = allClients.at(index).specBonus;
+            
+    // Update Kill count + create packet
+    packetID = 5;
+    sf::Packet killCountPacket;
+    allClients.at(index).killCount -= 1; // Minus one, on death.
+    killCountPacket << packetID << index << allClients.at(index).killCount;
+                           
+    // Create updated position packet
+    packetID = 3;
+    sf::Packet newPacket;
+    newPacket << packetID << allClients.at(index).position.x << allClients.at(index).position.y << allClients.at(index).dirFacing << index;
+
+    // Create updated health packet
+    packetID = 4;
+    sf::Packet packet;
+    packet << packetID << index << allClients.at(index).health;
+
+
+    // Send the packets to all
+    for(int i=0; i<allClients.size();i++){       
+        allClients.at(i).clientSocket->send(itemPacket);
+        allClients.at(i).clientSocket->send(killCountPacket);
+        allClients.at(i).clientSocket->send(newPacket);
+        allClients.at(i).clientSocket->send(packet);
+    }   
+
 }
 
 void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
@@ -316,28 +402,14 @@ void TCP_Net_Serv2::WaitForClients(void)
                             if(packetID == 2){                               
                                     packet >> bonusID;
 
-                                    // Need to set a random location which is on the floor. (And ideally not where another player is.) 
-                                    Tile tmpTile;
-                                    bool playerColliding;
-                                    do{
-                                        playerColliding = false;
-                                        tmpTile.position.x = (float)rand.IRandom(0,1024);
-                                        tmpTile.position.y = (float)rand.IRandom(0,768);
-                                        // Loop through other players, if colliding with one, set boolean, true.
-                                        // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
-                                        for(int i=0;i<allClients.size();i++){
-                                            if(i!=index){
-                                                if(mapLoader.PlayersColliding(allClients.at(i).position,tmpTile.position)){ playerColliding = true;}
-                                            }                                            
-                                        }
-                                    }while(playerColliding || !mapLoader.TileOnFloor(&tmpTile, this->currMapObj, true));
-
-                                    allClients.at(index).position = sf::Vector2f(tmpTile.position.x,tmpTile.position.y);
+                                    SetPlayerRandomPosition(&allClients, index, &mapLoader, currMapObj, rand);
+                                    
                                     allClients.at(index).specBonus = bonusID;
                                     allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
                                     allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
                                     allClients.at(index).killCount = 0;
                                     allClients.at(index).dirFacing = 0.0f;
+                                    allClients.at(index).timeOfLastContactDamage.restart();
                                     SetFullHealth(&allClients.at(index));
                                     
                                     this->readyClients++;
@@ -387,6 +459,25 @@ void TCP_Net_Serv2::WaitForClients(void)
 }
 
 
+void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allClients, int playerIndex, MapLoader* mapLoader, std::vector<Tile> mapTiles, CRandomMersenne rand){
+    // Need to set a random location which is on the floor. (And ideally not where another player is.) 
+    Tile tmpTile;
+    bool playerColliding;
+    do{
+        playerColliding = false;
+        tmpTile.position.x = (float)rand.IRandom(0,1024);
+        tmpTile.position.y = (float)rand.IRandom(0,768);
+        // Loop through other players, if colliding with one, set boolean, true.
+        // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
+        for(int i=0;i<allClients->size();i++){
+            if(i!=playerIndex){
+                if(mapLoader->PlayersColliding(allClients->at(i).position,tmpTile.position)){ playerColliding = true;}
+            }                                            
+        }
+    }while(playerColliding || !mapLoader->TileOnFloor(&tmpTile, mapTiles, true));
+
+    allClients->at(playerIndex).position = tmpTile.position;
+}
 
 
 bool TCP_Net_Serv2::ReadHealth(ClientInformation* player, HealthBits healthPosition)
@@ -411,6 +502,14 @@ void TCP_Net_Serv2::SetFullHealth(ClientInformation* player)
     for(int i=1;i<5;i++){
         SetHealth(player,(HealthBits)i,true);
     }
+}
+
+bool TCP_Net_Serv2::IsPlayerDead(ClientInformation* player)
+{
+    for(int i=1;i<5;i++){
+        if(ReadHealth(player,(HealthBits)i)) { return false; }
+    }
+    return true;
 }
 
 void TCP_Net_Serv2::SetMap(Maps map)
