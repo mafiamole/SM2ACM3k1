@@ -18,11 +18,14 @@ public:
   void Draw(sf::RenderTarget* target );
   
   void SetPosition(float x, float y);
+  void HandleCollision(bool isHorizontal);
   void SetSprite(sf::Sprite sprite);
   virtual ~ClientTile();
 
   virtual sf::Vector2f DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
-  
+  float GetVerticalIntersectionDepth(sf::IntRect rectA, sf::IntRect rectB);
+  float GetHorizontalIntersectionDepth( sf::IntRect rectA, sf::IntRect rectB);
+  sf::Vector2f Displacement(sf::IntRect collisionBox, sf::IntRect hitbox);
 };
 
 

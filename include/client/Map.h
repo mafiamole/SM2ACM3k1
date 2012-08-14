@@ -16,7 +16,8 @@ public:
 	
 
 	Map();
-	   bool collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocity, sf::Vector2f direction);
+    sf::Vector2f collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocity, sf::Vector2f direction);
+    sf::Vector2f WallCheck(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction);
 private:
   
 	std::vector<ClientTile*> tiles;

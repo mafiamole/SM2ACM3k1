@@ -57,24 +57,26 @@ Spikes::Spikes(sf::Sprite sprite) : ClientTile(sprite)
  sf::Vector2f Spikes::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction)
 {
 
-  sf::IntRect hitbox = this->sprite.getTextureRect();
-  
-  hitbox.top = this->sprite.getPosition().y;
-  hitbox.left = this->sprite.getPosition().x;
-    sf::Vector2f newvel;
-    newvel.x = velocity.x / 10;
-    newvel.y = velocity.y / 10;
-     
-  bool intercepts = collisionBox.intersects( hitbox );
-  
-  if (intercepts){
+  //sf::IntRect hitbox = this->sprite.getTextureRect();
+  //
+  //hitbox.top = this->sprite.getPosition().y;
+  //hitbox.left = this->sprite.getPosition().x;
+  //  sf::Vector2f newvel;
+  //  newvel.x = velocity.x / 10;
+  //  newvel.y = velocity.y / 10;
+  //   
+  //bool intercepts = collisionBox.intersects( hitbox );
+  //
+  //if (intercepts){
 
     return velocity;//newvel;
-  }
+
+    
+ /* }
   else
   {
     return velocity;
-  }
+  }*/
   
 }
 
@@ -124,29 +126,77 @@ Wall::~Wall()
 
 sf::Vector2f Wall::DetectCollision(sf::IntRect collisionBox, sf::Vector2f velocity,sf::Vector2f direction)
 {
-  
-  //std::cout << "checking wall!" << std::endl;
-  float xDistance = collisionBox.left - this->sprite.getPosition().x;
-  float yDistance = collisionBox.top - this->sprite.getPosition().y;
-  
-  float xTileDistance = xDistance / this->sprite.getTextureRect().width;
-  float yTileDistance = yDistance / this->sprite.getTextureRect().height;
-  
-  if ( xTileDistance > 2 || yTileDistance > 2)
+    // Wall Collision Detection is done elsewhere and not called per tile.
+ 
+
+
+
+
     return velocity;
-  
-  sf::IntRect hitbox = this->sprite.getTextureRect();
-  
-  hitbox.top = this->sprite.getPosition().y;
-  hitbox.left = this->sprite.getPosition().x;
-  
-  bool intercepts = collisionBox.intersects( hitbox );
-  if (intercepts){
-      //std::cout << "wall" << std::endl;
-  return sf::Vector2f(0,0);  
-    }
-  else
-    {
-    return velocity;
-    }
+}
+
+
+float ClientTile::GetHorizontalIntersectionDepth(sf::IntRect rectA, sf::IntRect rectB)
+	{
+		// Calculate half sizes.
+		float halfWidthA = rectA.width / 2.0f;
+		float halfWidthB = rectB.width / 2.0f;
+
+		// Calculate centers.
+		float centerA = rectA.left + halfWidthA;
+		float centerB = rectB.left + halfWidthB;
+
+		// Calculate current and minimum-non-intersecting distances between centers.
+		float distanceX = centerA - centerB;
+		float minDistanceX = halfWidthA + halfWidthB;
+
+		// If we are not intersecting at all, return (0, 0).
+		if (std::abs(distanceX) >= minDistanceX)
+			return 0.0f;
+
+		// Calculate and return intersection depths.
+
+        float dist = minDistanceX - distanceX;
+        float dist2 = -minDistanceX -distanceX;
+        
+		return distanceX > 0 ? dist : dist2;
+	}
+
+float ClientTile::GetVerticalIntersectionDepth(sf::IntRect rectA, sf::IntRect rectB)
+	{
+		// Calculate half sizes.
+		float halfHeightA = rectA.height / 2.0f;
+		float halfHeightB = rectB.height / 2.0f;
+
+		// Calculate centers.
+		float centerA = rectA.top + halfHeightA;
+		float centerB = rectB.top + halfHeightB;
+
+		// Calculate current and minimum-non-intersecting distances between centers.
+		float distanceY = centerA - centerB;
+		float minDistanceY = halfHeightA + halfHeightB;
+
+		// If we are not intersecting at all, return (0, 0).
+		if (std::abs(distanceY) >= minDistanceY)
+			return 0.0f;
+
+		// Calculate and return intersection depths.
+		return distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
+        //(((rectA.height/2)+(rectB.height/2)) - ((rectA.top+(rectA.height/2)) - (rectB.top + (rectB.height/2))))
+	}
+
+
+
+
+
+sf::Vector2f ClientTile::Displacement(sf::IntRect collisionBox, sf::IntRect hitbox){
+
+     int leftX = std::max(collisionBox.left, hitbox.left);
+     int rightX = std::min(collisionBox.left + collisionBox.width, hitbox.left + hitbox.width);
+     int topY = std::max(collisionBox.top, hitbox.top);    
+     int bottomY = std::min(collisionBox.top + collisionBox.height, hitbox.top + hitbox.height);
+
+     //sf::IntRect rectangle = sf::IntRect( leftX, topY, rightX-leftX, bottomY-topY );
+     return  sf::Vector2f( rightX-leftX, bottomY-topY); 
+
 }

@@ -17,9 +17,6 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     this->playerSprite.setOrigin(31,19);
     this->playerSprite.setPosition(531,519);
 
-    this->rect.left = 600;
-    this->rect.height = 350;
-    
 }
 
 void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
@@ -29,8 +26,10 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	int dirX = 0;
 	int dirY = 0;
 	bool moved = false;
+  
+    sf::Vector2f origPos(this->playerSprite.getPosition());
+    float origRot = this->playerSprite.getRotation();
 
-	 
 	Game* g = (Game*)this->game;
 
 
@@ -62,61 +61,30 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	
 
 	// Change position (based on elapsed time)
-	float vectorX = dirX * 1.f * (float)elapsed.asMilliseconds();  
-	float vectorY = dirY * 1.f * (float)elapsed.asMilliseconds();
-		
-	
-	sf::Vector2f playerPos = this->playerSprite.getPosition();
-	sf::IntRect collisionRect = this->playerSprite.getTextureRect();
-	
-	collisionRect.left = playerPos.x - ( collisionRect.width / 2); collisionRect.top = playerPos.y - ( collisionRect.height / 2);
-	
-	sf::IntRect collisionRectNext = collisionRect;
-	
-	collisionRectNext.left += vectorX;
-	collisionRectNext.top  += vectorY;
-	
-	sf::Vector2f velocity(vectorX,vectorY);
-	    
-	sf::Vector2f nextPosition (playerPos.x + vectorX,playerPos.y + vectorY);
+    // Limit elapsed time first
+    float limitedElapsed = (float)elapsed.asMilliseconds();
+    if(limitedElapsed > 31.0f){ limitedElapsed = 31.0f; }
 
-	sf::Vector2u windowSize = this->game->Window()->getSize();
-	
-	sf::IntRect windowRect(0,0,windowSize.x,windowSize.y);
-	
-	bool topLeft, topRight,bottomLeft,bottomRight;
-	
-	topLeft = windowRect.contains(collisionRectNext.left,collisionRectNext.top);
-	
-	topRight = windowRect.contains(collisionRectNext.left + collisionRectNext.width,collisionRectNext.top);
-	
-	bottomLeft = windowRect.contains(collisionRectNext.left,collisionRectNext.top + collisionRectNext.height);
-	
-	bottomRight = windowRect.contains(collisionRectNext.left + collisionRectNext.width,collisionRectNext.top + collisionRectNext.height);
-	
-	
-	this->rect = collisionRectNext;
-	sf::Vector2f newVector;
-	
-	bool hitobject = gameMap->collisionDetect(collisionRectNext, velocity,direction );
-	
-	sf::Vector2f newPosition = playerPos + newVector;
-	
-	if ( !(topLeft && topRight && bottomLeft && bottomRight))
-	{
-	  nextPosition = playerPos;
-	}
-	else {
-	  nextPosition = nextPosition;
-	  
-	}
-	
-	if (hitobject)
-	    nextPosition = playerPos;
+    sf::Vector2f velocity(dirX * 1.f * limitedElapsed, dirY * 1.f * limitedElapsed);
 
-	this->playerSprite.setPosition(nextPosition);
+    // Now check collision
+    
+    sf::IntRect origRect(this->playerSprite.getGlobalBounds());
+    origRect.top = origPos.y;
+    origRect.left = origPos.x;
+    origRect.width = origRect.height = 32;
 
-	// Set sprite orientation based on dir
+
+    
+    sf::Vector2f correctedVector = gameMap->collisionDetect(origRect, velocity, direction ) ;
+   
+    correctedVector.x += origPos.x;
+    correctedVector.y += origPos.y;
+      
+    this->playerSprite.setPosition(correctedVector);
+ 
+
+    // Set sprite orientation based on dir
 	float rotation = 0.0f;
 
 	// Diagonals
@@ -132,38 +100,43 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 	}
 
 	if(rotation == 0.0f){
-	if(dirY == 1){
-		rotation = 180.0f;
-	}else if(dirX == -1){
-		rotation = 270.0f;
-	}else if(dirX == 1){
-		rotation = 90.0f;
+	    if(dirY == 1){
+		    rotation = 180.0f;
+	    }else if(dirX == -1){
+		    rotation = 270.0f;
+	    }else if(dirX == 1){
+		    rotation = 90.0f;
+	    }
 	}
-	}
 
-	//if(dirX == -1){ this->playerSprite.rotate(20.0f);  }
-	//if(dirX == 1){ this->playerSprite.rotate(-20.0f); }
+    this->playerSprite.setRotation(rotation);
 
-	
 
-	if(moved){
-		this->playerSprite.setRotation(rotation);
+	if(moved){		
 		Packets packets;
 		WorkQueues::packetsToSend().push(packets.CreateSendThisPlayerPos(playerSprite.getPosition(),playerSprite.getRotation()));
 
-	}
+	}else{
+        this->playerSprite.setRotation(origRot);
+    }
+
+}
+
+sf::IntRect Player::GetHitBox(){ 
+    return sf::IntRect(this->playerSprite.getGlobalBounds().left + 15,
+                       this->playerSprite.getGlobalBounds().top + 3,
+                       this->playerSprite.getGlobalBounds().width - 31,
+                       this->playerSprite.getGlobalBounds().height - 6);   
+}
+
+sf::Vector2f Player::HitBoxPosToBoundingPos(sf::Vector2f pos){
+    return sf::Vector2f(pos.x-15,pos.y-3);
 
 }
 
 void Player::Draw()
 {
-  //sf::Vector2f rectSize;
-  //rectSize.x = this->rect.width; rectSize.y = this->rect.height;
-  //sf::RectangleShape shape = sf::RectangleShape(rectSize);
-  
-  //shape.setPosition(this->rect.left,this->rect.top);
-  //this->game->DrawSprite(shape);
-
+ 
   this->game->DrawSprite(this->playerSprite);
   MB::GameComponent::Draw();
   

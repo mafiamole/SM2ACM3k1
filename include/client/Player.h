@@ -18,8 +18,7 @@ class Player : public MB::GameComponent
 private:
     sf::Sprite playerSprite;
     MB::Action * up,*down; 
-     Map* gameMap;
-    sf::IntRect rect;
+    Map* gameMap;
 public:
 	sf::Vector2f GetPosition();
     sf::IntRect GetTextureRect();
@@ -27,6 +26,8 @@ public:
 	void SetPosition(float X, float Y);
     void SetPosition(sf::Vector2f vect);
 	float GetDirection();
+    sf::IntRect GetHitBox();
+    sf::Vector2f HitBoxPosToBoundingPos(sf::Vector2f pos);
     Player(MB::Game* game, Map* map);
 	
     virtual void Update(sf::Time elapsed, MB::Types::EventList* events);
