@@ -1,8 +1,15 @@
 
 #include <client/Players/PlayerInformation.hpp>
 #include <client/HUD.h>
-#include <MoleBox/Lua/ScriptHelper.hpp>
+#include <MoleBox/Lua/Helpers.hpp>
 #include <lua.h>
+
+//sf::IntRect PlayerData::GetWeaponHitBox(PlayerData* player){
+//    if(player->
+//
+//
+//    return;
+//}
 
 bool PlayerData::ReadHealth(PlayerData* player, HealthBits healthPosition)
 {

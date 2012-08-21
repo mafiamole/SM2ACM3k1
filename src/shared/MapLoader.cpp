@@ -101,8 +101,8 @@ bool MapLoader::TileOnFloor(Tile* tile, std::vector<Tile> mapTiles, bool isPlaye
 bool MapLoader::PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f player2Pos)
 {
     sf::IntRect rect1;
-    rect1.width = 63;
-    rect1.height = 38;
+    rect1.width = PLAYER_WIDTH;
+    rect1.height = PLAYER_HEIGHT;
     sf::IntRect rect2 = rect1;
     rect1.left = player1Pos.x;
     rect1.top = player1Pos.y;
@@ -160,4 +160,68 @@ bool MapLoader::TileCollidingWithTileOfType(sf::Vector2f tilePosition, std::vect
 
   return false;
 
+}
+
+
+int MapLoader::GetTileRelativePosition(sf::IntRect box1, sf::IntRect box2){
+    
+    sf::Vector2i centre1(box1.left + (box1.width/2),box1.top + (box1.height/2));
+    sf::Vector2i centre2(box2.left + (box2.width/2),box2.top + (box2.height/2));
+
+    sf::Vector2i distance(centre1.x - centre2.x, centre1.y - centre2.y);
+    sf::Vector2i centreDist = distance;
+
+    bool usingX = false;
+    short dir = 0; // 1 up, 2 left, 3 bottom, 4 right.
+
+    if(abs(distance.x) < std::abs(distance.y)){ usingX = true; }
+
+    //if(usingX){
+    //    if(centre1.x < centre2.x){ dir = 4; } else { dir = 2; } // OnRight else OnLeft
+    //}else{
+    //    if(centre1.y < centre2.y){ dir = 1; } else { dir = 3; } // OnTop else OnBottom
+    //}
+
+    sf::IntRect player, hitbox;
+    player = box1;
+    hitbox = box2;
+
+    //
+    //if ((player.left - hitbox.left  < 0) && (centreDist.x >= centreDist.y)) { dir = 4; } // on left
+    //else if ((player.top-hitbox.top < 0) && (centreDist.y >= centreDist.x)) { dir = 1; }// on front
+    //else if ((player.left -hitbox.left > 0) && (centreDist.x >= centreDist.y)) { dir = 2; }// on right
+    //else if ((player.top-hitbox.top > 0) && (centreDist.y >= centreDist.x)) { dir = 3; }// on rear
+
+
+    //if ((centre1.x - centre2.x  < 0) && (centreDist.x <= centreDist.y)) { dir = 2; } // on right
+    //if ((centre1.y-centre2.y < 0) && (centreDist.y <= centreDist.x)) { dir = 1; }// on front
+    //if ((centre1.x -centre2.x > 0) && (centreDist.x <= centreDist.y)) { dir = 4; }// on left
+    //if ((centre1.y-centre2.y > 0) && (centreDist.y <= centreDist.x)) { dir = 3; }// on rear
+
+
+    //if(centreDist.x >= centreDist.y){ // either left or right
+    //    if(centre1.x - centre2.x < 0) { dir = 4; } else { dir = 2; }
+    //}else{ // either top or bottom
+    //    if(centre1.y - centre2.y < 0) { dir = 1; } else { dir = 3; }
+    //}
+
+
+        if(std::abs(centreDist.x) >= std::abs(centreDist.y)){ // either left or right
+            if(centre1.x - centre2.x < 0) { 
+                dir = 4; 
+            } else {
+                dir = 2; 
+            }
+        }else { // either top or bottom
+            if(centre1.y - centre2.y < 0) { 
+                dir = 1; 
+            } else { 
+                dir = 3;
+            }
+        }
+
+
+    // Box1 on {{dir}} of Box2
+    
+    return dir;
 }

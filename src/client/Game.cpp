@@ -23,21 +23,24 @@ Game::Game(std::string windowName) : MB::Game(windowName)
   
   mapObj = Map(this->window, ClientMapLoader::PopulateClientTileSprites(&mapLoader.ReadFile("map.txt")));
 
-  this->actionList.Register("Exit",new MB::Keyboard(sf::Keyboard::Escape));
-  this->actionList.Register("Player Move Up",new MB::Keyboard(sf::Keyboard::W));
-  this->actionList.Register("Player Move Down",new MB::Keyboard(sf::Keyboard::S));
-  this->actionList.Register("Player Move Left",new MB::Keyboard(sf::Keyboard::A));
-  this->actionList.Register("Player Move Right",new MB::Keyboard(sf::Keyboard::D));
+  this->actions.Register("Exit",new MB::Actions::Keyboard(sf::Keyboard::Escape));
+  this->actions.Register("Player Move Up",new MB::Actions::Keyboard(sf::Keyboard::W));
+  this->actions.Register("Player Move Down",new MB::Actions::Keyboard(sf::Keyboard::S));
+  this->actions.Register("Player Move Left",new MB::Actions::Keyboard(sf::Keyboard::A));
+  this->actions.Register("Player Move Right",new MB::Actions::Keyboard(sf::Keyboard::D));
   	
-  this->actionList.Register("Player Move Up Alt",new MB::Keyboard(sf::Keyboard::Comma));
-  this->actionList.Register("Player Move Down Alt",new MB::Keyboard(sf::Keyboard::O));
-  this->actionList.Register("Player Move Right Alt",new MB::Keyboard(sf::Keyboard::E));
+  this->actions.Register("Player Move Up Alt",new MB::Actions::Keyboard(sf::Keyboard::Comma));
+  this->actions.Register("Player Move Down Alt",new MB::Actions::Keyboard(sf::Keyboard::O));
+  this->actions.Register("Player Move Right Alt",new MB::Actions::Keyboard(sf::Keyboard::E));
 
-  this->actionList.Register("UseItem", new MB::Keyboard(sf::Keyboard::U));
-  this->actionList.Register("UseItem Alt", new MB::Keyboard(sf::Keyboard::F));
+  this->actions.Register("UseItem", new MB::Actions::Keyboard(sf::Keyboard::U));
+  this->actions.Register("UseItem Alt", new MB::Actions::Keyboard(sf::Keyboard::F));
 
-  this->actionList.Register("CheckHealth", new MB::Keyboard(sf::Keyboard::Num0));
-  this->actionList.Register("CheckScore", new MB::Keyboard(sf::Keyboard::Num9));
+  this->actions.Register("Attack", new MB::Actions::Keyboard(sf::Keyboard::Space));
+
+  this->actions.Register("CheckHealth", new MB::Actions::Keyboard(sf::Keyboard::Num0));
+  this->actions.Register("CheckScore", new MB::Actions::Keyboard(sf::Keyboard::Num9));
+
 
   this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
   //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
@@ -50,7 +53,8 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 
   // Bonus is currently selected randomly, need to change this later
   Packets packets;
-  WorkQueues::packetsToSend().push(packets.CreateInitThisClient((Bonus)rand.IRandom(1,3)));
+  this->player->bonus = Bonus::LONG;//;(Bonus)rand.IRandom(1,3);
+  WorkQueues::packetsToSend().push(packets.CreateInitThisClient(this->player->bonus));
 
 }
 
@@ -60,7 +64,7 @@ Game::~Game(void)
 
 }
 
-void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
+void Game::Update(sf::Time elapsed, MB::EventList *events)
 {
 	// Update HasFocus variable
     // Polling events, method 1
@@ -100,7 +104,7 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
     // Handle Keyboard input	(only if has focus - ideally)
 
 	//if(this->HasFocus()){
-        if (this->actionList.Exists("CheckHealth") && this->actionList.Get("CheckHealth")->IsActive() && allPlayers.size()>0){
+        if (this->GetActions()->Exists("CheckHealth") && this->GetActions()->Get("CheckHealth")->IsActive() && allPlayers.size()>0){
             std::cout << "Health: ";
             for(int i=1; i<5;i++){
                 std::cout << allPlayers.at(player->ownID).ReadHealth(&allPlayers.at(player->ownID),(HealthBits)i);
@@ -108,18 +112,18 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
             std::cout << "\n";
 		}
 
-        if (this->actionList.Exists("CheckScore") && this->actionList.Get("CheckScore")->IsActive() && allPlayers.size()>0){
+        if (this->GetActions()->Exists("CheckScore") && this->GetActions()->Get("CheckScore")->IsActive() && allPlayers.size()>0){
             std::cout << "Score: " << allPlayers.at(player->ownID).killCount << "\n";
 		}
 
 
-		if (this->actionList.Exists("Exit") && this->actionList.Get("Exit")->IsActive()){
+		if (this->GetActions()->Exists("Exit") && this->GetActions()->Get("Exit")->IsActive()){
 			this->window->close(); 
 			exit(0);
 		}
 
-        if (this->actionList.Exists("UseItem") && (this->actionList.Get("UseItem")->IsActive() ||
-                                                   this->actionList.Get("UseItem Alt")->IsActive())){
+        if (this->GetActions()->Exists("UseItem") && (this->GetActions()->Get("UseItem")->IsActive() ||
+                                                   this->GetActions()->Get("UseItem Alt")->IsActive())){
             if(!allPlayers.at(this->player->ownID).item == PowerUp::NO_POWERUP){
 
                 int packetID = 10;
@@ -138,6 +142,149 @@ void Game::Update(sf::Time elapsed, MB::Types::EventList *events)
                 allPlayers.at(this->player->ownID).item = PowerUp::NO_POWERUP;
             }
 		}
+
+
+        
+		if (this->GetActions()->Exists("Attack") && this->GetActions()->Get("Attack")->IsActive()){
+            // TODO: Trigger attack animation
+            
+            // Send player made attack packet with weapon hitbox
+            int packetID = 6;
+            sf::Packet packet;
+            sf::FloatRect rectangle = this->player->weaponHitBox.getGlobalBounds();
+            sf::FloatRect revisedRectangle = rectangle;
+            float thisRot = this->player->GetDirection();
+            sf::Vector2i dirVect = this->player->GetDirectionVector();
+
+            if(dirVect.x != 0){
+                revisedRectangle.left += ((-dirVect.x)*(revisedRectangle.width*3));
+            }
+
+            if(dirVect.y != 0){
+                revisedRectangle.top += ((-dirVect.y)*(revisedRectangle.height*3));
+            }
+
+            //if(thisRot == 0.0f || thisRot == 45.0f || thisRot == 315.0f){ // North facing, so change to south
+            //    revisedRectangle.height *= 20;
+            //}
+            //if(thisRot == 135 || thisRot == 180 || thisRot == 225){ // South facing, so change to north
+            //    revisedRectangle.top -= 20*rectangle.height;
+            //    //revisedRectangle.height *= 20; // May not need
+            //}
+            //if(thisRot == 45 || thisRot == 90 || thisRot == 135){ // East facing, so change to west
+            //    revisedRectangle.left -= 20*rectangle.width;
+            //    //revisedRectangle.width *=20; // May not need
+            //}
+            //if(thisRot == 225 || thisRot == 270 || thisRot == 315){ // West facing, so change to east
+            //    revisedRectangle.width *= 20;
+            //}
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            this->revisedRectangleGlobal = revisedRectangle;
+
+   int otherPlayer;
+                if(this->player->ownID == 0) { otherPlayer = 1; } else { otherPlayer = 0; }
+
+
+            sf::Sprite revisedSprite;
+            
+            revisedSprite.setTextureRect(sf::IntRect(0,0,64,64));
+            //revisedSprite.setRotation(allPlayers.at(otherPlayer).playerSprite.getRotation());
+            revisedSprite.setPosition(revisedRectangle.left ,revisedRectangle.top ); 
+                    // NOT SURE IF THIS POSITION WILL BE CHANGED AFTER THE ORIGIN IS APPLIED, PROBABLY WILL, BUT NOT DESIRED
+                
+                //sf::Transform transform = revisedSprite.getTransform();
+                //sf::Vector2f pos = transform.transformPoint();
+                
+                // convert playerRect origin to a local co-ordinate of revisedsprite
+                // revisedsprite.left - origin.x, revised sprite.top - origin.y 
+             
+                sf::Vector2f revisedOrigin(revisedSprite.getGlobalBounds().left - allPlayers.at(otherPlayer).position.x, revisedSprite.getGlobalBounds().top-allPlayers.at(otherPlayer).position.y);
+               
+                // after origin is set, the revised rectangle centre is ....
+
+                
+                // revisedOrigin -= width ; -= height?
+            
+              
+                
+                revisedSprite.setOrigin(revisedOrigin);
+            
+                revisedSprite.setRotation(360-allPlayers.at(otherPlayer).direction);
+                
+                 sf::Transform transform = revisedSprite.getTransform();
+                 //transform.set
+                 //transform.rotate();
+                sf::Vector2f pos =  transform.transformPoint(0,0);
+
+                //revisedSprite.setPosition(
+                revisedRectangle.left = pos.x;
+                revisedRectangle.top = pos.y;
+              
+
+                this->revisedRectangleGlobal = revisedRectangle;
+
+float playerRot = allPlayers.at(otherPlayer).direction;
+float rotateBy = 360-allPlayers.at(otherPlayer).direction;
+
+  sf::Vector2f pos1 = revisedSprite.getPosition();
+
+
+
+   // revisedSprite.rotate(rotateBy);
+  sf::Vector2f pos2 = revisedSprite.getPosition();
+//revisedSprite.setOrigin(0,0);
+//revisedSprite.setPosition(revisedSprite.getPosition().x + revisedOrigin.x, revisedSprite.getPosition().y + revisedOrigin.y); 
+
+
+
+    float revisedRot = revisedSprite.getRotation();
+
+ sf::FloatRect rect1 = revisedSprite.getGlobalBounds();
+   
+
+    // set origin back to normal before getting position etc.
+//    revisedSprite.setOrigin(22,22);
+   
+    sf::FloatRect rect2 = revisedSprite.getGlobalBounds();
+
+
+               this->revisedSpriteGlobal = revisedSprite;
+
+                // probably need to update position here (with offset to origin)
+                    
+                // position before changing orientation/origin
+          //  revisedRectangle.left = revisedSprite.getGlobalBounds().left;
+          //      revisedRectangle.top = revisedSprite.getGlobalBounds().top;
+
+
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+            // if contains N - posy -=20*height
+            // if contains S - height *= 20
+            // if contains E - width *= 20
+            // if contains W - posx -=20*width
+
+//  int weaponHitBox.x         - rectangle hitbox for the player's weapon.
+//  int weaponHitBox.y
+//  int weaponHitBox.width
+//  int weaponHitBox.height
+//  int revisedHitBox.x
+//  int revisedHitBox.y
+
+            packet << packetID << this->player->ownID << rectangle.left << rectangle.top << rectangle.width << rectangle.height << revisedRectangle.left << revisedRectangle.top << revisedRectangle.width << revisedRectangle.height;
+            WorkQueues::packetsToSend().push(packet);
+		}
+
                  
 	//}
      
@@ -306,8 +453,50 @@ void Game::Draw()
 
    // Loop through other players and draw them
     for(int i=0; i < allPlayers.size();i++){
+     
+        // Draw player if not self
         if(i != this->player->ownID){
             this->DrawSprite(allPlayers.at(i).playerSprite);
+         // Draw a hitbox for the player
+         sf::RectangleShape rectangle;
+         rectangle.setOutlineColor(sf::Color::Green);
+         rectangle.setFillColor(sf::Color::Transparent);
+         rectangle.setOutlineThickness(3);
+         rectangle.setSize(sf::Vector2f(46,46));
+         rectangle.setOrigin(23,23);         
+         rectangle.setPosition(allPlayers.at(i).position);
+         this->DrawSprite(rectangle);
+
+         // Draw the revised rectangle
+          sf::RectangleShape rectangle2;
+          rectangle2.setOutlineColor(sf::Color::Blue);
+         rectangle2.setFillColor(sf::Color::Transparent);
+         rectangle2.setOutlineThickness(3);
+         rectangle2.setSize(sf::Vector2f(this->revisedRectangleGlobal.width,this->revisedRectangleGlobal.height));
+                  
+         rectangle2.setPosition(this->revisedRectangleGlobal.left,this->revisedRectangleGlobal.top);
+         this->DrawSprite(rectangle2);
+
+         //// Draw the rotated sprite
+         sf::RectangleShape rectangle3;
+         rectangle3.setOutlineColor(sf::Color::Black);
+         rectangle3.setFillColor(sf::Color::Transparent);
+         rectangle3.setOutlineThickness(3);
+         rectangle3.setSize(sf::Vector2f(50,50));
+                  
+         rectangle3.setPosition(this->revisedSpriteGlobal.getGlobalBounds().left,this->revisedSpriteGlobal.getGlobalBounds().top);
+         this->DrawSprite(rectangle3);
+
+         
+         //// Draw the rotated sprite
+         //sf::RectangleShape rectangle4;
+         //rectangle4.setOutlineColor(sf::Color::White);
+         //rectangle4.setFillColor(sf::Color::Transparent);
+         //rectangle4.setOutlineThickness(3);
+         //rectangle4.setSize(sf::Vector2f(40,40));
+         //rectangle4.setOrigin(20,20);
+         //rectangle4.setPosition(this->revisedSpriteGlobal.or);
+         //this->DrawSprite(rectangle3);
         }
     }
 

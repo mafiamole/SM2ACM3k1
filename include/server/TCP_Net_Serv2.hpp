@@ -50,7 +50,8 @@ using namespace std;
     int currPowerUp;
     int specBonus;
     sf::Clock timeOfLastContactDamage; // This is the time since last contact damage (e.g. spikes) and is the minimum time ( before adding grace period) before can be contact_damaged again
-    sf::Vector2f position;
+    sf::Vector2f origin_position;
+    sf::Vector2f topLeft_position;
     float dirFacing;
     sf::TcpSocket* clientSocket;
     
@@ -86,7 +87,7 @@ protected:
   void SetPlayerRandomPosition(std::vector<ClientInformation>* allClients, int playerIndex, MapLoader* mapLoader, std::vector<Tile> mapTiles, CRandomMersenne rand);
   void DisconnectClient(sf::TcpSocket *client);
   void ReceiveData(int index, ClientInformation* client);
-  void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition, float currDirectionFacing);
+  void SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f origin_playerPosition, float currDirectionFacing);
   void PlayerDiedUpdateAll(int index, CRandomMersenne rand);
   void SetMap(Maps map);
   bool ReadHealth(ClientInformation* player, HealthBits healthPosition);

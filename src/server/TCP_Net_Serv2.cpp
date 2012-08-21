@@ -82,11 +82,14 @@ void TCP_Net_Serv2::Launch()
         // Check for collisions between players with items on board
         int i = 0;
 
+
+
         while(i < itemsOnMap.size()){
             bool removedSomething = false;
             for(int j=0; j<this->allClients.size();j++){
                 if(i < itemsOnMap.size()){
-                    if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).position)){
+                    sf::Vector2f topLeft = allClients.at(j).origin_position;
+                    if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).topLeft_position)){
                         // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
                         int packetID = 7;
                         bool isWeapon = false;
@@ -119,8 +122,8 @@ void TCP_Net_Serv2::Launch()
         CRandomMersenne rand((int)time(0));
 
         // Check if a player is colliding with a contact_damage tile (e.g. spikes), check if the time since last contact_damage is after the grace period, then update health / send packet
-        for(int j=0;j<allClients.size();j++){           
-            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).position,currMapObj,TileTypes::CONTACT_DAMAGE)){
+        for(int j=0;j<allClients.size();j++){      
+            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).topLeft_position,currMapObj,TileTypes::CONTACT_DAMAGE)){
                 if(allClients.at(j).timeOfLastContactDamage.getElapsedTime() > sf::milliseconds(1000)){ //Time before more hurting on spikies can occur (in milliseconds)
                    //std::cout << "Player " << j << " took damage.\n";
                    // Player needs to lose a random health block. This assumes that there IS some health to loose, otherwise infinite loop.
@@ -181,7 +184,7 @@ void TCP_Net_Serv2::Launch()
 
                // Check not spawing on a player
                for(int j=0;j<allClients.size();j++){
-                   if(mapLoader.PlayersColliding(allClients.at(j).position,i.position)){ playerColliding = true;}
+                   if(mapLoader.PlayersColliding(allClients.at(j).topLeft_position,i.position)){ playerColliding = true;}
                }
 
                // Check not spawing on another item
@@ -216,7 +219,7 @@ void TCP_Net_Serv2::Launch()
 }
 
 
-void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f playerPosition,float currDirectionFacing)
+void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformation* client, sf::Vector2f origin_playerPosition,float currDirectionFacing)
 {
     for (std::vector<ClientInformation>::iterator it2 = this->allClients.begin(); it2 != this->allClients.end(); ++it2)
     {
@@ -232,13 +235,15 @@ void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformatio
             int newPacketID = 3;
             sf::Packet newPacket;
 
-            newPacket << newPacketID << playerPosition.x << playerPosition.y << currDirectionFacing << index;
+            newPacket << newPacketID << origin_playerPosition.x << origin_playerPosition.y << currDirectionFacing << index;
 
             sf::Socket::Status status = (client2.clientSocket)->send(newPacket);
         }else{
                 // Update the player position/dir for this client
                 client2.dirFacing = currDirectionFacing;
-                client2.position = playerPosition;
+                client2.topLeft_position = client2.origin_position = origin_playerPosition;
+                client2.topLeft_position.x -= PLAYER_WIDTH;
+                client2.topLeft_position.y -= PLAYER_HEIGHT;
         }
 
 
@@ -269,7 +274,7 @@ void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand){
     // Create updated position packet
     packetID = 3;
     sf::Packet newPacket;
-    newPacket << packetID << allClients.at(index).position.x << allClients.at(index).position.y << allClients.at(index).dirFacing << index;
+    newPacket << packetID << allClients.at(index).origin_position.x << allClients.at(index).origin_position.y << allClients.at(index).dirFacing << index;
 
     // Create updated health packet
     packetID = 4;
@@ -303,10 +308,84 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
         {
         case 1:
         {
-            sf::Vector2f playerPosition;
+            sf::Vector2f origin_playerPosition;
             float playerDirection;
-            packet >> playerPosition.x >> playerPosition.y >> playerDirection;
-            SendPositionToAllExcludingSender(index,client,playerPosition,playerDirection);
+            packet >> origin_playerPosition.x >> origin_playerPosition.y >> playerDirection;
+            SendPositionToAllExcludingSender(index,client,origin_playerPosition,playerDirection);
+            break;
+        }
+        case 6: // player has performed an attack, need to check for collision with player and update health / all clients so they can animate
+        {
+            int playerID;
+            sf::FloatRect rectangle;
+            sf::FloatRect revisedRectangle;
+            sf::Sprite revisedSprite;
+            
+            packet >> playerID >> rectangle.left >> rectangle.top >> rectangle.width >> rectangle.height >> revisedRectangle.left >> revisedRectangle.top >> revisedRectangle.width >> revisedRectangle.height;
+
+            // Create packet to send to all players saying someone attacked and send 
+
+            
+            // Check if this hitbox is colliding with a player, if so check where the hitbox is relative to the other player to determine which health block to take.
+            // -- if was colliding and health was taken (it wasn't 0 before), see if player is now dead and update as required.
+            
+            for(int i=0;i<allClients.size();i++){
+            if(i!=playerID){
+                // Giving the player that was 'hit' a hitbox 46x46 around its centre, avoids the weird uneven shape and facing direction.
+                sf::FloatRect playerRect(allClients.at(i).origin_position.x - 23, allClients.at(i).origin_position.y - 23, 46, 46);
+                
+
+                // If rectangle colliding with player,
+                if(playerRect.intersects(rectangle)){
+                    // set player sprite size and origin, rotate -current rotation.
+
+
+
+
+                    revisedSprite.setPosition(revisedRectangle.left,revisedRectangle.top);
+                    // NOT SURE IF THIS POSITION WILL BE CHANGED AFTER THE ORIGIN IS APPLIED, PROBABLY WILL, BUT NOT DESIRED
+                
+                sf::Transform transform = revisedSprite.getTransform();
+                //sf::Vector2f pos = transform.transformPoint();
+                
+                // convert playerRect origin to a local co-ordinate of revisedsprite
+                // revisedsprite.left - origin.x, revised sprite.top - origin.y 
+                sf::Vector2f revisedOrigin(revisedSprite.getGlobalBounds().left-allClients.at(i).origin_position.x,revisedSprite.getGlobalBounds().top - allClients.at(i).origin_position.y);
+               
+                // after origin is set, the revised rectangle centre is ....
+
+
+
+               revisedSprite.setOrigin(revisedOrigin);
+                 revisedSprite.rotate(-allClients.at(i).dirFacing);
+
+
+                // probably need to update position here (with offset to origin)
+                    
+                // position before changing orientation/origin
+            revisedRectangle.left = revisedSprite.getGlobalBounds().left;
+                revisedRectangle.top = revisedSprite.getGlobalBounds().top;
+
+
+         
+
+
+               
+
+                    // set revised sprite pos, and its origin to centre of player being hit
+                    // rotate negative to the current player rotation
+
+                // temp rotate rectangle.
+
+                    int side = mapLoader.GetTileRelativePosition(sf::IntRect(revisedRectangle),sf::IntRect(playerRect));
+                    // Translate hit side to side of player
+                    std::cout << "hitside " << side << "\n";
+                    //if( = )
+                }               
+            } 
+            }
+
+
             break;
         }
         case 10: // Player has used item, update internal info, and process if needed, then send out same packet to all other clients.
@@ -338,6 +417,7 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
 
 
 }
+
 
 void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
 {
@@ -438,8 +518,8 @@ void TCP_Net_Serv2::WaitForClients(void)
     {     
         // Loop through all clients and fill arrays to send in the packets
         IDsForWeapons[index] = (*itr).currWeapon;
-        positionX[index] = (*itr).position.x;
-        positionY[index] = (*itr).position.y;
+        positionX[index] = (*itr).origin_position.x;
+        positionY[index] = (*itr).origin_position.y;
         index++;
     }
 
@@ -471,12 +551,14 @@ void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allC
         // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
         for(int i=0;i<allClients->size();i++){
             if(i!=playerIndex){
-                if(mapLoader->PlayersColliding(allClients->at(i).position,tmpTile.position)){ playerColliding = true;}
+                if(mapLoader->PlayersColliding(allClients->at(i).topLeft_position,tmpTile.position)){ playerColliding = true;}
             }                                            
         }
     }while(playerColliding || !mapLoader->TileOnFloor(&tmpTile, mapTiles, true));
 
-    allClients->at(playerIndex).position = tmpTile.position;
+    allClients->at(playerIndex).origin_position = allClients->at(playerIndex).topLeft_position = tmpTile.position;
+    allClients->at(playerIndex).origin_position.x += PLAYER_WIDTH;
+    allClients->at(playerIndex).origin_position.y += PLAYER_HEIGHT;
 }
 
 

@@ -1,10 +1,10 @@
 #include <client/HUD.h>
 
-HUD::HUD(MB::Game* game, std::string file) : MB::Lua::LuaComponent(game,file)
+HUD::HUD(MB::Game* game, std::string file) : MB::Lua::Component(file, game)
 {
   
   //getComponentFromUserData<HUD>(this->script->GetState());
-  setUserData<HUD>(this->script->GetState(),"HUD_OBJ",this);
+  setUserData<HUD>(this->script.GetState(),"HUD_OBJ",this);
   //this->script->AddLibrary("Test",);
 }
 
@@ -14,9 +14,9 @@ HUD::~HUD()
   
 }
 
-void HUD::Update(sf::Time elapsed, MB::Types::EventList* events)
+void HUD::Update(sf::Time elapsed, MB::EventList* events)
 {
- MB::Lua::LuaComponent::Update(elapsed,events); 
+ MB::Lua::Component::Update(elapsed,events); 
 }
 
 

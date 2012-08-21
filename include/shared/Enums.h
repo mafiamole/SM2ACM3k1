@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
+const int PLAYER_WIDTH = 63;
+const int PLAYER_HEIGHT = 38;
+
 enum Weapons
 {        
     NO_WEAPON,

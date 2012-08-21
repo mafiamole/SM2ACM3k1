@@ -4,7 +4,7 @@
 #include <client/Players/PlayerInformation.hpp>
 #include "UI/UI_Elements.hpp"
 
-class HUD : public MB::Lua::LuaComponent
+class HUD : public MB::Lua::Component
 {
 protected:
   PlayerDataList 	playersData;
@@ -22,7 +22,7 @@ public:
   
   
   
-  void Update(sf::Time elapsed, MB::Types::EventList* events);
+  void Update(sf::Time elapsed, MB::EventList* events);
   
   void Draw();
   

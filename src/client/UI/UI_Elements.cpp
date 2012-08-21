@@ -23,7 +23,7 @@ void UI_Element::Set_Position(sf::Vector2f position)
   this->position = position;
 }
 
-bool UI_Element::Activated(MB::Types::EventList* events)
+bool UI_Element::Activated(MB::EventList* events)
 {
   return false;
 }
@@ -49,10 +49,10 @@ UI_Button::~UI_Button()
   
 }
 
-bool UI_Button::Activated(MB::Types::EventList* events)
+bool UI_Button::Activated(MB::EventList* events)
 {
 
-  MB::Types::EventList::iterator eventItr;
+  MB::EventList::iterator eventItr;
   
  // std::cout << events->size() << std::endl;
   
@@ -109,7 +109,7 @@ UI_Radio::~UI_Radio()
   
 }
 
-bool UI_Radio::Activated(MB::Types::EventList* events)
+bool UI_Radio::Activated(MB::EventList* events)
 {
   return false;
 }
@@ -133,7 +133,7 @@ UI_TextBox::~UI_TextBox()
   
 }
 
-bool UI_TextBox::Activated(MB::Types::EventList* events)
+bool UI_TextBox::Activated(MB::EventList* events)
 {
   return false;
 }

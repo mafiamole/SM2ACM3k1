@@ -17,6 +17,7 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     this->playerSprite.setOrigin(31,19);
     this->playerSprite.setPosition(531,519);
 
+    UpdateWeaponHitBox();
 }
 
 void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
@@ -74,15 +75,16 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
     origRect.left = origPos.x;
     origRect.width = origRect.height = 32;
 
-
+    // Slight offset correction (from origin)
+    origRect.top -= 16;
+    origRect.left -= 16;
     
     sf::Vector2f correctedVector = gameMap->collisionDetect(origRect, velocity, direction ) ;
    
     correctedVector.x += origPos.x;
     correctedVector.y += origPos.y;
-      
+    
     this->playerSprite.setPosition(correctedVector);
- 
 
     // Set sprite orientation based on dir
 	float rotation = 0.0f;
@@ -113,6 +115,10 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 
 
 	if(moved){		
+        // Update the local copy of weapon hitbox only if moved
+        UpdateWeaponHitBox();
+        this->directionVector = sf::Vector2i(dirX,dirY);
+        // Send Packet
 		Packets packets;
 		WorkQueues::packetsToSend().push(packets.CreateSendThisPlayerPos(playerSprite.getPosition(),playerSprite.getRotation()));
 
@@ -123,10 +129,12 @@ void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
 }
 
 sf::IntRect Player::GetHitBox(){ 
-    return sf::IntRect(this->playerSprite.getGlobalBounds().left + 15,
-                       this->playerSprite.getGlobalBounds().top + 3,
+    return sf::IntRect(this->playerSprite.getPosition().x - 15,
+                       this->playerSprite.getPosition().y - 3, 32, 32);
+    //return sf::IntRect(this->playerSprite.getGlobalBounds().left + 15,
+                       /*this->playerSprite.getGlobalBounds().top + 3,
                        this->playerSprite.getGlobalBounds().width - 31,
-                       this->playerSprite.getGlobalBounds().height - 6);   
+                       this->playerSprite.getGlobalBounds().height - 6);   */
 }
 
 sf::Vector2f Player::HitBoxPosToBoundingPos(sf::Vector2f pos){
@@ -134,12 +142,52 @@ sf::Vector2f Player::HitBoxPosToBoundingPos(sf::Vector2f pos){
 
 }
 
+sf::Vector2i Player::GetDirectionVector(){
+    return this->directionVector;
+}
+
 void Player::Draw()
 {
- 
-  this->game->DrawSprite(this->playerSprite);
+
+this->game->DrawSprite(this->playerSprite);
+
+  // Draw a hitbox for the weapon     
+  this->game->DrawSprite(this->weaponHitBox);
+
+  
   MB::GameComponent::Draw();
   
+}
+
+void Player::UpdateWeaponHitBox(){
+    sf::RectangleShape rectangle;
+       
+    rectangle.setOutlineColor(sf::Color::Magenta);
+    rectangle.setFillColor(sf::Color::Transparent);
+    rectangle.setOutlineThickness(3);
+    int playerHeight = this->GetTextureRect().height;
+
+    switch(this->bonus){
+    case Bonus::SHORT:
+        {          
+            rectangle.setSize(sf::Vector2f(this->GetTextureRect().width, playerHeight*1.2));
+            rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );
+            rectangle.setOrigin(31, rectangle.getLocalBounds().height - 19);
+            break;
+        }
+    case Bonus::LONG:
+        {
+            rectangle.setSize(sf::Vector2f(this->GetTextureRect().width-20, playerHeight*2.2));
+            rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );
+            rectangle.setOrigin(21, rectangle.getLocalBounds().height - 19);
+            break;
+        }
+    }
+       
+   // Try and set origin to about players head center // 
+ 
+   rectangle.setRotation(this->playerSprite.getRotation());
+   this->weaponHitBox = rectangle;
 }
 
 sf::Vector2f Player::GetPosition(){

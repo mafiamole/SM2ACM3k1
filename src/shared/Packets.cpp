@@ -58,11 +58,22 @@
 //  [Dev-Status]                     - Done
 
 //  --------------------------------------------
-//  client to server (serv checks if a coll is made with another player) && server to client (send back out to all but orig sender)
+//  client to server (serv checks if a coll is made with another player)
 //  int packetID        ==        6  - player has made an attack
-//  playerID
+//  int playerID
+//  int weaponHitBox.x         - rectangle hitbox for the player's weapon.
+//  int weaponHitBox.y
+//  int weaponHitBox.width
+//  int weaponHitBox.height
+//  int revisedHitBox.x
+//  int revisedHitBox.y
+//  float reversedWeaponHitBoxRotation - this contains the hitbox rotation (direction) of attack for the player, but reversed to point the opposite way.
 
-//  [Dev-Status]                     - Not Started
+//  [Dev-Status]                     - Working on, server will increase weapon hitbox by 20* size in the opposite direction, determine which side this box is on compared to player (if hitting)
+//                                      then work out from hit players current orientation which side that is to deal with.
+//         Might be worth calculating the start position of the new box on client and just sending that instead of reversed rotation. Server will know width from hitbox.width*20
+
+
 
 //  --------------------------------------------
 //  server to client
