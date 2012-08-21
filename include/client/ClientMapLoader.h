@@ -10,10 +10,10 @@
 #include <shared/Enums.h>
 #include <client/Map/Tile.hpp>
 
-static class ClientMapLoader {
+class ClientMapLoader {
 public:
 	ClientMapLoader();
-    static std::vector<ClientTile*> PopulateClientTileSprites(std::vector<Tile>* tiles);
+  static std::vector<ClientTile*> PopulateClientTileSprites(std::vector< Tile > tiles);
 };
 
 

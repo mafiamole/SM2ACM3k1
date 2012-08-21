@@ -33,17 +33,17 @@ std::vector<Tile> MapLoader::ReadFile(std::string path)  {
     case 'F':
 	
      //FLOOR
-     tempTile.tileType = TileTypes::FLOOR;
+     tempTile.tileType = FLOOR;
 	 tmpVect.push_back(tempTile);
      break;
     case 'W':
      //WALL
-     tempTile.tileType = TileTypes::WALL;
+     tempTile.tileType = WALL;
 	 tmpVect.push_back(tempTile);
      break;
     case 'S':
      //SPIKE
-     tempTile.tileType = TileTypes::CONTACT_DAMAGE;
+     tempTile.tileType = CONTACT_DAMAGE;
 	 tmpVect.push_back(tempTile);
     default:
 
@@ -87,7 +87,7 @@ bool MapLoader::TileOnFloor(Tile* tile, std::vector<Tile> mapTiles, bool isPlaye
 
   for(it = mapTiles.begin(); it != mapTiles.end();it++) {     
     // If the map tile is collidable, and they intersect, hasHitSomething = true
-    if(((*it).tileType == TileTypes::CONTACT_DAMAGE) || ((*it).tileType == TileTypes::WALL)){
+    if(((*it).tileType == CONTACT_DAMAGE) || ((*it).tileType == WALL)){
         rect2.left = (*it).position.x;
         rect2.top = (*it).position.y;
         if(rect.intersects(rect2)){ return false; }
@@ -113,14 +113,14 @@ bool MapLoader::PlayersColliding(sf::Vector2f player1Pos, sf::Vector2f player2Po
 }
 
 
-bool MapLoader::TilesColliding(Tile* tile1, sf::Vector2f tile2Pos)
+bool MapLoader::TilesColliding(Tile tile1, sf::Vector2f tile2Pos)
 {
     // TODO: Not much use with colliding against players as they should have a diff hitbox
     sf::IntRect rect1;
     rect1.width = rect1.height = 32;
     sf::IntRect rect2 = rect1;
-    rect1.left = tile1->position.x;
-    rect1.top = tile1->position.y;
+    rect1.left = tile1.position.x;
+    rect1.top = tile1.position.y;
     rect2.left = tile2Pos.x;
     rect2.top = tile2Pos.y;
 

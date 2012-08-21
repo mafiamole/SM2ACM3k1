@@ -20,7 +20,7 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     UpdateWeaponHitBox();
 }
 
-void Player::Update(sf::Time elapsed, MB::Types::EventList* events)
+void Player::Update(sf::Time elapsed, MB::EventList* events)
 {
     MB::GameComponent::Update(elapsed, events);
 
@@ -149,10 +149,10 @@ sf::Vector2i Player::GetDirectionVector(){
 void Player::Draw()
 {
 
-this->game->DrawSprite(this->playerSprite);
+  this->game->DrawAsset(this->playerSprite);
 
   // Draw a hitbox for the weapon     
-  this->game->DrawSprite(this->weaponHitBox);
+  this->game->DrawAsset(this->weaponHitBox);
 
   
   MB::GameComponent::Draw();
@@ -168,14 +168,14 @@ void Player::UpdateWeaponHitBox(){
     int playerHeight = this->GetTextureRect().height;
 
     switch(this->bonus){
-    case Bonus::SHORT:
+    case SHORT:
         {          
             rectangle.setSize(sf::Vector2f(this->GetTextureRect().width, playerHeight*1.2));
             rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );
             rectangle.setOrigin(31, rectangle.getLocalBounds().height - 19);
             break;
         }
-    case Bonus::LONG:
+    case LONG:
         {
             rectangle.setSize(sf::Vector2f(this->GetTextureRect().width-20, playerHeight*2.2));
             rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );

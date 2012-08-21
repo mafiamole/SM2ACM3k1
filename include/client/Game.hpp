@@ -21,12 +21,12 @@ protected:
    
    bool hasFocus;
 public:
-	Game(std::string windowName);
+	Game(std::string windowName, int argc, char** argv);
 	~Game(void);
 	std::string pathPrefix;
 	virtual void Draw(void);
 	virtual void Update(sf::Time elapsed, MB::EventList *events);
-	virtual int Run(int argc,char **argv);
+	virtual int Run();
 	Player* GetPlayer();
 	bool HasFocus();
 	std::vector<PlayerData> allPlayers;

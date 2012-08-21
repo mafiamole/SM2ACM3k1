@@ -2,9 +2,9 @@
 
 int main(int argc, char **argv)
 {
-	Game game("The Game");
+	Game game("The Game",argc,argv);
 	
-	game.Run(argc,argv);
+	game.Run();
 	
 return 0;
 }

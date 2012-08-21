@@ -55,10 +55,10 @@ int Player_Interface_Reg::GetHP(lua_State* L)
   
   PlayerData playerData = hud->PlayerInformation(Player);
 
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::FRONT)); // 1));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::BACK));  // 2));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::LEFT));  // 3));//
-  lua_pushboolean(L,playerData.ReadHealth(&playerData, HealthBits::RIGHT)); // 4));//  
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, FRONT)); // 1));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, BACK));  // 2));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, LEFT));  // 3));//
+  lua_pushboolean(L,playerData.ReadHealth(&playerData, RIGHT)); // 4));//  
 
   return 4;
 

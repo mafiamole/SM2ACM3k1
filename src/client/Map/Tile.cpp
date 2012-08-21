@@ -1,5 +1,6 @@
 #include <client/Map/Tile.hpp>
 #include <iostream>
+#include <cmath>
 /**
  * 
  * 

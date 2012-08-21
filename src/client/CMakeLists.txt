@@ -47,7 +47,7 @@ add_executable(client ${HEADERS} ${SOURCES} )
 
 include_directories (${MoleBox_INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIR} )
 
-target_link_libraries( client ${MoleBox_LIBRARIES} ${LUA_LIBRARIES} )
+target_link_libraries( client ${LIBRARIES} )
 
 
 add_subdirectory(Players)

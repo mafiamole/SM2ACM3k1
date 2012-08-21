@@ -89,17 +89,17 @@ void TCP_Net_Serv2::Launch()
             for(int j=0; j<this->allClients.size();j++){
                 if(i < itemsOnMap.size()){
                     sf::Vector2f topLeft = allClients.at(j).origin_position;
-                    if(mapLoader.TilesColliding(&itemsOnMap.at(i), allClients.at(j).topLeft_position)){
+                    if(mapLoader.TilesColliding(itemsOnMap.at(i), allClients.at(j).topLeft_position)){
                         // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
                         int packetID = 7;
                         bool isWeapon = false;
 
                         switch(itemsOnMap.at(i).tileType){
-                        case TileTypes::WEAPON:
+                        case WEAPON:
                             allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
                             isWeapon = true;
                             break;
-                        case TileTypes::ITEM:
+                        case ITEM:
                             allClients.at(j).currPowerUp = itemsOnMap.at(i).ItemID;
                             break;
                         }
@@ -123,7 +123,7 @@ void TCP_Net_Serv2::Launch()
 
         // Check if a player is colliding with a contact_damage tile (e.g. spikes), check if the time since last contact_damage is after the grace period, then update health / send packet
         for(int j=0;j<allClients.size();j++){      
-            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).topLeft_position,currMapObj,TileTypes::CONTACT_DAMAGE)){
+            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).topLeft_position,currMapObj,CONTACT_DAMAGE)){
                 if(allClients.at(j).timeOfLastContactDamage.getElapsedTime() > sf::milliseconds(1000)){ //Time before more hurting on spikies can occur (in milliseconds)
                    //std::cout << "Player " << j << " took damage.\n";
                    // Player needs to lose a random health block. This assumes that there IS some health to loose, otherwise infinite loop.
@@ -171,8 +171,8 @@ void TCP_Net_Serv2::Launch()
             for(int j=0;j<4;j++){
 
             Item i;
-            i.ItemID = PowerUp::REPEL_NPC;
-            i.tileType = TileTypes::ITEM;
+            i.ItemID = REPEL_NPC;
+            i.tileType = ITEM;
             
             float x, y; 
             bool playerColliding;
@@ -190,7 +190,7 @@ void TCP_Net_Serv2::Launch()
                // Check not spawing on another item
                for(int k=0;playerColliding == false && k<itemsOnMap.size();k++){
                 // if(j!=index){
-                   if(mapLoader.TilesColliding(&(Tile)itemsOnMap.at(k),i.position)){ playerColliding = true;}
+                   if(mapLoader.TilesColliding((Tile)itemsOnMap.at(k),i.position)){ playerColliding = true;}
                //  }                                            
                }
 
@@ -262,7 +262,7 @@ void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand){
     sf::Packet itemPacket;
     itemPacket << packetID << index << isWeapon << allClients.at(index).specBonus << itemIndex;
 
-    allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;                           
+    allClients.at(index).currPowerUp = NO_POWERUP;                           
     allClients.at(index).currWeapon = allClients.at(index).specBonus;
             
     // Update Kill count + create packet
@@ -394,7 +394,7 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
                packet >> playerID;
                sf::Packet newPacket;
                newPacket << packetID << playerID;
-               allClients.at(playerID).currPowerUp = PowerUp::NO_POWERUP;
+               allClients.at(playerID).currPowerUp = NO_POWERUP;
 
                for(int i=0; i<allClients.size();i++){
                     if(i != playerID){
@@ -450,7 +450,7 @@ void TCP_Net_Serv2::WaitForClients(void)
     
     // Set which map we will be using.
     std::cout << "Setting map <Colosseum> for round" << std::endl;
-    SetMap(Maps::COLOSSEUM);
+    SetMap(COLOSSEUM);
 
     while ((this->clientCount < this->maxClients) || (this->readyClients != this->maxClients))
     {
@@ -486,7 +486,7 @@ void TCP_Net_Serv2::WaitForClients(void)
                                     
                                     allClients.at(index).specBonus = bonusID;
                                     allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
-                                    allClients.at(index).currPowerUp = PowerUp::NO_POWERUP;
+                                    allClients.at(index).currPowerUp = NO_POWERUP;
                                     allClients.at(index).killCount = 0;
                                     allClients.at(index).dirFacing = 0.0f;
                                     allClients.at(index).timeOfLastContactDamage.restart();

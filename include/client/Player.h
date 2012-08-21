@@ -8,7 +8,7 @@
 #include <client/WorkQueues.h>
 #include <client/Players/PlayerInformation.hpp>
 #include <shared/Packets.h>
-
+#include <MoleBox/Actions/Action.hpp>
 
 class Game;
 class Component;
@@ -17,7 +17,7 @@ class Player : public MB::GameComponent
 {
 private:
     sf::Sprite playerSprite;
-    MB::Action * up,*down; 
+    MB::Actions::Action * up,*down; 
     Map* gameMap;
     sf::Vector2i directionVector;
 public:

@@ -4,7 +4,7 @@ HUD::HUD(MB::Game* game, std::string file) : MB::Lua::Component(file, game)
 {
   
   //getComponentFromUserData<HUD>(this->script->GetState());
-  setUserData<HUD>(this->script.GetState(),"HUD_OBJ",this);
+  setUserData<HUD>(this->script->GetState(),"HUD_OBJ",this);
   //this->script->AddLibrary("Test",);
 }
 

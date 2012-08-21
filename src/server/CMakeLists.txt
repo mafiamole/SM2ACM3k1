@@ -20,4 +20,4 @@ set (SOURCES TCP_Net_Serv2.cpp
 
 add_executable(server ${HEADERS} ${SOURCES} )
 
-target_link_libraries( server ${MoleBox_LIBRARIES})
+target_link_libraries( server ${LIBRARIES})

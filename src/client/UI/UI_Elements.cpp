@@ -1,5 +1,7 @@
 #include <client/UI/UI_Elements.hpp>
 #include <MoleBox/Content/Content.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <iostream>
 /**
  * 
  * 

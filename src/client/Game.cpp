@@ -1,4 +1,5 @@
 #include <client/Game.hpp>
+#include <MoleBox/Content/Content.hpp>
 #include <MoleBox/Actions/Keyboard.hpp>
 #include <MoleBox/Actions/Mouse.hpp>
 #include <MoleBox/Lua/Component.hpp>
@@ -14,14 +15,12 @@
 
 Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
-Game::Game(std::string windowName) : MB::Game(windowName)
+Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,argc,argv)
 {
-
-
   //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
   this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
-  
-  mapObj = Map(this->window, ClientMapLoader::PopulateClientTileSprites(&mapLoader.ReadFile("map.txt")));
+
+  mapObj = Map(this->window, ClientMapLoader::PopulateClientTileSprites(mapLoader.ReadFile("map.txt")));
 
   this->actions.Register("Exit",new MB::Actions::Keyboard(sf::Keyboard::Escape));
   this->actions.Register("Player Move Up",new MB::Actions::Keyboard(sf::Keyboard::W));
@@ -53,7 +52,7 @@ Game::Game(std::string windowName) : MB::Game(windowName)
 
   // Bonus is currently selected randomly, need to change this later
   Packets packets;
-  this->player->bonus = Bonus::LONG;//;(Bonus)rand.IRandom(1,3);
+  this->player->bonus = LONG;//;(Bonus)rand.IRandom(1,3);
   WorkQueues::packetsToSend().push(packets.CreateInitThisClient(this->player->bonus));
 
 }
@@ -124,7 +123,7 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
 
         if (this->GetActions()->Exists("UseItem") && (this->GetActions()->Get("UseItem")->IsActive() ||
                                                    this->GetActions()->Get("UseItem Alt")->IsActive())){
-            if(!allPlayers.at(this->player->ownID).item == PowerUp::NO_POWERUP){
+            if(!allPlayers.at(this->player->ownID).item == NO_POWERUP){
 
                 int packetID = 10;
                 sf::Packet packet;
@@ -133,13 +132,13 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
 
                 // Do something depending on which item was currently equipped, then set equipped to null
                 switch(allPlayers.at(this->player->ownID).item){
-                case PowerUp::REPEL_NPC:
+                case REPEL_NPC:
                         std::cout << "Player just used Repel NPC Item.\n";
                     break;
 
                 }
 
-                allPlayers.at(this->player->ownID).item = PowerUp::NO_POWERUP;
+                allPlayers.at(this->player->ownID).item = NO_POWERUP;
             }
 		}
 
@@ -327,7 +326,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
                       
                       allPlayers.at(i).direction = 0.0f;
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
-                      allPlayers.at(i).item = PowerUp::NO_POWERUP;
+                      allPlayers.at(i).item = NO_POWERUP;
                       allPlayers.at(i).killCount = 0;
                   }
                 
@@ -357,7 +356,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
                 // If player is self (in case of has been killed and new position generated) - This packet should only be sent to self under that circumstance. So can re-init items as well
                 if(playerID == player->ownID){
                     player->SetPosition(allPlayers.at(playerID).position);
-                    allPlayers.at(playerID).item = PowerUp::NO_POWERUP;
+                    allPlayers.at(playerID).item = NO_POWERUP;
                 }
 				break;
             }
@@ -405,7 +404,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
               
                 packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;                
 
-                if(isWeapon){ tempItem.tileType = TileTypes::WEAPON; }else{ tempItem.tileType = TileTypes::ITEM; }
+                if(isWeapon){ tempItem.tileType = WEAPON; }else{ tempItem.tileType = ITEM; }
 
                 // Need a better item/tile/sprite handling...
                 tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
@@ -427,7 +426,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
                 int playerID;
                 packet >> playerID;
                 // Clear player's item.
-                allPlayers.at(playerID).item = PowerUp::NO_POWERUP;
+                allPlayers.at(playerID).item = NO_POWERUP;
                 std::cout << "Player " << playerID << " just used their item.\n";
                 // This will NOT be sent to originating client. Originating client deals with the item use on send (see the keypress above)
                 break;
@@ -448,7 +447,7 @@ void Game::Draw()
 
     // Loop and draw all items
     for(int i=0; i < allItems.size();i++){
-        this->DrawSprite(allItems.at(i).itemSprite);
+        this->DrawAsset(allItems.at(i).itemSprite);
     }
 
    // Loop through other players and draw them
@@ -456,7 +455,7 @@ void Game::Draw()
      
         // Draw player if not self
         if(i != this->player->ownID){
-            this->DrawSprite(allPlayers.at(i).playerSprite);
+            this->DrawAsset(allPlayers.at(i).playerSprite);
          // Draw a hitbox for the player
          sf::RectangleShape rectangle;
          rectangle.setOutlineColor(sf::Color::Green);
@@ -465,7 +464,7 @@ void Game::Draw()
          rectangle.setSize(sf::Vector2f(46,46));
          rectangle.setOrigin(23,23);         
          rectangle.setPosition(allPlayers.at(i).position);
-         this->DrawSprite(rectangle);
+         this->DrawAsset(rectangle);
 
          // Draw the revised rectangle
           sf::RectangleShape rectangle2;
@@ -475,7 +474,7 @@ void Game::Draw()
          rectangle2.setSize(sf::Vector2f(this->revisedRectangleGlobal.width,this->revisedRectangleGlobal.height));
                   
          rectangle2.setPosition(this->revisedRectangleGlobal.left,this->revisedRectangleGlobal.top);
-         this->DrawSprite(rectangle2);
+         this->DrawAsset(rectangle2);
 
          //// Draw the rotated sprite
          sf::RectangleShape rectangle3;
@@ -485,7 +484,7 @@ void Game::Draw()
          rectangle3.setSize(sf::Vector2f(50,50));
                   
          rectangle3.setPosition(this->revisedSpriteGlobal.getGlobalBounds().left,this->revisedSpriteGlobal.getGlobalBounds().top);
-         this->DrawSprite(rectangle3);
+         this->DrawAsset(rectangle3);
 
          
          //// Draw the rotated sprite
@@ -505,7 +504,7 @@ void Game::Draw()
   
 }
 
-int Game::Run(int argc,char **argv)
+int Game::Run()
 {
   ConnectionInfo info;
   //info.address = "86.185.77.64";
@@ -516,7 +515,7 @@ int Game::Run(int argc,char **argv)
   sf::Thread tcpThread(&TCP_Net_Thead2,info);
   
   tcpThread.launch();
-  MB::Game::Run(argc,argv);
+  MB::Game::Run();
   tcpThread.wait();
 
   return 0;

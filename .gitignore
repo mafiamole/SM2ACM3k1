@@ -35,8 +35,8 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *~
-
-
+.kdev4
+*.kdev4
 
 /build/CMakeFiles/Progress/8
 /build/include/client/Players/Makefile

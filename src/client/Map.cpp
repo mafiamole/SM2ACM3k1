@@ -44,10 +44,10 @@ sf::Vector2f Map::collisionDetect(sf::IntRect collisionBox, sf::Vector2f velocit
     ClientTile* tile = (*it);
     
     switch(tile->tileType){
-    case TileTypes::FLOOR: // No action for floors, don't even bother checking collision
+    case FLOOR: // No action for floors, don't even bother checking collision
             
         break;
-    case TileTypes::WALL: // Any extra processing (not collision) for walls
+    case WALL: // Any extra processing (not collision) for walls
        
         break;
     default: // do a standard bounding box collision check for anything else (only spikes I think atm)
@@ -85,7 +85,7 @@ sf::Vector2f Map::WallCheck(sf::IntRect collisionBox, sf::Vector2f velocity,sf::
          for(it = tiles.begin(); it != tiles.end();it++) {
                 ClientTile* tile = (*it);
                 
-                if(tile->tileType == TileTypes::WALL){
+                if(tile->tileType == WALL){
 
                     if(velocity.x != 0){  
                
@@ -114,7 +114,7 @@ sf::Vector2f Map::WallCheck(sf::IntRect collisionBox, sf::Vector2f velocity,sf::
             for(it = tiles.begin(); it != tiles.end();it++) {      
                 ClientTile* tile = (*it);
                 
-                if(tile->tileType == TileTypes::WALL){
+                if(tile->tileType == WALL){
 
                 if(direction.y > 0){
                     collisionBox.top = fullCollBox.top = origBox.top + velocity.y - depth.y;
