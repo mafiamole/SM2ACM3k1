@@ -121,9 +121,9 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
 			exit(0);
 		}
 
-        if (this->GetActions()->Exists("UseItem") && (this->GetActions()->Get("UseItem")->IsActive() ||
-                                                   this->GetActions()->Get("UseItem Alt")->IsActive())){
-            if(!allPlayers.at(this->player->ownID).item == NO_POWERUP){
+        if ((this->GetActions()->Exists("UseItem") && this->GetActions()->Get("UseItem")->IsActive()) ||
+                                                   (this->GetActions()->Exists("UseItem Alt") && this->GetActions()->Get("UseItem Alt")->IsActive())){
+            if(!(allPlayers.at(this->player->ownID).item == PowerUp::NO_POWERUP)){
 
                 int packetID = 10;
                 sf::Packet packet;
@@ -135,7 +135,9 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
                 case REPEL_NPC:
                         std::cout << "Player just used Repel NPC Item.\n";
                     break;
-
+                default:
+                    std::cout << "Player used UNSPECIFIED item.\n";
+                    break;
                 }
 
                 allPlayers.at(this->player->ownID).item = NO_POWERUP;
@@ -326,7 +328,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
                       
                       allPlayers.at(i).direction = 0.0f;
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
-                      allPlayers.at(i).item = NO_POWERUP;
+                      allPlayers.at(i).item = PowerUp::NO_POWERUP;
                       allPlayers.at(i).killCount = 0;
                   }
                 
@@ -507,8 +509,8 @@ void Game::Draw()
 int Game::Run()
 {
   ConnectionInfo info;
-  info.address = "127.0.0.1";
-  //info.address = "81.159.77.208";
+  //info.address = "127.0.0.1";
+  info.address = "81.159.77.208";
   info.port = 4000;
   info.attempts = 3;
   info.timeout = 2000;
