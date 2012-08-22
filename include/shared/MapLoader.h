@@ -6,6 +6,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <shared/Enums.h>
+#include <iostream>
 
 
 class MapLoader {

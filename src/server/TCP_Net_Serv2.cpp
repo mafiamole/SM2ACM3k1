@@ -89,7 +89,7 @@ void TCP_Net_Serv2::Launch()
             for(int j=0; j<this->allClients.size();j++){
                 if(i < itemsOnMap.size()){
                     sf::Vector2f topLeft = allClients.at(j).origin_position;
-                    if(mapLoader.TilesColliding(itemsOnMap.at(i), allClients.at(j).topLeft_position)){
+                    if(mapLoader.TilesColliding(itemsOnMap.at(i), sf::Vector2f(allClients.at(j).origin_position.x - 16, allClients.at(j).origin_position.y - 16) )){
                         // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
                         int packetID = 7;
                         bool isWeapon = false;
@@ -178,8 +178,8 @@ void TCP_Net_Serv2::Launch()
             bool playerColliding;
             do{
                playerColliding = false;
-               x = (float)rand.IRandom(0,1024);
-               y = (float)rand.IRandom(0,768);
+               x = (float)rand.IRandom(10,1014);
+               y = (float)rand.IRandom(10,758);
                i.position = sf::Vector2f(x,y);
 
                // Check not spawing on a player
@@ -454,8 +454,8 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     while ((this->clientCount < this->maxClients) || (this->readyClients != this->maxClients))
     {
-
         this->selector.add(servListener);
+       
         if ( this->selector.wait() )
         {
 
@@ -545,8 +545,8 @@ void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allC
     bool playerColliding;
     do{
         playerColliding = false;
-        tmpTile.position.x = (float)rand.IRandom(0,1024);
-        tmpTile.position.y = (float)rand.IRandom(0,768);
+        tmpTile.position.x = (float)rand.IRandom(10,1014); // some screen bounds
+        tmpTile.position.y = (float)rand.IRandom(10,758);
         // Loop through other players, if colliding with one, set boolean, true.
         // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
         for(int i=0;i<allClients->size();i++){
@@ -557,8 +557,8 @@ void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allC
     }while(playerColliding || !mapLoader->TileOnFloor(&tmpTile, mapTiles, true));
 
     allClients->at(playerIndex).origin_position = allClients->at(playerIndex).topLeft_position = tmpTile.position;
-    allClients->at(playerIndex).origin_position.x += PLAYER_WIDTH;
-    allClients->at(playerIndex).origin_position.y += PLAYER_HEIGHT;
+    allClients->at(playerIndex).origin_position.x += PLAYER_WIDTH/2;
+    allClients->at(playerIndex).origin_position.y += PLAYER_HEIGHT/2;
 }
 
 

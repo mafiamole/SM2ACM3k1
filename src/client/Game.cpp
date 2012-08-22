@@ -17,8 +17,8 @@ Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
 Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,argc,argv)
 {
-  //this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
-  this->window = new sf::RenderWindow(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
+    //this->window->create(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
+    this->window->create(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
   mapObj = Map(this->window, ClientMapLoader::PopulateClientTileSprites(mapLoader.ReadFile("map.txt")));
 
@@ -507,11 +507,11 @@ void Game::Draw()
 int Game::Run()
 {
   ConnectionInfo info;
-  //info.address = "86.185.77.64";
   info.address = "127.0.0.1";
+  //info.address = "81.159.77.208";
   info.port = 4000;
   info.attempts = 3;
-  info.timeout = 300;
+  info.timeout = 2000;
   sf::Thread tcpThread(&TCP_Net_Thead2,info);
   
   tcpThread.launch();

@@ -52,30 +52,30 @@ void TCP_Net2::Run()
 {
   //first Connects
   
-  clientSocket.setBlocking(false);
+  clientSocket.setBlocking(true);
 
   sf::Packet tmpPacket;
   
-  std::cout << "Attempting to Connect" << std::endl;
-  
   for ( int i = 0; i < this->connectionAttemptLimit; i++)
-  {
-    //attempt to connect
+  {     
+    // Attempt to connect
+    std::cout << "Attempting new Connection" << std::endl;
     sf::Socket::Status connectStatus = this->clientSocket.connect(this->serverIP,this->portNumber,this->timeout);
-    std::cout << connectStatus << std::endl;
 
-    
-    if ( connectStatus != sf::Socket::NotReady  )
-    {
-      std::cout << "Connection established. Welcome to the Matrix." << std::endl;
-      this->connected = true;
-      break;
+    if(connectStatus == sf::Socket::Done){
+        std::cout << "Connection established. Welcome to the Matrix." << std::endl;
+        this->connected = true; 
+        this->clientSocket.setBlocking(false); 
+        break;
+    }else{
+        if(i==this->connectionAttemptLimit-1){ // Still more attempts to make
+            std::cout << "Unable to establish connection." << std::endl;
+        }
     }
-    
   }
+
+
  
- if ( this->connected )
- {
     while ( this->connected )
     {
       sf::sleep( sf::milliseconds(10) );
@@ -86,7 +86,7 @@ void TCP_Net2::Run()
       {
 	case sf::Socket::Disconnected:
 	  std::cout << "You have been disconnected" << std::endl;
-	  this->connected = false;
+      this->connected = false;
 	  break;
 	case sf::Socket::Done:
 	  WorkQueues::packetsToProcess().push(tmpPacket);
@@ -115,5 +115,5 @@ void TCP_Net2::Run()
     std::cout << "Thank you for playing" << std::endl;
  }
   
-}
+
 

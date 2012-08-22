@@ -56,6 +56,9 @@ std::vector<Tile> MapLoader::ReadFile(std::string path)  {
    }
   
   }
+ else{
+     std::cout << "Error opening map file" << std::endl;
+ }
  
  //return new vector;
  return tmpVect;
@@ -75,9 +78,9 @@ bool MapLoader::TileOnFloor(Tile* tile, std::vector<Tile> mapTiles, bool isPlaye
   
   rect2.width = rect2.height = 32;
   
-  if(isPlayer){
+  if(isPlayer){ // TODO: incorrect, but bounding box that'll ensure no collision
     rect.width = 63;
-    rect.height = 38;
+    rect.height = 63;
   }else{
     rect = rect2;
   }
