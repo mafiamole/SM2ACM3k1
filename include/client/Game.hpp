@@ -8,7 +8,7 @@
 #include "Player.h"
 #include <client/Players/PlayerInformation.hpp>
 #include <vector>
-
+#include <client/TCP_Net2.hpp>
 class Game :
 	public MB::Game	
 {
@@ -31,7 +31,7 @@ public:
 	bool HasFocus();
 	std::vector<PlayerData> allPlayers;
     std::vector<ClientItem> allItems;
-
+	ConnectionInfo info;
 
     sf::Sprite revisedSpriteGlobal;
     sf::FloatRect revisedRectangleGlobal;

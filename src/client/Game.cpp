@@ -9,7 +9,7 @@
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
 #include <shared/randomc.h>
-#include <client/TCP_Net2.hpp>
+
 #include <ctime>
 #include <iostream>
 
@@ -17,6 +17,18 @@ Map mapObj = Map();
 MapLoader mapLoader = MapLoader();
 Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,argc,argv)
 {
+  this->Config.LoadFile("Config.cfg");
+  this->Config.LoadArgs(argc,argv);
+  std::string ip = this->Config.GetStringValue("ip");
+  if ( ip != "")
+      info.address = ip;
+  else
+    info.address = "127.0.0.1";
+    
+      info.port = 4000;
+      info.attempts = 3;
+      info.timeout = 2000;
+  
     //this->window->create(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Fullscreen);
     this->window->create(sf::VideoMode(1024 , 768, 32), "Super Mega Awesome Arena Colosseum multiplayer 3000 and 1", sf::Style::Default);
 
@@ -123,7 +135,7 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
 
         if ((this->GetActions()->Exists("UseItem") && this->GetActions()->Get("UseItem")->IsActive()) ||
                                                    (this->GetActions()->Exists("UseItem Alt") && this->GetActions()->Get("UseItem Alt")->IsActive())){
-            if(!(allPlayers.at(this->player->ownID).item == PowerUp::NO_POWERUP)){
+            if(!(allPlayers.at(this->player->ownID).item == NO_POWERUP)){
 
                 int packetID = 10;
                 sf::Packet packet;
@@ -328,7 +340,7 @@ float rotateBy = 360-allPlayers.at(otherPlayer).direction;
                       
                       allPlayers.at(i).direction = 0.0f;
                       allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
-                      allPlayers.at(i).item = PowerUp::NO_POWERUP;
+                      allPlayers.at(i).item = NO_POWERUP;
                       allPlayers.at(i).killCount = 0;
                   }
                 
@@ -508,12 +520,12 @@ void Game::Draw()
 
 int Game::Run()
 {
-  ConnectionInfo info;
-  //info.address = "127.0.0.1";
-  info.address = "81.159.77.208";
-  info.port = 4000;
-  info.attempts = 3;
-  info.timeout = 2000;
+//   ConnectionInfo info;
+//   //info.address = "127.0.0.1";
+//   info.address = "81.159.77.208";
+//   info.port = 4000;
+//   info.attempts = 3;
+//   info.timeout = 2000;
   sf::Thread tcpThread(&TCP_Net_Thead2,info);
   
   tcpThread.launch();
