@@ -507,8 +507,8 @@ void Game::Draw()
 int Game::Run()
 {
   ConnectionInfo info;
-  info.address = "127.0.0.1";
-  //info.address = "81.159.77.208";
+  //info.address = "127.0.0.1";
+  info.address = "81.159.77.208";
   info.port = 4000;
   info.attempts = 3;
   info.timeout = 2000;
