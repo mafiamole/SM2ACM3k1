@@ -148,7 +148,7 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
                         std::cout << "Player just used Repel NPC Item.\n";
                     break;
                 default:
-                    std::cout << "Player used UNSPECIFIED item.\n";
+                    std::cout << "Player used UNSPECIFIED item. ID=" << allPlayers.at(this->player->ownID).item << "\n";
                     break;
                 }
 
@@ -460,12 +460,12 @@ void Game::Draw()
 	mapObj.Draw();
 
     // Loop and draw all items
-    for(int i=0; i < allItems.size();i++){
+    for(unsigned int i=0; i < allItems.size();i++){
         this->DrawAsset(allItems.at(i).itemSprite);
     }
 
    // Loop through other players and draw them
-    for(int i=0; i < allPlayers.size();i++){
+    for(unsigned int i=0; i < allPlayers.size();i++){
      
         // Draw player if not self
         if(i != this->player->ownID){

@@ -10,7 +10,7 @@ std::vector<ClientTile*> ClientMapLoader::PopulateClientTileSprites(std::vector<
     // TODO: this needs to be map agnostic (i.e load spike.png when the map is the colosseum, force field when future map etc)
     std::vector<ClientTile*> clientTiles;
     sf::Sprite tmpSprite;
-    for(int i=0; i < tiles.size();i++){
+    for(unsigned int i=0; i < tiles.size();i++){
 
         tmpSprite.setPosition(tiles.at(i).position); 
 

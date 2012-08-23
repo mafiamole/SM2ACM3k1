@@ -56,7 +56,7 @@ void TCP_Net2::Run()
 
   sf::Packet tmpPacket;
   
-  for ( int i = 0; i < this->connectionAttemptLimit; i++)
+  for ( unsigned int i = 1; i < this->connectionAttemptLimit; i++)
   {     
     // Attempt to connect
     std::cout << "Attempting new Connection" << std::endl;
@@ -68,7 +68,7 @@ void TCP_Net2::Run()
         this->clientSocket.setBlocking(false); 
         break;
     }else{
-        if(i==this->connectionAttemptLimit-1){ // Still more attempts to make
+        if(i==this->connectionAttemptLimit){ // Still more attempts to make
             std::cout << "Unable to establish connection." << std::endl;
         }
     }
@@ -94,7 +94,7 @@ void TCP_Net2::Run()
       // send any pending data.
       if ( WorkQueues::packetsToSend().size() > 0 )
       {
-	    for ( int i = 0; i < WorkQueues::packetsToSend().size(); i++)
+	    for ( unsigned int i = 0; i < WorkQueues::packetsToSend().size(); i++)
 	    {
 	        clientSocket.send( WorkQueues::packetsToSend().front() );
 	        WorkQueues::packetsToSend().pop();
