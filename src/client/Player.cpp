@@ -20,6 +20,12 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     UpdateWeaponHitBox();
 }
 
+
+Player::~Player()
+{
+
+}
+
 void Player::Update(sf::Time elapsed, MB::EventList* events)
 {
     MB::GameComponent::Update(elapsed, events);
@@ -168,20 +174,17 @@ void Player::UpdateWeaponHitBox(){
     int playerHeight = this->GetTextureRect().height;
 
     switch(this->bonus){
-    case SHORT:
-        {          
+    case SHORT:       
             rectangle.setSize(sf::Vector2f(this->GetTextureRect().width, playerHeight*1.2));
             rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );
             rectangle.setOrigin(31, rectangle.getLocalBounds().height - 19);
             break;
-        }
+        
     case LONG:
-        {
             rectangle.setSize(sf::Vector2f(this->GetTextureRect().width-20, playerHeight*2.2));
             rectangle.setPosition(this->playerSprite.getPosition().x , this->playerSprite.getPosition().y  );
             rectangle.setOrigin(21, rectangle.getLocalBounds().height - 19);
             break;
-        }
     }
        
    // Try and set origin to about players head center // 
@@ -209,8 +212,41 @@ sf::IntRect Player::GetTextureRect(){
 	return this->playerSprite.getTextureRect();
 }
 
-Player::~Player()
+/**
+ * @brief Call when you register an attack action. This function will send the weapon hitbox to the server.
+ * @author mafiamole@gmail.com
+ * @return void
+ **/
+void Player::Attack()
 {
+    sf::FloatRect revisedHitBox = this->weaponHitBox.getGlobalBounds();
+    
+    float playerDirection = this->playerSprite.getRotation(); // not used.
+    
+    sf::Vector2i playerDirectionVector =  this->directionVector;
+    
+    // Scale up hitbox in opposite direction of attack.
+    
+    if ( this->directionVector.x != 0)
+    {
+      revisedHitBox.left += ( (-directionVector.x) * (revisedHitBox.width * 3 ));
+    }
+    
+    if ( this->directionVector.y !=0)
+    {
+     revisedHitBox.top += ( (-directionVector.y) * (revisedHitBox.height * 3) );
+    }
+    
+    int otherPlayer;
+    
+    otherPlayer =  (this->ownID == 0); // cheap trick
+    
+    sf::Sprite revisedSprite;
+    
+    revisedSprite.setTextureRect( sf::IntRect(0,0,64,64) );
+    
+    revisedSprite.setPosition(revisedHitBox.left, revisedHitBox.top);
 
+   // sf::Vector2f revisedOrigin( revisedSprite.getGlobalBounds().left - game->allPlayers
+    
 }
-

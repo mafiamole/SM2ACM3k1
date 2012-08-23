@@ -20,8 +20,17 @@ private:
     MB::Actions::Action * up,*down; 
     Map* gameMap;
     sf::Vector2i directionVector;
+    
 public:
-	sf::Vector2f GetPosition();
+    Player(MB::Game* game, Map* map);
+    virtual ~Player();
+    
+    virtual void Update(sf::Time elapsed, MB::EventList* events);
+    virtual void Draw();
+    
+    void Attack();
+    
+    sf::Vector2f GetPosition();
     sf::IntRect GetTextureRect();
     int ownID;
     Bonus bonus;
@@ -33,11 +42,9 @@ public:
     sf::RectangleShape weaponHitBox;
     void UpdateWeaponHitBox();
     sf::Vector2f HitBoxPosToBoundingPos(sf::Vector2f pos);
-    Player(MB::Game* game, Map* map);
-	
-    virtual void Update(sf::Time elapsed, MB::EventList* events);
-    virtual void Draw();
-    virtual ~Player();
+
+
+
 };
 
 #endif // PLAYER_H
