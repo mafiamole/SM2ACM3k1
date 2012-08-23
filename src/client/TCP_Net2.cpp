@@ -88,8 +88,19 @@ void TCP_Net2::Run()
 	  std::cout << "You have been disconnected" << std::endl;
       this->connected = false;
 	  break;
-	case sf::Socket::Done:
+    case sf::Socket::Done:
 	  WorkQueues::packetsToProcess().push(tmpPacket);
+
+      // send any pending data.
+      if ( WorkQueues::packetsToSend().size() > 0 )
+      {
+	    for ( int i = 0; i < WorkQueues::packetsToSend().size(); i++)
+	    {
+	        clientSocket.send( WorkQueues::packetsToSend().front() );
+	        WorkQueues::packetsToSend().pop();
+	    }
+      }
+
 	  break;
 	case sf::Socket::NotReady:
 	  break;
@@ -99,17 +110,7 @@ void TCP_Net2::Run()
 	default:
 	  std::cerr << "IMPOSSIBRO!" << std::endl;
 	break;
-      }
-      // send any pending data.
-      if ( WorkQueues::packetsToSend().size() > 0 )
-      {
-	for ( int i = 0; i < WorkQueues::packetsToSend().size(); i++)
-	{
-	  clientSocket.send( WorkQueues::packetsToSend().front() );
-	  WorkQueues::packetsToSend().pop();
-	}
-      }
-      
+      }      
     }
     
     std::cout << "Thank you for playing" << std::endl;
