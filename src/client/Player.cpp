@@ -247,6 +247,6 @@ void Player::Attack()
     
     revisedSprite.setPosition(revisedHitBox.left, revisedHitBox.top);
 
-    
+   // sf::Vector2f revisedOrigin( revisedSprite.getGlobalBounds().left - game->allPlayers
     
 }
