@@ -40,6 +40,7 @@ set (SOURCES
     SpriteSheetAnimator.cpp
     TCP_Net2.cpp
     Items.cpp
+    Players.cpp
     )
 
 
