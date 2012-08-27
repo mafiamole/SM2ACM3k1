@@ -12,6 +12,7 @@ set (HEADERS
     ${MB_INCLUDE_DIR}/shared/randomc.h
     ${MB_INCLUDE_DIR}/shared/Packets.h
     ${MB_INCLUDE_DIR}/shared/Enums.h
+    ${MB_INCLUDE_DIR}/shared/SharedRoutines.hpp
     ${MB_INCLUDE_DIR}/client/Map/Tile.hpp
     ${MB_INCLUDE_DIR}/client/WorkQueues.h
     ${MB_INCLUDE_DIR}/client/UI/UI_LuaFunctions.hpp
@@ -34,6 +35,7 @@ set (SOURCES
     ../shared/MapLoader.cpp
     ../shared/mersenne.cpp
     ../shared/Packets.cpp
+    ../shared/SharedRoutines.cpp
     Map/Tile.cpp
     SpriteSheet.cpp
     WorkQueues.cpp

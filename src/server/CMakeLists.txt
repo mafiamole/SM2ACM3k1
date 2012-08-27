@@ -8,7 +8,8 @@ set (HEADERS
 	${MB_INCLUDE_DIR}/shared/Enums.h
 	${MB_INCLUDE_DIR}/shared/randomc.h
 	${MB_INCLUDE_DIR}/server/TCP_Net_Serv2.hpp
-	${MB_INCLUDE_DIR}/shared/MapLoader.h)
+	${MB_INCLUDE_DIR}/shared/MapLoader.h
+	${MB_INCLUDE_DIR}/shared/SharedRoutines.hpp)
 
 set (SOURCES TCP_Net_Serv2.cpp
 	PacketRoutines.cpp 
@@ -16,6 +17,7 @@ set (SOURCES TCP_Net_Serv2.cpp
 	Main.cpp
 	../shared/Packets.cpp
 	../shared/mersenne.cpp
+	../shared/SharedRoutines.cpp
 	../shared/MapLoader.cpp)
 
 add_executable(server ${HEADERS} ${SOURCES} )
