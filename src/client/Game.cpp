@@ -56,7 +56,7 @@ Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,ar
     this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
     this->players = (Players*)this->AddComponent( new Players(player,this) );
     this->player->SetPlayers(players);
-    
+
     //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
     //this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
 
@@ -79,19 +79,19 @@ Game::~Game(void)
 
 void Game::Update(sf::Time elapsed, MB::EventList *events)
 {
-  
+
     if (this->GetActions()->Exists("CheckHealth") && this->GetActions()->Get("CheckHealth")->IsActive() && players->Count()>0) {
         std::cout << "Health: ";
-	PlayerData clientData = players->GetPlayerData(player->ownID);
+        PlayerData clientData = players->GetPlayerData(player->ownID);
         for(int i=1; i<5; i++) {
-           // std::cout << allPlayers.at(player->ownID).ReadHealth( players->GetPlayerData() .at(player->ownID),(HealthBits)i);
-           std::cout << clientData.ReadHealth(&clientData,(HealthBits)i);
+            // std::cout << allPlayers.at(player->ownID).ReadHealth( players->GetPlayerData() .at(player->ownID),(HealthBits)i);
+            std::cout << clientData.ReadHealth(&clientData,(HealthBits)i);
         }
         std::cout << "\n";
     }
 
     if (this->GetActions()->Exists("CheckScore") && this->GetActions()->Get("CheckScore")->IsActive() && players->Count()>0) {
-      PlayerData clientData = players->GetPlayerData(player->ownID);
+        PlayerData clientData = players->GetPlayerData(player->ownID);
         std::cout << "Score: " << clientData.killCount << "\n";
     }
 
@@ -125,12 +125,12 @@ void Game::Draw()
 
 int Game::Run()
 {
-//   ConnectionInfo info;
-//   //info.address = "127.0.0.1";
-//   info.address = "81.159.77.208";
-//   info.port = 4000;
-//   info.attempts = 3;
-//   info.timeout = 2000;
+    //   ConnectionInfo info;
+    //   //info.address = "127.0.0.1";
+    //   info.address = "81.159.77.208";
+    //   info.port = 4000;
+    //   info.attempts = 3;
+    //   info.timeout = 2000;
     sf::Thread tcpThread(&TCP_Net_Thead2,info);
 
     tcpThread.launch();
@@ -145,104 +145,96 @@ void Game::NetworkUpdate()
 {
     while (WorkQueues::packetsToProcess().size() != 0)
     {
-      
+
         sf::Packet packet = WorkQueues::packetsToProcess().front();
-	 
+
         WorkQueues::packetsToProcess().pop();
 
         int packetID;
         packet >> packetID;
-	std::cout << "packet recieved " << packetID << std::endl;
+        std::cout << "packet recieved " << packetID << std::endl;
         switch (packetID)
         {
-        case 0:
-	{
-            // Initialise packet
-            int playerCount;
-            int weaponId;
-            float xPos,yPos;
-            packet >> playerCount;
-            for (int plrCtr = 0; plrCtr < playerCount; plrCtr++)
-            {
-                packet >> weaponId >> xPos >> yPos;
-                players->AddPlayer(weaponId,xPos,yPos);
-            }
-            packet >> this->player->ownID;
-            player->SetPosition(players->GetPlayerPosition(player->ownID));
-            break;
-	}
-        case 3:
-	{
-            // Player Moved
-            float xPos,yPos,direction;
-            int playerId;
-            packet >> xPos >> yPos >> direction >> playerId;
-
-            players->UpdatePlayerPosition(playerId,xPos,yPos,direction);
-            if ( playerId == player->ownID)
-            {
+        case INITIALISATION_SERV:
+            {   // The game start packet that initialises the local copy of player data for each player.
+                int playerCount;
+                int weaponId;
+                float xPos,yPos;
+                packet >> playerCount;
+                for (int plrCtr = 0; plrCtr < playerCount; plrCtr++)
+                {
+                    packet >> weaponId >> xPos >> yPos;
+                    players->AddPlayer(weaponId,xPos,yPos);
+                }
+                packet >> this->player->ownID;
                 player->SetPosition(players->GetPlayerPosition(player->ownID));
-                players->RemovePowerUp(player->ownID);
+                break;
             }
-            break;
-	}
-        case 4:
-	{
-            int playerId;
-            int newHealth;
-            packet >> playerId >> newHealth;
-            players->UpdatePlayerHealth(playerId,newHealth);
-            break;
-	}
-        case 5:
-	{
-            int playerId;
-            int newKillCount;
-            packet >> playerId >> newKillCount;
-            players->UpdateKillCount(playerId,newKillCount);
-            break;
-	}
-        case 7:
-	{
-            int playerId;
-            bool isWeapon;
-            int itemCode;
-            int itemIndex;
+        case PLAYER_POSITION_SERV: // A player has moved. Update their info
+            {                
+                float xPos,yPos,direction;
+                int playerId;
+                packet >> xPos >> yPos >> direction >> playerId;
+                players->UpdatePlayerPosition(playerId,xPos,yPos,direction);
+                break;
+            }
+        case UPDATE_HEALTH_SERV: // Someone lost health (could be self). Do whatever (trigger hurt animation, combat text etc)
+            {
+                int playerId;
+                int newHealth;
+                packet >> playerId >> newHealth;
+                players->UpdatePlayerHealth(playerId,newHealth);
+                break;
+            }
+        case UPDATE_SCORE_SERV: // Receive updated kill count from server and do whatever
+            {
+                int playerId;
+                int newKillCount;
+                packet >> playerId >> newKillCount;
+                players->UpdateKillCount(playerId,newKillCount);
+                break;
+            }
+        case ITEM_RECEIVED_SERV: // Remove item   -- if index is -1, then don't remove from floor
+            {
+                int playerId;
+                bool isWeapon;
+                int itemCode;
+                int itemIndex;
 
-            packet >> playerId >> isWeapon >> itemCode >> itemIndex;
-            players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
-            break;
-	}
-        case 8:
-	{
-	    bool isWeapon;
-	    ClientItem tempItem;
-	    
-	    packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
-	    if (isWeapon)
-	    {
-	      tempItem.tileType = WEAPON;
-	    }
-	    else
-	    {
-	      tempItem.tileType = ITEM;
-	    }
-	    
-	    tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
-	    tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
-	    sf::IntRect rect = sf::IntRect(32,13*32,32,32);
-	    tempItem.itemSprite.setTextureRect(rect);
+                packet >> playerId >> isWeapon >> itemCode >> itemIndex;
+                players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
+                break;
+            }
+        case NEW_ITEM_ON_FLOOR_SERV:  // Put new items on the floor,
+            {
+                bool isWeapon;
+                ClientItem tempItem;
 
-	    allItems.push_back(tempItem);
-            break;
-	}
-        case 10:
-	{
-            int playerId;
-            packet >> playerId;
-            players->UseEquiment(playerId);
-            break;
-	}
+                packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
+                if (isWeapon)
+                {
+                    tempItem.tileType = WEAPON;
+                }
+                else
+                {
+                    tempItem.tileType = ITEM;
+                }
+
+                tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
+                tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
+                sf::IntRect rect = sf::IntRect(32,13*32,32,32);
+                tempItem.itemSprite.setTextureRect(rect);
+
+                allItems.push_back(tempItem);
+                break;
+            }
+        case PacketTypes::ITEM_USED_BOTH:    // A player just used their equipped item
+            {
+                int playerId;
+                packet >> playerId;
+                players->UseEquiment(playerId);
+                break;
+            }
         }
 
     }
@@ -252,7 +244,7 @@ void Game::NetworkUpdate()
 void Game::RemoveItem(int index)
 {
 
-  allItems.erase(allItems.begin() + index);
+    allItems.erase(allItems.begin() + index);
 
 }
 

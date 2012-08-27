@@ -314,7 +314,7 @@ void Player::Attack()
     playerWeaponTempRect.rotate(otherPlayer.direction);
 
     // create packet.
-    int packetID = 6;
+    int packetID = ATTACK_MADE_CLIENT;
     sf::Packet packet;
     sf::FloatRect weaponRect = this->weaponHitBox.getGlobalBounds();
     sf::FloatRect revisedRect = playerWeaponTempRect.getGlobalBounds();
@@ -333,7 +333,7 @@ void Player::UseItem()
     if(!(item == NO_POWERUP))
     {
 
-        int packetID = 10;
+        int packetID = ITEM_USED_BOTH;
         sf::Packet packet;
         packet << packetID << ownID;
         WorkQueues::packetsToSend().push(packet);

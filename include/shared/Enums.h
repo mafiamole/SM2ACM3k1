@@ -6,6 +6,21 @@
 const int PLAYER_WIDTH = 63;
 const int PLAYER_HEIGHT = 38;
 
+enum PacketTypes
+{   // Suffix denotes sender application, so server should check those suffixed CLIENT etc.
+    INITIALISATION_SERV,
+    PLAYER_POSITION_CLIENT,
+    SET_PLAYER_INFO_CLIENT,
+    PLAYER_POSITION_SERV,
+    UPDATE_HEALTH_SERV,
+    UPDATE_SCORE_SERV,
+    ATTACK_MADE_CLIENT,
+    ITEM_RECEIVED_SERV,
+    NEW_ITEM_ON_FLOOR_SERV,
+    PLACEHOLDER_UNUSED_PACKET,
+    ITEM_USED_BOTH
+};
+
 enum Weapons
 {        
     NO_WEAPON,
