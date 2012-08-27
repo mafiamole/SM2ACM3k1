@@ -27,6 +27,7 @@ private:
     Players* players;
     sf::FloatRect attackRect;
     bool attacking;
+    sf::RectangleShape attackedRect;
 public:
     Player(MB::Game* game, Map* map);
     

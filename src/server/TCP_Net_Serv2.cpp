@@ -59,12 +59,16 @@ void TCP_Net_Serv2::Launch()
     this->WaitForClients();
 
     bool createdItems = false;
-     
+
     while (this->serverUp)
     {
 
         int index = 0;
-
+        if ( this->clientCount <= 0)
+        {
+            this->serverUp = false;
+            break;
+        }
         for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
         {
 
@@ -84,17 +88,17 @@ void TCP_Net_Serv2::Launch()
 
 
 
-        while(i < itemsOnMap.size()){
+        while(i < itemsOnMap.size()) {
             bool removedSomething = false;
-            for(int j=0; j<this->allClients.size();j++){
-                if(i < itemsOnMap.size()){
+            for(int j=0; j<this->allClients.size(); j++) {
+                if(i < itemsOnMap.size()) {
                     sf::Vector2f topLeft = allClients.at(j).origin_position;
-                    if(mapLoader.TilesColliding(itemsOnMap.at(i), sf::Vector2f(allClients.at(j).origin_position.x - 16, allClients.at(j).origin_position.y - 16) )){
+                    if(mapLoader.TilesColliding(itemsOnMap.at(i), sf::Vector2f(allClients.at(j).origin_position.x - 16, allClients.at(j).origin_position.y - 16) )) {
                         // Player 'j' has landed on item 'i', give it to him, remove from the on board list and send update packets.
                         int packetID = 7;
                         bool isWeapon = false;
 
-                        switch(itemsOnMap.at(i).tileType){
+                        switch(itemsOnMap.at(i).tileType) {
                         case WEAPON:
                             allClients.at(j).currWeapon = itemsOnMap.at(i).ItemID;
                             isWeapon = true;
@@ -108,55 +112,57 @@ void TCP_Net_Serv2::Launch()
                         sf::Packet packet;
                         packet << packetID << j << isWeapon << itemsOnMap.at(i).ItemID << i;
 
-                        for(int k=0;k<this->allClients.size();k++){
+                        for(int k=0; k<this->allClients.size(); k++) {
                             this->allClients.at(k).clientSocket->send(packet);
-                        }                     
+                        }
 
                         itemsOnMap.erase(itemsOnMap.begin() + i);
                     }
                 }
             }
-            if(!removedSomething || (itemsOnMap.size()==0)){ i++; }
+            if(!removedSomething || (itemsOnMap.size()==0)) {
+                i++;
+            }
         }
 
         CRandomMersenne rand((int)time(0));
 
         // Check if a player is colliding with a contact_damage tile (e.g. spikes), check if the time since last contact_damage is after the grace period, then update health / send packet
-        for(int j=0;j<allClients.size();j++){      
-            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).topLeft_position,currMapObj,CONTACT_DAMAGE)){
-                if(allClients.at(j).timeOfLastContactDamage.getElapsedTime() > sf::milliseconds(1000)){ //Time before more hurting on spikies can occur (in milliseconds)
-                   //std::cout << "Player " << j << " took damage.\n";
-                   // Player needs to lose a random health block. This assumes that there IS some health to loose, otherwise infinite loop.
-                   
-                   bool foundHealthyBlock = false;
-                   HealthBits positionUsed;
-                   do{
-                       positionUsed = (HealthBits)rand.IRandom(1,4);
-                       if(this->ReadHealth(&allClients.at(j), positionUsed)){
-                           foundHealthyBlock = true;
-                       }
-                   }
-                   while(!foundHealthyBlock);
+        for(int j=0; j<allClients.size(); j++) {
+            if(mapLoader.TileCollidingWithTileOfType(allClients.at(j).topLeft_position,currMapObj,CONTACT_DAMAGE)) {
+                if(allClients.at(j).timeOfLastContactDamage.getElapsedTime() > sf::milliseconds(1000)) { //Time before more hurting on spikies can occur (in milliseconds)
+                    //std::cout << "Player " << j << " took damage.\n";
+                    // Player needs to lose a random health block. This assumes that there IS some health to loose, otherwise infinite loop.
 
-                   SetHealth(&allClients.at(j), positionUsed,0);
+                    bool foundHealthyBlock = false;
+                    HealthBits positionUsed;
+                    do {
+                        positionUsed = (HealthBits)rand.IRandom(1,4);
+                        if(this->ReadHealth(&allClients.at(j), positionUsed)) {
+                            foundHealthyBlock = true;
+                        }
+                    }
+                    while(!foundHealthyBlock);
 
-                   // Check if player is dead, and deal with appropriately.
-                   if(IsPlayerDead(&allClients.at(j))){ // Alert other players that a player died, update kill count, re-init character etc
-                        PlayerDiedUpdateAll(j, rand);            
-                        
-                   }else{ // Not dead, alert other players about losing health
+                    SetHealth(&allClients.at(j), positionUsed,0);
+
+                    // Check if player is dead, and deal with appropriately.
+                    if(IsPlayerDead(&allClients.at(j))) { // Alert other players that a player died, update kill count, re-init character etc
+                        PlayerDiedUpdateAll(j, rand);
+
+                    } else { // Not dead, alert other players about losing health
                         int packetID = 4;
                         sf::Packet packet;
                         packet << packetID << j << allClients.at(j).health;
 
-                        for(int i=0; i<allClients.size();i++){                    
+                        for(int i=0; i<allClients.size(); i++) {
                             allClients.at(i).clientSocket->send(packet);
-                        }               
+                        }
 
-                   }
-                   
-                   // Update collision time for this player
-                   allClients.at(j).timeOfLastContactDamage.restart();
+                    }
+
+                    // Update collision time for this player
+                    allClients.at(j).timeOfLastContactDamage.restart();
                 }
             }
         }
@@ -164,51 +170,55 @@ void TCP_Net_Serv2::Launch()
 
 
         // Randomly spawn items if it's time to. Needs to spawn in locations that are 'floor'.
-        if(!createdItems){
+        if(!createdItems) {
             // spawn a few items to get going (testing)
             CRandomMersenne rand((int)time(0));
 
-            for(int j=0;j<4;j++){
+            for(int j=0; j<4; j++) {
 
-            Item i;
-            i.ItemID = REPEL_NPC;
-            i.tileType = ITEM;
-            
-            float x, y; 
-            bool playerColliding;
-            do{
-               playerColliding = false;
-               x = (float)rand.IRandom(10,1014);
-               y = (float)rand.IRandom(10,758);
-               i.position = sf::Vector2f(x,y);
+                Item i;
+                i.ItemID = REPEL_NPC;
+                i.tileType = ITEM;
 
-               // Check not spawing on a player
-               for(int j=0;j<allClients.size();j++){
-                   if(mapLoader.PlayersColliding(allClients.at(j).topLeft_position,i.position)){ playerColliding = true;}
-               }
+                float x, y;
+                bool playerColliding;
+                do {
+                    playerColliding = false;
+                    x = (float)rand.IRandom(10,1014);
+                    y = (float)rand.IRandom(10,758);
+                    i.position = sf::Vector2f(x,y);
 
-               // Check not spawing on another item
-               for(int k=0;playerColliding == false && k<itemsOnMap.size();k++){
-                // if(j!=index){
-                   if(mapLoader.TilesColliding((Tile)itemsOnMap.at(k),i.position)){ playerColliding = true;}
-               //  }                                            
-               }
+                    // Check not spawing on a player
+                    for(int j=0; j<allClients.size(); j++) {
+                        if(mapLoader.PlayersColliding(allClients.at(j).topLeft_position,i.position)) {
+                            playerColliding = true;
+                        }
+                    }
 
-            }while(playerColliding || !mapLoader.TileOnFloor(&i, this->currMapObj)); 
-            //should also check not colliding with players, or other items.
-            // Randomly choose a position for item. Then check it's valid
+                    // Check not spawing on another item
+                    for(int k=0; playerColliding == false && k<itemsOnMap.size(); k++) {
+                        // if(j!=index){
+                        if(mapLoader.TilesColliding((Tile)itemsOnMap.at(k),i.position)) {
+                            playerColliding = true;
+                        }
+                        //  }
+                    }
 
-            this->itemsOnMap.push_back(i);
-            // Send packet saying new item has been put on floor
-            int packetID = 8 ;
-            bool isWeapon = false;
+                } while(playerColliding || !mapLoader.TileOnFloor(&i, this->currMapObj));
+                //should also check not colliding with players, or other items.
+                // Randomly choose a position for item. Then check it's valid
 
-            sf::Packet packet;
-            packet << packetID << isWeapon << i.ItemID << i.position.x << i.position.y;
+                this->itemsOnMap.push_back(i);
+                // Send packet saying new item has been put on floor
+                int packetID = 8 ;
+                bool isWeapon = false;
 
-            for(int k=0;k<this->allClients.size();k++){
-               this->allClients.at(k).clientSocket->send(packet);
-            } 
+                sf::Packet packet;
+                packet << packetID << isWeapon << i.ItemID << i.position.x << i.position.y;
+
+                for(int k=0; k<this->allClients.size(); k++) {
+                    this->allClients.at(k).clientSocket->send(packet);
+                }
 
             }
             createdItems = true;
@@ -238,39 +248,39 @@ void TCP_Net_Serv2::SendPositionToAllExcludingSender(int index, ClientInformatio
             newPacket << newPacketID << origin_playerPosition.x << origin_playerPosition.y << currDirectionFacing << index;
 
             sf::Socket::Status status = (client2.clientSocket)->send(newPacket);
-        }else{
-                // Update the player position/dir for this client
-                client2.dirFacing = currDirectionFacing;
-                client2.topLeft_position = client2.origin_position = origin_playerPosition;
-                client2.topLeft_position.x -= PLAYER_WIDTH;
-                client2.topLeft_position.y -= PLAYER_HEIGHT;
+        } else {
+            // Update the player position/dir for this client
+            client2.dirFacing = currDirectionFacing;
+            client2.topLeft_position = client2.origin_position = origin_playerPosition;
+            client2.topLeft_position.x -= PLAYER_WIDTH;
+            client2.topLeft_position.y -= PLAYER_HEIGHT;
         }
 
 
     }
 }
 
-void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand){
+void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand) {
     //std::vector<ClientInformation>& allClients = *clients;
     SetFullHealth(&allClients.at(index));
-                      
+
     SetPlayerRandomPosition(&allClients, index, &mapLoader, currMapObj, rand);
     // Drop/Destroy currently held weapon/items. Create packets (player powerup removed by position update packet)
-    int packetID = 7;                        
+    int packetID = 7;
     bool isWeapon = true;
     int itemIndex = -1;
     sf::Packet itemPacket;
     itemPacket << packetID << index << isWeapon << allClients.at(index).specBonus << itemIndex;
 
-    allClients.at(index).currPowerUp = NO_POWERUP;                           
+    allClients.at(index).currPowerUp = NO_POWERUP;
     allClients.at(index).currWeapon = allClients.at(index).specBonus;
-            
+
     // Update Kill count + create packet
     packetID = 5;
     sf::Packet killCountPacket;
     allClients.at(index).killCount -= 1; // Minus one, on death.
     killCountPacket << packetID << index << allClients.at(index).killCount;
-                           
+
     // Create updated position packet
     packetID = 3;
     sf::Packet newPacket;
@@ -283,12 +293,12 @@ void TCP_Net_Serv2::PlayerDiedUpdateAll(int index, CRandomMersenne rand){
 
 
     // Send the packets to all
-    for(int i=0; i<allClients.size();i++){       
+    for(int i=0; i<allClients.size(); i++) {
         allClients.at(i).clientSocket->send(itemPacket);
         allClients.at(i).clientSocket->send(killCountPacket);
         allClients.at(i).clientSocket->send(newPacket);
         allClients.at(i).clientSocket->send(packet);
-    }   
+    }
 
 }
 
@@ -320,90 +330,92 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
             sf::FloatRect rectangle;
             sf::FloatRect revisedRectangle;
             sf::Sprite revisedSprite;
-            
+
             packet >> playerID >> rectangle.left >> rectangle.top >> rectangle.width >> rectangle.height >> revisedRectangle.left >> revisedRectangle.top >> revisedRectangle.width >> revisedRectangle.height;
+            std::cout << "Player " << playerID << " has attacked!" << std::endl;
 
-            // Create packet to send to all players saying someone attacked and send 
+            // Create packet to send to all players saying someone attacked and send
 
-            
+
             // Check if this hitbox is colliding with a player, if so check where the hitbox is relative to the other player to determine which health block to take.
             // -- if was colliding and health was taken (it wasn't 0 before), see if player is now dead and update as required.
-            
-            for(int i=0;i<allClients.size();i++){
-            if(i!=playerID){
-                // Giving the player that was 'hit' a hitbox 46x46 around its centre, avoids the weird uneven shape and facing direction.
-                sf::FloatRect playerRect(allClients.at(i).origin_position.x - 23, allClients.at(i).origin_position.y - 23, 46, 46);
-                
 
-                // If rectangle colliding with player,
-                if(playerRect.intersects(rectangle)){
-                    // set player sprite size and origin, rotate -current rotation.
+            for(int i=0; i<allClients.size(); i++) {
+                if(i!=playerID) {
+                    // Giving the player that was 'hit' a hitbox 46x46 around its centre, avoids the weird uneven shape and facing direction.
+                    //sf::FloatRect playerRect(allClients.at(i).origin_position.x - 23, allClients.at(i).origin_position.y - 23, 46, 46);
+                    sf::FloatRect playerRect(allClients.at(i).origin_position.x, allClients.at(i).origin_position.y, 46, 46);
 
 
-
-
-                    revisedSprite.setPosition(revisedRectangle.left,revisedRectangle.top);
-                    // NOT SURE IF THIS POSITION WILL BE CHANGED AFTER THE ORIGIN IS APPLIED, PROBABLY WILL, BUT NOT DESIRED
-                
-                sf::Transform transform = revisedSprite.getTransform();
-                //sf::Vector2f pos = transform.transformPoint();
-                
-                // convert playerRect origin to a local co-ordinate of revisedsprite
-                // revisedsprite.left - origin.x, revised sprite.top - origin.y 
-                sf::Vector2f revisedOrigin(revisedSprite.getGlobalBounds().left-allClients.at(i).origin_position.x,revisedSprite.getGlobalBounds().top - allClients.at(i).origin_position.y);
-               
-                // after origin is set, the revised rectangle centre is ....
+                    // If rectangle colliding with player,
+                    if(playerRect.intersects(rectangle)) {
+                        // set player sprite size and origin, rotate -current rotation.
 
 
 
-               revisedSprite.setOrigin(revisedOrigin);
-                 revisedSprite.rotate(-allClients.at(i).dirFacing);
+
+                        revisedSprite.setPosition(revisedRectangle.left,revisedRectangle.top);
+                        // NOT SURE IF THIS POSITION WILL BE CHANGED AFTER THE ORIGIN IS APPLIED, PROBABLY WILL, BUT NOT DESIRED
+
+                        sf::Transform transform = revisedSprite.getTransform();
+                        //sf::Vector2f pos = transform.transformPoint();
+
+                        // convert playerRect origin to a local co-ordinate of revisedsprite
+                        // revisedsprite.left - origin.x, revised sprite.top - origin.y
+                        sf::Vector2f revisedOrigin(revisedSprite.getGlobalBounds().left-allClients.at(i).origin_position.x,revisedSprite.getGlobalBounds().top - allClients.at(i).origin_position.y);
+
+                        // after origin is set, the revised rectangle centre is ....
 
 
-                // probably need to update position here (with offset to origin)
-                    
-                // position before changing orientation/origin
-            revisedRectangle.left = revisedSprite.getGlobalBounds().left;
-                revisedRectangle.top = revisedSprite.getGlobalBounds().top;
+
+                        revisedSprite.setOrigin(revisedOrigin);
+                        revisedSprite.rotate(-allClients.at(i).dirFacing);
 
 
-         
+                        // probably need to update position here (with offset to origin)
+
+                        // position before changing orientation/origin
+                        revisedRectangle.left = revisedSprite.getGlobalBounds().left;
+                        revisedRectangle.top = revisedSprite.getGlobalBounds().top;
 
 
-               
 
-                    // set revised sprite pos, and its origin to centre of player being hit
-                    // rotate negative to the current player rotation
 
-                // temp rotate rectangle.
 
-                    int side = mapLoader.GetTileRelativePosition(sf::IntRect(revisedRectangle),sf::IntRect(playerRect));
-                    // Translate hit side to side of player
-                    std::cout << "hitside " << side << "\n";
-                    //if( = )
-                }               
-            } 
+
+
+                        // set revised sprite pos, and its origin to centre of player being hit
+                        // rotate negative to the current player rotation
+
+                        // temp rotate rectangle.
+
+                        int side = mapLoader.GetTileRelativePosition(sf::IntRect(revisedRectangle),sf::IntRect(playerRect));
+                        // Translate hit side to side of player
+                        std::cout << "hitside " << side << "\n";
+                        //if( = )
+                    }
+                }
             }
 
 
             break;
         }
         case 10: // Player has used item, update internal info, and process if needed, then send out same packet to all other clients.
-            {
-               int playerID;
-               packet >> playerID;
-               sf::Packet newPacket;
-               newPacket << packetID << playerID;
-               allClients.at(playerID).currPowerUp = NO_POWERUP;
+        {
+            int playerID;
+            packet >> playerID;
+            sf::Packet newPacket;
+            newPacket << packetID << playerID;
+            allClients.at(playerID).currPowerUp = NO_POWERUP;
 
-               for(int i=0; i<allClients.size();i++){
-                    if(i != playerID){
-                        allClients.at(i).clientSocket->send(newPacket);
-                    }
-               }
-               
-
+            for(int i=0; i<allClients.size(); i++) {
+                if(i != playerID) {
+                    allClients.at(i).clientSocket->send(newPacket);
+                }
             }
+
+
+        }
         }
 
     }
@@ -413,6 +425,7 @@ void TCP_Net_Serv2::ReceiveData(int index, ClientInformation* client)
         sf::Packet p;
         int t[] = {1,2,3};
         p << t;
+        this->clientCount--;
     }
 
 
@@ -426,7 +439,7 @@ void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
     {
         ClientInformation NCI;
         NCI.clientSocket = client;
-        allClients.push_back(NCI); 
+        allClients.push_back(NCI);
         this->clientCount++;
         selector->add(*client);
         std::cout << "New client connected at " << client->getRemoteAddress() << std::endl;
@@ -438,7 +451,7 @@ void TCP_Net_Serv2::AddClient(sf::SocketSelector* selector)
 void TCP_Net_Serv2::WaitForClients(void)
 {
     // Need to wait for initialisation packet, might as well create temp vars now to save re-creating each time the packet is received.
-    int packetID;	
+    int packetID;
     int bonusID;
 
     int index;
@@ -447,7 +460,7 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     std::cout << "Listening for connections on port " << this->port << std::endl;
     servListener.listen( this->port );
-    
+
     // Set which map we will be using.
     std::cout << "Setting map <Colosseum> for round" << std::endl;
     SetMap(COLOSSEUM);
@@ -455,7 +468,7 @@ void TCP_Net_Serv2::WaitForClients(void)
     while ((this->clientCount < this->maxClients) || (this->readyClients != this->maxClients))
     {
         this->selector.add(servListener);
-       
+
         if ( this->selector.wait() )
         {
 
@@ -469,7 +482,7 @@ void TCP_Net_Serv2::WaitForClients(void)
                 // Loop through all currently connected clients, if one is sending data check for an init packet, mark readyClients++ and set their info in the client list
                 index = 0;
                 for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
-                {                  
+                {
                     if (this->selector.isReady(*itr->clientSocket))
                     {
                         sf::Packet packet;
@@ -479,20 +492,20 @@ void TCP_Net_Serv2::WaitForClients(void)
                         {
                             packet >> packetID;
 
-                            if(packetID == 2){                               
-                                    packet >> bonusID;
+                            if(packetID == 2) {
+                                packet >> bonusID;
 
-                                    SetPlayerRandomPosition(&allClients, index, &mapLoader, currMapObj, rand);
-                                    
-                                    allClients.at(index).specBonus = bonusID;
-                                    allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
-                                    allClients.at(index).currPowerUp = NO_POWERUP;
-                                    allClients.at(index).killCount = 0;
-                                    allClients.at(index).dirFacing = 0.0f;
-                                    allClients.at(index).timeOfLastContactDamage.restart();
-                                    SetFullHealth(&allClients.at(index));
-                                    
-                                    this->readyClients++;
+                                SetPlayerRandomPosition(&allClients, index, &mapLoader, currMapObj, rand);
+
+                                allClients.at(index).specBonus = bonusID;
+                                allClients.at(index).currWeapon = bonusID; // Starter weapons are in the order of the bonusID's, so can just assign it to weap.
+                                allClients.at(index).currPowerUp = NO_POWERUP;
+                                allClients.at(index).killCount = 0;
+                                allClients.at(index).dirFacing = 0.0f;
+                                allClients.at(index).timeOfLastContactDamage.restart();
+                                SetFullHealth(&allClients.at(index));
+
+                                this->readyClients++;
                             }
 
                         }
@@ -506,16 +519,16 @@ void TCP_Net_Serv2::WaitForClients(void)
 
     std::cout << "Everyone is ready. Init and Sending go signal." << std::endl;
 
-   
+
     packetID = 0;
     int *IDsForWeapons = new int[this->maxClients];
     float *positionX = new float[this->maxClients];
     float *positionY = new float[this->maxClients];
-    
+
 
     index = 0;
     for (std::vector<ClientInformation>::iterator itr = allClients.begin(); itr != this->allClients.end(); ++itr)
-    {     
+    {
         // Loop through all clients and fill arrays to send in the packets
         IDsForWeapons[index] = (*itr).currWeapon;
         positionX[index] = (*itr).origin_position.x;
@@ -523,38 +536,40 @@ void TCP_Net_Serv2::WaitForClients(void)
         index++;
     }
 
-    for(int i = 0; i < this->maxClients;i++){
+    for(int i = 0; i < this->maxClients; i++) {
         // Loop through all clients, create its packet and send
         sf::Packet packet;
         packet << packetID << this->maxClients;
-        
+
         // Need to loop through all data arrays and push each item individually into packet.
-        for(int j=0; j<this->maxClients;j++){
-            packet << IDsForWeapons[j] << positionX[j] << positionY[j]; 
+        for(int j=0; j<this->maxClients; j++) {
+            packet << IDsForWeapons[j] << positionX[j] << positionY[j];
         }
         packet << i;
         allClients.at(i).clientSocket->send(packet);
     }
-   
+
 }
 
 
-void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allClients, int playerIndex, MapLoader* mapLoader, std::vector<Tile> mapTiles, CRandomMersenne rand){
-    // Need to set a random location which is on the floor. (And ideally not where another player is.) 
+void TCP_Net_Serv2::SetPlayerRandomPosition(std::vector<ClientInformation>* allClients, int playerIndex, MapLoader* mapLoader, std::vector<Tile> mapTiles, CRandomMersenne rand) {
+    // Need to set a random location which is on the floor. (And ideally not where another player is.)
     Tile tmpTile;
     bool playerColliding;
-    do{
+    do {
         playerColliding = false;
         tmpTile.position.x = (float)rand.IRandom(10,1014); // some screen bounds
         tmpTile.position.y = (float)rand.IRandom(10,758);
         // Loop through other players, if colliding with one, set boolean, true.
         // This isn't a true collision check atm, incorrect hitbox size/shape/orientation
-        for(int i=0;i<allClients->size();i++){
-            if(i!=playerIndex){
-                if(mapLoader->PlayersColliding(allClients->at(i).topLeft_position,tmpTile.position)){ playerColliding = true;}
-            }                                            
+        for(int i=0; i<allClients->size(); i++) {
+            if(i!=playerIndex) {
+                if(mapLoader->PlayersColliding(allClients->at(i).topLeft_position,tmpTile.position)) {
+                    playerColliding = true;
+                }
+            }
         }
-    }while(playerColliding || !mapLoader->TileOnFloor(&tmpTile, mapTiles, true));
+    } while(playerColliding || !mapLoader->TileOnFloor(&tmpTile, mapTiles, true));
 
     allClients->at(playerIndex).origin_position = allClients->at(playerIndex).topLeft_position = tmpTile.position;
     allClients->at(playerIndex).origin_position.x += PLAYER_WIDTH/2;
@@ -571,9 +586,9 @@ bool TCP_Net_Serv2::ReadHealth(ClientInformation* player, HealthBits healthPosit
 
 void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPosition, bool value)
 {
-  if(value){
-      player->health = player->health | (1<<healthPosition-1);
-    }else{
+    if(value) {
+        player->health = player->health | (1<<healthPosition-1);
+    } else {
         player->health = player->health & (~(1<<healthPosition-1));
     }
 }
@@ -581,15 +596,17 @@ void TCP_Net_Serv2::SetHealth(ClientInformation* player, HealthBits healthPositi
 void TCP_Net_Serv2::SetFullHealth(ClientInformation* player)
 {
     // Could probably just set the value to 15 to init first 4 bits - At least this system is ignores platform endien-ness & int size.
-    for(int i=1;i<5;i++){
+    for(int i=1; i<5; i++) {
         SetHealth(player,(HealthBits)i,true);
     }
 }
 
 bool TCP_Net_Serv2::IsPlayerDead(ClientInformation* player)
 {
-    for(int i=1;i<5;i++){
-        if(ReadHealth(player,(HealthBits)i)) { return false; }
+    for(int i=1; i<5; i++) {
+        if(ReadHealth(player,(HealthBits)i)) {
+            return false;
+        }
     }
     return true;
 }
@@ -598,13 +615,13 @@ void TCP_Net_Serv2::SetMap(Maps map)
 {
     this->currMap = map;
     // also load the mapObj here
-        switch(map){
+    switch(map) {
 
-        case 1: // Colosseum
-            this->currMapObj = mapLoader.ReadFile("map.txt");
-            break;
+    case 1: // Colosseum
+        this->currMapObj = mapLoader.ReadFile("map.txt");
+        break;
 
-        }
+    }
 }
 
 //find map.txt for server, and work on integrating the mapid/enum/file loader ( i.e. for colosseum (enum 1) load map1.txt file.

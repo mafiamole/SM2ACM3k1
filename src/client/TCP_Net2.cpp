@@ -56,7 +56,7 @@ void TCP_Net2::Run()
 
   sf::Packet tmpPacket;
   
-  for ( int i = 0; i < this->connectionAttemptLimit; i++)
+  for ( unsigned int i = 1; i < this->connectionAttemptLimit; i++)
   {     
     // Attempt to connect
     std::cout << "Attempting new Connection" << std::endl;
@@ -68,7 +68,7 @@ void TCP_Net2::Run()
         this->clientSocket.setBlocking(false); 
         break;
     }else{
-        if(i==this->connectionAttemptLimit-1){ // Still more attempts to make
+        if(i==this->connectionAttemptLimit){ // Still more attempts to make
             std::cout << "Unable to establish connection." << std::endl;
         }
     }
@@ -90,17 +90,6 @@ void TCP_Net2::Run()
 	  break;
     case sf::Socket::Done:
 	  WorkQueues::packetsToProcess().push(tmpPacket);
-
-      // send any pending data.
-      if ( WorkQueues::packetsToSend().size() > 0 )
-      {
-	    for ( int i = 0; i < WorkQueues::packetsToSend().size(); i++)
-	    {
-	        clientSocket.send( WorkQueues::packetsToSend().front() );
-	        WorkQueues::packetsToSend().pop();
-	    }
-      }
-
 	  break;
 	case sf::Socket::NotReady:
 	  break;
@@ -110,7 +99,25 @@ void TCP_Net2::Run()
 	default:
 	  std::cerr << "IMPOSSIBRO!" << std::endl;
 	break;
-      }      
+      } 
+
+      
+      // Send any pending data.
+      if ( WorkQueues::packetsToSend().size() > 0 )
+      {
+	    for ( unsigned int i = 0; i < WorkQueues::packetsToSend().size(); i++)
+	    {
+	        sf::Socket::Status status2 = clientSocket.send( WorkQueues::packetsToSend().front() );
+            if(status2 == sf::Socket::Done){
+	            WorkQueues::packetsToSend().pop();
+            }else{
+                // Not ready to process packets, break.
+                break;
+            }
+	    }
+      }
+
+
     }
     
     std::cout << "Thank you for playing" << std::endl;

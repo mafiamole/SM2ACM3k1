@@ -251,7 +251,9 @@ void Game::NetworkUpdate()
 
 void Game::RemoveItem(int index)
 {
+
   allItems.erase(allItems.begin() + index);
+
 }
 
 

@@ -14,16 +14,16 @@
 bool PlayerData::ReadHealth(PlayerData* player, HealthBits healthPosition)
 {
     int result;
-    result = player->health & (1<<healthPosition-1);
+    result = player->health & (1<<(healthPosition-1));
     if(result > 0){return true;}else{ return false;}
 }
 
 void PlayerData::SetHealth(PlayerData* player, HealthBits healthPosition, bool value)
 {
   if(value){
-      player->health = player->health | (1<<healthPosition-1);
+      player->health = player->health | (1<<(healthPosition-1));
     }else{
-        player->health = player->health & (~(1<<healthPosition-1));
+        player->health = player->health & (~(1<<(healthPosition-1)));
     }
 }
 

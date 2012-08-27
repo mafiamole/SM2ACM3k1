@@ -30,7 +30,7 @@
 #include <MoleBox/Content/Content.hpp>
 #include <MoleBox/Game.hpp>
 
-Players::Players(Player* clientPlayer, MB::Game* game) : MB::GameComponent(game), playerCount(0)
+Players::Players(Player* clientPlayer, MB::Game* game) : MB::GameComponent(game), clientPlayer(clientPlayer), playerCount(0)
 {
 
 }
@@ -46,7 +46,8 @@ void Players::Draw()
     
     for ( int playerCtr = 0; playerCtr < playerCount; playerCtr++)
     {
-       this->DrawAsset( this->allPlayers[playerCtr].playerSprite );
+      if (playerCtr != clientPlayer->ownID)
+	this->DrawAsset( this->allPlayers[playerCtr].playerSprite );
     }
 }
 

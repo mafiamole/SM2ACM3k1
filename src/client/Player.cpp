@@ -22,6 +22,10 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     this->playerSprite.setPosition(531,519);
 
     UpdateWeaponHitBox();
+    
+    attackedRect.setOutlineColor(sf::Color::Red);
+    attackedRect.setFillColor(sf::Color::Transparent);
+    attackedRect.setOutlineThickness(3);
 }
 
 
@@ -189,6 +193,7 @@ void Player::Draw()
 
     // Draw a hitbox for the weapon
     this->game->DrawAsset(this->weaponHitBox);
+    
     if (attacking)
     {
       sf::RectangleShape attackShape;
@@ -199,6 +204,7 @@ void Player::Draw()
       attackShape.setPosition( attackRect.left, attackRect.top );
       attackShape.setSize( sf::Vector2f( attackRect.width,attackRect.height) );
       this->game->DrawAsset(attackShape);
+      this->game->DrawAsset(attackedRect);
     }
 
     MB::GameComponent::Draw();
@@ -314,7 +320,7 @@ void Player::Attack()
     sf::FloatRect revisedRect = playerWeaponTempRect.getGlobalBounds();
 
     this->attackRect = revisedRect;
-    
+    this->attackedRect = otherPlayerRect;
     packet << packetID << this->ownID
            << weaponRect.left << weaponRect.top << weaponRect.width << weaponRect.height
            << revisedRect.left << revisedRect.top << revisedRect.width << revisedRect.height;
