@@ -12,7 +12,7 @@ set (MB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories ( ${MB_INCLUDE_DIR} )
 include_directories (${MoleBox_INCLUDE_DIRECTORIES} )
 set (LIBRARIES ${MoleBox_LIBRARIES})
-
+add_definitions(-DMB_STATIC)
 add_subdirectory(src/shared)
 add_subdirectory(src/server)
 add_subdirectory(src/client)

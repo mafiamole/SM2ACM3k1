@@ -4,8 +4,8 @@
 #include <MoleBox/Actions/Mouse.hpp>
 #include <MoleBox/Lua/Component.hpp>
 #include <client/Map.h>
-#include <client/ClientMapLoader.h>
-#include <shared/MapLoader.h>
+
+
 #include <client/Game.hpp>
 #include <client/UI/UI_Elements.hpp>
 #include <shared/randomc.h>
@@ -13,8 +13,8 @@
 #include <ctime>
 #include <iostream>
 
-Map mapObj = Map();
-MapLoader mapLoader = MapLoader();
+// Map mapObj = Map();
+// MapLoader mapLoader = MapLoader();
 Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,argc,argv)
 {
     this->Config.LoadFile("Config.cfg");
@@ -54,8 +54,10 @@ Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,ar
 
 
     this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
+    this->players = (Players*)this->AddComponent( new Players(player,this) );
+    this->player->SetPlayers(players);
+    
     //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
-    //this->player = (Player*)this->AddComponent( new Player(this) );
     //this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
 
 
@@ -77,54 +79,20 @@ Game::~Game(void)
 
 void Game::Update(sf::Time elapsed, MB::EventList *events)
 {
-    // Update HasFocus variable
-    // Polling events, method 1
-    /*int count = (*events).size();
-    if(count  > 0){ cout << count << "\n"; }
-    for (map<Event::EventType,Event>::iterator it = (*events).begin(); it != (*events).end(); ++it)
-    {
-
-    	switch(it->first){
-    		case sf::Event::LostFocus:
-    			hasFocus = false;
-            break;
-    		case sf::Event::GainedFocus:
-    			hasFocus = true;
-    		break;
-        default:
-    		break;
-        }
-
-    }*/
-
-    /// Polling events, method 2
-    ///*sf::Event e;
-//while (this->window->pollEvent(e))
-//{
-//   switch(e.type){
-    //		case sf::Event::LostFocus:
-    //			hasFocus = false;
-    //        break;
-    //		case sf::Event::GainedFocus:
-    //			hasFocus = true;
-    //		break;
-    //    default:
-    //		break;
-    //    }
-//}*/
-    // Handle Keyboard input	(only if has focus - ideally)
-
-    //if(this->HasFocus()){
-    if (this->GetActions()->Exists("CheckHealth") && this->GetActions()->Get("CheckHealth")->IsActive() && allPlayers.size()>0) {
+  
+    if (this->GetActions()->Exists("CheckHealth") && this->GetActions()->Get("CheckHealth")->IsActive() && players->Count()>0) {
         std::cout << "Health: ";
+	PlayerData clientData = players->GetPlayerData(player->ownID);
         for(int i=1; i<5; i++) {
-            std::cout << allPlayers.at(player->ownID).ReadHealth(&allPlayers.at(player->ownID),(HealthBits)i);
+           // std::cout << allPlayers.at(player->ownID).ReadHealth( players->GetPlayerData() .at(player->ownID),(HealthBits)i);
+           std::cout << clientData.ReadHealth(&clientData,(HealthBits)i);
         }
         std::cout << "\n";
     }
 
-    if (this->GetActions()->Exists("CheckScore") && this->GetActions()->Get("CheckScore")->IsActive() && allPlayers.size()>0) {
-        std::cout << "Score: " << allPlayers.at(player->ownID).killCount << "\n";
+    if (this->GetActions()->Exists("CheckScore") && this->GetActions()->Get("CheckScore")->IsActive() && players->Count()>0) {
+      PlayerData clientData = players->GetPlayerData(player->ownID);
+        std::cout << "Score: " << clientData.killCount << "\n";
     }
 
 
@@ -133,332 +101,7 @@ void Game::Update(sf::Time elapsed, MB::EventList *events)
         exit(0);
     }
 
-    if ((this->GetActions()->Exists("UseItem") && this->GetActions()->Get("UseItem")->IsActive()) ||
-            (this->GetActions()->Exists("UseItem Alt") && this->GetActions()->Get("UseItem Alt")->IsActive())) {
-        if(!(allPlayers.at(this->player->ownID).item == NO_POWERUP)) {
-
-            int packetID = 10;
-            sf::Packet packet;
-            packet << packetID << this->player->ownID;
-            WorkQueues::packetsToSend().push(packet);
-
-            // Do something depending on which item was currently equipped, then set equipped to null
-            switch(allPlayers.at(this->player->ownID).item) {
-            case REPEL_NPC:
-                std::cout << "Player just used Repel NPC Item.\n";
-                break;
-            default:
-                std::cout << "Player used UNSPECIFIED item.\n";
-                break;
-            }
-
-            allPlayers.at(this->player->ownID).item = NO_POWERUP;
-        }
-    }
-
-
-
-    if (this->GetActions()->Exists("Attack") && this->GetActions()->Get("Attack")->IsActive()) {
-        // TODO: Trigger attack animation
-
-        // Send player made attack packet with weapon hitbox
-        int packetID = 6;
-        sf::Packet packet;
-        sf::FloatRect rectangle = this->player->weaponHitBox.getGlobalBounds();
-        sf::FloatRect revisedRectangle = rectangle;
-        float thisRot = this->player->GetDirection();
-        sf::Vector2i dirVect = this->player->GetDirectionVector();
-
-        if(dirVect.x != 0) {
-            revisedRectangle.left += ((-dirVect.x)*(revisedRectangle.width*3));
-        }
-
-        if(dirVect.y != 0) {
-            revisedRectangle.top += ((-dirVect.y)*(revisedRectangle.height*3));
-        }
-
-        //if(thisRot == 0.0f || thisRot == 45.0f || thisRot == 315.0f){ // North facing, so change to south
-        //    revisedRectangle.height *= 20;
-        //}
-        //if(thisRot == 135 || thisRot == 180 || thisRot == 225){ // South facing, so change to north
-        //    revisedRectangle.top -= 20*rectangle.height;
-        //    //revisedRectangle.height *= 20; // May not need
-        //}
-        //if(thisRot == 45 || thisRot == 90 || thisRot == 135){ // East facing, so change to west
-        //    revisedRectangle.left -= 20*rectangle.width;
-        //    //revisedRectangle.width *=20; // May not need
-        //}
-        //if(thisRot == 225 || thisRot == 270 || thisRot == 315){ // West facing, so change to east
-        //    revisedRectangle.width *= 20;
-        //}
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        this->revisedRectangleGlobal = revisedRectangle;
-
-        int otherPlayer;
-        if(this->player->ownID == 0) {
-            otherPlayer = 1;
-        }
-        else {
-            otherPlayer = 0;
-        }
-
-
-        sf::Sprite revisedSprite;
-
-        revisedSprite.setTextureRect(sf::IntRect(0,0,64,64));
-        //revisedSprite.setRotation(allPlayers.at(otherPlayer).playerSprite.getRotation());
-        revisedSprite.setPosition(revisedRectangle.left ,revisedRectangle.top );
-        // NOT SURE IF THIS POSITION WILL BE CHANGED AFTER THE ORIGIN IS APPLIED, PROBABLY WILL, BUT NOT DESIRED
-
-        //sf::Transform transform = revisedSprite.getTransform();
-        //sf::Vector2f pos = transform.transformPoint();
-
-        // convert playerRect origin to a local co-ordinate of revisedsprite
-        // revisedsprite.left - origin.x, revised sprite.top - origin.y
-
-        sf::Vector2f revisedOrigin(revisedSprite.getGlobalBounds().left - allPlayers.at(otherPlayer).position.x, revisedSprite.getGlobalBounds().top-allPlayers.at(otherPlayer).position.y);
-
-        // after origin is set, the revised rectangle centre is ....
-
-
-        // revisedOrigin -= width ; -= height?
-
-
-
-        revisedSprite.setOrigin(revisedOrigin);
-
-        revisedSprite.setRotation(360-allPlayers.at(otherPlayer).direction);
-
-        sf::Transform transform = revisedSprite.getTransform();
-        //transform.set
-        //transform.rotate();
-        sf::Vector2f pos =  transform.transformPoint(0,0);
-
-        //revisedSprite.setPosition(
-        revisedRectangle.left = pos.x;
-        revisedRectangle.top = pos.y;
-
-
-        this->revisedRectangleGlobal = revisedRectangle;
-
-        float playerRot = allPlayers.at(otherPlayer).direction;
-        float rotateBy = 360-allPlayers.at(otherPlayer).direction;
-
-        sf::Vector2f pos1 = revisedSprite.getPosition();
-
-
-
-        // revisedSprite.rotate(rotateBy);
-        sf::Vector2f pos2 = revisedSprite.getPosition();
-//revisedSprite.setOrigin(0,0);
-//revisedSprite.setPosition(revisedSprite.getPosition().x + revisedOrigin.x, revisedSprite.getPosition().y + revisedOrigin.y);
-
-
-
-        float revisedRot = revisedSprite.getRotation();
-
-        sf::FloatRect rect1 = revisedSprite.getGlobalBounds();
-
-
-        // set origin back to normal before getting position etc.
-//    revisedSprite.setOrigin(22,22);
-
-        sf::FloatRect rect2 = revisedSprite.getGlobalBounds();
-
-
-        this->revisedSpriteGlobal = revisedSprite;
-
-        // probably need to update position here (with offset to origin)
-
-        // position before changing orientation/origin
-        //  revisedRectangle.left = revisedSprite.getGlobalBounds().left;
-        //      revisedRectangle.top = revisedSprite.getGlobalBounds().top;
-
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-        // if contains N - posy -=20*height
-        // if contains S - height *= 20
-        // if contains E - width *= 20
-        // if contains W - posx -=20*width
-
-//  int weaponHitBox.x         - rectangle hitbox for the player's weapon.
-//  int weaponHitBox.y
-//  int weaponHitBox.width
-//  int weaponHitBox.height
-//  int revisedHitBox.x
-//  int revisedHitBox.y
-
-        packet << packetID << this->player->ownID << rectangle.left << rectangle.top << rectangle.width << rectangle.height << revisedRectangle.left << revisedRectangle.top << revisedRectangle.width << revisedRectangle.height;
-        WorkQueues::packetsToSend().push(packet);
-    }
-
-
-    //}
-
-    // Here have a section which processes the work (received) packets queue
-    while(WorkQueues::packetsToProcess().size() != 0) {
-        sf::Packet packet = WorkQueues::packetsToProcess().front();
-        WorkQueues::packetsToProcess().pop();
-
-        int packetID;
-        packet >> packetID;
-
-        switch(packetID) {
-        case 0: // The game start packet that initialises the local copy of player data for each player.
-        {
-            int playerCount;
-            packet >> playerCount;
-            int *IDsForWeapons = new int[playerCount];
-            float *positionX = new float[playerCount];
-            float *positionY = new float[playerCount];
-
-            // Need to loop through all data arrays and unpack each data element individually.
-
-            for(int j=0; j<playerCount; j++) {
-                packet >> IDsForWeapons[j] >> positionX[j] >> positionY[j];
-            }
-
-            packet >> this->player->ownID;
-
-            for(int i=0; i < playerCount; i++) {
-                // Add a new player to allPlayers, and flesh out the info, own data will be used also(at least partially)
-                PlayerData tmpPlayer;
-                allPlayers.push_back(tmpPlayer);
-                allPlayers.at(i).playerSprite = MB::Content::NewSprite("Player2.png");
-                allPlayers.at(i).playerSprite.setOrigin(31,19);
-
-                allPlayers.at(i).position.x = positionX[i];
-                allPlayers.at(i).position.y = positionY[i];
-                allPlayers.at(i).playerSprite.setPosition(allPlayers.at(i).position);
-                allPlayers.at(i).weapon = IDsForWeapons[i];
-
-                allPlayers.at(i).direction = 0.0f;
-                allPlayers.at(i).SetFullHealth(&allPlayers.at(i));
-                allPlayers.at(i).item = NO_POWERUP;
-                allPlayers.at(i).killCount = 0;
-            }
-
-
-            // Set pointer to own data in player class
-            //this->player->playerInformation = (&*(allPlayers.begin()) + (sizeof(PlayerData)*this->player->ownID)  );
-            // Set this player position from the received go packet.
-            //this->player->SetPosition(this->player->playerInformation->position);
-            this->player->SetPosition(allPlayers.at(this->player->ownID).position);
-        }
-        break;
-        case 3: // A player has moved. Update their info
-        {
-            float positionX;
-            float positionY;
-            float dirFacing;
-            int playerID;
-
-            packet >> positionX >> positionY >> dirFacing >> playerID;
-
-            allPlayers.at(playerID).position.x = positionX;
-            allPlayers.at(playerID).position.y = positionY;
-            allPlayers.at(playerID).direction = dirFacing;
-            allPlayers.at(playerID).playerSprite.setPosition(sf::Vector2f(positionX,positionY));
-            allPlayers.at(playerID).playerSprite.setRotation(dirFacing);
-
-            // If player is self (in case of has been killed and new position generated) - This packet should only be sent to self under that circumstance. So can re-init items as well
-            if(playerID == player->ownID) {
-                player->SetPosition(allPlayers.at(playerID).position);
-                allPlayers.at(playerID).item = NO_POWERUP;
-            }
-            break;
-        }
-        case 4: // Someone lost health (could be self). Do whatever (trigger hurt animation, combat text etc)
-        {
-            int playerID;
-            int newHealth;
-            packet >> playerID >> newHealth;
-            allPlayers.at(playerID).health = newHealth;
-            break;
-        }
-        case 5: // Receive updated kill count from server and do whatever
-        {
-            int playerID;
-            int newKillCount;
-            packet >> playerID >> newKillCount;
-            allPlayers.at(playerID).killCount = newKillCount;
-            break;
-        }
-        case 7: // Remove item   -- if index is -1, then don't remove from floor
-        {
-            int playerID;
-            bool isWeapon;
-            int itemCode;
-            int itemIndex;
-
-            packet >> playerID >> isWeapon >> itemCode >> itemIndex;
-
-            if(isWeapon) {
-                allPlayers.at(playerID).weapon = itemCode;
-            } else {
-                allPlayers.at(playerID).item = itemCode;
-            }
-
-            if(!(itemIndex == -1)) {
-                allItems.erase(allItems.begin() + itemIndex);
-            }
-
-            break;
-        }
-        case 8: // Put new items on the floor,
-        {
-            bool isWeapon;
-            ClientItem tempItem;
-
-            packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
-
-            if(isWeapon) {
-                tempItem.tileType = WEAPON;
-            }
-            else {
-                tempItem.tileType = ITEM;
-            }
-
-            // Need a better item/tile/sprite handling...
-            tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
-            tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
-
-            //13*32 // row;
-            //1*32 // col;
-            sf::IntRect rect = sf::IntRect(32,13*32,32,32);
-            tempItem.itemSprite.setTextureRect(rect);
-
-            allItems.push_back(tempItem);
-            // new item appeared on floor (could have been dropped by another player, or randomly spawned)
-
-
-            break;
-        }
-        case 10: // A player just used their equipped item
-        {
-            int playerID;
-            packet >> playerID;
-            // Clear player's item.
-            allPlayers.at(playerID).item = NO_POWERUP;
-            std::cout << "Player " << playerID << " just used their item.\n";
-            // This will NOT be sent to originating client. Originating client deals with the item use on send (see the keypress above)
-            break;
-        }
-        }
-
-    }
-
+    this->NetworkUpdate();
 
     MB::Game::Update(elapsed,events);
 
@@ -470,58 +113,10 @@ void Game::Draw()
     mapObj.Draw();
 
     // Loop and draw all items
-    for(unsigned int i=0; i < allItems.size();i++){
+    for(int i=0; i < allItems.size(); i++) {
         this->DrawAsset(allItems.at(i).itemSprite);
     }
 
-    // Loop through other players and draw them
-    for(unsigned int i=0; i < allPlayers.size();i++){
-
-        // Draw player if not self
-        if(i != this->player->ownID) {
-            this->DrawAsset(allPlayers.at(i).playerSprite);
-            // Draw a hitbox for the player
-            sf::RectangleShape rectangle;
-            rectangle.setOutlineColor(sf::Color::Green);
-            rectangle.setFillColor(sf::Color::Transparent);
-            rectangle.setOutlineThickness(3);
-            rectangle.setSize(sf::Vector2f(46,46));
-            rectangle.setOrigin(23,23);
-            rectangle.setPosition(allPlayers.at(i).position);
-            this->DrawAsset(rectangle);
-
-            // Draw the revised rectangle
-            sf::RectangleShape rectangle2;
-            rectangle2.setOutlineColor(sf::Color::Blue);
-            rectangle2.setFillColor(sf::Color::Transparent);
-            rectangle2.setOutlineThickness(3);
-            rectangle2.setSize(sf::Vector2f(this->revisedRectangleGlobal.width,this->revisedRectangleGlobal.height));
-
-            rectangle2.setPosition(this->revisedRectangleGlobal.left,this->revisedRectangleGlobal.top);
-            this->DrawAsset(rectangle2);
-
-            //// Draw the rotated sprite
-            sf::RectangleShape rectangle3;
-            rectangle3.setOutlineColor(sf::Color::Black);
-            rectangle3.setFillColor(sf::Color::Transparent);
-            rectangle3.setOutlineThickness(3);
-            rectangle3.setSize(sf::Vector2f(50,50));
-
-            rectangle3.setPosition(this->revisedSpriteGlobal.getGlobalBounds().left,this->revisedSpriteGlobal.getGlobalBounds().top);
-            this->DrawAsset(rectangle3);
-
-
-            //// Draw the rotated sprite
-            //sf::RectangleShape rectangle4;
-            //rectangle4.setOutlineColor(sf::Color::White);
-            //rectangle4.setFillColor(sf::Color::Transparent);
-            //rectangle4.setOutlineThickness(3);
-            //rectangle4.setSize(sf::Vector2f(40,40));
-            //rectangle4.setOrigin(20,20);
-            //rectangle4.setPosition(this->revisedSpriteGlobal.or);
-            //this->DrawSprite(rectangle3);
-        }
-    }
 
 
     MB::Game::Draw();
@@ -546,14 +141,120 @@ int Game::Run()
 }
 
 
-Player* Game::GetPlayer() {
-    return this->player;
+void Game::NetworkUpdate()
+{
+    while (WorkQueues::packetsToProcess().size() != 0)
+    {
+      
+        sf::Packet packet = WorkQueues::packetsToProcess().front();
+	 
+        WorkQueues::packetsToProcess().pop();
+
+        int packetID;
+        packet >> packetID;
+	std::cout << "packet recieved " << packetID << std::endl;
+        switch (packetID)
+        {
+        case 0:
+	{
+            // Initialise packet
+            int playerCount;
+            int weaponId;
+            float xPos,yPos;
+            packet >> playerCount;
+            for (int plrCtr = 0; plrCtr < playerCount; plrCtr++)
+            {
+                packet >> weaponId >> xPos >> yPos;
+                players->AddPlayer(weaponId,xPos,yPos);
+            }
+            packet >> this->player->ownID;
+            player->SetPosition(players->GetPlayerPosition(player->ownID));
+            break;
+	}
+        case 3:
+	{
+            // Player Moved
+            float xPos,yPos,direction;
+            int playerId;
+            packet >> xPos >> yPos >> direction >> playerId;
+
+            players->UpdatePlayerPosition(playerId,xPos,yPos,direction);
+            if ( playerId == player->ownID)
+            {
+                player->SetPosition(players->GetPlayerPosition(player->ownID));
+                players->RemovePowerUp(player->ownID);
+            }
+            break;
+	}
+        case 4:
+	{
+            int playerId;
+            int newHealth;
+            packet >> playerId >> newHealth;
+            players->UpdatePlayerHealth(playerId,newHealth);
+            break;
+	}
+        case 5:
+	{
+            int playerId;
+            int newKillCount;
+            packet >> playerId >> newKillCount;
+            players->UpdateKillCount(playerId,newKillCount);
+            break;
+	}
+        case 7:
+	{
+            int playerId;
+            bool isWeapon;
+            int itemCode;
+            int itemIndex;
+
+            packet >> playerId >> isWeapon >> itemCode >> itemIndex;
+            players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
+            break;
+	}
+        case 8:
+	{
+	    bool isWeapon;
+	    ClientItem tempItem;
+	    
+	    packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
+	    if (isWeapon)
+	    {
+	      tempItem.tileType = WEAPON;
+	    }
+	    else
+	    {
+	      tempItem.tileType = ITEM;
+	    }
+	    
+	    tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
+	    tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
+	    sf::IntRect rect = sf::IntRect(32,13*32,32,32);
+	    tempItem.itemSprite.setTextureRect(rect);
+
+	    allItems.push_back(tempItem);
+            break;
+	}
+        case 10:
+	{
+            int playerId;
+            packet >> playerId;
+            players->UseEquiment(playerId);
+            break;
+	}
+        }
+
+    }
+
 }
 
-bool Game::HasFocus() {
-    return this->hasFocus;
-}
+void Game::RemoveItem(int index)
+{
 
+  allItems.erase(allItems.begin() + index);
+
+}
 
 
 // Maybe use a stack instead of a queue, and process only the latest of each message - to avoid updating multiple positions etc needlessly, tricky with them arriving out of order, maybe?
