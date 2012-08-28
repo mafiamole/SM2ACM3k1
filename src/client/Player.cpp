@@ -22,7 +22,7 @@ Player::Player(MB::Game* game, Map* map) : MB::GameComponent(game), gameMap(map)
     this->playerSprite.setPosition(531,519);
 
     UpdateWeaponHitBox();
-    
+
     attackedRect.setOutlineColor(sf::Color::Red);
     attackedRect.setFillColor(sf::Color::Transparent);
     attackedRect.setOutlineThickness(3);
@@ -36,7 +36,7 @@ Player::~Player()
 
 void Player::SetPlayers(Players* players)
 {
-  this->players = players;
+    this->players = players;
 }
 
 void Player::Update(sf::Time elapsed, MB::EventList* events)
@@ -151,18 +151,18 @@ void Player::Update(sf::Time elapsed, MB::EventList* events)
         this->playerSprite.setRotation(origRot);
     }
 
-    
+
     if (
-	(this->actions->Exists("UseItem") && this->actions->Get("UseItem")->IsActive()) ||
+        (this->actions->Exists("UseItem") && this->actions->Get("UseItem")->IsActive()) ||
         (this->actions->Exists("UseItem Alt") && this->actions->Get("UseItem Alt")->IsActive())
-       ) 
+    )
     {
-      this->UseItem();
+        this->UseItem();
     }
     this->attacking = false;
     if (this->game->GetActions()->Exists("Attack") && this->game->GetActions()->Get("Attack")->IsActive())
     {
-	this->attacking = true;
+        this->attacking = true;
         this->Attack();
 
     }
@@ -193,18 +193,18 @@ void Player::Draw()
 
     // Draw a hitbox for the weapon
     this->game->DrawAsset(this->weaponHitBox);
-    
+
     if (attacking)
     {
-      sf::RectangleShape attackShape;
-      attackShape.setOutlineColor(sf::Color::Black);
-      attackShape.setFillColor(sf::Color::Transparent);
-      attackShape.setOutlineThickness(3);
-      attackShape.setSize(sf::Vector2f(50,50));
-      attackShape.setPosition( attackRect.left, attackRect.top );
-      attackShape.setSize( sf::Vector2f( attackRect.width,attackRect.height) );
-      this->game->DrawAsset(attackShape);
-      this->game->DrawAsset(attackedRect);
+        sf::RectangleShape attackShape;
+        attackShape.setOutlineColor(sf::Color::Black);
+        attackShape.setFillColor(sf::Color::Transparent);
+        attackShape.setOutlineThickness(3);
+        attackShape.setSize(sf::Vector2f(50,50));
+        attackShape.setPosition( attackRect.left, attackRect.top );
+        attackShape.setSize( sf::Vector2f( attackRect.width,attackRect.height) );
+        this->game->DrawAsset(attackShape);
+        this->game->DrawAsset(attackedRect);
     }
 
     MB::GameComponent::Draw();
@@ -296,17 +296,17 @@ void Player::Attack()
     //Since the origin is relative to the top left corner of the sprite, we have to find out the relative postion from that point
 
     sf::Vector2f playerTopLeftPosition = sf::Vector2f
-      (
+                                         (
 
-	  this->weaponHitBox.getPosition().x - (this->weaponHitBox.getTextureRect().width / 2),
-	  this->weaponHitBox.getPosition().y - (this->weaponHitBox.getTextureRect().height /2)
+                                                 this->weaponHitBox.getPosition().x - (this->weaponHitBox.getTextureRect().width / 2),
+                                                 this->weaponHitBox.getPosition().y - (this->weaponHitBox.getTextureRect().height /2)
 
-      );
+                                         );
     // get the origin relative too the top left of the player weapon hitbox.
     sf::Vector2f RelativeRotateOrigin = sf::Vector2f
-      (
-	  otherPlayerRect.getPosition() - playerTopLeftPosition
-      );
+                                        (
+                                            otherPlayerRect.getPosition() - playerTopLeftPosition
+                                        );
     // create the new rectangle, cloning the weapon hitbox and setting this origin to the calculated one.
     sf::RectangleShape playerWeaponTempRect = this->weaponHitBox;
 

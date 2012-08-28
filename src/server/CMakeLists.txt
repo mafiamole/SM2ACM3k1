@@ -8,9 +8,12 @@ set (HEADERS
 	${MB_INCLUDE_DIR}/shared/Enums.h
 	${MB_INCLUDE_DIR}/shared/randomc.h
 	${MB_INCLUDE_DIR}/server/TCP_Net_Serv2.hpp
-	${MB_INCLUDE_DIR}/shared/MapLoader.h)
+	${MB_INCLUDE_DIR}/shared/MapLoader.h
+        ${MB_INCLUDE_DIR}/server/TCP_Net_Manager.h
+        ${MB_INCLUDE_DIR}/server/Match.h
+      )
 
-set (SOURCES TCP_Net_Serv2.cpp
+set (SOURCES Match.cpp TCP_Net_Manager.cpp TCP_Net_Serv2.cpp
 	PacketRoutines.cpp 
 	Game.cpp 
 	Main.cpp

@@ -18,13 +18,18 @@
 Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,argc,argv)
 {
     this->Config.LoadFile("Config.cfg");
-    this->Config.LoadArgs(argc,argv);
+    //this->Config.LoadArgs(argc,argv);
     std::string ip = this->Config.GetStringValue("ip");
+    
+    std::cout << info.address << std::endl;
+    
     if ( ip != "")
         info.address = ip;
     else
         info.address = "127.0.0.1";
 
+    
+    std::cout << info.address << std::endl;
     info.port = 4000;
     info.attempts = 3;
     info.timeout = 2000;
@@ -56,7 +61,7 @@ Game::Game(std::string windowName,int argc,char** argv) : MB::Game(windowName,ar
     this->player = (Player*)this->AddComponent(  new Player( this , &mapObj ) );
     this->players = (Players*)this->AddComponent( new Players(player,this) );
     this->player->SetPlayers(players);
-    
+
     //this->Hud    = (HUD*)this->AddComponent( new HUD(this,"HUD.lua") );
     //this->AddComponent(new MB::Lua::LuaComponent(this, "Music.lua") );
 
@@ -79,19 +84,19 @@ Game::~Game(void)
 
 void Game::Update(sf::Time elapsed, MB::EventList *events)
 {
-  
+
     if (this->GetActions()->Exists("CheckHealth") && this->GetActions()->Get("CheckHealth")->IsActive() && players->Count()>0) {
         std::cout << "Health: ";
-	PlayerData clientData = players->GetPlayerData(player->ownID);
+        PlayerData clientData = players->GetPlayerData(player->ownID);
         for(int i=1; i<5; i++) {
-           // std::cout << allPlayers.at(player->ownID).ReadHealth( players->GetPlayerData() .at(player->ownID),(HealthBits)i);
-           std::cout << clientData.ReadHealth(&clientData,(HealthBits)i);
+            // std::cout << allPlayers.at(player->ownID).ReadHealth( players->GetPlayerData() .at(player->ownID),(HealthBits)i);
+            std::cout << clientData.ReadHealth(&clientData,(HealthBits)i);
         }
         std::cout << "\n";
     }
 
     if (this->GetActions()->Exists("CheckScore") && this->GetActions()->Get("CheckScore")->IsActive() && players->Count()>0) {
-      PlayerData clientData = players->GetPlayerData(player->ownID);
+        PlayerData clientData = players->GetPlayerData(player->ownID);
         std::cout << "Score: " << clientData.killCount << "\n";
     }
 
@@ -145,18 +150,18 @@ void Game::NetworkUpdate()
 {
     while (WorkQueues::packetsToProcess().size() != 0)
     {
-      
+
         sf::Packet packet = WorkQueues::packetsToProcess().front();
-	 
+
         WorkQueues::packetsToProcess().pop();
 
         int packetID;
         packet >> packetID;
-	std::cout << "packet recieved " << packetID << std::endl;
+        std::cout << "packet recieved " << packetID << std::endl;
         switch (packetID)
         {
         case 0:
-	{
+        {
             // Initialise packet
             int playerCount;
             int weaponId;
@@ -170,9 +175,9 @@ void Game::NetworkUpdate()
             packet >> this->player->ownID;
             player->SetPosition(players->GetPlayerPosition(player->ownID));
             break;
-	}
+        }
         case 3:
-	{
+        {
             // Player Moved
             float xPos,yPos,direction;
             int playerId;
@@ -185,25 +190,25 @@ void Game::NetworkUpdate()
                 players->RemovePowerUp(player->ownID);
             }
             break;
-	}
+        }
         case 4:
-	{
+        {
             int playerId;
             int newHealth;
             packet >> playerId >> newHealth;
             players->UpdatePlayerHealth(playerId,newHealth);
             break;
-	}
+        }
         case 5:
-	{
+        {
             int playerId;
             int newKillCount;
             packet >> playerId >> newKillCount;
             players->UpdateKillCount(playerId,newKillCount);
             break;
-	}
+        }
         case 7:
-	{
+        {
             int playerId;
             bool isWeapon;
             int itemCode;
@@ -212,37 +217,37 @@ void Game::NetworkUpdate()
             packet >> playerId >> isWeapon >> itemCode >> itemIndex;
             players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
             break;
-	}
+        }
         case 8:
-	{
-	    bool isWeapon;
-	    ClientItem tempItem;
-	    
-	    packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
-	    if (isWeapon)
-	    {
-	      tempItem.tileType = WEAPON;
-	    }
-	    else
-	    {
-	      tempItem.tileType = ITEM;
-	    }
-	    
-	    tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
-	    tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
-	    sf::IntRect rect = sf::IntRect(32,13*32,32,32);
-	    tempItem.itemSprite.setTextureRect(rect);
+        {
+            bool isWeapon;
+            ClientItem tempItem;
 
-	    allItems.push_back(tempItem);
+            packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
+            if (isWeapon)
+            {
+                tempItem.tileType = WEAPON;
+            }
+            else
+            {
+                tempItem.tileType = ITEM;
+            }
+
+            tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
+            tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
+            sf::IntRect rect = sf::IntRect(32,13*32,32,32);
+            tempItem.itemSprite.setTextureRect(rect);
+
+            allItems.push_back(tempItem);
             break;
-	}
+        }
         case 10:
-	{
+        {
             int playerId;
             packet >> playerId;
             players->UseEquiment(playerId);
             break;
-	}
+        }
         }
 
     }
@@ -252,7 +257,7 @@ void Game::NetworkUpdate()
 void Game::RemoveItem(int index)
 {
 
-  allItems.erase(allItems.begin() + index);
+    allItems.erase(allItems.begin() + index);
 
 }
 
