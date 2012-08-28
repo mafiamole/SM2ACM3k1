@@ -79,18 +79,19 @@ void Players::AddPlayer(int weapon, float xPos,float yPos)
 
 void Players::UpdatePlayerPosition(int playerId,float x,float y,float direction)
 {
-    allPlayers[playerId].position.x = x;
-    allPlayers[playerId].position.y = y;
-    allPlayers[playerId].direction = direction;
-    allPlayers[playerId].playerSprite.setPosition(x,y);
-    allPlayers[playerId].playerSprite.setRotation(direction);
-
-    if ( playerId = clientPlayer->ownID)
-    {
-        clientPlayer->SetPosition(allPlayers[playerId].position);
-        allPlayers[playerId].item = NO_POWERUP;
-    }
-
+  allPlayers[playerId].position.x = x;
+  allPlayers[playerId].position.y = y;
+  allPlayers[playerId].direction = direction;
+  allPlayers[playerId].playerSprite.setPosition(x,y);
+  allPlayers[playerId].playerSprite.setRotation(direction);
+  
+  // If player is self (in case of has been killed and new position generated) - This packet should only be sent to self under that circumstance. So can re-init items as well
+  if ( playerId == clientPlayer->ownID)
+  {
+    clientPlayer->SetPosition(allPlayers[playerId].position);
+    RemovePowerUp(playerId);
+  }
+  
 }
 void Players::UpdatePlayerHealth(int playerId,int health)
 {

@@ -6,7 +6,7 @@
 #include <iostream>
 #include <shared/Enums.h>
 
-enum PacketTypes {
+enum PacketTypes2 {
   
   SERVER_INITALISE = 0,
   CLIENT_SEND_POS,

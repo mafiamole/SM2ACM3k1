@@ -11,7 +11,7 @@ set (HEADERS
 	${MB_INCLUDE_DIR}/shared/MapLoader.h
         ${MB_INCLUDE_DIR}/server/TCP_Net_Manager.h
         ${MB_INCLUDE_DIR}/server/Match.h
-      )
+	${MB_INCLUDE_DIR}/shared/SharedRoutines.hpp)
 
 set (SOURCES Match.cpp TCP_Net_Manager.cpp TCP_Net_Serv2.cpp
 	PacketRoutines.cpp 
@@ -19,6 +19,7 @@ set (SOURCES Match.cpp TCP_Net_Manager.cpp TCP_Net_Serv2.cpp
 	Main.cpp
 	../shared/Packets.cpp
 	../shared/mersenne.cpp
+	../shared/SharedRoutines.cpp
 	../shared/MapLoader.cpp)
 
 add_executable(server ${HEADERS} ${SOURCES} )

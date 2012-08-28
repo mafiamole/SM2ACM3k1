@@ -130,12 +130,12 @@ void Game::Draw()
 
 int Game::Run()
 {
-//   ConnectionInfo info;
-//   //info.address = "127.0.0.1";
-//   info.address = "81.159.77.208";
-//   info.port = 4000;
-//   info.attempts = 3;
-//   info.timeout = 2000;
+    //   ConnectionInfo info;
+    //   //info.address = "127.0.0.1";
+    //   info.address = "81.159.77.208";
+    //   info.port = 4000;
+    //   info.attempts = 3;
+    //   info.timeout = 2000;
     sf::Thread tcpThread(&TCP_Net_Thead2,info);
 
     tcpThread.launch();
@@ -160,94 +160,86 @@ void Game::NetworkUpdate()
         std::cout << "packet recieved " << packetID << std::endl;
         switch (packetID)
         {
-        case 0:
-        {
-            // Initialise packet
-            int playerCount;
-            int weaponId;
-            float xPos,yPos;
-            packet >> playerCount;
-            for (int plrCtr = 0; plrCtr < playerCount; plrCtr++)
-            {
-                packet >> weaponId >> xPos >> yPos;
-                players->AddPlayer(weaponId,xPos,yPos);
-            }
-            packet >> this->player->ownID;
-            player->SetPosition(players->GetPlayerPosition(player->ownID));
-            break;
-        }
-        case 3:
-        {
-            // Player Moved
-            float xPos,yPos,direction;
-            int playerId;
-            packet >> xPos >> yPos >> direction >> playerId;
-
-            players->UpdatePlayerPosition(playerId,xPos,yPos,direction);
-            if ( playerId == player->ownID)
-            {
+        case INITIALISATION_SERV:
+            {   // The game start packet that initialises the local copy of player data for each player.
+                int playerCount;
+                int weaponId;
+                float xPos,yPos;
+                packet >> playerCount;
+                for (int plrCtr = 0; plrCtr < playerCount; plrCtr++)
+                {
+                    packet >> weaponId >> xPos >> yPos;
+                    players->AddPlayer(weaponId,xPos,yPos);
+                }
+                packet >> this->player->ownID;
                 player->SetPosition(players->GetPlayerPosition(player->ownID));
-                players->RemovePowerUp(player->ownID);
+                break;
             }
-            break;
-        }
-        case 4:
-        {
-            int playerId;
-            int newHealth;
-            packet >> playerId >> newHealth;
-            players->UpdatePlayerHealth(playerId,newHealth);
-            break;
-        }
-        case 5:
-        {
-            int playerId;
-            int newKillCount;
-            packet >> playerId >> newKillCount;
-            players->UpdateKillCount(playerId,newKillCount);
-            break;
-        }
-        case 7:
-        {
-            int playerId;
-            bool isWeapon;
-            int itemCode;
-            int itemIndex;
-
-            packet >> playerId >> isWeapon >> itemCode >> itemIndex;
-            players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
-            break;
-        }
-        case 8:
-        {
-            bool isWeapon;
-            ClientItem tempItem;
-
-            packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
-            if (isWeapon)
+        case PLAYER_POSITION_SERV: // A player has moved. Update their info
+            {                
+                float xPos,yPos,direction;
+                int playerId;
+                packet >> xPos >> yPos >> direction >> playerId;
+                players->UpdatePlayerPosition(playerId,xPos,yPos,direction);
+                break;
+            }
+        case UPDATE_HEALTH_SERV: // Someone lost health (could be self). Do whatever (trigger hurt animation, combat text etc)
             {
-                tempItem.tileType = WEAPON;
+                int playerId;
+                int newHealth;
+                packet >> playerId >> newHealth;
+                players->UpdatePlayerHealth(playerId,newHealth);
+                break;
             }
-            else
+        case UPDATE_SCORE_SERV: // Receive updated kill count from server and do whatever
             {
-                tempItem.tileType = ITEM;
+                int playerId;
+                int newKillCount;
+                packet >> playerId >> newKillCount;
+                players->UpdateKillCount(playerId,newKillCount);
+                break;
             }
+        case ITEM_RECEIVED_SERV: // Remove item   -- if index is -1, then don't remove from floor
+            {
+                int playerId;
+                bool isWeapon;
+                int itemCode;
+                int itemIndex;
 
-            tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
-            tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
-            sf::IntRect rect = sf::IntRect(32,13*32,32,32);
-            tempItem.itemSprite.setTextureRect(rect);
+                packet >> playerId >> isWeapon >> itemCode >> itemIndex;
+                players->RemoveItem(playerId,isWeapon,itemCode,itemIndex);
+                break;
+            }
+        case NEW_ITEM_ON_FLOOR_SERV:  // Put new items on the floor,
+            {
+                bool isWeapon;
+                ClientItem tempItem;
 
-            allItems.push_back(tempItem);
-            break;
-        }
-        case 10:
-        {
-            int playerId;
-            packet >> playerId;
-            players->UseEquiment(playerId);
-            break;
-        }
+                packet >> isWeapon >> tempItem.ItemID >> tempItem.position.x >> tempItem.position.y;
+                if (isWeapon)
+                {
+                    tempItem.tileType = WEAPON;
+                }
+                else
+                {
+                    tempItem.tileType = ITEM;
+                }
+
+                tempItem.itemSprite = MB::Content::NewSprite("ItemTileSheet.png");
+                tempItem.itemSprite.setPosition(tempItem.position.x,tempItem.position.y);
+                sf::IntRect rect = sf::IntRect(32,13*32,32,32);
+                tempItem.itemSprite.setTextureRect(rect);
+
+                allItems.push_back(tempItem);
+                break;
+            }
+        case ITEM_USED_BOTH:    // A player just used their equipped item
+            {
+                int playerId;
+                packet >> playerId;
+                players->UseEquiment(playerId);
+                break;
+            }
         }
 
     }

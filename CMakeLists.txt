@@ -17,4 +17,11 @@ add_subdirectory(src/shared)
 add_subdirectory(src/server)
 add_subdirectory(src/client)
 
+option(CXXELEVEN "Enable c++11 support in builds" false)
+
+if (CXXELEVEN)
+  SET(CMAKE_CXX_FLAGS "-std=c++0x")
+  add_definitions("-std=c++0x")
+  message ( "Setting c++11 support" )
+endif()
 

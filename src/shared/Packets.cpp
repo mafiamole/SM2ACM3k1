@@ -127,13 +127,13 @@ Packets::Packets(){}
 // Client Side packets
 sf::Packet Packets::CreateSendThisPlayerPos(sf::Vector2f playerPosition, float currDirectionFacing){
 	sf::Packet packet;
-	int packetID = 1;
+	int packetID = PLAYER_POSITION_CLIENT;
 	packet << packetID << playerPosition.x << playerPosition.y << currDirectionFacing;
 	return packet;
 }
 sf::Packet Packets::CreateInitThisClient(Bonus specBonus){
 	sf::Packet packet;
-	int packetID = 2;
+	int packetID = SET_PLAYER_INFO_CLIENT;
 	packet << packetID << specBonus;
 	return packet;
 }
